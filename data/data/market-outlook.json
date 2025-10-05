@@ -1,0 +1,22 @@
+{
+  "articles": [
+    {
+      "id": "q3-2023-global-recovery",
+      "title": "Global Economic Recovery",
+      "quarter": "Q3",
+      "year": "2023",
+      "excerpt": "Analysis of post-pandemic recovery patterns across major economies and potential headwinds that could slow growth momentum.",
+      "tags": ["Global Economy", "GDP", "Recovery"],
+      "url": "market-outlook/articles/q3-2023-global-recovery.html"
+    },
+    {
+      "id": "q2-2023-interest-rates",
+      "title": "Interest Rate Impact",
+      "quarter": "Q2",
+      "year": "2023",
+      "excerpt": "Examination of how central bank policies and interest rate changes are affecting different asset classes and investment strategies.",
+      "tags": ["Central Banks", "Interest Rates", "Monetary Policy"],
+      "url": "market-outlook/articles/q2-2023-interest-rates.html"
+    }
+  ]
+}
