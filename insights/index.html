@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights - Tulga</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">TULGA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../portfolio/index.html">PORTFOLIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../market-outlook/index.html">MARKET OUTLOOK</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">INSIGHTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html#contact">Get in Touch</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Insights Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="page-title">Insights</h1>
+                    <p class="page-description">
+                        Research series and investment insights covering valuation methods, 
+                        CFA knowledge, econometrics, portfolio management, and machine learning applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Series Selector -->
+    <section class="series-selector">
+        <div class="container">
+            <div class="series-tabs">
+                <button class="series-tab active" onclick="filterBySeries('all')">All Series</button>
+                <button class="series-tab" onclick="filterBySeries('valuation')">Valuation Series</button>
+                <button class="series-tab" onclick="filterBySeries('cfa')">CFA Knowledge</button>
+                <button class="series-tab" onclick="filterBySeries('econometrics')">Econometrics</button>
+                <button class="series-tab" onclick="filterBySeries('portfolio')">Portfolio Management</button>
+                <button class="series-tab" onclick="filterBySeries('machine-learning')">Machine Learning</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Articles Grid -->
+    <section class="articles-grid">
+        <div class="container">
+            <div class="row" id="insightsArticles">
+                <!-- Articles will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Tulga - Ochir Sugar</h3>
+                    <p>Providing insightful market analysis and investment strategies based on comprehensive research and quantitative approaches.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../portfolio/index.html">Portfolio</a></li>
+                        <li><a href="../market-outlook/index.html">Market Outlook</a></li>
+                        <li><a href="index.html">Insights</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Tulga-Ochir Sugar. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // Load insights articles
+        document.addEventListener('DOMContentLoaded', function() {
+            loadInsightsArticles();
+        });
+
+        function loadInsightsArticles() {
+            fetch('../data/insights.json')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('insightsArticles');
+                    container.innerHTML = '';
+                    
+                    data.articles.forEach(article => {
+                        const articleElement = createInsightArticle(article);
+                        container.appendChild(articleElement);
+                    });
+                });
+        }
+
+        function createInsightArticle(article) {
+            const col = document.createElement('div');
+            col.className = 'col-lg-4 col-md-6 mb-4';
+            col.setAttribute('data-series', article.series);
+            
+            col.innerHTML = `
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="${article.image}" alt="${article.title}">
+                        <div class="article-overlay">
+                            <span class="article-series">${article.series}</span>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h3>${article.title}</h3>
+                        <p>${article.excerpt}</p>
+                        <div class="article-meta">
+                            <span class="article-date">${article.date}</span>
+                            <span class="article-read-time">${article.readTime}</span>
+                        </div>
+                        <a href="${article.url}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            `;
+            
+            return col;
+        }
+
+        function filterBySeries(series) {
+            const articles = document.querySelectorAll('#insightsArticles > div');
+            const tabs = document.querySelectorAll('.series-tab');
+            
+            // Update active tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter articles
+            articles.forEach(article => {
+                if (series === 'all' || article.getAttribute('data-series') === series) {
+                    article.style.display = 'block';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
