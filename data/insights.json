@@ -1,0 +1,24 @@
+{
+  "articles": [
+    {
+      "id": "valuation-dcf",
+      "title": "Discounted Cash Flow Valuation",
+      "series": "valuation",
+      "excerpt": "Step-by-step guide to DCF valuation including cash flow projection and discount rate determination.",
+      "image": "https://picsum.photos/seed/dcf-valuation/400/250.jpg",
+      "date": "August 15, 2023",
+      "readTime": "12 min read",
+      "url": "insights/articles/valuation-dcf.html"
+    },
+    {
+      "id": "cfa-ethics",
+      "title": "CFA Ethics and Professional Standards",
+      "series": "cfa",
+      "excerpt": "Overview of ethical standards and professional conduct requirements for investment professionals.",
+      "image": "https://picsum.photos/seed/cfa-ethics/400/250.jpg",
+      "date": "August 10, 2023",
+      "readTime": "8 min read",
+      "url": "insights/articles/cfa-ethics.html"
+    }
+  ]
+}
