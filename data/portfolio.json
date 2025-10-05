@@ -9,26 +9,6 @@
       "date": "September 2023",
       "readTime": "8 min read",
       "url": "portfolio/articles/factor-regression.html"
-    },
-    {
-      "id": "portfolio-optimisation",
-      "title": "Portfolio Optimisation & Backtesting",
-      "excerpt": "Advanced portfolio optimization techniques with comprehensive backtesting results across multiple market scenarios.",
-      "image": "https://picsum.photos/seed/portfolio-opt/400/250.jpg",
-      "category": "optimization",
-      "date": "August 2023",
-      "readTime": "12 min read",
-      "url": "portfolio/articles/portfolio-optimisation.html"
-    },
-    {
-      "id": "stock-risk-measurement",
-      "title": "Stock - Risk Measurement",
-      "excerpt": "Various risk measurement methodologies including VaR, CVaR, and stress testing for individual stocks.",
-      "image": "https://picsum.photos/seed/risk-measure/400/250.jpg",
-      "category": "risk",
-      "date": "July 2023",
-      "readTime": "10 min read",
-      "url": "portfolio/articles/stock-risk-measurement.html"
     }
   ]
 }
