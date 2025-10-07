@@ -1,52 +1,88 @@
 {
-  "articles": [
+  "marketData": [
     {
-      "id": "q1-2025-overview",
-      "title": "Q1 2025 Market Outlook",
-      "quarter": "Q1",
-      "year": "2025",
-      "excerpt": "Complete analysis of Q1 2025 market trends, economic indicators, and investment opportunities across global markets.",
-      "image": "https://picsum.photos/seed/q1-2025/400/250.jpg",
-      "category": "quarterly",
-      "date": "January 2025",
-      "readTime": "15 min read",
-      "url": "market-outlook/q1-2025.html"
-    },
-    {
-      "id": "q2-2025-overview",
-      "title": "Q2 2025 Market Outlook",
-      "quarter": "Q2",
-      "year": "2025",
-      "excerpt": "Q2 2025 market expectations, earnings season preview, and economic forecast for the April-June period.",
-      "image": "https://picsum.photos/seed/q2-2025/400/250.jpg",
-      "category": "quarterly",
-      "date": "April 2025",
-      "readTime": "12 min read",
-      "url": "market-outlook/q2-2025.html"
-    },
-    {
-      "id": "q3-2025-overview",
-      "title": "Q3 2025 Market Outlook",
-      "quarter": "Q3",
-      "year": "2025",
-      "excerpt": "Comprehensive outlook for Q3 2025, focusing on summer economic trends, central bank policies, and sector performance.",
-      "image": "https://picsum.photos/seed/q3-2025/400/250.jpg",
-      "category": "quarterly",
-      "date": "July 2025",
-      "readTime": "14 min read",
-      "url": "market-outlook/q3-2025.html"
-    },
-    {
-      "id": "q4-2025-overview",
-      "title": "Q4 2025 Market Outlook",
-      "quarter": "Q4",
-      "year": "2025",
-      "excerpt": "End-of-year analysis and Q4 2025 forecast, including holiday season retail predictions and outlook for the new year.",
-      "image": "https://picsum.photos/seed/q4-2025/400/250.jpg",
-      "category": "quarterly",
-      "date": "October 2025",
-      "readTime": "16 min read",
-      "url": "market-outlook/q4-2025.html"
+      "year": 2025,
+      "quarters": [
+        {
+          "id": "q1-2025",
+          "name": "Q1 2025",
+          "overview": {
+            "title": "Q1 2025 Market Outlook",
+            "excerpt": "Complete analysis of Q1 2025 market trends, economic indicators, and investment opportunities.",
+            "url": "market-outlook/q1-2025.html"
+          },
+          "months": []
+        },
+        {
+          "id": "q2-2025",
+          "name": "Q2 2025",
+          "overview": {
+            "title": "Q2 2025 Market Outlook",
+            "excerpt": "Q2 2025 market expectations, earnings season preview, and economic forecast.",
+            "url": "market-outlook/q2-2025.html"
+          },
+          "months": []
+        },
+        {
+          "id": "q3-2025",
+          "name": "Q3 2025",
+          "overview": {
+            "title": "Q3 2025 Market Outlook",
+            "excerpt": "Comprehensive outlook for Q3 2025, focusing on summer economic trends.",
+            "url": "market-outlook/q3-2025.html"
+          },
+          "months": [
+            {
+              "name": "July",
+              "articles": [
+                {
+                  "id": "jul-w2-2025",
+                  "title": "July Mid-Month Update",
+                  "excerpt": "Analysis of early Q3 data and market performance in the first half of July.",
+                  "date": "July 15, 2025",
+                  "readTime": "6 min read",
+                  "url": "market-outlook/articles/jul-w2-2025.html"
+                }
+              ]
+            },
+            {
+              "name": "August",
+              "articles": [
+                {
+                  "id": "aug-inflation-2025",
+                  "title": "August Inflation Report",
+                  "excerpt": "Deep dive into the latest inflation numbers and the potential impact on Fed policy.",
+                  "date": "August 12, 2025",
+                  "readTime": "8 min read",
+                  "url": "market-outlook/articles/aug-inflation-2025.html"
+                },
+                {
+                  "id": "aug-jobs-2025",
+                  "title": "Jobs Market Analysis - August",
+                  "excerpt": "Reviewing the August jobs report and its implications for the economy.",
+                  "date": "August 28, 2025",
+                  "readTime": "5 min read",
+                  "url": "market-outlook/articles/aug-jobs-2025.html"
+                }
+              ]
+            },
+            {
+              "name": "September",
+              "articles": []
+            }
+          ]
+        },
+        {
+          "id": "q4-2025",
+          "name": "Q4 2025",
+          "overview": {
+            "title": "Q4 2025 Market Outlook",
+            "excerpt": "End-of-year analysis and Q4 2025 forecast.",
+            "url": "market-outlook/q4-2025.html"
+          },
+          "months": []
+        }
+      ]
     }
   ]
 }
