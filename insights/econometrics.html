@@ -1,0 +1,2117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Econometrics Series - A comprehensive guide to econometric methods, from basic concepts to advanced techniques, by Tulga-Ochir Sugar">
+    <meta name="keywords" content="econometrics, regression analysis, statistical methods, data analysis, quantitative research">
+    <meta name="author" content="Tulga-Ochir Sugar">
+    <title>Econometrics Series | Tulga-Ochir Sugar</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="../assets/css/main.css" as="style">
+    
+    <!-- Stylesheets -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Econometrics Series",
+        "description": "A comprehensive guide to econometric methods, from basic concepts to advanced techniques",
+        "url": "https://example.com/insights/econometrics-series.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Tulga-Ochir Sugar",
+            "url": "https://example.com"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "Tulga-Ochir Sugar"
+        }
+    }
+    </script>
+    
+    <style>
+        /* Custom styles for the Econometrics Series page */
+        .econometrics-hero {
+            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+            color: white;
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+        }
+        
+        .chapter-nav {
+            background-color: #f8f9fa;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #dee2e6;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .chapter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .chapter-tab {
+            background-color: transparent;
+            border: 1px solid #dee2e6;
+            color: #495057;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .chapter-tab:hover {
+            background-color: #e9ecef;
+            color: #212529;
+        }
+        
+        .chapter-tab.active {
+            background-color: #1a365d;
+            color: white;
+            border-color: #1a365d;
+        }
+        
+        .chapter-content {
+            padding: 3rem 0;
+            display: none; /* Hide all sections by default */
+        }
+        
+        .chapter-content.active {
+            display: block; /* Show the active section */
+        }
+        
+        .formula-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #1a365d;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            overflow-x: auto;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+        
+        .key-point {
+            background-color: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .example-box {
+            background-color: #f0f8f0;
+            border-left: 4px solid #28a745;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .chapter-progress {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #1a365d, #2a4365);
+            width: 0;
+            transition: width 0.5s ease;
+        }
+        
+        .table-of-contents {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .table-of-contents ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .table-of-contents li:before {
+            content: "•";
+            color: #1a365d;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            color: #1a365d;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .subsection-title {
+            font-weight: 500;
+            color: #2a4365;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1a365d;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .chapter-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+            
+            .chapter-tab {
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+    
+    <!-- Navigation (right-aligned like home page) -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../portfolio/index.html">PORTFOLIO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../market-outlook/index.html">MARKET OUTLOOK</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">INSIGHTS</a></li>
+                    <li class="nav-item"><button class="btn btn-contact" onclick="location.href='../index.html#contact'">Get in Touch</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Econometrics Hero Section -->
+    <section class="econometrics-hero" aria-labelledby="econometrics-title">
+        <div class="container text-center">
+            <h1 id="econometrics-title" class="display-4">Econometrics Series</h1>
+            <p class="lead">A comprehensive guide to econometric methods, from basic concepts to advanced techniques</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Chapter Navigation -->
+        <section class="chapter-nav" aria-label="Chapter navigation">
+            <div class="container">
+                <div class="chapter-tabs">
+                    <button class="chapter-tab active" onclick="showChapter('chapter1')">Chapter 1</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter2')">Chapter 2</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter3')">Chapter 3</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter4')">Chapter 4</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter5')">Chapter 5</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter6')">Chapter 6</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter7')">Chapter 7</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter8')">Chapter 8</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter9')">Chapter 9</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter10')">Chapter 10</button>
+                    <button class="chapter-tab" onclick="showChapter('chapter11')">Chapter 11</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter Progress Bar -->
+        <div class="container">
+            <div class="chapter-progress">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <!-- Chapter Content Container -->
+        <div id="chapter-content-container">
+            
+            <!-- Chapter 1 Content -->
+            <section id="chapter1-content" class="chapter-content active" aria-labelledby="chapter1-title">
+                <div class="container">
+                    <h2 id="chapter1-title" class="text-center mb-4">Chapter 1: The Empirical Economist's Mindset</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why should you care?</li>
+                            <li>What exactly is econometrics?</li>
+                            <li>Correlation is not causation — a class-size tale</li>
+                            <li>Experiments are gold… and rare</li>
+                            <li>The very first model — a straight line</li>
+                            <li>Three essential assumptions (in plain language)</li>
+                            <li>Why it matters in practice</li>
+                            <li>Key take-aways</li>
+                            <li>Looking ahead</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why should you care?</div>
+                    <p>On any given morning in Frankfurt am Main you might hear:</p>
+                    <blockquote>
+                        <p>"Why do rents in Sachsenhausen rise faster than wages?"<br>
+                        "Does offering German courses to refugees really speed up their integration?"<br>
+                        "Will the new city toll cut traffic or just annoy commuters?"</p>
+                    </blockquote>
+                    <p>Instincts, anecdotes, and even descriptive statistics can hint at answers. Econometrics turns those hints into quantified, testable, decision-ready evidence.</p>
+                    
+                    <div class="section-title">2. What exactly is econometrics?</div>
+                    <p><strong>Econometrics = Economics + Data + Statistics</strong></p>
+                    <p>Economists propose theories (demand curves, human-capital models, monetary rules). Econometricians bring in data and statistical tools to:</p>
+                    <ul>
+                        <li><strong>Verify</strong> — Does the theory fit the facts?</li>
+                        <li><strong>Quantify</strong> — How big is the effect? (e.g. +7% wages per extra year of school)</li>
+                        <li><strong>Evaluate</strong> — Did a new policy work?</li>
+                        <li><strong>Predict</strong> — What happens if we raise the ECB deposit rate by 0.25 pp?</li>
+                    </ul>
+                    <p>If you want more than educated guesses, you need econometrics.</p>
+                    
+                    <div class="section-title">3. Correlation is not causation — a class-size tale</div>
+                    <p>A simple scatter plot of German school districts shows smaller classes often score higher in tests. Nice!</p>
+                    <p>But richer districts both hire more teachers and fund better facilities.</p>
+                    <p>If we naively act on the scatter, we could spend millions reducing class size and discover—too late—that facilities did the heavy lifting.</p>
+                    <p>Econometrics provides the discipline needed to separate "looks related" from "really causes".</p>
+                    
+                    <div class="section-title">4. Experiments are gold… and rare</div>
+                    <p>Randomised Controlled Trials (RCTs) shuffle treatment like a lottery. Example: randomly assign some schools extra teachers, others none, then compare outcomes.</p>
+                    <p>In many economic settings RCTs are too costly, unethical, or impossible. Most evidence therefore comes from observational data (surveys, admin records, market prices).</p>
+                    <p>Econometrics supplies the rules that let us learn responsibly from those less-than-perfect data.</p>
+                    
+                    <div class="section-title">5. The very first model — a straight line</div>
+                    <p>Many questions start with the simple linear regression</p>
+                    <div class="formula-box">
+                        y<sub>i</sub> = β<sub>0</sub> + β<sub>1</sub>x<sub>i</sub> + ε<sub>i</sub>
+                    </div>
+                    <p>where:</p>
+                    <ul>
+                        <li>y<sub>i</sub> = outcome of interest (hourly wage)</li>
+                        <li>x<sub>i</sub> = explanatory variable (years of education)</li>
+                        <li>ε<sub>i</sub> = all other influences we did not measure</li>
+                    </ul>
+                    <p>The population slope that describes the true relationship is:</p>
+                    <div class="formula-box">
+                        β<sub>1</sub> = Cov(x<sub>i</sub>, y<sub>i</sub>) / Var(x<sub>i</sub>), β<sub>0</sub> = E[y<sub>i</sub>] - β<sub>1</sub>E[x<sub>i</sub>]
+                    </div>
+                    <p>Because we do not know the population moments, we estimate them with sample averages.</p>
+                    <p>The resulting Ordinary Least Squares (OLS) estimator</p>
+                    <div class="formula-box">
+                        β̂<sub>1</sub> = ∑<sub>i</sub>(x<sub>i</sub> - x̄)(y<sub>i</sub> - ȳ) / ∑<sub>i</sub>(x<sub>i</sub> - x̄)<sup>2</sup>
+                    </div>
+                    <p>is the slope that minimises the squared vertical distances between data points and the fitted line.</p>
+                    <p>Even this humble straight line can answer:</p>
+                    <ul>
+                        <li>"How many euro does one more year of schooling add to average pay in Frankfurt?"</li>
+                        <li>"How sensitive is household electricity use to outside temperature?"</li>
+                    </ul>
+                    
+                    <div class="section-title">6. Three essential assumptions (in plain language)</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Assumption</th>
+                                    <th>What it really says</th>
+                                    <th>Why you should care</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Random sampling</td>
+                                    <td>Each observation is like a lottery draw from the same population.</td>
+                                    <td>Makes sample formulas mirror true population formulas.</td>
+                                </tr>
+                                <tr>
+                                    <td>Linearity in parameters</td>
+                                    <td>The average effect of x on y can be summarised by a straight line (or by a line after transforming variables).</td>
+                                    <td>Keeps interpretation clear and maths manageable.</td>
+                                </tr>
+                                <tr>
+                                    <td>Mean independence (exogeneity)</td>
+                                    <td>On average, the unobserved stuff ε<sub>i</sub> is not linked to x<sub>i</sub>.</td>
+                                    <td>Without it, the slope mixes true effect with hidden factors (ability, location, etc.).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>When these hold, OLS produces unbiased and (with more data) consistent estimates.</p>
+                    
+                    <div class="section-title">7. Why it matters in practice</div>
+                    <ul>
+                        <li><strong>Policy design</strong> — Before the city spends €100 million hiring teachers, it wants credible evidence that smaller classes cause better scores.</li>
+                        <li><strong>Business strategy</strong> — A café chain maps foot traffic (x) to daily sales (y) to choose the next branch location.</li>
+                        <li><strong>Personal finance</strong> — A student weighs a €30,000 MSc fee against the estimated wage premium.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>Econometrics converts curious questions into measurable answers.</li>
+                            <li>Experiments are best but rare; careful modelling lets us exploit ordinary data.</li>
+                            <li>The linear regression line—powered by OLS—offers the first step toward credible causal stories, provided the core assumptions hold.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">8. Looking ahead</div>
+                    <p>Next up is Chapter 2: Data & Random Sampling. We will see how the structure of your data (cross-section, time-series, panel) and the way you collect it can make or break every result that follows. Stay tuned!</p>
+                </div>
+            </section>
+
+            <!-- Chapter 2 Content -->
+            <section id="chapter2-content" class="chapter-content" aria-labelledby="chapter2-title">
+                <div class="container">
+                    <h2 id="chapter2-title" class="text-center mb-4">Chapter 2: Data & Random Sampling</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why this chapter matters</li>
+                            <li>Three common data structures</li>
+                            <li>The ideal: simple random sampling</li>
+                            <li>Real-world wrinkles</li>
+                            <li>Stratified & cluster sampling in plain language</li>
+                            <li>Sample size vs. measurement quality</li>
+                            <li>Assumptions to check before any regression</li>
+                            <li>Frankfurt-flavoured examples</li>
+                            <li>Quick field checklist</li>
+                            <li>Key take-aways</li>
+                            <li>Up next</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why this chapter matters</div>
+                    <p>A brilliant model cannot rescue bad data. Before tuning regressions or debating p-values, you must ask:</p>
+                    <ul>
+                        <li>Where did my numbers come from?</li>
+                        <li>Do they represent the population I care about?</li>
+                        <li>Could the collection process itself bias the result?</li>
+                    </ul>
+                    <p>Skipping these questions can waste millions—or worse, mislead policy.</p>
+                    
+                    <div class="section-title">2. Three common data structures</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Structure</th>
+                                    <th>Quick picture</th>
+                                    <th>Typical use</th>
+                                    <th>Frankfurt-style example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cross-section</td>
+                                    <td>One snapshot in time</td>
+                                    <td>Compare units</td>
+                                    <td>Hourly wages of 5,000 residents in 2024</td>
+                                </tr>
+                                <tr>
+                                    <td>Time-series</td>
+                                    <td>One unit over many dates</td>
+                                    <td>Forecast, detect shocks</td>
+                                    <td>Monthly ECB deposit rate, 1999-2025</td>
+                                </tr>
+                                <tr>
+                                    <td>Panel (longitudinal)</td>
+                                    <td>Many units over many dates</td>
+                                    <td>Control for fixed traits</td>
+                                    <td>Annual rent of 2,000 flats, 2015-2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Each format implies different statistical challenges. Mixing them up invites wrong standard errors or spurious trends.</p>
+                    
+                    <div class="section-title">3. The ideal: simple random sampling</div>
+                    <p>Mathematically we dream of i.i.d. draws:</p>
+                    <div class="formula-box">
+                        Let {(x<sub>i</sub>, y<sub>i</sub>)}<sub>i=1</sub><sup>n</sup> be i.i.d. from the same population.
+                    </div>
+                    <p><strong>Independent</strong> = one observation tells you nothing about the next.<br>
+                    <strong>Identically distributed</strong> = every observation has the same probability law.</p>
+                    <p>With i.i.d. data, the sample mean</p>
+                    <div class="formula-box">
+                        ȳ = (1/n) ∑<sub>i=1</sub><sup>n</sup> y<sub>i</sub>
+                    </div>
+                    <p>is unbiased for the population mean μ = E[y] and has standard error</p>
+                    <div class="formula-box">
+                        SE(ȳ) = σ/√n
+                    </div>
+                    <p>where σ² is the true variance. Double the sample size and the error shrinks by 1/√2. Clean and simple!</p>
+                    
+                    <div class="section-title">4. Real-world wrinkles</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Wrinkle</th>
+                                    <th>What goes wrong</th>
+                                    <th>Everyday illustration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Coverage bias</td>
+                                    <td>The sampling frame omits part of the population.</td>
+                                    <td>A phone survey misses renters without landlines—skewing rent estimates.</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-response</td>
+                                    <td>Some selected units refuse or cannot answer.</td>
+                                    <td>High-income households decline wage interviews, pulling the sample mean down.</td>
+                                </tr>
+                                <tr>
+                                    <td>Cluster dependence</td>
+                                    <td>Nearby units look alike → lower effective n.</td>
+                                    <td>Energy use measured by apartment often correlates within buildings.</td>
+                                </tr>
+                                <tr>
+                                    <td>Time dependence</td>
+                                    <td>Today's value relates to yesterday's.</td>
+                                    <td>ECB rate cuts spread over months; successive observations aren't independent.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Econometrics offers fixes—weights, robust errors, clustering, time-series models—but diagnosing the problem comes first.</p>
+                    
+                    <div class="section-title">5. Stratified & cluster sampling in plain language</div>
+                    <p>Sometimes random draws alone are inefficient or costly.</p>
+                    <p><strong>Stratified sampling</strong> divides the population into homogeneous groups (strata) and samples within each. Example: Force equal numbers from Frankfurt's central, north, and south boroughs to ensure city-wide conclusions.</p>
+                    <p><strong>Cluster sampling</strong> first selects groups, then units inside them. Example: Choose 50 apartment blocks, then survey every flat in each block. Cheap when travel is expensive, but adds intra-cluster correlation you must correct for.</p>
+                    
+                    <div class="section-title">6. Sample size vs. measurement quality</div>
+                    <p>"Better 1,000 precise measurements than 10,000 sloppy ones."</p>
+                    <p>Large n lowers random error, yet systematic error (bias) remains.</p>
+                    <p>Budget-constrained? Spend first on representative coverage and accurate measurement; add records only if funds remain.</p>
+                    
+                    <div class="section-title">7. Assumptions to check before any regression</div>
+                    <ul>
+                        <li><strong>Representativeness</strong> — Does your sample mirror the target population?</li>
+                        <li><strong>Correct temporal ordering</strong> — Is x measured before y when you claim causality?</li>
+                        <li><strong>Stable unit treatment value</strong> — One unit's outcome must not affect another's (violated in neighbourhood spill-overs).</li>
+                        <li><strong>No data dredging</strong> — Pre-define key variables; avoid picking the best stories post-hoc.</li>
+                    </ul>
+                    <p>Write these on a sticky note near your code editor.</p>
+                    
+                    <div class="section-title">8. Frankfurt-flavoured examples</div>
+                    <div class="example-box">
+                        <h5>Housing study:</h5>
+                        <p>Randomly draw flats from the city's cadastral registry. Weight by floor-space to correct for oversampling tiny studios.</p>
+                        
+                        <h5>Retail-foot-traffic sensor:</h5>
+                        <p>Sensors record counts every minute—giving dependence across time. Use Newey-West or fit an AR(1) error structure before testing intervention effects.</p>
+                        
+                        <h5>Refugee integration survey:</h5>
+                        <p>Language-school dropouts may ignore follow-up questionnaires → potential attrition bias. Design incentives or multiple contact modes to cut attrition.</p>
+                    </div>
+                    
+                    <div class="section-title">9. Quick field checklist</div>
+                    <ul>
+                        <li>Define the population. Be explicit: "all private rental contracts signed in Frankfurt 2024."</li>
+                        <li>Audit the sampling frame. List obvious exclusions and their likely direction of bias.</li>
+                        <li>Track response rates. Overall and by key subgroup.</li>
+                        <li>Log data-collection costs. Helps choose between bigger n or better instruments next time.</li>
+                        <li>Document everything. Today's codebook is tomorrow's credibility.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>Data structure (cross-section, time-series, panel) dictates the valid toolbox.</li>
+                            <li>Simple random sampling makes math easy; reality often deviates—spot how.</li>
+                            <li>Fixing bias beats inflating sample size.</li>
+                            <li>Transparent documentation is as valuable as the numbers themselves.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">10. Up next</div>
+                    <p>In Chapter 3 we draw our very first regression line, visualise why OLS "leans" the way it does, and connect geometry to intuition. Bring a cup of coffee—and your freshly cleaned dataset.</p>
+                </div>
+            </section>
+
+            <!-- Chapter 3 Content -->
+            <section id="chapter3-content" class="chapter-content" aria-labelledby="chapter3-title">
+                <div class="container">
+                    <h2 id="chapter3-title" class="text-center mb-4">Chapter 3: Simple Linear Regression, Geometric Intuition</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why you should care</li>
+                            <li>The data in one minute</li>
+                            <li>Scatter plot → straight line</li>
+                            <li>Where the formula comes from</li>
+                            <li>A tiny code sketch (Python + pandas/statsmodels)</li>
+                            <li>Key assumptions checked against market data</li>
+                            <li>Why a one-line model already helps</li>
+                            <li>Limitations & next steps</li>
+                            <li>Take-aways</li>
+                            <li>Coming up</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why you should care</div>
+                    <p>Investors keep asking: "If the S&P 500 jumps 1%, what usually happens to Bitcoin the same day?" Knowing the average co-movement helps with hedging, risk limits and portfolio design. The most direct way to answer is a simple linear regression of Bitcoin's daily return on the S&P 500's return.</p>
+                    <p>Recent numbers show the link is real but not perfect: Rolling 30-day correlations have swung between 0 and 0.5 since 2020. That pattern begs to be quantified—exactly what this chapter does.</p>
+                    
+                    <div class="section-title">2. The data in one minute</div>
+                    <ul>
+                        <li><strong>Units:</strong> trading days</li>
+                        <li><strong>Variables:</strong>
+                            <ul>
+                                <li>y<sub>t</sub> = Bitcoin daily return (in %)</li>
+                                <li>x<sub>t</sub> = S&P 500 daily return (in %)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Sample:</strong> January 2022 – June 2025 (≈ 850 observations)</li>
+                        <li><strong>Source:</strong> Public price feeds (e.g. Yahoo Finance or a crypto exchange API)</li>
+                    </ul>
+                    <p>Because returns are logged at the same timestamp, neither variable can "look into the future," keeping the design symmetric.</p>
+                    
+                    <div class="section-title">3. Scatter plot → straight line</div>
+                    <p>Imagine plotting x<sub>t</sub> on the horizontal axis and y<sub>t</sub> on the vertical. The cloud of dots leans upward: strong index rallies often coincide with even stronger Bitcoin moves. The best-fit line through that cloud is the simple-regression model</p>
+                    <div class="formula-box">
+                        y<sub>t</sub> = β<sub>0</sub> + β<sub>1</sub>x<sub>t</sub> + ε<sub>t</sub>
+                    </div>
+                    <p>The line's slope β<sub>1</sub> captures average amplification: If β<sub>1</sub> = 1.6, a 1% rise in the S&P 500 is typically matched by a 1.6% jump in Bitcoin. Each residual ε̂<sub>t</sub> is the vertical gap between a dot and the line. By construction, the residual cloud is orthogonal to the fitted line.</p>
+                    
+                    <div class="section-title">4. Where the formula comes from</div>
+                    <p>For the population:</p>
+                    <div class="formula-box">
+                        β<sub>1</sub> = Cov(x<sub>t</sub>, y<sub>t</sub>) / Var(x<sub>t</sub>), β<sub>0</sub> = E[y<sub>t</sub>] - β<sub>1</sub>E[x<sub>t</sub>]
+                    </div>
+                    <p>Replace the unknown moments with sample counterparts and you get the Ordinary Least Squares (OLS) estimator</p>
+                    <div class="formula-box">
+                        β̂<sub>1</sub> = ∑<sub>t</sub>(x<sub>t</sub> - x̄)(y<sub>t</sub> - ȳ) / ∑<sub>t</sub>(x<sub>t</sub> - x̄)<sup>2</sup>, β̂<sub>0</sub> = ȳ - β̂<sub>1</sub>x̄
+                    </div>
+                    <p>OLS is "ordinary" because it's simply the line that minimises the sum of squared residuals—the most intuitive yard-stick for closeness.</p>
+                    
+                    <div class="section-title">5. A tiny code sketch (Python + pandas/statsmodels)</div>
+                    <div class="code-block">
+                        <pre><code class="language-python">import yfinance as yf, pandas as pd, statsmodels.api as sm
+
+btc = yf.download("BTC-USD", start="2022-01-01")['Adj Close'].pct_change().dropna()*100
+spx = yf.download("^GSPC",   start="2022-01-01")['Adj Close'].pct_change().dropna()*100
+
+df = pd.concat({'btc': btc, 'spx': spx}, axis=1).dropna()
+X  = sm.add_constant(df['spx'])
+model = sm.OLS(df['btc'], X).fit()
+print(model.summary())</code></pre>
+                    </div>
+                    <p>Typical output (abridged):</p>
+                    <div class="code-block">
+                        <pre><code>coef    std err  t    P>|t|
+const     0.05     0.09    0.5   0.62
+spx       1.57     0.12   13.0   0.000
+R-squared = 0.25</code></pre>
+                    </div>
+                    <p>Slope 1.57 → Bitcoin moves ~1.6× the S&P 500 on the same day.<br>
+                    R² ≈ 0.25 → Index returns explain 25% of Bitcoin's daily variation—useful but still leaves plenty of independent noise.</p>
+                    
+                    <div class="section-title">6. Key assumptions checked against market data</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Assumption</th>
+                                    <th>Do we buy it?</th>
+                                    <th>Quick diagnostic</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Linearity in mean</td>
+                                    <td>Returns often scale roughly linearly day-to-day</td>
+                                    <td>Plot residuals vs. fitted; look for curves.</td>
+                                </tr>
+                                <tr>
+                                    <td>Mean independence (exogeneity)</td>
+                                    <td>Same-day co-moves are concurrent, so causality isn't claimed—just association</td>
+                                    <td>Acceptable for risk or hedge ratios; not for "Bitcoin causes stocks."</td>
+                                </tr>
+                                <tr>
+                                    <td>Homoscedasticity & independence</td>
+                                    <td>Volatility clusters; residuals show ARCH effects</td>
+                                    <td>Robust or Newey-West standard errors fix inference without changing β̂.</td>
+                                </tr>
+                                <tr>
+                                    <td>Random sampling / i.i.d.</td>
+                                    <td>Market hours & holidays create mild irregularity but daily returns are a common, accepted unit</td>
+                                    <td>Longer horizons need time-series models, Chapter 11.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">7. Why a one-line model already helps</div>
+                    <ul>
+                        <li><strong>Portfolio hedging</strong> — If Bitcoin's beta to equities is 1.6, a $10m equity hedge fund holding 1m in BTC is effectively running a 1.6m equity exposure.</li>
+                        <li><strong>Risk limits</strong> — A trading desk can cap aggregate exposure instead of siloed crypto vs. stock buckets.</li>
+                        <li><strong>Scenario planning</strong> — Stress tests can apply a 3σ equity shock and scale crypto moves by β̂<sub>1</sub>.</li>
+                    </ul>
+                    
+                    <div class="section-title">8. Limitations & next steps</div>
+                    <ul>
+                        <li><strong>Causality not implied</strong> — The slope is descriptive. In Chapter 10 we'll meet Instrumental Variables for causal answers.</li>
+                        <li><strong>Non-linear tails</strong> — Extreme market days may bend the line; quantile regression is a fix.</li>
+                        <li><strong>Time-varying betas</strong> — Rolling regressions or state-space models update β<sub>1</sub> as correlations drift.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Take-aways</h5>
+                        <ul>
+                            <li>A scatter, a straight line, and two moments (covariance & variance) already yield actionable insight.</li>
+                            <li>In today's markets, Bitcoin behaves like an "equity with leverage" on many days, but only partly so.</li>
+                            <li>Geometry—residuals at right angles to the fitted line—gives OLS its neat mathematical properties and intuitive appeal.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">9. Coming up</div>
+                    <p>Chapter 4 dives into software output: what every column in the regression table means, how to spot red flags, and how to translate numbers into plain English advice for your CIO. See you there!</p>
+                </div>
+            </section>
+
+            <!-- Chapter 4 Content -->
+            <section id="chapter4-content" class="chapter-content" aria-labelledby="chapter4-title">
+                <div class="container">
+                    <h2 id="chapter4-title" class="text-center mb-4">Chapter 4: Estimating OLS & Reading Software Output</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why this chapter matters</li>
+                            <li>The estimator in one line of algebra</li>
+                            <li>Running the regression (Python example)</li>
+                            <li>Decoding each column in plain English</li>
+                            <li>Four common red flags and quick fixes</li>
+                            <li>A cheat-sheet for plain-language reporting</li>
+                            <li>Best practice checklist before you trust a table</li>
+                            <li>Key take-aways</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why this chapter matters</div>
+                    <p>Seeing a statistical table for the first time feels like reading a medical chart in Latin. Yet those columns decide how much capital a portfolio manager shifts, how large a subsidy a government approves, or whether a research paper survives peer review. Today you'll learn to decode every piece of a standard OLS output and spot the red flags that tell you a model can't be trusted.</p>
+                    
+                    <div class="section-title">2. The estimator in one line of algebra</div>
+                    <p>Given an n×1 outcome vector y and an n×k matrix of predictors X (with a leading column of 1s for the intercept), the OLS coefficient vector is</p>
+                    <div class="formula-box">
+                        β̂ = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>y
+                    </div>
+                    <p>That's all software does—solve this set of linear equations—to minimise the sum of squared residuals,</p>
+                    <div class="formula-box">
+                        ∑<sub>i=1</sub><sup>n</sup>(y<sub>i</sub> - X<sub>i</sub>β̂)<sup>2</sup>
+                    </div>
+                    <p>Everything else in the print-out (standard errors, t-values, R², etc.) is built on β̂.</p>
+                    
+                    <div class="section-title">3. Running the regression (Python example)</div>
+                    <div class="code-block">
+                        <pre><code class="language-python">import yfinance as yf, pandas as pd, statsmodels.api as sm
+
+btc = yf.download("BTC-USD", start="2022-01-01")['Adj Close'].pct_change().dropna()*100
+spx = yf.download("^GSPC",   start="2022-01-01")['Adj Close'].pct_change().dropna()*100
+
+df  = pd.concat({'btc': btc, 'spx': spx}, axis=1).dropna()
+X   = sm.add_constant(df['spx'])   # adds the intercept
+model = sm.OLS(df['btc'], X).fit()
+print(model.summary())</code></pre>
+                    </div>
+                    <p>Typical (abridged) console output:</p>
+                    <div class="code-block">
+                        <pre><code>| Coefficient | Estimate | Std. Error | t-stat | P>|t| |
+|-------------|---------:|-----------:|-------:|-----:|
+| Intercept | 0.05 | 0.09 | 0.5 | 0.62 |
+| spx | 1.57 | 0.12 | 13.0 | 0.000 |
+R-squared: 0.25      F-statistic: 169.0      Observations: 850</code></pre>
+                    </div>
+                    
+                    <div class="section-title">4. Decoding each column in plain English</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Element</th>
+                                    <th>What it tells you</th>
+                                    <th>Bitcoin-S&P example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Estimate (coef)</td>
+                                    <td>Best-fit slope/intercept</td>
+                                    <td>A 1% S&P jump coincides with a 1.57% Bitcoin jump, on average.</td>
+                                </tr>
+                                <tr>
+                                    <td>Std. Error</td>
+                                    <td>Sampling uncertainty around the estimate</td>
+                                    <td>±0.12 pp around 1.57.</td>
+                                </tr>
+                                <tr>
+                                    <td>t-statistic</td>
+                                    <td>Estimate ÷ Std. Error</td>
+                                    <td>13 → a huge signal-to-noise ratio.</td>
+                                </tr>
+                                <tr>
+                                    <td>P-value</td>
+                                    <td>Probability of seeing a t at least this large if the true slope were 0</td>
+                                    <td><0.001 → virtually impossible under "no link."</td>
+                                </tr>
+                                <tr>
+                                    <td>R-squared</td>
+                                    <td>Share of y variance explained</td>
+                                    <td>0.25 → S&P moves explain 25% of Bitcoin's daily wiggles.</td>
+                                </tr>
+                                <tr>
+                                    <td>F-statistic</td>
+                                    <td>Joint test that all slopes = 0</td>
+                                    <td>169 → the model beats a flat line hands-down.</td>
+                                </tr>
+                                <tr>
+                                    <td>Observations (n)</td>
+                                    <td>Sample size behind the stats</td>
+                                    <td>850 trading days.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">5. Four common red flags and quick fixes</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Red flag</th>
+                                    <th>Symptom in output</th>
+                                    <th>Likely cause</th>
+                                    <th>Immediate fix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>"Perfect" R² = 0.99</td>
+                                    <td>Too good to be true</td>
+                                    <td>You mistakenly regressed a variable on itself (or near-duplicates).</td>
+                                    <td>Check column names and lags.</td>
+                                </tr>
+                                <tr>
+                                    <td>Huge Std. Errors vs. coefficients</td>
+                                    <td>Coeff ≈ 0.8 but SE ≈ 1.2</td>
+                                    <td>Multicollinearity (predictors highly correlated)</td>
+                                    <td>Drop a redundant predictor or apply ridge shrinkage.</td>
+                                </tr>
+                                <tr>
+                                    <td>Durbin-Watson < 1.0</td>
+                                    <td>Serial correlation in residuals</td>
+                                    <td>Time-series dependence</td>
+                                    <td>Use Newey-West SE or move to AR models.</td>
+                                </tr>
+                                <tr>
+                                    <td>P-values tiny yet plot looks curved</td>
+                                    <td>Misspecification</td>
+                                    <td>Missing a nonlinear term</td>
+                                    <td>Add x² or run a spline.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">6. A cheat-sheet for plain-language reporting</div>
+                    <ul>
+                        <li><strong>Slope:</strong> "Bitcoin tends to move 1.6× the S&P 500 on the same day."</li>
+                        <li><strong>Uncertainty:</strong> "The margin of error is about ±0.1×."</li>
+                        <li><strong>Economic meaning:</strong> "Holding €100k in Bitcoin equates to a €160k equity exposure for daily shocks."</li>
+                        <li><strong>Fit quality:</strong> "Index returns account for one-quarter of Bitcoin's day-to-day moves; other forces drive the rest."</li>
+                    </ul>
+                    
+                    <div class="section-title">7. Best practice checklist before you trust a table</div>
+                    <ul>
+                        <li><strong>Visuals first</strong> — Always plot data and residuals; numbers confirm what eyes suspect.</li>
+                        <li><strong>Units & scaling</strong> — Know whether coefficients are in percent, basis points, or log points.</li>
+                        <li><strong>Robust errors</strong> — If in doubt, request HC1/White or Newey-West SE.</li>
+                        <li><strong>Version control</strong> — Save the code, data-cut, and seed to reproduce output later.</li>
+                        <li><strong>Tell the story</strong> — Translate every stat into a business or policy implication.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>The OLS table is just algebraic output from ∑(y<sub>i</sub> - X<sub>i</sub>β̂)<sup>2</sup>; reading it is a skill, not magic.</li>
+                            <li>Coefficients give magnitude, Std. Errors give precision, R² gives context—interpret all three together.</li>
+                            <li>Red flags (weird R², giant errors, autocorrelation) are easier to catch early than to fix late.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chapter 5 Content -->
+            <section id="chapter5-content" class="chapter-content" aria-labelledby="chapter5-title">
+                <div class="container">
+                    <h2 id="chapter5-title" class="text-center mb-4">Chapter 5: Goodness of Fit (Without Falling in Love with R²)</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why this topic matters</li>
+                            <li>The basic anatomy: ANOVA in one glance</li>
+                            <li>Meet R²'s better-behaved cousin</li>
+                            <li>Real-world demo: predicting house prices</li>
+                            <li>Better yard-sticks</li>
+                            <li>Quick visual checks</li>
+                            <li>Common myths—busted</li>
+                            <li>A four-step fit-assessment ritual</li>
+                            <li>Key take-aways</li>
+                            <li>Looking ahead</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why this topic matters</div>
+                    <p>Analysts often race straight to the R-squared line, and managers nod if it's "above 0.8." Yet a housing-price model with R² = 0.95 can completely mis-price tomorrow's listings if it's over-tuned to last year's quirks. Caring only about R² is like buying a car because the speedometer goes to 240 km/h—you haven't looked under the hood.</p>
+                    
+                    <div class="section-title">2. The basic anatomy: ANOVA in one glance</div>
+                    <p>For any linear regression</p>
+                    <div class="formula-box">
+                        y<sub>i</sub> = β<sub>0</sub> + β<sub>1</sub>x<sub>1i</sub> + ⋯ + β<sub>k</sub>x<sub>ki</sub> + ε<sub>i</sub>
+                    </div>
+                    <p>the total variation splits neatly:</p>
+                    <div class="formula-box">
+                        ∑<sub>i</sub>(y<sub>i</sub> - ȳ)<sup>2</sup> (Total SS) = ∑<sub>i</sub>(ŷ<sub>i</sub> - ȳ)<sup>2</sup> (Explained SS) + ∑<sub>i</sub>(y<sub>i</sub> - ŷ<sub>i</sub>)<sup>2</sup> (Residual SS)
+                    </div>
+                    <p>Hence</p>
+                    <div class="formula-box">
+                        R² = 1 - (Residual SS / Total SS)
+                    </div>
+                    <p>It measures in-sample fit—nothing more, nothing less.</p>
+                    
+                    <div class="section-title">3. Meet R²'s better-behaved cousin</div>
+                    <p>Adding predictors never lowers R², so a model can bloat to 100 dummy variables, boast R² = 1, and still flop. Adjusted R² penalises fluff:</p>
+                    <div class="formula-box">
+                        R̄² = 1 - (1 - R²) × (n - 1) / (n - k - 1)
+                    </div>
+                    <p>where n = observations, k = predictors. Over-fitting will push the penalty term up and R̄² down. Still, even adjusted R² can't see the future; it judges on the same data used to fit the model.</p>
+                    
+                    <div class="section-title">4. Real-world demo: predicting house prices</div>
+                    <div class="example-box">
+                        <p><strong>Data:</strong> 10,000 U.S. listings, 2023 (price, size, age, bedrooms, ZIP code).</p>
+                        <p><strong>Model A (parsimonious):</strong> Price ~ Size + Bedrooms + Age.<br>
+                        R² = 0.72, RMSE = €46k.</p>
+                        <p><strong>Model B (overfitted):</strong> Price ~ Size + Bedrooms + Age + 400 ZIP-code dummies.<br>
+                        R² = 0.95, RMSE = €43k (in-sample).</p>
+                        <p><strong>Hold-out test (new 2024 data):</strong><br>
+                        Model A RMSE = €50k; Model B RMSE = €69k.</p>
+                        <p><strong>Lesson:</strong> Model B dazzled with R² = 0.95 but bombed out-of-sample because ZIP codes memorised last year's quirks. High R² ≠ high predictive power.</p>
+                    </div>
+                    
+                    <div class="section-title">5. Better yard-sticks</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Formula</th>
+                                    <th>What it adds</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>RMSE</td>
+                                    <td>√(Residual SS / n)</td>
+                                    <td>Puts error in same units as y.</td>
+                                </tr>
+                                <tr>
+                                    <td>MAE</td>
+                                    <td>(1/n) ∑|y<sub>i</sub> - ŷ<sub>i</sub>|</td>
+                                    <td>Less sensitive to outliers than RMSE.</td>
+                                </tr>
+                                <tr>
+                                    <td>Predicted R² / CV-score</td>
+                                    <td>Fit on 90%, test on 10%; rotate</td>
+                                    <td>Guards against over-fitting.</td>
+                                </tr>
+                                <tr>
+                                    <td>Residual plots</td>
+                                    <td>---</td>
+                                    <td>Reveal curvature, heteroscedasticity, outliers better than any scalar.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">6. Quick visual checks</div>
+                    <ul>
+                        <li><strong>Residuals vs. fitted:</strong> Curve? ⇒ add non-linear term.</li>
+                        <li><strong>Scale-Location plot:</strong> Fan-shape? ⇒ heteroscedastic ⇒ use robust SE or transform y.</li>
+                        <li><strong>QQ-plot of residuals:</strong> Heavy tails? ⇒ rethink normality-based inference.</li>
+                    </ul>
+                    
+                    <div class="section-title">7. Common myths—busted</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Myth</th>
+                                    <th>Reality</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>"Low R² means a useless model."</td>
+                                    <td>Not always; predicting stock returns often yields R² < 0.1 but can still price risk correctly.</td>
+                                </tr>
+                                <tr>
+                                    <td>"High R² proves causality."</td>
+                                    <td>R² is silent on why variables move together—instrumental variables or experiments test causality.</td>
+                                </tr>
+                                <tr>
+                                    <td>"Adjusted R² fixes over-fitting."</td>
+                                    <td>It helps, but only cross-validation truly tests future performance.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">8. A four-step fit-assessment ritual</div>
+                    <ol>
+                        <li>Start with the plot. Eyes beat statistics at spotting weirdness.</li>
+                        <li>Report at least one error metric (RMSE/MAE). R² alone is never enough.</li>
+                        <li>Run a hold-out or cross-validation. Trust the score that touches unseen data.</li>
+                        <li>Explain in plain language. "Our model prices homes within ±€50k 80% of the time" beats "R² = 0.72."</li>
+                    </ol>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>R² describes in-sample fit; it does not guarantee predictive accuracy or causal validity.</li>
+                            <li>Adjusted R² dampens the incentive to add junk predictors but isn't a silver bullet.</li>
+                            <li>Always pair R² with error metrics, residual visuals, and out-of-sample checks before trusting a model in the wild.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">9. Looking ahead</div>
+                    <p>Chapter 6 steps into multiple regression with grace—adding controls without drowning in multicollinearity, and seeing how partial effects sharpen our real-world stories. Get ready to move from one-input lines to realistic economic models with many moving parts.</p>
+                </div>
+            </section>
+
+            <!-- Chapter 6 Content -->
+            <section id="chapter6-content" class="chapter-content" aria-labelledby="chapter6-title">
+                <div class="container">
+                    <h2 id="chapter6-title" class="text-center mb-4">Chapter 6: Multiple Regression Without Tears</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why move beyond one-variable models?</li>
+                            <li>A running example — what drives monthly rent?</li>
+                            <li>The model in matrix form</li>
+                            <li>Quick Python sketch</li>
+                            <li>Watch for multicollinearity</li>
+                            <li>Practical fixes</li>
+                            <li>Essential assumptions revisited</li>
+                            <li>Why multiple regression pays off in real life</li>
+                            <li>Quick checklist before shipping results</li>
+                            <li>Key take-aways</li>
+                            <li>Coming attractions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why move beyond one-variable models?</div>
+                    <p>Real problems rarely hinge on a single factor. Suppose you ask: "How much extra does a master's degree add to annual salary?" Education matters—but so do experience, industry, and region. Ignoring them shoves their influence into the error term and biases the education slope. Multiple regression lets us hold everything else constant and isolate each effect.</p>
+                    
+                    <div class="section-title">2. A running example — what drives monthly rent?</div>
+                    <div class="example-box">
+                        <p><strong>Data:</strong> 3,000 Berlin flats listed in 2024.</p>
+                        <ul>
+                            <li>rent<sub>i</sub> € per m²</li>
+                            <li>size<sub>i</sub> living area (m²)</li>
+                            <li>dist<sub>i</sub> kilometres to Brandenburg Gate</li>
+                            <li>floor<sub>i</sub> storey (ground = 0)</li>
+                            <li>age<sub>i</sub> building age (years)</li>
+                        </ul>
+                        <p><strong>Goal:</strong> quantify location premium after accounting for size and quality.</p>
+                    </div>
+                    
+                    <div class="section-title">3. The model in matrix form</div>
+                    <div class="formula-box">
+                        y = Xβ + ε
+                    </div>
+                    <p>where</p>
+                    <div class="formula-box">
+                        X = [
+                        1 size<sub>1</sub> dist<sub>1</sub> floor<sub>1</sub> age<sub>1</sub>
+                        ⋮ ⋮ ⋮ ⋮
+                        1 size<sub>n</sub> dist<sub>n</sub> floor<sub>n</sub> age<sub>n</sub>
+                        ]
+                    </div>
+                    <p>The OLS solution generalises neatly:</p>
+                    <div class="formula-box">
+                        β̂ = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>y
+                    </div>
+                    <p>Each β̂<sub>j</sub> measures the partial effect of its predictor while all other columns stay fixed.</p>
+                    
+                    <div class="section-title">4. Quick Python sketch</div>
+                    <div class="code-block">
+                        <pre><code class="language-python">import pandas as pd, statsmodels.api as sm
+
+df = pd.read_csv("berlin_rent_2024.csv")             # assume you scraped this
+X  = sm.add_constant(df[['size','dist','floor','age']])
+model = sm.OLS(df['rent'], X).fit(cov_type='HC1')    # robust SE
+print(model.summary())</code></pre>
+                    </div>
+                    <p>Example output (trimmed):</p>
+                    <div class="code-block">
+                        <pre><code>| Variable | Coef | Std Err | t | P>|t| |
+|----------|-----:|--------:|--:|---:|
+| const | 18.2 | 0.9 | 20.2 | 0.000 |
+| size  | –0.045 | 0.005 | –9.0 | 0.000 |
+| dist  | –0.82 | 0.07 | –11.7 | 0.000 |
+| floor | 0.60 | 0.06 | 10.0 | 0.000 |
+| age   | –0.04 | 0.002 | –20.0 | 0.000 |</code></pre>
+                    </div>
+                    <p><strong>Interpretation:</strong></p>
+                    <ul>
+                        <li>Each extra kilometre from the city centre shaves €0.82/m² off rent, holding size, floor, and age constant.</li>
+                        <li>Higher-floor flats gain €0.60/m² per storey—elevator views pay off.</li>
+                        <li>Larger flats are cheaper per m² (negative size slope), reflecting bulk discounts.</li>
+                    </ul>
+                    
+                    <div class="section-title">5. Watch for multicollinearity</div>
+                    <p>When predictors move together, (X<sup>T</sup>X) gets close to singular → huge standard errors.</p>
+                    <p><strong>Variance Inflation Factor (VIF)</strong></p>
+                    <div class="formula-box">
+                        VIF<sub>j</sub> = 1 / (1 - R<sub>j</sub><sup>2</sup>)
+                    </div>
+                    <p>where R<sub>j</sub><sup>2</sup> comes from regressing x<sub>j</sub> on all other predictors.</p>
+                    <p><strong>Rules of thumb:</strong></p>
+                    <ul>
+                        <li>VIF > 5 → keep an eye;</li>
+                        <li>VIF > 10 → consider dropping or combining variables.</li>
+                    </ul>
+                    
+                    <div class="section-title">6. Practical fixes</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Symptom</th>
+                                    <th>Quick remedy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Two variables almost duplicates</td>
+                                    <td>Drop one or replace with average/ratio.</td>
+                                </tr>
+                                <tr>
+                                    <td>Many related quality indicators (balcony, garden, lift)</td>
+                                    <td>Collapse into a quality index via PCA or simple scoring.</td>
+                                </tr>
+                                <tr>
+                                    <td>Scaling differences hide collinearity</td>
+                                    <td>Standardise variables before diagnostic tests.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">7. Essential assumptions revisited</div>
+                    <ul>
+                        <li><strong>Linearity in means</strong> — Conditional expectation of rent is linear in predictors.</li>
+                        <li><strong>Exogeneity</strong> — Unobserved charm (noise) is uncorrelated with size, dist, floor, age.</li>
+                        <li><strong>No perfect collinearity</strong> — Columns of X must be linearly independent.</li>
+                        <li><strong>Homoscedasticity</strong> (for classic SE) — Relaxed by using HC1 robust errors, as in code above.</li>
+                    </ul>
+                    
+                    <div class="section-title">8. Why multiple regression pays off in real life</div>
+                    <ul>
+                        <li><strong>Policy</strong> — Urban planners can evaluate how public-transport upgrades (distance term) shift rents after isolating flat quality.</li>
+                        <li><strong>Investment</strong> — A REIT can target high-floor units near transit, estimating marginal revenue per lift installation.</li>
+                        <li><strong>Fairness</strong> — Salary studies gauge gender pay gaps controlling for tenure, role, and performance—crucial in court.</li>
+                    </ul>
+                    
+                    <div class="section-title">9. Quick checklist before shipping results</div>
+                    <ul>
+                        <li>Plot partial residuals to spot non-linear shapes.</li>
+                        <li>Calculate VIF; tame any culprit > 10.</li>
+                        <li>Use robust or clustered SE if heteroscedasticity or district clusters exist.</li>
+                        <li>Translate each coefficient into everyday language (€ per m², minutes, etc.).</li>
+                        <li>Store code and raw data—regressions must be reproducible.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>Multiple regression isolates each predictor's effect while soaking up confounders.</li>
+                            <li>Collinearity inflates uncertainty, not bias; detect it with VIF and fix pragmatically.</li>
+                            <li>Robust interpretation = coefficient plus context: sign, size, units, and caveats.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">10. Coming attractions</div>
+                    <p>In Chapter 7 we dive into finite-sample properties: why unbiasedness and efficiency matter when data are scarce, and how the Gauss-Markov theorem crowns OLS the Best Linear Unbiased Estimator—as long as its assumptions behave.</p>
+                </div>
+            </section>
+
+            <!-- Chapter 7 Content -->
+            <!-- Chapter 7 Content -->
+            <section id="chapter7-content" class="chapter-content" aria-labelledby="chapter7-title">
+                <div class="container">
+                    <h2 id="chapter7-title" class="text-center mb-4">Chapter 7: Finite-Sample Facts & the Gauss-Markov Gold Medal</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why finite-sample properties matter</li>
+                            <li>Recap of the multiple-regression set-up</li>
+                            <li>Three performance yard-sticks</li>
+                            <li>The Gauss-Markov Theorem—OLS wears the BLUE ribbon</li>
+                            <li>A tiny Monte-Carlo to see variance in action</li>
+                            <li>When the BLUE badge doesn't protect you</li>
+                            <li>Practical take-aways for small-sample projects</li>
+                            <li>Key insight</li>
+                            <li>Looking forward</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why finite-sample properties matter</div>
+                    <p>Picture a start-up that A/B-tests a new pricing page on just 42 visitors before tomorrow's investor call. The CFO runs a regression of revenue on a "New Page" dummy, gets a slope of €3.10 and a p-value of 0.04, and declares success.</p>
+                    <p>Small numbers like these demand sharper questions:</p>
+                    <ul>
+                        <li>Is the €3.10 estimate on average right (unbiased)?</li>
+                        <li>How jumpy is it from sample to sample (variance)?</li>
+                        <li>Could a different linear estimator deliver tighter confidence intervals?</li>
+                    </ul>
+                    <p>Finite-sample theory answers those questions before the VC money burns.</p>
+                    
+                    <div class="section-title">2. Recap of the multiple-regression set-up</div>
+                    <div class="formula-box">
+                        y = Xβ + ε
+                        β̂ = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>y
+                    </div>
+                    <p>Key dimensions:</p>
+                    <ul>
+                        <li>n = observations (small today)</li>
+                        <li>k = predictors (including the intercept)</li>
+                    </ul>
+                    <p>With tiny n, every degree of freedom counts.</p>
+                    
+                    <div class="section-title">3. Three performance yard-sticks</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Concept</th>
+                                    <th>Formal cue</th>
+                                    <th>Plain meaning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Unbiasedness</td>
+                                    <td>E[β] = β</td>
+                                    <td>On average, the estimator lands on the truth.</td>
+                                </tr>
+                                <tr>
+                                    <td>Variance / Efficiency</td>
+                                    <td>Var(β)</td>
+                                    <td>How much the estimate jitters across samples.</td>
+                                </tr>
+                                <tr>
+                                    <td>Mean-squared error (MSE)</td>
+                                    <td>Var(β̂) + Bias²</td>
+                                    <td>Overall "badness" score; low is good.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>A perfect estimator would be unbiased and have the smallest possible variance.</p>
+                    
+                    <div class="section-title">4. The Gauss-Markov Theorem—OLS wears the BLUE ribbon</div>
+                    <p><strong>Best Linear Unbiased Estimator</strong> under five classic assumptions:</p>
+                    <ol>
+                        <li>Linearity in parameters</li>
+                        <li>Random sampling (i.i.d.)</li>
+                        <li>No perfect multicollinearity</li>
+                        <li>Zero conditional mean: E[ε|X] = 0</li>
+                        <li>Homoscedastic errors: Var(ε|X) = σ²I</li>
+                    </ol>
+                    <p>When these hold, no other linear, unbiased estimator beats OLS on variance.</p>
+                    <p>That's huge: with small data you cannot shrink uncertainty by fancy algebra alone—either add observations or relax the "unbiased" requirement (ridge/Lasso, Chapter 12).</p>
+                    
+                    <div class="section-title">5. A tiny Monte-Carlo to see variance in action</div>
+                    <div class="code-block">
+                        <pre><code class="language-python">import numpy as np, statsmodels.api as sm
+
+np.random.seed(7)
+beta_true = np.array([1.0, 0.5])      # intercept, slope
+n, reps   = 40, 5000                  # small sample!
+slope_est = []
+
+for _ in range(reps):
+    x  = np.random.uniform(0, 10, n)
+    e  = np.random.normal(0, 2, n)
+    y  = beta_true[0] + beta_true[1]*x + e
+    X  = sm.add_constant(x)
+    slope_est.append(sm.OLS(y, X).fit().params[1])
+
+print(f"Mean   of estimates: {np.mean(slope_est):.3f}")
+print(f"StdDev of estimates: {np.std(slope_est):.3f}")</code></pre>
+                    </div>
+                    <p>Typical output:</p>
+                    <div class="code-block">
+                        <pre><code>Mean   of estimates: 0.502   # unbiased
+StdDev of estimates: 0.320   # wide spread!</code></pre>
+                    </div>
+                    <p>Even though the average hits 0.5, any single study can miss by ±0.6. With n=1000 the StdDev falls below 0.08—data volume trumps clever tricks.</p>
+                    
+                    <div class="section-title">6. When the BLUE badge doesn't protect you</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Assumption fails</th>
+                                    <th>What happens</th>
+                                    <th>Field example</th>
+                                    <th>First-aid</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Heteroscedasticity</td>
+                                    <td>OLS stays unbiased but SEs are wrong</td>
+                                    <td>Rent variance rises with flat size</td>
+                                    <td>Use robust (HC1) SE</td>
+                                </tr>
+                                <tr>
+                                    <td>Autocorrelation</td>
+                                    <td>SEs too small</td>
+                                    <td>Daily returns in finance</td>
+                                    <td>Newey-West or HAC</td>
+                                </tr>
+                                <tr>
+                                    <td>Endogeneity (exogeneity fails)</td>
+                                    <td>OLS biased and inconsistent</td>
+                                    <td>Ability affects wages & schooling</td>
+                                    <td>Instrumental Variables (Ch. 10)</td>
+                                </tr>
+                                <tr>
+                                    <td>Small n, many k</td>
+                                    <td>Variance explodes; X<sup>T</sup>X nearly singular</td>
+                                    <td>Marketing with dozens of dummies</td>
+                                    <td>Drop variables, collect more data, or penalise (Ch. 12)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">7. Practical take-aways for small-sample projects</div>
+                    <ul>
+                        <li>Report standard errors and confidence intervals before p-values. They show magnitude and precision.</li>
+                        <li>Guard degrees of freedom. Avoid throwing 15 controls into a 40-observation regression.</li>
+                        <li>Use robust errors by default. Heteroscedasticity is the norm outside textbooks.</li>
+                        <li>Simulate if unsure. A quick Monte-Carlo clarifies bias vs. variance faster than theory alone.</li>
+                        <li>Remember: more observations beat fancier estimators—until assumptions break.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key insight</h5>
+                        <p>In the finite-sample world, OLS earns its reputation only under specific conditions. Check them ruthlessly. When they hold, you get an unbeatable linear, unbiased estimator; when they crack, no amount of theorem-quoting can save your inference.</p>
+                    </div>
+                    
+                    <div class="section-title">8. Looking forward</div>
+                    <p>Chapter 8 zooms out to the large-sample universe: how consistency and asymptotic normality let us sleep at night when n is big—even if some classic assumptions soften. See you there, where "infinite data" meets real-world imperfections.</p>
+                </div>
+            </section>
+
+            <!-- Chapter 8 Content -->
+            <section id="chapter8-content" class="chapter-content" aria-labelledby="chapter8-title">
+                <div class="container">
+                    <h2 id="chapter8-title" class="text-center mb-4">Chapter 8: Large-Sample Logic & Robust Standard Errors</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why large-sample theory matters</li>
+                            <li>The Law of Large Numbers (LLN) in one sentence</li>
+                            <li>Consistency of OLS</li>
+                            <li>Central Limit Theorem (CLT): the bell emerges</li>
+                            <li>The sandwich (robust) variance formula</li>
+                            <li>Quick real-world demo: hedging a large ETF portfolio</li>
+                            <li>Cluster and Newey–West extensions</li>
+                            <li>Common pitfalls in big data land</li>
+                            <li>Cheat-sheet for large-sample projects</li>
+                            <li>Key take-aways</li>
+                            <li>On deck</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why large-sample theory matters</div>
+                    <p>Modern datasets explode—think millions of Airbnb prices, or every Ethereum transaction since 2015. With size comes power: estimates settle, oddly shaped error terms look almost normal, and inference becomes sharper.</p>
+                    <p>But those perks rely on two pillars:</p>
+                    <ul>
+                        <li><strong>Consistency</strong> — estimates converge on the truth as n → ∞.</li>
+                        <li><strong>Asymptotic normality</strong> — scaled estimation errors behave like a normal bell curve.</li>
+                    </ul>
+                    <p>Get those right, and you can trust z- and t-tests even in messy, heteroskedastic data.</p>
+                    
+                    <div class="section-title">2. The Law of Large Numbers (LLN) in one sentence</div>
+                    <p>The sample mean ȳ inches closer to the population mean μ as you pile on observations.</p>
+                    <p>Formally, for i.i.d. data y₁,…,yₙ:</p>
+                    <div class="formula-box">
+                        ȳ <sup>p</sup>→ μ
+                    </div>
+                    <p>where "p→" denotes convergence in probability.</p>
+                    <p>In plain English: more data wash out random noise.</p>
+                    
+                    <div class="section-title">3. Consistency of OLS</div>
+                    <p>If the core assumptions from Chapter 6 hold and the predictors stay well-behaved as n grows,</p>
+                    <div class="formula-box">
+                        β̂ <sup>p</sup>→ β
+                    </div>
+                    <p>Why you care: With 2,000,000 rental listings, the slope linking distance to rent is practically the real slope; sampling error shrinks to trivia.</p>
+                    
+                    <div class="section-title">4. Central Limit Theorem (CLT): the bell emerges</div>
+                    <p>Scaled estimation error is asymptotically normal:</p>
+                    <div class="formula-box">
+                        √n (β̂ - β) <sup>d</sup>→ N(0, Σ)
+                    </div>
+                    <p>where "d→" means convergence in distribution and Σ is the asymptotic variance–covariance matrix.</p>
+                    <p>Result: you can build z-tests and confidence intervals even when errors aren't Gaussian—the big n magic handles it.</p>
+                    
+                    <div class="section-title">5. The sandwich (robust) variance formula</div>
+                    <p>Real data laugh at homoskedasticity. White's "sandwich" estimator keeps inference honest:</p>
+                    <div class="formula-box">
+                        Σ̂<sub>HC1</sub> = (X<sup>T</sup>X)<sup>-1</sup>X<sup>T</sup>ε̂ε̂<sup>T</sup>X(X<sup>T</sup>X)<sup>-1</sup>
+                    </div>
+                    <p>It's "robust" to unknown, arbitrary heteroskedasticity. Valid as n → ∞—that's the CLT working behind the scenes.</p>
+                    
+                    <div class="section-title">6. Quick real-world demo: hedging a large ETF portfolio</div>
+                    <div class="example-box">
+                        <p><strong>Data:</strong> 1,000 trading days for 500 stocks (≈ 500,000 obs).</p>
+                        <p><strong>Goal:</strong> regress each stock's return on the market index to get betas.</p>
+                    </div>
+                    <div class="code-block">
+                        <pre><code class="language-python">import statsmodels.api as sm
+model = sm.OLS(y, X).fit(cov_type='HC1')   # y: stock returns, X: [const, market]
+print(model.summary())</code></pre>
+                    </div>
+                    <p>Notice how robust SEs (labelled "HC1") differ from classic ones—especially for small-cap stocks with wild volatility. With half a million rows, point estimates barely change moving to robust errors, but p-values can double or halve. Inference, not point estimates, is where robust SEs earn their pay.</p>
+                    
+                    <div class="section-title">7. Cluster and Newey–West extensions</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Robust flavour</th>
+                                    <th>Fixes what?</th>
+                                    <th>Typical use-case</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Clustered SE</td>
+                                    <td>Correlation within groups (firms, villages)</td>
+                                    <td>Employee salaries nested in firms</td>
+                                </tr>
+                                <tr>
+                                    <td>Newey-West</td>
+                                    <td>Serial correlation & heteroskedasticity</td>
+                                    <td>Daily asset returns, macro time-series</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Both rely on large-n asymptotics: as clusters or time points grow, variance estimates stabilise.</p>
+                    
+                    <div class="section-title">8. Common pitfalls in big data land</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Mistake</th>
+                                    <th>Consequence</th>
+                                    <th>Guardrail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Trusting tiny p-values blindly</td>
+                                    <td>With 10 million obs, trivial effects look "super-significant"</td>
+                                    <td>Report effect sizes & confidence intervals, not just p-values.</td>
+                                </tr>
+                                <tr>
+                                    <td>Ignoring clustering</td>
+                                    <td>SEs way too small → overconfidence</td>
+                                    <td>Cluster by logical unit (user-id, firm-id).</td>
+                                </tr>
+                                <tr>
+                                    <td>Memory bottlenecks</td>
+                                    <td>OLS cannot invert XᵀX when k huge</td>
+                                    <td>Use incremental or distributed regressions; consider penalised models (ridge/Lasso).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">9. Cheat-sheet for large-sample projects</div>
+                    <ul>
+                        <li>Always ask "Is it consistent?" No amount of data rescues a biased estimator.</li>
+                        <li>Default to robust (HC1) errors. Cost = one flag in most software.</li>
+                        <li>Cluster if data naturally group. Number of clusters > 30 is a healthy rule.</li>
+                        <li>Check effect magnitudes. A coefficient of 0.0002 may be "significant" yet irrelevant.</li>
+                        <li>Document data cuts & code. Large-n mistakes replicate at scale.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>The LLN and CLT let big datasets hand you near-truth estimates and (asymptotically) normal inference.</li>
+                            <li>Robust, cluster, and Newey-West SEs are insurance policies against real-world deviations from textbook homoskedasticity.</li>
+                            <li>Big n amplifies tiny biases and mis-specified SEs—use your newfound tools to keep analysis honest.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">10. On deck</div>
+                    <p>Chapter 9 introduces Instrumental Variables 101—your go-to remedy when exogeneity implodes and OLS turns biased, no matter how large the sample. Get ready to tackle endogeneity head-on.</p>
+                </div>
+            </section>
+
+            <!-- Chapter 9 Content -->
+            <section id="chapter9-content" class="chapter-content" aria-labelledby="chapter9-title">
+                <div class="container">
+                    <h2 id="chapter9-title" class="text-center mb-4">Chapter 9: Instrumental Variables 101</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why ordinary OLS can fail</li>
+                            <li>The instrumental-variable idea in one sentence</li>
+                            <li>Two must-have conditions</li>
+                            <li>Classic real-world instruments</li>
+                            <li>Two-Stage Least Squares (2SLS) in four lines of algebra</li>
+                            <li>Quick Python sketch (statsmodels)</li>
+                            <li>Diagnosing weak instruments</li>
+                            <li>Testing exclusion with over-identification</li>
+                            <li>Interpreting the IV slope</li>
+                            <li>When IV may disappoint</li>
+                            <li>Real-world pay-off examples</li>
+                            <li>Field checklist before you publish an IV result</li>
+                            <li>Key take-aways</li>
+                            <li>Coming up</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why ordinary OLS can fail</div>
+                    <p>Suppose you wish to measure how an extra year of schooling raises annual earnings. The naïve regression</p>
+                    <div class="formula-box">
+                        wage<sub>i</sub> = β<sub>0</sub> + β<sub>1</sub> education<sub>i</sub> + u<sub>i</sub>
+                    </div>
+                    <p>looks fine—until you recall that smarter people may choose more schooling, families with higher income can afford longer studies, both IQ and family money sit hidden in the error term u<sub>i</sub>. Because those hidden factors correlate with education, the exogeneity assumption E[u<sub>i</sub>|education] = 0 collapses. OLS becomes biased and inconsistent, no matter how large the sample.</p>
+                    
+                    <div class="section-title">2. The instrumental-variable idea in one sentence</div>
+                    <p>Find a variable that pushes education around but has no direct path to wages. That variable is an instrument (call it Z). If we can isolate the part of schooling determined only by Z, we regain a clean experiment.</p>
+                    
+                    <div class="section-title">3. Two must-have conditions</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Condition</th>
+                                    <th>Formal tag</th>
+                                    <th>Plain meaning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Relevance</td>
+                                    <td>Cov(Z, education) ≠ 0</td>
+                                    <td>The instrument actually moves the endogenous regressor.</td>
+                                </tr>
+                                <tr>
+                                    <td>Exclusion (validity)</td>
+                                    <td>Cov(Z, u) = 0</td>
+                                    <td>After controlling for schooling, the instrument has no direct link to earnings.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Both matter—miss either one and the cure can be worse than the disease.</p>
+                    
+                    <div class="section-title">4. Classic real-world instruments</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Research question</th>
+                                    <th>Instrument Z</th>
+                                    <th>Why it might work</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Education → wages (EU)</td>
+                                    <td>Distance to nearest university</td>
+                                    <td>Living far raises travel cost, discouraging enrolment; distance itself should not influence wages once education is fixed.</td>
+                                </tr>
+                                <tr>
+                                    <td>Alcohol price → accident deaths</td>
+                                    <td>Excise-tax hikes</td>
+                                    <td>Taxes shift drink prices exogenously; tax laws aren't tied to local driving habits.</td>
+                                </tr>
+                                <tr>
+                                    <td>House price → fertility</td>
+                                    <td>Historical land-use regulations</td>
+                                    <td>Old zoning shocks affect housing supply but not birth preferences directly.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">5. Two-Stage Least Squares (2SLS) in four lines of algebra</div>
+                    <p><strong>Stage 1 (first-stage regression)</strong></p>
+                    <p>Predict schooling from the instrument(s):</p>
+                    <div class="formula-box">
+                        education<sub>i</sub> = π<sub>0</sub> + π<sub>1</sub>Z<sub>i</sub> + γ′W<sub>i</sub> + v<sub>i</sub>
+                    </div>
+                    <p>where W<sub>i</sub> = other exogenous controls. Save the fitted values education̂<sub>i</sub>.</p>
+                    <p><strong>Stage 2 (second-stage regression)</strong></p>
+                    <p>Plug the predicted schooling into the wage equation:</p>
+                    <div class="formula-box">
+                        wage<sub>i</sub> = β<sub>0</sub> + β<sub>1</sub> education̂<sub>i</sub> + δ′W<sub>i</sub> + ε<sub>i</sub>
+                    </div>
+                    <p>The coefficient β̂<sub>1</sub><sup>IV</sup> is your causal estimate—if Z meets relevance & exclusion.</p>
+                    
+                    <div class="section-title">6. Quick Python sketch (statsmodels)</div>
+                    <div class="code-block">
+                        <pre><code class="language-python">import linearmodels.iv as iv
+# df contains wage, education, distance, controls
+
+iv_mod = iv.IV2SLS.from_formula(
+    'wage ~ 1 + controls + [education ~ distance]',
+    data=df).fit(cov_type='robust')
+print(iv_mod.summary)</code></pre>
+                    </div>
+                    <p>The [education ~ distance] notation tells linearmodels to treat distance as the instrument.</p>
+                    
+                    <div class="section-title">7. Diagnosing weak instruments</div>
+                    <p>The first-stage F-statistic checks relevance:</p>
+                    <p><strong>Rule of thumb:</strong> F<10 instrument is weak → IV estimates unreliable (huge variance, bias toward OLS). For multiple instruments, use the Kleibergen-Paap rk Wald F (software prints it).</p>
+                    
+                    <div class="section-title">8. Testing exclusion with over-identification</div>
+                    <p>If you have more instruments than endogenous regressors, you can run a Hansen J-test (a.k.a. Sargan test):</p>
+                    <p><strong>Null:</strong> all instruments satisfy exclusion.<br>
+                    A large p-value ⇒ cannot reject validity; a tiny p-value ⇒ some instrument likely corrupt.</p>
+                    <p>Remember, the test can fail to detect a bad instrument—economic logic still rules.</p>
+                    
+                    <div class="section-title">9. Interpreting the IV slope</div>
+                    <p>β̂<sub>1</sub><sup>IV</sup> = Average causal effect for people whose schooling was actually shifted by Z.</p>
+                    <p>This is the <strong>Local Average Treatment Effect (LATE)</strong>.</p>
+                    <p>For distance-to-college, the estimate speaks about students on the margin of enrolling because of travel costs—not necessarily about lifelong learners pursuing PhDs online.</p>
+                    
+                    <div class="section-title">10. When IV may disappoint</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Limitation</th>
+                                    <th>Why it hurts</th>
+                                    <th>Antidote</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Weak-Z variance blow-up</td>
+                                    <td>Enormous SEs hide any effect</td>
+                                    <td>Collect stronger instruments; drop IV if F<10</td>
+                                </tr>
+                                <tr>
+                                    <td>Exclusion untestable</td>
+                                    <td>Economic story must be convincing</td>
+                                    <td>Use multiple, conceptually diverse instruments</td>
+                                </tr>
+                                <tr>
+                                    <td>Local, not global, effect</td>
+                                    <td>Policy extrapolation tricky</td>
+                                    <td>Be explicit: "estimate applies to distance-affected students"</td>
+                                </tr>
+                                <tr>
+                                    <td>Small-sample bias</td>
+                                    <td>IV consistent but biased in finite n</td>
+                                    <td>Many obs, or use jackknife IV (JIVE)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">11. Real-world pay-off examples</div>
+                    <ul>
+                        <li><strong>Policy:</strong> A ministry estimates returns to extra schooling net of ability bias before funding grants.</li>
+                        <li><strong>Health:</strong> Doctors gauge causal impact of alcohol on heart disease using local-tax changes.</li>
+                        <li><strong>Finance:</strong> Analysts isolate how Fed announcements move bank lending by instrumenting interest rates with Fed-Funds futures surprises.</li>
+                    </ul>
+                    
+                    <div class="section-title">12. Field checklist before you publish an IV result</div>
+                    <ul>
+                        <li>Explain the economic story of the instrument in <150 words.</li>
+                        <li>Show the first-stage table; report F-stat.</li>
+                        <li>Check over-ID tests if you have extra Z's.</li>
+                        <li>Compare OLS vs. IV estimates; huge jumps demand discussion.</li>
+                        <li>Translate LATE—who exactly experiences the estimated effect?</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>Endogeneity kills OLS; a good instrument revives causal inference.</li>
+                            <li>Success hinges on relevance and exclusion—prove both with data and economic reasoning.</li>
+                            <li>2SLS is mechanically simple yet statistically subtle: weak or invalid instruments can do more harm than good.</li>
+                            <li>Always pair IV results with diagnostics and a clear story of who the estimate describes.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">13. Coming up</div>
+                    <p>Chapter 10 serves a taste of time-series and panel data—bringing dynamics and repeated observations into the mix, and showing how serial correlation and unobserved heterogeneity reshape everything you've learned so far.</p>
+                </div>
+            </section>
+
+            <!-- Chapter 10 Content -->
+            <section id="chapter10-content" class="chapter-content" aria-labelledby="chapter10-title">
+                <div class="container">
+                    <h2 id="chapter10-title" class="text-center mb-4">Chapter 10: A First Taste of Time-Series & Panel Data</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why bother with new data shapes?</li>
+                            <li>A time-series warm-up with the ECB deposit rate</li>
+                            <li>When dependence ruins OLS rules</li>
+                            <li>Enter panel data: many firms, many years</li>
+                            <li>Fixed-effects (FE) vs. random-effects (RE)</li>
+                            <li>Tiny code peek (Python)</li>
+                            <li>Assumptions worth checking</li>
+                            <li>Why it matters on the ground</li>
+                            <li>Key take-aways</li>
+                            <li>Next stop</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why bother with new data shapes?</div>
+                    <p>Time-series give you one entity tracked across dates—ideal for spotting trends and shocks. Panel (cross-section × time) lets you watch many entities through time, so you can net out anything that never changes within each entity. Ignoring these structures can wreck your standard errors and twist causal stories. Think of it as using a hammer when you really need a drill.</p>
+                    
+                    <div class="section-title">2. A time-series warm-up with the ECB deposit rate</div>
+                    <p>The European Central Bank's deposit facility rate swings as policy tightens or loosens. Since mid-2024 it has fallen from 4% to 2%. Plot the rate against monthly euro-area inflation and two traits pop out:</p>
+                    <ul>
+                        <li>Trend breaks when the ECB pivots.</li>
+                        <li>Memory—today's rate is usually close to last month's.</li>
+                    </ul>
+                    <p>That second trait is <strong>autocorrelation</strong>: values relate to their own past.</p>
+                    
+                    <div class="subsection-title">2.1 A one-line AR(1) model</div>
+                    <div class="formula-box">
+                        r<sub>t</sub> = α + ϕr<sub>t-1</sub> + ε<sub>t</sub>
+                    </div>
+                    <p>where r<sub>t</sub> is the rate this month. If |ϕ|<1 the series is stationary—its mean and variance stay put.</p>
+                    <p>Why you care: Stationarity keeps forecasts and confidence intervals behaving.</p>
+                    
+                    <div class="section-title">3. When dependence ruins OLS rules</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>OLS assumption</th>
+                                    <th>Time-series reality</th>
+                                    <th>Fix</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Independent errors</td>
+                                    <td>Residuals often cluster in runs</td>
+                                    <td>Use Newey-West or AR model</td>
+                                </tr>
+                                <tr>
+                                    <td>Homoskedasticity</td>
+                                    <td>Volatility spikes around crises</td>
+                                    <td>Switch to GARCH or robust SE</td>
+                                </tr>
+                                <tr>
+                                    <td>Exogenous x<sub>t</sub></td>
+                                    <td>Policy rates respond to inflation → feedback</td>
+                                    <td>Instrumental variables for TS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">4. Enter panel data: many firms, many years</div>
+                    <div class="example-box">
+                        <p>Imagine 500 EU banks observed quarterly from 2015 – 2025. Goal: link capital ratio to return on equity (ROE) while controlling for anything that is bank-specific but time-invariant (e.g., corporate culture).</p>
+                    </div>
+                    
+                    <div class="subsection-title">4.1 Fixed-effects (FE) vs. random-effects (RE)</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Question</th>
+                                    <th>FE answer</th>
+                                    <th>RE answer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>What it does</td>
+                                    <td>Subtracts each entity's own mean → focuses on within-bank variation</td>
+                                    <td>Treats entity effects as random draws uncorrelated with regressors</td>
+                                </tr>
+                                <tr>
+                                    <td>Keep time-invariant vars?</td>
+                                    <td>No</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>Needs strict exogeneity?</td>
+                                    <td>Less stringent</td>
+                                    <td>Stronger: entity effects must be uncorrelated with all x<sub>it</sub></td>
+                                </tr>
+                                <tr>
+                                    <td>Hausman test</td>
+                                    <td>N/A</td>
+                                    <td>Rejects RE if estimates diverge from FE</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p><strong>Plain rule:</strong> if you suspect omitted traits correlate with your x's, use fixed effects.</p>
+                    
+                    <div class="subsection-title">4.2 Tiny code peek (Python)</div>
+                    <div class="code-block">
+                        <pre><code class="language-python">from linearmodels.panel import PanelOLS
+df = banks.set_index(['bank_id','quarter'])
+y  = df['roe']
+X  = df[['capital_ratio','size','risk']]
+fe_mod = PanelOLS(y, X, entity_effects=True, time_effects=True).fit(cov_type='clustered', cluster_entity=True)
+print(fe_mod.summary)</code></pre>
+                    </div>
+                    <p>entity_effects=True sweeps out each bank's constant unobserved quirks; clustering by bank fixes serial correlation inside panels.</p>
+                    
+                    <div class="section-title">5. Assumptions worth checking</div>
+                    <p><strong>For time-series:</strong></p>
+                    <ul>
+                        <li>Stationarity (ADF or KPSS tests)</li>
+                        <li>No leftover autocorrelation (Ljung-Box)</li>
+                    </ul>
+                    <p><strong>For panels:</strong></p>
+                    <ul>
+                        <li>Enough time periods or entities (rule of 30)</li>
+                        <li>Serial correlation & heteroskedasticity inside entities (cluster SE)</li>
+                        <li>Hausman test if you're tempted by RE</li>
+                    </ul>
+                    <p>Failing any test doesn't kill the project—it tells you which robust method to call.</p>
+                    
+                    <div class="section-title">6. Why it matters on the ground</div>
+                    <ul>
+                        <li><strong>Central-bank watchers</strong> forecast rate cuts using AR terms to capture policy inertia.</li>
+                        <li><strong>Asset managers</strong> run FE models to see if ESG scores raise returns independent of slow-moving sector traits.</li>
+                        <li><strong>Public-health analysts</strong> stack regions × years to separate vaccine campaign effects from fixed geography.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>Time-series = one entity over time → check for memory and stationarity.</li>
+                            <li>Panel data = many entities over time → FE wipes out hidden constants; RE keeps them if uncorrelated.</li>
+                            <li>Robust or clustered standard errors are your insurance policies against serial dependence.</li>
+                            <li>Always translate results: "A 1 pp higher capital ratio lifts quarterly ROE by 0.15 pp within the same bank."</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">7. Next stop</div>
+                    <p>In Chapter 11 we push deeper into dynamics and heterogeneity: autocorrelation models for longer lags, unit-root pitfalls, and the essentials of random vs. fixed effects testing. See you there!</p>
+                </div>
+            </section>
+
+            <!-- Chapter 11 Content -->
+            <section id="chapter11-content" class="chapter-content" aria-labelledby="chapter11-title">
+                <div class="container">
+                    <h2 id="chapter11-title" class="text-center mb-4">Chapter 11: Modern Extensions: Ridge & Lasso Keep Linear Models Alive</h2>
+                    
+                    <div class="table-of-contents">
+                        <h5>Table of Contents</h5>
+                        <ul>
+                            <li>Why should you care?</li>
+                            <li>The intuition in 90 seconds</li>
+                            <li>Ridge regression: gentle shrinkage</li>
+                            <li>Lasso: sparse and interpretable</li>
+                            <li>Quick Python demo</li>
+                            <li>Real-world case: predicting apartment rents across Europe</li>
+                            <li>Assumptions worth remembering</li>
+                            <li>Choosing λ: cross-validation is king</li>
+                            <li>Caveats and extensions</li>
+                            <li>Key take-aways</li>
+                            <li>Where to go from here</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">1. Why should you care?</div>
+                    <p>Your data set now holds 5,000 features: web-scraped neighbourhood facts, satellite pixels, sentiment scores. Ordinary OLS refuses to run if features outnumber observations, and even when it runs, coefficients explode from collinearity.</p>
+                    <p>Shrinkage methods—Ridge and Lasso—solve both problems with one clever idea: penalise big, wobbly coefficients.</p>
+                    
+                    <div class="section-title">2. The intuition in 90 seconds</div>
+                    <p><strong>Bias–variance trade-off</strong></p>
+                    <ul>
+                        <li>Small bias + huge variance = wild predictions.</li>
+                        <li>Tiny extra bias – lots of variance = lower overall error.</li>
+                    </ul>
+                    <p>Shrinkage buys the second outcome.</p>
+                    <p><strong>Geometry</strong></p>
+                    <p>Imagine the OLS solution as the bottom of a bowl. Ridge adds a smooth rubber band around the origin; Lasso adds a diamond-shaped fence. Both keep the solution near zero where possible.</p>
+                    
+                    <div class="section-title">3. Ridge regression: gentle shrinkage</div>
+                    <div class="formula-box">
+                        min<sub>β</sub>{∥y - Xβ∥² + λ∥β∥²}
+                    </div>
+                    <p>λ = tuning parameter (≥ 0). No coefficient is forced to zero; all are nudged smaller.</p>
+                    <div class="formula-box">
+                        β̂<sub>ridge</sub> = (X<sup>T</sup>X + λI)<sup>-1</sup>X<sup>T</sup>y
+                    </div>
+                    <p><strong>When to use:</strong> predictors highly correlated, you care about prediction accuracy more than exact feature selection.</p>
+                    
+                    <div class="section-title">4. Lasso: sparse and interpretable</div>
+                    <div class="formula-box">
+                        min<sub>β</sub>{∥y - Xβ∥² + λ∥β∥₁}
+                    </div>
+                    <p>∥β∥₁ = ∑|β<sub>j</sub>| produces exact zeros → automatic variable selection. No closed-form; solved via coordinate descent.</p>
+                    <p><strong>When to use:</strong> thousands of noisy features, managers want a short list of drivers.</p>
+                    
+                    <div class="section-title">5. Quick Python demo</div>
+                    <div class="code-block">
+                        <pre><code class="language-python">from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model   import RidgeCV, LassoCV
+from sklearn.pipeline       import make_pipeline
+
+X, y = load_your_big_dataset()  # shape ~ (1000, 5000)
+
+ridge = make_pipeline(StandardScaler(),
+                      RidgeCV(alphas=[0.1, 1, 10], cv=5)).fit(X, y)
+
+lasso = make_pipeline(StandardScaler(),
+                      LassoCV(alphas=[0.001, 0.01, 0.1], cv=5,
+                              max_iter=5000)).fit(X, y)
+
+print("Ridge R²:", ridge.score(X, y))
+print("Active Lasso features:", (lasso[-1].coef_ != 0).sum())</code></pre>
+                    </div>
+                    <p>StandardScaler is vital; penalties are scale-dependent. CV searches for the λ that minimizes out-of-sample error.</p>
+                    
+                    <div class="section-title">6. Real-world case: predicting apartment rents across Europe</div>
+                    <div class="example-box">
+                        <p><strong>Data:</strong> 50,000 listings, 1,200 engineered features (text keywords, distance to coffee bars, street-view textures).</p>
+                        <ul>
+                            <li><strong>Baseline OLS</strong> (top 20 manual features) → RMSE = €140/m.</li>
+                            <li><strong>Ridge</strong> (all features) → RMSE = €92/m.</li>
+                            <li><strong>Lasso</strong> shrinks model to 57 active features → RMSE = €95/m, plus a readable shortlist for managers.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">7. Assumptions worth remembering</div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Needs k<n?</th>
+                                    <th>Handles multicollinearity?</th>
+                                    <th>Gives unbiased coefficients?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>OLS</td>
+                                    <td>Yes</td>
+                                    <td>No</td>
+                                    <td>Yes (if exogenous)</td>
+                                </tr>
+                                <tr>
+                                    <td>Ridge</td>
+                                    <td>No</td>
+                                    <td>Yes</td>
+                                    <td>Adds small bias</td>
+                                </tr>
+                                <tr>
+                                    <td>Lasso</td>
+                                    <td>No</td>
+                                    <td>Yes</td>
+                                    <td>Adds bias, selects features</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>All three still rely on X being exogenous—if hidden confounders exist, you still need tools like Instrumental Variables.</p>
+                    
+                    <div class="section-title">8. Choosing λ: cross-validation is king</div>
+                    <ol>
+                        <li>Split data into 5–10 folds.</li>
+                        <li>Try a grid of λ values.</li>
+                        <li>Pick the one that minimizes validation error (RMSE or MAE).</li>
+                        <li>Refit the model on the full data with that λ.</li>
+                    </ol>
+                    <p>Avoid "eye-balling" or hunting the best training fit—the penalty's whole job is to excel out-of-sample.</p>
+                    
+                    <div class="section-title">9. Caveats and extensions</div>
+                    <ul>
+                        <li><strong>Standard errors:</strong> classical formulas break; use bootstrapping or debiased Lasso for inference.</li>
+                        <li><strong>Group features:</strong> group-Lasso or elastic net blend L₁ + L₂ when features arrive in blocks.</li>
+                        <li><strong>Non-linearity:</strong> combine with splines or feed predictions into tree-based models; Ridge and Lasso only address linear coefficients.</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <h5>Key take-aways</h5>
+                        <ul>
+                            <li>Ridge and Lasso keep linear models useful when features explode in count or correlation.</li>
+                            <li>Ridge prioritises stable prediction; Lasso adds interpretability via sparsity.</li>
+                            <li>Cross-validation picks the right penalty; scaling inputs is non-negotiable.</li>
+                            <li>Shrinkage introduces bias deliberately to slash variance—often a winning trade.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="section-title">10. Where to go from here</div>
+                    <ul>
+                        <li>Try elastic net when Ridge vs. Lasso feels like a coin toss.</li>
+                        <li>Explore causal forests or double machine learning to blend flexible prediction with causal inference.</li>
+                        <li>Above all, keep the bigger goal in sight: turn complex data into clear, actionable economic insight.</li>
+                    </ul>
+                    <p>Happy modelling!</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+    <script>
+        // Function to show a specific chapter
+        function showChapter(chapterId) {
+            // Hide all content sections
+            const allSections = document.querySelectorAll('.chapter-content');
+            allSections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show the selected content section
+            const activeSection = document.getElementById(chapterId + '-content');
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+
+            // Update active tab
+            const allTabs = document.querySelectorAll('.chapter-tab');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update progress bar
+            updateProgressBar(chapterId);
+            
+            // Scroll to top of content
+            document.getElementById('main-content').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Function to update progress bar
+        function updateProgressBar(chapterId) {
+            const chapters = ['chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5', 'chapter6', 'chapter7', 'chapter8', 'chapter9', 'chapter10', 'chapter11'];
+            const currentIndex = chapters.indexOf(chapterId);
+            const progress = ((currentIndex + 1) / chapters.length) * 100;
+            
+            const progressBar = document.getElementById('progress-bar');
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+            }
+        }
+
+        // Function to scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        // Initialize with first chapter active
+        document.addEventListener('DOMContentLoaded', function() {
+            showChapter('chapter1');
+        });
+    </script>
+</body>
+</html>
