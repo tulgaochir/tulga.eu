@@ -1,162 +1,127 @@
 <body>
     <nav class="navbar navbar-expand-lg">
-        </nav>
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../portfolio/index.html">PORTFOLIO</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">MARKET OUTLOOK</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../insights/index.html">INSIGHTS</a></li>
+                    <li class="nav-item"><button class="btn btn-contact" onclick="location.href='../index.html#contact'">Get in Touch</button></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <section class="page-header">
         <div class="container text-center">
-            <h1 class="display-4">Market Outlook</h1>
-            <p class="lead">Quarterly analysis and forecasts for global markets.</p>
+            <h1 class="display-4">Market Outlook 2025</h1>
+            <p class="lead">Quarterly forecasts, monthly analysis, and in-depth reports.</p>
         </div>
     </section>
 
     <main class="container py-5">
-        <div class="d-flex justify-content-center mb-5">
-            <div class="dropdown">
-                <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="quarterSelector" data-bs-toggle="dropdown" aria-expanded="false">
-                    Year 2025
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="quarterSelector">
-                    <li><a class="dropdown-item" href="#" data-target="q1-2025-content">Q1 2025</a></li>
-                    <li><a class="dropdown-item" href="#" data-target="q2-2025-content">Q2 2025</a></li>
-                    <li><a class="dropdown-item" href="#" data-target="q3-2025-content">Q3 2025</a></li>
-                    <li><a class="dropdown-item" href="#" data-target="q4-2025-content">Q4 2025</a></li>
-                </ul>
+        
+        <ul class="nav nav-tabs nav-fill mb-4" id="quarterTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="q1-tab" data-bs-toggle="tab" data-bs-target="#q1-tab-pane" type="button" role="tab">Q1 2025</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="q2-tab" data-bs-toggle="tab" data-bs-target="#q2-tab-pane" type="button" role="tab">Q2 2025</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="q3-tab" data-bs-toggle="tab" data-bs-target="#q3-tab-pane" type="button" role="tab">Q3 2025</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="q4-tab" data-bs-toggle="tab" data-bs-target="#q4-tab-pane" type="button" role="tab">Q4 2025</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="quarterTabContent">
+
+            <div class="tab-pane fade" id="q1-tab-pane" role="tabpanel" tabindex="0">
+                <p class="text-center text-muted fst-italic py-5">Content for Q1 2025 will be displayed here.</p>
             </div>
-        </div>
 
-        <div id="quarter-content-container" class="row justify-content-center">
+            <div class="tab-pane fade" id="q2-tab-pane" role="tabpanel" tabindex="0">
+                 <p class="text-center text-muted fst-italic py-5">Content for Q2 2025 will be displayed here.</p>
+            </div>
 
-            <div id="q3-2025-content" class="col-lg-9 quarter-content d-none">
-                <div class="card shadow-sm mb-5">
-                    <div class="card-body text-center">
-                        <h2 class="card-title">Q3 2025 Market Outlook</h2>
-                        <p class="card-text">Comprehensive outlook for Q3 2025, focusing on summer economic trends, central bank policies, and sector performance.</p>
-                        <a href="q3-2025.html" class="btn btn-dark">Read Full Outlook</a>
-                    </div>
-                </div>
-
-                <h3 class="text-center mb-4">Monthly Breakdowns</h3>
-
-                <div class="accordion" id="q3-accordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJuly">
-                                July 2025
-                            </button>
-                        </h2>
-                        <div id="collapseJuly" class="accordion-collapse collapse show" data-bs-parent="#q3-accordion">
-                            <div class="accordion-body">
-                                <div class="list-group">
-                                    <a href="articles/jul-w2-2025.html" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">July Mid-Month Update</h5>
-                                            <small>July 15, 2025</small>
+            <div class="tab-pane fade" id="q3-tab-pane" role="tabpanel" tabindex="0">
+                <div class="row g-5">
+                    <div class="col-md-8">
+                        <h3 class="mb-4">Monthly Breakdowns</h3>
+                        <div class="accordion" id="q3-accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJuly">July 2025</button></h2>
+                                <div id="collapseJuly" class="accordion-collapse collapse show" data-bs-parent="#q3-accordion">
+                                    <div class="accordion-body">
+                                        <div class="list-group">
+                                            <a href="articles/jul-w2-2025.html" class="list-group-item list-group-item-action"><i class="far fa-file-alt me-2"></i>July Mid-Month Update</a>
                                         </div>
-                                        <p class="mb-1">Analysis of early Q3 data and market performance in the first half of July.</p>
-                                        <small>6 min read</small>
-                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAugust">August 2025</button></h2>
+                                <div id="collapseAugust" class="accordion-collapse collapse" data-bs-parent="#q3-accordion">
+                                    <div class="accordion-body">
+                                        <div class="list-group">
+                                            <a href="articles/aug-inflation-2025.html" class="list-group-item list-group-item-action"><i class="far fa-file-alt me-2"></i>August Inflation Report</a>
+                                            <a href="articles/aug-jobs-2025.html" class="list-group-item list-group-item-action"><i class="far fa-file-alt me-2"></i>Jobs Market Analysis - August</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeptember">September 2025</button></h2>
+                                <div id="collapseSeptember" class="accordion-collapse collapse" data-bs-parent="#q3-accordion">
+                                    <div class="accordion-body"><p class="text-muted">No articles for this month yet.</p></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAugust">
-                                August 2025
-                            </button>
-                        </h2>
-                        <div id="collapseAugust" class="accordion-collapse collapse" data-bs-parent="#q3-accordion">
-                            <div class="accordion-body">
-                                <div class="list-group">
-                                    <a href="articles/aug-inflation-2025.html" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">August Inflation Report</h5>
-                                            <small>August 12, 2025</small>
-                                        </div>
-                                        <p class="mb-1">Deep dive into the latest inflation numbers and the potential impact on Fed policy.</p>
-                                        <small>8 min read</small>
-                                    </a>
-                                    <a href="articles/aug-jobs-2025.html" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Jobs Market Analysis - August</h5>
-                                            <small>August 28, 2025</small>
-                                        </div>
-                                        <p class="mb-1">Reviewing the August jobs report and its implications for the economy.</p>
-                                        <small>5 min read</small>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeptember">
-                                September 2025
-                            </button>
-                        </h2>
-                        <div id="collapseSeptember" class="accordion-collapse collapse" data-bs-parent="#q3-accordion">
-                            <div class="accordion-body">
-                                <p>No articles for this month yet.</p>
+                    <div class="col-md-4">
+                        <div class="card bg-light position-sticky" style="top: 2rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Q3 2025 Summary</h5>
+                                <p class="card-text">Comprehensive outlook for Q3 2025, focusing on summer economic trends, central bank policies, and sector performance.</p>
+                                <a href="q3-2025.html" class="btn btn-dark w-100">Read Full Outlook</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="q4-2025-content" class="col-lg-9 quarter-content">
-                <div class="card shadow-sm mb-5">
-                    <div class="card-body text-center">
-                        <h2 class="card-title">Q4 2025 Market Outlook</h2>
-                        <p class="card-text">End-of-year analysis and Q4 2025 forecast.</p>
-                        <a href="q4-2025.html" class="btn btn-dark">Read Full Outlook</a>
+            <div class="tab-pane fade show active" id="q4-tab-pane" role="tabpanel" tabindex="0">
+                <div class="row g-5">
+                     <div class="col-md-8">
+                        <h3 class="mb-4">Monthly Breakdowns</h3>
+                        <p class="text-center text-muted fst-italic pt-4">No monthly articles available for this quarter yet.</p>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="card bg-light position-sticky" style="top: 2rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Q4 2025 Summary</h5>
+                                <p class="card-text">End-of-year analysis and Q4 2025 forecast, including holiday season retail predictions and outlook for the new year.</p>
+                                <a href="q4-2025.html" class="btn btn-dark w-100">Read Full Outlook</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                 <h3 class="text-center mb-4">Monthly Breakdowns</h3>
-                 <p class="text-center text-muted">No monthly articles available for this quarter yet.</p>
             </div>
-
 
         </div>
     </main>
     
     <footer>
-        </footer>
+        <div class="container">
+            </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const dropdownItems = document.querySelectorAll('.dropdown-item');
-            const quarterContents = document.querySelectorAll('.quarter-content');
-            const selectorButton = document.getElementById('quarterSelector');
 
-            // Zeige das aktuelle Quartal standardmäßig an (hier Q4)
-            document.getElementById('q4-2025-content').classList.remove('d-none');
-             selectorButton.textContent = 'Q4 2025';
-
-
-            dropdownItems.forEach(item => {
-                item.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    
-                    const targetId = this.getAttribute('data-target');
-                    
-                    // Verstecke alle Quartals-Inhalte
-                    quarterContents.forEach(content => {
-                        content.classList.add('d-none');
-                    });
-                    
-                    // Zeige den ausgewählten Inhalt
-                    const targetContent = document.getElementById(targetId);
-                    if (targetContent) {
-                        targetContent.classList.remove('d-none');
-                    }
-
-                    // Update Button Text
-                    selectorButton.textContent = this.textContent;
-                });
-            });
-        });
-    </script>
 </body>
