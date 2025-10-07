@@ -3,167 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Outlook - Tulga-Ochir Sugar</title>
+    <meta name="description" content="Market Outlook 2025 - Quarterly forecasts, monthly analysis, and in-depth reports by Tulga-Ochir Sugar">
+    <meta name="keywords" content="market outlook, financial analysis, quarterly forecasts, investment strategy">
+    <meta name="author" content="Tulga-Ochir Sugar">
+    <title>Market Outlook 2025 - Tulga-Ochir Sugar</title>
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="../assets/css/main.css" as="style">
+    
+    <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" href="../assets/css/main.css">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Market Outlook 2025",
+        "description": "Quarterly forecasts, monthly analysis, and in-depth reports by Tulga-Ochir Sugar",
+        "url": "https://example.com/market-outlook/index.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Tulga-Ochir Sugar",
+            "url": "https://example.com"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "Tulga-Ochir Sugar"
+        }
+    }
+    </script>
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+    
+    <!-- Header with Navigation -->
+    <header class="navbar navbar-expand-lg" role="banner">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../portfolio/index.html">PORTFOLIO</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="index.html">MARKET OUTLOOK</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../insights/index.html">INSIGHTS</a></li>
-                    <li class="nav-item"><button class="btn btn-contact" onclick="location.href='../index.html#contact'">Get in Touch</button></li>
-                </ul>
+                <nav role="navigation" aria-label="Main navigation">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../index.html">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../portfolio/index.html">PORTFOLIO</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">MARKET OUTLOOK</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../insights/index.html">INSIGHTS</a></li>
+                        <li class="nav-item"><button class="btn btn-contact" onclick="location.href='../index.html#contact'">Get in Touch</button></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <section class="page-header">
+    <!-- Page Header -->
+    <section class="page-header" aria-labelledby="page-title">
         <div class="container text-center">
-            <h1 class="display-4">Market Outlook 2025</h1>
+            <h1 id="page-title" class="display-4">Market Outlook 2025</h1>
             <p class="lead">Quarterly forecasts, monthly analysis, and in-depth reports.</p>
         </div>
     </section>
 
-    <main class="container py-5">
-        
-        <ul class="nav nav-tabs nav-fill mb-4" id="quarterTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="q1-tab" data-bs-toggle="tab" data-bs-target="#q1-tab-pane" type="button" role="tab">Q1 2025</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="q2-tab" data-bs-toggle="tab" data-bs-target="#q2-tab-pane" type="button" role="tab">Q2 2025</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="q3-tab" data-bs-toggle="tab" data-bs-target="#q3-tab-pane" type="button" role="tab">Q3 2025</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="q4-tab" data-bs-toggle="tab" data-bs-target="#q4-tab-pane" type="button" role="tab">Q4 2025</button>
-            </li>
-        </ul>
+    <!-- Main Content -->
+    <main id="main-content" class="container py-5" role="main">
+        <div class="row">
+            <div class="col-12">
+                <!-- Quarter Tabs Navigation -->
+                <nav aria-label="Quarterly reports navigation">
+                    <ul class="nav nav-tabs nav-fill mb-4" id="quarterTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="q1-tab" data-bs-toggle="tab" data-bs-target="#q1-tab-pane" type="button" role="tab" aria-controls="q1-tab-pane" aria-selected="false">Q1 2025</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="q2-tab" data-bs-toggle="tab" data-bs-target="#q2-tab-pane" type="button" role="tab" aria-controls="q2-tab-pane" aria-selected="false">Q2 2025</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="q3-tab" data-bs-toggle="tab" data-bs-target="#q3-tab-pane" type="button" role="tab" aria-controls="q3-tab-pane" aria-selected="false">Q3 2025</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="q4-tab" data-bs-toggle="tab" data-bs-target="#q4-tab-pane" type="button" role="tab" aria-controls="q4-tab-pane" aria-selected="true">Q4 2025</button>
+                        </li>
+                    </ul>
+                </nav>
 
-        <div class="tab-content" id="quarterTabContent">
+                <!-- Tab Content -->
+                <div class="tab-content" id="quarterTabContent">
+                    <!-- Q1 2025 Tab -->
+                    <div class="tab-pane fade" id="q1-tab-pane" role="tabpanel" tabindex="0" aria-labelledby="q1-tab">
+                        <div class="alert alert-info text-center" role="alert">
+                            <p class="mb-0">Content for Q1 2025 will be displayed here.</p>
+                        </div>
+                    </div>
 
-            <div class="tab-pane fade" id="q1-tab-pane" role="tabpanel" tabindex="0">
-                <p class="text-center text-muted fst-italic py-5">Content for Q1 2025 will be displayed here.</p>
-            </div>
+                    <!-- Q2 2025 Tab -->
+                    <div class="tab-pane fade" id="q2-tab-pane" role="tabpanel" tabindex="0" aria-labelledby="q2-tab">
+                        <div class="alert alert-info text-center" role="alert">
+                            <p class="mb-0">Content for Q2 2025 will be displayed here.</p>
+                        </div>
+                    </div>
 
-            <div class="tab-pane fade" id="q2-tab-pane" role="tabpanel" tabindex="0">
-                 <p class="text-center text-muted fst-italic py-5">Content for Q2 2025 will be displayed here.</p>
-            </div>
-
-            <div class="tab-pane fade" id="q3-tab-pane" role="tabpanel" tabindex="0">
-                <div class="row g-5">
-                    <div class="col-md-8">
-                        <h3 class="mb-4">Monthly Breakdowns</h3>
-                        <div class="accordion" id="q3-accordion">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJuly">July 2025</button></h2>
-                                <div id="collapseJuly" class="accordion-collapse collapse show" data-bs-parent="#q3-accordion">
-                                    <div class="accordion-body">
-                                        <div class="list-group">
-                                            <a href="articles/jul-w2-2025.html" class="list-group-item list-group-item-action"><i class="far fa-file-alt me-2"></i>July Mid-Month Update</a>
+                    <!-- Q3 2025 Tab -->
+                    <div class="tab-pane fade" id="q3-tab-pane" role="tabpanel" tabindex="0" aria-labelledby="q3-tab">
+                        <div class="row g-5">
+                            <div class="col-md-8">
+                                <section aria-labelledby="q3-monthly-title">
+                                    <h2 id="q3-monthly-title" class="mb-4">Monthly Breakdowns</h2>
+                                    <div class="accordion" id="q3-accordion">
+                                        <!-- July 2025 -->
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJuly" aria-expanded="true" aria-controls="collapseJuly">
+                                                    July 2025
+                                                </button>
+                                            </h3>
+                                            <div id="collapseJuly" class="accordion-collapse collapse show" data-bs-parent="#q3-accordion" role="region">
+                                                <div class="accordion-body">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item">
+                                                            <a href="articles/jul-w2-2025.html" class="list-group-item-action d-flex align-items-center">
+                                                                <i class="far fa-file-alt me-2" aria-hidden="true"></i>
+                                                                <span>July Mid-Month Update</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- August 2025 -->
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAugust" aria-expanded="false" aria-controls="collapseAugust">
+                                                    August 2025
+                                                </button>
+                                            </h3>
+                                            <div id="collapseAugust" class="accordion-collapse collapse" data-bs-parent="#q3-accordion" role="region">
+                                                <div class="accordion-body">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item">
+                                                            <a href="articles/aug-inflation-2025.html" class="list-group-item-action d-flex align-items-center">
+                                                                <i class="far fa-file-alt me-2" aria-hidden="true"></i>
+                                                                <span>August Inflation Report</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <a href="articles/aug-jobs-2025.html" class="list-group-item-action d-flex align-items-center">
+                                                                <i class="far fa-file-alt me-2" aria-hidden="true"></i>
+                                                                <span>Jobs Market Analysis - August</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- September 2025 -->
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeptember" aria-expanded="false" aria-controls="collapseSeptember">
+                                                    September 2025
+                                                </button>
+                                            </h3>
+                                            <div id="collapseSeptember" class="accordion-collapse collapse" data-bs-parent="#q3-accordion" role="region">
+                                                <div class="accordion-body">
+                                                    <p class="text-muted">No articles for this month yet.</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </section>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAugust">August 2025</button></h2>
-                                <div id="collapseAugust" class="accordion-collapse collapse" data-bs-parent="#q3-accordion">
-                                    <div class="accordion-body">
-                                        <div class="list-group">
-                                            <a href="articles/aug-inflation-2025.html" class="list-group-item list-group-item-action"><i class="far fa-file-alt me-2"></i>August Inflation Report</a>
-                                            <a href="articles/aug-jobs-2025.html" class="list-group-item list-group-item-action"><i class="far fa-file-alt me-2"></i>Jobs Market Analysis - August</a>
+                            
+                            <div class="col-md-4">
+                                <aside aria-labelledby="q3-summary-title">
+                                    <div class="card bg-light position-sticky" style="top: 2rem;">
+                                        <div class="card-body">
+                                            <h3 id="q3-summary-title" class="card-title">Q3 2025 Summary</h3>
+                                            <p class="card-text">Comprehensive outlook for Q3 2025, focusing on summer economic trends, central bank policies, and sector performance.</p>
+                                            <a href="q3-2025.html" class="btn btn-dark w-100">Read Full Outlook</a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeptember">September 2025</button></h2>
-                                <div id="collapseSeptember" class="accordion-collapse collapse" data-bs-parent="#q3-accordion">
-                                    <div class="accordion-body"><p class="text-muted">No articles for this month yet.</p></div>
-                                </div>
+                                </aside>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card bg-light position-sticky" style="top: 2rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Q3 2025 Summary</h5>
-                                <p class="card-text">Comprehensive outlook for Q3 2025, focusing on summer economic trends, central bank policies, and sector performance.</p>
-                                <a href="q3-2025.html" class="btn btn-dark w-100">Read Full Outlook</a>
+
+                    <!-- Q4 2025 Tab -->
+                    <div class="tab-pane fade show active" id="q4-tab-pane" role="tabpanel" tabindex="0" aria-labelledby="q4-tab">
+                        <div class="row g-5">
+                            <div class="col-md-8">
+                                <section aria-labelledby="q4-monthly-title">
+                                    <h2 id="q4-monthly-title" class="mb-4">Monthly Breakdowns</h2>
+                                    <div class="alert alert-info text-center" role="alert">
+                                        <p class="mb-0">No monthly articles available for this quarter yet.</p>
+                                    </div>
+                                </section>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <aside aria-labelledby="q4-summary-title">
+                                    <div class="card bg-light position-sticky" style="top: 2rem;">
+                                        <div class="card-body">
+                                            <h3 id="q4-summary-title" class="card-title">Q4 2025 Summary</h3>
+                                            <p class="card-text">End-of-year analysis and Q4 2025 forecast, including holiday season retail predictions and outlook for the new year.</p>
+                                            <a href="q4-2025.html" class="btn btn-dark w-100">Read Full Outlook</a>
+                                        </div>
+                                    </div>
+                                </aside>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="tab-pane fade show active" id="q4-tab-pane" role="tabpanel" tabindex="0">
-                <div class="row g-5">
-                     <div class="col-md-8">
-                        <h3 class="mb-4">Monthly Breakdowns</h3>
-                        <p class="text-center text-muted fst-italic pt-4">No monthly articles available for this quarter yet.</p>
-                    </div>
-                    <div class="col-md-4">
-                         <div class="card bg-light position-sticky" style="top: 2rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">Q4 2025 Summary</h5>
-                                <p class="card-text">End-of-year analysis and Q4 2025 forecast, including holiday season retail predictions and outlook for the new year.</p>
-                                <a href="q4-2025.html" class="btn btn-dark w-100">Read Full Outlook</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </main>
     
-    <footer>
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h3>Tulga-Ochir Sugar</h3>
-                    <p>Providing insightful market analysis and investment strategies based on comprehensive research and quantitative approaches.</p>
+                    <section aria-labelledby="about-title">
+                        <h3 id="about-title">Tulga-Ochir Sugar</h3>
+                        <p>Providing insightful market analysis and investment strategies based on comprehensive research and quantitative approaches.</p>
+                    </section>
                 </div>
                 <div class="col-md-4">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="../portfolio/index.html">Portfolio</a></li>
-                        <li><a href="index.html">Market Outlook</a></li>
-                        <li><a href="../insights/index.html">Insights</a></li>
-                    </ul>
+                    <section aria-labelledby="quick-links-title">
+                        <h4 id="quick-links-title">Quick Links</h4>
+                        <ul class="footer-links list-unstyled">
+                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="../portfolio/index.html">Portfolio</a></li>
+                            <li><a href="index.html">Market Outlook</a></li>
+                            <li><a href="../insights/index.html">Insights</a></li>
+                        </ul>
+                    </section>
                 </div>
                 <div class="col-md-4">
-                    <h4>Connect</h4>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+                    <section aria-labelledby="connect-title">
+                        <h4 id="connect-title">Connect</h4>
+                        <div class="social-icons" role="navigation" aria-label="Social media links">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </section>
                 </div>
             </div>
-            <div class="copyright">
+            <div class="copyright mt-4">
                 <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>
