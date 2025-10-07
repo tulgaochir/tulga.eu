@@ -8,17 +8,42 @@
     <meta name="author" content="Tulga-Ochir Sugar">
     <title>Market Overview – January 2025 | Tulga-Ochir Sugar</title>
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="../../assets/css/main.css" as="style">
+    
     <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
     
-    <style>
-        .article-header {
-            background: linear-gradient(135deg, #1a2a6c, #2a4365);
-            color: white;
-            padding: 4rem 0;
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "name": "Market Overview – January 2025",
+        "description": "Analysis of bond market volatility, equity performance, and policy changes under the new administration",
+        "url": "https://example.com/market-outlook/articles/q1-2025/january-2025.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Tulga-Ochir Sugar",
+            "url": "https://example.com"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "Tulga-Ochir Sugar"
+        },
+        "datePublished": "2025-01-31",
+        "author": {
+            "@type": "Person",
+            "name": "Tulga-Ochir Sugar"
         }
+    }
+    </script>
+    
+    <style>
+        /* Custom styles for article content that don't conflict with main site */
         .article-content {
             max-width: 800px;
             margin: 0 auto;
@@ -82,55 +107,43 @@
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
         }
-        .share-buttons {
-            margin-top: 2rem;
-        }
-        .share-buttons button {
-            margin-right: 0.5rem;
-        }
-        .related-articles {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #dee2e6;
-        }
-        .related-article-card {
-            transition: transform 0.2s;
-        }
-        .related-article-card:hover {
-            transform: translateY(-5px);
-        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+    
+    <!-- Header with Navigation (same as main page) -->
+    <header class="navbar navbar-expand-lg" role="banner">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="../../index.html">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../../portfolio/index.html">PORTFOLIO</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="../index.html">MARKET OUTLOOK</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../../insights/index.html">INSIGHTS</a></li>
-                    <li class="nav-item"><button class="btn btn-contact" onclick="location.href='../../index.html#contact'">Get in Touch</button></li>
-                </ul>
+                <nav role="navigation" aria-label="Main navigation">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="../../index.html">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../portfolio/index.html">PORTFOLIO</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="../index.html">MARKET OUTLOOK</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../../insights/index.html">INSIGHTS</a></li>
+                        <li class="nav-item"><button class="btn btn-contact" onclick="location.href='../../index.html#contact'">Get in Touch</button></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </header>
 
-    <!-- Article Header -->
-    <section class="article-header">
-        <div class="container">
+    <!-- Page Header (consistent with main page) -->
+    <section class="page-header" aria-labelledby="page-title">
+        <div class="container text-center">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
                     <li class="breadcrumb-item"><a href="../index.html">Market Outlook</a></li>
                     <li class="breadcrumb-item"><a href="../index.html#q1-2025">Q1 2025</a></li>
                     <li class="breadcrumb-item active" aria-current="page">January 2025</li>
                 </ol>
             </nav>
-            <h1 class="display-4 mt-3">Market Overview – January 2025</h1>
+            <h1 id="page-title" class="display-4 mt-3">Market Overview – January 2025</h1>
             <p class="lead">A Month of Whiplash and Policy Pivots</p>
             <div class="article-meta mt-3">
                 <span class="me-3"><i class="far fa-calendar"></i> January 31, 2025</span>
@@ -140,8 +153,8 @@
         </div>
     </section>
 
-    <!-- Article Content -->
-    <main class="container py-5">
+    <!-- Main Content -->
+    <main id="main-content" class="container py-5" role="main">
         <div class="article-content">
             <p class="lead">January 2025 was a month of sharp reversals and shifting narratives, defined by a dramatic tug-of-war between interest rate volatility and the dawn of a new political era. After a quiet start, markets were seized by a fierce sell-off in long-term bonds, only to be rescued by benign inflation data that propelled equities to new all-time highs. However, this rally was met with underlying caution as investors braced for a gauntlet of policy changes, pivotal central bank meetings, and the core of the Q4 earnings season, setting a tense and uncertain stage for the months ahead.</p>
 
@@ -271,73 +284,10 @@
                 <span class="tag">S&P 500</span>
                 <span class="tag">Inflation</span>
             </div>
-
-            <!-- Share Buttons -->
-            <div class="share-buttons">
-                <h5>Share this article:</h5>
-                <button class="btn btn-outline-primary"><i class="fab fa-linkedin-in"></i></button>
-                <button class="btn btn-outline-info"><i class="fab fa-twitter"></i></button>
-                <button class="btn btn-outline-dark"><i class="fas fa-envelope"></i></button>
-            </div>
-
-            <!-- Related Articles -->
-            <div class="related-articles">
-                <h4>Related Articles</h4>
-                <div class="row mt-3">
-                    <div class="col-md-6 mb-3">
-                        <div class="card related-article-card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="february-2025.html" class="text-decoration-none">February 2025 Market Outlook</a></h5>
-                                <p class="card-text">Analysis of market trends following the Federal Reserve's January meeting and initial policy implementations.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="card related-article-card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title"><a href="../insights/fed-policy-2025.html" class="text-decoration-none">Federal Reserve Policy Outlook 2025</a></h5>
-                                <p class="card-text">Deep dive into expected Fed policy changes and their potential impact on financial markets.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer bg-dark text-white py-4 mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h3>Tulga-Ochir Sugar</h3>
-                    <p>Providing insightful market analysis and investment strategies based on comprehensive research and quantitative approaches.</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links list-unstyled">
-                        <li><a href="../../index.html">Home</a></li>
-                        <li><a href="../../portfolio/index.html">Portfolio</a></li>
-                        <li><a href="../index.html">Market Outlook</a></li>
-                        <li><a href="../../insights/index.html">Insights</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h4>Connect</h4>
-                    <div class="social-icons">
-                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright mt-4">
-                <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
 </body>
 </html>
