@@ -1,22 +1,66 @@
 {
-  "articles": [
+  "quarters": [
     {
-      "id": "q3-2023-global-recovery",
-      "title": "Global Economic Recovery",
-      "quarter": "Q3",
-      "year": "2023",
-      "excerpt": "Analysis of post-pandemic recovery patterns across major economies and potential headwinds that could slow growth momentum.",
-      "tags": ["Global Economy", "GDP", "Recovery"],
-      "url": "market-outlook/articles/q3-2023-global-recovery.html"
+      "id": "q1-2025",
+      "title": "Q1 2025 Market Outlook",
+      "quarter": "Q1",
+      "year": "2025",
+      "overview": "Analysis of Q1 2025 market trends and economic indicators...",
+      "image": "https://picsum.photos/seed/q1-2025/800/400.jpg",
+      "url": "market-outlook/q1-2025/index.html",
+      "weeks": [
+        {
+          "id": "q1-2025-week-1",
+          "title": "Week 1: January Market Analysis",
+          "date": "January 6, 2025",
+          "excerpt": "First week analysis of January 2025 market performance...",
+          "image": "https://picsum.photos/seed/q1-2025-w1/400/250.jpg",
+          "url": "market-outlook/q1-2025/week-1.html"
+        },
+        {
+          "id": "q1-2025-week-2",
+          "title": "Week 2: Mid-January Update",
+          "date": "January 13, 2025",
+          "excerpt": "Mid-January market developments and economic data...",
+          "image": "https://picsum.photos/seed/q1-2025-w2/400/250.jpg",
+          "url": "market-outlook/q1-2025/week-2.html"
+        },
+        {
+          "id": "q1-2025-week-3",
+          "title": "Week 3: Late January Review",
+          "date": "January 20, 2025",
+          "excerpt": "Late January market movements and policy updates...",
+          "image": "https://picsum.photos/seed/q1-2025-w3/400/250.jpg",
+          "url": "market-outlook/q1-2025/week-3.html"
+        },
+        {
+          "id": "q1-2025-week-4",
+          "title": "Week 4: January Summary",
+          "date": "January 27, 2025",
+          "excerpt": "Complete January market summary and February outlook...",
+          "image": "https://picsum.photos/seed/q1-2025-w4/400/250.jpg",
+          "url": "market-outlook/q1-2025/week-4.html"
+        }
+      ]
     },
     {
-      "id": "q2-2023-interest-rates",
-      "title": "Interest Rate Impact",
+      "id": "q2-2025",
+      "title": "Q2 2025 Market Outlook",
       "quarter": "Q2",
-      "year": "2023",
-      "excerpt": "Examination of how central bank policies and interest rate changes are affecting different asset classes and investment strategies.",
-      "tags": ["Central Banks", "Interest Rates", "Monetary Policy"],
-      "url": "market-outlook/articles/q2-2023-interest-rates.html"
+      "year": "2025",
+      "overview": "Q2 2025 market expectations and economic forecasts...",
+      "image": "https://picsum.photos/seed/q2-2025/800/400.jpg",
+      "url": "market-outlook/q2-2025/index.html",
+      "weeks": [
+        {
+          "id": "q2-2025-week-1",
+          "title": "Week 1: April Market Start",
+          "date": "April 7, 2025",
+          "excerpt": "April market opening and Q1 review...",
+          "image": "https://picsum.photos/seed/q2-2025-w1/400/250.jpg",
+          "url": "market-outlook/q2-2025/week-1.html"
+        }
+      ]
     }
   ]
 }
