@@ -66,6 +66,16 @@
             padding: 1.5rem;
             margin: 1.5rem 0;
         }
+        .chart-placeholder {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 2rem 0;
+        }
         .breadcrumb {
             background: transparent;
             padding: 0;
@@ -132,6 +142,29 @@
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280%2c%200%2c%200%2c%0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
+        /* Dark blue header background matching Market Outlook 2025 page */
+        .page-header {
+            background-color: #1a365d; /* Dunkelblau wie auf der Market Outlook Seite */
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        .page-header h1, .page-header p, .page-header .breadcrumb-item {
+            color: white;
+        }
+        .page-header .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .page-header .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .page-header .article-meta {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        /* Ensure content below header has proper spacing */
+        main.container.py-5 {
+            padding-top: 2rem;
+        }
         .stat-box {
             background-color: #f8f9fa;
             border-radius: 8px;
@@ -189,7 +222,7 @@
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
     
-    <!-- Navigation (matching the main market outlook page design with white background) -->
+    <!-- Navigation (KORRIGIERTE PFADE) -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -197,10 +230,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/index.html">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/portfolio/index.html">PORTFOLIO</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/tulga.eu/market-outlook/index.html">MARKET OUTLOOK</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/insights/index.html">INSIGHTS</a></li>
+                    <!-- Korrektur: 4 Ebenen nach oben zum Haupt-Index -->
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html">HOME</a></li>
+                    <!-- Korrektur: 4 Ebenen nach oben, dann ins portfolio-Verzeichnis -->
+                    <li class="nav-item"><a class="nav-link" href="../../../portfolio/index.html">PORTFOLIO</a></li>
+                    <!-- Korrektur: 3 Ebenen nach oben zum market-outlook-Index -->
+                    <li class="nav-item"><a class="nav-link active" href="../../index.html">MARKET OUTLOOK</a></li>
+                    <!-- Korrektur: 4 Ebenen nach oben, dann ins insights-Verzeichnis -->
+                    <li class="nav-item"><a class="nav-link" href="../../../insights/index.html">INSIGHTS</a></li>
                 </ul>
             </div>
         </div>
@@ -209,10 +246,11 @@
     <!-- Page Header (consistent with main page) -->
     <section class="page-header" aria-labelledby="page-title">
         <div class="container text-center">
+            <!-- Breadcrumb Navigation (KORRIGIERTE PFADE) -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="../index.html">Market Outlook</a></li>
-                    <li class="breadcrumb-item"><a href="../index.html#q4-2025">Q4 2025</a></li>
+                    <li class="breadcrumb-item"><a href="../../index.html">Market Outlook</a></li>
+                    <li class="breadcrumb-item"><a href="../../index.html#q4-2025">Q4 2025</a></li>
                     <li class="breadcrumb-item active" aria-current="page">October 2025</li>
                 </ol>
             </nav>
@@ -279,7 +317,8 @@
         </div>
     </main>
 
-    <!-- Scripts -->
+    <!-- Scripts (KORRIGIERTER PFAD) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../../assets/js/main.js"></script>
 </body>
 </html>
