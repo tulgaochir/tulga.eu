@@ -8,6 +8,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
     <style>
+        /* Sticky Footer Fix */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .site-wrapper {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-wrapper {
+            flex: 1;
+        }
+
         .hero-section {
             padding: 120px 0 80px;
             text-align: center;
@@ -53,26 +70,14 @@
             color: #0055a4;
             font-weight: 500;
         }
-        .footer {
+        footer {
             background-color: #003366 !important;
-            padding: 60px 0 30px;
-            margin-top: 80px;
+            padding: 40px 0 20px;
             color: #ffffff !important;
-        }
-        .footer h3, .footer h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: #ffffff !important;
-            font-weight: 600;
-        }
-        .footer p {
-            font-size: 0.95rem;
-            color: #e0e0e0 !important;
-            line-height: 1.6;
-            max-width: 400px;
+            flex-shrink: 0; /* Verhindert, dass der Footer schrumpft */
         }
         .social-icons {
-            margin-top: 1.5rem;
+            margin-bottom: 20px;
         }
         .social-icons a {
             display: inline-flex;
@@ -82,7 +87,7 @@
             height: 45px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.15);
-            margin-right: 15px;
+            margin: 0 8px;
             color: #ffffff !important;
             transition: all 0.3s;
             text-decoration: none;
@@ -91,16 +96,10 @@
             background-color: rgba(255, 255, 255, 0.25);
             transform: translateY(-3px);
         }
-        .copyright {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            text-align: center;
-        }
         .copyright p {
             font-size: 0.85rem;
             color: #b0b0b0 !important;
-            max-width: 100%;
+            margin: 0;
         }
         .nav-link {
             color: #333 !important;
@@ -141,58 +140,62 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./portfolio/index.html">PORTFOLIO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./market-outlook/index.html">MARKET OUTLOOK</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./insights/index.html">INSIGHTS</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div class="site-wrapper">
+        <div class="content-wrapper">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#home">HOME</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./portfolio/index.html">PORTFOLIO</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./market-outlook/index.html">MARKET OUTLOOK</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./insights/index.html">INSIGHTS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
-    <section id="home" class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Tulga-Ochir Sugar</h1>
-            
-            <div class="about-section">
-                <h2 class="section-title">About</h2>
-                <div class="about-content">
-                    <p>I track global markets and macroeconomic trends daily, combining <span class="highlight">fundamental analysis</span> with <span class="highlight">quantitative approaches</span> to identify investment opportunities.</p>
+            <section id="home" class="hero-section">
+                <div class="container">
+                    <h1 class="hero-title">Tulga-Ochir Sugar</h1>
                     
-                    <p>My research methodology prioritizes risk management and long-term value creation, avoiding short-term market fluctuations in favor of sustainable investment strategies.</p>
-                    
-                    <p>I believe patience, discipline, and continuous learning are essential qualities for successful investing in today's complex financial environment.</p>
+                    <div class="about-section">
+                        <h2 class="section-title">About</h2>
+                        <div class="about-content">
+                            <p>I track global markets and macroeconomic trends daily, combining <span class="highlight">fundamental analysis</span> with <span class="highlight">quantitative approaches</span> to identify investment opportunities.</p>
+                            
+                            <p>My research methodology prioritizes risk management and long-term value creation, avoiding short-term market fluctuations in favor of sustainable investment strategies.</p>
+                            
+                            <p>I believe patience, discipline, and continuous learning are essential qualities for successful investing in today's complex financial environment.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="container text-center">
+                <div class="social-icons mb-4">
+                    <a href="https://www.linkedin.com/in/tulga-ochir-s/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:mail@tulga.eu"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-<footer>
-    <div class="container text-center">
-        <div class="social-icons mb-4">
-            <a href="https://www.linkedin.com/in/tulga-ochir-s/"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:mail@tulga.eu"><i class="fas fa-envelope"></i></a>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
-        </div>
+        </footer>
     </div>
-</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
@@ -214,4 +217,3 @@
     </script>
 </body>
 </html>
-
