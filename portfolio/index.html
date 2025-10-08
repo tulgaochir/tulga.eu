@@ -1,177 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Tulga</title>
+    <meta name="description" content="Portfolio Factor Regression Tool by Tulga-Ochir Sugar">
+    <meta name="keywords" content="portfolio, factor analysis, regression tool, quantitative finance">
+    <meta name="author" content="Tulga-Ochir Sugar">
+    <title>Portfolio Factor Regression Tool - Tulga-Ochir Sugar</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="../assets/css/main.css" as="style">
+    
+    <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
+    
+    <!-- Custom CSS to remove underlines -->
+    <style>
+        /* Remove underlines from all links */
+        a {
+            text-decoration: none !important;
+        }
+        
+        /* Add underline on hover for better UX */
+        a:hover {
+            text-decoration: underline !important;
+        }
+        
+        /* Specifically target navigation links */
+        .navbar-nav .nav-link {
+            text-decoration: none !important;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            text-decoration: none !important;
+        }
+        
+        /* Target list group items */
+        .list-group-item-action {
+            text-decoration: none !important;
+        }
+        
+        .list-group-item-action:hover {
+            text-decoration: none !important;
+        }
+        
+        /* Target footer links */
+        .footer a {
+            text-decoration: none !important;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline !important;
+        }
+        
+        /* Target social icons */
+        .social-icons a {
+            text-decoration: none !important;
+        }
+        
+        .social-icons a:hover {
+            text-decoration: none !important;
+        }
+    </style>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Portfolio Factor Regression Tool",
+        "description": "Interactive factor analysis tool by Tulga-Ochir Sugar",
+        "url": "https://example.com/portfolio/index.html",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Tulga-Ochir Sugar",
+            "url": "https://example.com"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "Tulga-Ochir Sugar"
+        }
+    }
+    </script>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+    
+    <!-- Navigation (right-aligned like home page) -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">PORTFOLIO</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../market-outlook/index.html">MARKET OUTLOOK</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../insights/index.html">INSIGHTS</a>
-                    </li>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">PORTFOLIO</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../market-outlook/index.html">MARKET OUTLOOK</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../insights/index.html">INSIGHTS</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Portfolio Header -->
-    <section class="page-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="page-title">Portfolio</h1>
-                    <p class="page-description">
-                        Collection of quantitative finance projects covering macro analysis, portfolio risk management, 
-                        and investment strategies. All data, code, and visualizations represent my personal work.
-                    </p>
-                </div>
-            </div>
+    <!-- Page Header -->
+    <section class="page-header" aria-labelledby="page-title">
+        <div class="container text-center">
+            <h1 id="page-title" class="display-4">Portfolio Factor Regression Tool</h1>
+            <p class="lead">A comprehensive tool for analyzing portfolio returns through established asset pricing models.</p>
         </div>
     </section>
 
-    <!-- Filter Section -->
-    <section class="filter-section">
-        <div class="container">
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterArticles('all')">All Projects</button>
-                <button class="filter-btn" onclick="filterArticles('risk')">Risk Management</button>
-                <button class="filter-btn" onclick="filterArticles('optimization')">Portfolio Optimization</button>
-                <button class="filter-btn" onclick="filterArticles('analysis')">Market Analysis</button>
-                <button class="filter-btn" onclick="filterArticles('backtesting')">Backtesting</button>
+    <!-- Main Content -->
+    <main id="main-content" class="container py-5" role="main">
+        <div class="row">
+            <div class="col-12">
+                <!-- Factor Analysis Section -->
+                <section aria-labelledby="tool-description">
+                    <h2 id="tool-description" class="mb-4">Project Overview</h2>
+                    <div class="accordion" id="factor-accordion">
+                        <!-- Portfolio Factor Regression Tool -->
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFactorRegression" aria-expanded="true" aria-controls="collapseFactorRegression">
+                                    Portfolio Factor Regression Dashboard
+                                </button>
+                            </h3>
+                            <div id="collapseFactorRegression" class="accordion-collapse collapse show" data-bs-parent="#factor-accordion" role="region">
+                                <div class="accordion-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <a href="https://tulga-factor-regression.streamlit.app/" target="_blank" class="list-group-item-action d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-chart-line me-2" aria-hidden="true"></i>
+                                                    <div>
+                                                        <span>Interactive Factor Analysis Tool</span>
+                                                        <small class="text-muted d-block">Analyze portfolio returns through Fama-French and Carhart factor models with professional-grade visualizations</small>
+                                                    </div>
+                                                </div>
+                                                <span class="badge bg-success">Live Tool</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </section>
-
-    <!-- Portfolio Articles Grid -->
-    <section class="articles-grid">
-        <div class="container">
-            <div class="row" id="portfolioArticles">
-                <!-- Articles will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-
+    </main>
+    
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h3>Tulga - Ochir Sugar</h3>
+                <div class="col-md-6">
+                    <h3>Tulga-Ochir Sugar</h3>
                     <p>Providing insightful market analysis and investment strategies based on comprehensive research and quantitative approaches.</p>
                 </div>
-                <div class="col-md-4">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="index.html">Portfolio</a></li>
-                        <li><a href="../market-outlook/index.html">Market Outlook</a></li>
-                        <li><a href="../insights/index.html">Insights</a></li>
-                        <li><a href="../index.html#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <h4>Connect</h4>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/tulga-ochir-s/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:mail@tulga.eu"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 Tulga-Ochir Sugar. All Rights Reserved.</p>
+                <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/main.js"></script>
-    <script>
-        // Load portfolio articles
-        document.addEventListener('DOMContentLoaded', function() {
-            loadPortfolioArticles();
-        });
-
-        function loadPortfolioArticles() {
-            fetch('../data/portfolio.json')
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('portfolioArticles');
-                    container.innerHTML = '';
-                    
-                    data.articles.forEach(article => {
-                        const articleElement = createPortfolioArticle(article);
-                        container.appendChild(articleElement);
-                    });
-                });
-        }
-
-        function createPortfolioArticle(article) {
-            const col = document.createElement('div');
-            col.className = 'col-lg-4 col-md-6 mb-4';
-            col.setAttribute('data-category', article.category);
-            
-            col.innerHTML = `
-                <div class="article-card">
-                    <div class="article-image">
-                        <img src="${article.image}" alt="${article.title}">
-                        <div class="article-overlay">
-                            <span class="article-category">${article.category}</span>
-                        </div>
-                    </div>
-                    <div class="article-content">
-                        <h3>${article.title}</h3>
-                        <p>${article.excerpt}</p>
-                        <div class="article-meta">
-                            <span class="article-date">${article.date}</span>
-                            <span class="article-read-time">${article.readTime}</span>
-                        </div>
-                        <a href="${article.url}" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            `;
-            
-            return col;
-        }
-
-        function filterArticles(category) {
-            const articles = document.querySelectorAll('#portfolioArticles > div');
-            const buttons = document.querySelectorAll('.filter-btn');
-            
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter articles
-            articles.forEach(article => {
-                if (category === 'all' || article.getAttribute('data-category') === category) {
-                    article.style.display = 'block';
-                } else {
-                    article.style.display = 'none';
-                }
-            });
-        }
-    </script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
