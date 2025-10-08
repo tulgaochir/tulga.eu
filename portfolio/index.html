@@ -1,162 +1,187 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio Factor Regression Tool by Tulga-Ochir Sugar">
-    <meta name="keywords" content="portfolio, factor analysis, regression tool, quantitative finance">
-    <meta name="author" content="Tulga-Ochir Sugar">
-    <title>Portfolio Factor Regression Tool - Tulga-Ochir Sugar</title>
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="../assets/css/main.css" as="style">
-    
-    <!-- Stylesheets -->
+    <title>Tulga-Ochir Sugar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
-    
-    <!-- Custom CSS to remove underlines -->
+    <link rel="stylesheet" href="assets/css/main.css">
     <style>
-        /* Remove underlines from all links */
-        a {
-            text-decoration: none !important;
+        /* --- NEUE STILE, UM DIE LÜCKE ZU ENTFERNEN --- */
+        html {
+            height: 100%;
         }
-        
-        /* Add underline on hover for better UX */
-        a:hover {
-            text-decoration: underline !important;
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Stellt sicher, dass der body immer die volle Bildschirmhöhe hat */
         }
-        
-        /* Specifically target navigation links */
-        .navbar-nav .nav-link {
-            text-decoration: none !important;
+        main {
+            flex-grow: 1; /* Lässt den Hauptinhalt wachsen und den Footer nach unten drücken */
         }
-        
-        .navbar-nav .nav-link:hover {
-            text-decoration: none !important;
+        /* --- ENDE NEUE STILE --- */
+
+        .hero-section {
+            padding: 120px 0 80px;
+            text-align: center;
         }
-        
-        /* Target list group items */
-        .list-group-item-action {
-            text-decoration: none !important;
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
         }
-        
-        .list-group-item-action:hover {
-            text-decoration: none !important;
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
         }
-        
-        /* Target footer links */
-        .footer a {
-            text-decoration: none !important;
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #333;
+            position: relative;
+            display: inline-block;
         }
-        
-        .footer a:hover {
-            text-decoration: underline !important;
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: #0055a4;
         }
-        
-        /* Target social icons */
+        .about-section {
+            margin-top: 4rem;
+        }
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+        .highlight {
+            color: #0055a4;
+            font-weight: 500;
+        }
+        .footer {
+            background-color: #003366 !important;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+            color: #ffffff !important;
+        }
+        .footer h3, .footer h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+        .footer p {
+            font-size: 0.95rem;
+            color: #e0e0e0 !important;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+        .social-icons {
+            margin-top: 1.5rem;
+        }
         .social-icons a {
-            text-decoration: none !important;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+            margin-right: 15px;
+            color: #ffffff !important;
+            transition: all 0.3s;
+            text-decoration: none;
         }
-        
         .social-icons a:hover {
-            text-decoration: none !important;
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+        }
+        .copyright p {
+            font-size: 0.85rem;
+            color: #b0b0b0 !important;
+            max-width: 100%;
+        }
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #0055a4 !important;
+        }
+        .navbar {
+            background-color: transparent !important;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
         }
     </style>
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Portfolio Factor Regression Tool",
-        "description": "Interactive factor analysis tool by Tulga-Ochir Sugar",
-        "url": "https://example.com/portfolio/index.html",
-        "isPartOf": {
-            "@type": "WebSite",
-            "name": "Tulga-Ochir Sugar",
-            "url": "https://example.com"
-        },
-        "provider": {
-            "@type": "Organization",
-            "name": "Tulga-Ochir Sugar"
-        }
-    }
-    </script>
 </head>
 <body>
-    <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
-    
-    <!-- Navigation (right-aligned like home page) -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="../index.html">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="index.html">PORTFOLIO</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../market-outlook/index.html">MARKET OUTLOOK</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../insights/index.html">INSIGHTS</a></li>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="portfolio/index.html">PORTFOLIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="market-outlook/index.html">MARKET OUTLOOK</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="insights/index.html">INSIGHTS</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header" aria-labelledby="page-title">
-        <div class="container text-center">
-            <h1 id="page-title" class="display-4">Portfolio Factor Regression Tool</h1>
-            <p class="lead">A comprehensive tool for analyzing portfolio returns through established asset pricing models.</p>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main id="main-content" class="container py-5" role="main">
-        <div class="row">
-            <div class="col-12">
-                <!-- Factor Analysis Section -->
-                <section aria-labelledby="tool-description">
-                    <h2 id="tool-description" class="mb-4">Project Overview</h2>
-                    <div class="accordion" id="factor-accordion">
-                        <!-- Portfolio Factor Regression Tool -->
-                        <div class="accordion-item">
-                            <h3 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFactorRegression" aria-expanded="true" aria-controls="collapseFactorRegression">
-                                    Portfolio Factor Regression Dashboard
-                                </button>
-                            </h3>
-                            <div id="collapseFactorRegression" class="accordion-collapse collapse show" data-bs-parent="#factor-accordion" role="region">
-                                <div class="accordion-body">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <a href="https://tulga-factor-regression.streamlit.app/" target="_blank" class="list-group-item-action d-flex align-items-center justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <i class="fas fa-chart-line me-2" aria-hidden="true"></i>
-                                                    <div>
-                                                        <span>Interactive Factor Analysis Tool</span>
-                                                        <small class="text-muted d-block">Analyze portfolio returns through Fama-French and Carhart factor models with professional-grade visualizations</small>
-                                                    </div>
-                                                </div>
-                                                <span class="badge bg-success">Live Tool</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+    <main>
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">Tulga-Ochir Sugar</h1>
+                
+                <div class="about-section">
+                    <h2 class="section-title">About</h2>
+                    <div class="about-content">
+                        <p>I track global markets and macroeconomic trends daily, combining <span class="highlight">fundamental analysis</span> with <span class="highlight">quantitative approaches</span> to identify investment opportunities.</p>
+                        
+                        <p>My research methodology prioritizes risk management and long-term value creation, avoiding short-term market fluctuations in favor of sustainable investment strategies.</p>
+                        
+                        <p>I believe patience, discipline, and continuous learning are essential qualities for successful investing in today's complex financial environment.</p>
                     </div>
-                </section>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
-    
-    <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
