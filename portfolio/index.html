@@ -82,10 +82,10 @@
             text-decoration: none !important;
         }
         
-        /* Footer styling */
+        /* Footer styling - REDUCED PADDING */
         footer {
             background-color: #003366 !important;
-            padding: 60px 0 30px;
+            padding: 40px 0 20px; /* Reduced from 60px 0 30px */
             color: #ffffff !important;
             flex-shrink: 0;
         }
@@ -105,7 +105,7 @@
         }
         
         .social-icons {
-            margin-top: 1.5rem;
+            margin-bottom: 20px; /* Reduced from margin-top: 1.5rem */
         }
         
         .social-icons a {
@@ -116,7 +116,7 @@
             height: 45px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.15);
-            margin-right: 15px;
+            margin: 0 8px; /* Changed from margin-right: 15px */
             color: #ffffff !important;
             transition: all 0.3s;
         }
@@ -127,8 +127,8 @@
         }
         
         .copyright {
-            margin-top: 40px;
-            padding-top: 20px;
+            margin-top: 20px; /* Reduced from 40px */
+            padding-top: 15px; /* Reduced from 20px */
             border-top: 1px solid rgba(255, 255, 255, 0.15);
             text-align: center;
         }
@@ -137,6 +137,7 @@
             font-size: 0.85rem;
             color: #b0b0b0 !important;
             max-width: 100%;
+            margin: 0; /* Added to remove default margin */
         }
         
         .nav-link {
@@ -249,17 +250,18 @@
             </main>
         </div>
         
-<footer>
-    <div class="container text-center">
-        <div class="social-icons mb-4">
-            <a href="https://www.linkedin.com/in/tulga-ochir-s/"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:mail@tulga.eu"><i class="fas fa-envelope"></i></a>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
-        </div>
+        <footer>
+            <div class="container text-center">
+                <div class="social-icons mb-4">
+                    <a href="https://www.linkedin.com/in/tulga-ochir-s/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:mail@tulga.eu"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
     </div>
-</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/main.js"></script>
