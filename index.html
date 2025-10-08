@@ -7,6 +7,122 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        .hero-section {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: #1a365d;
+        }
+        .about-section {
+            margin-top: 4rem;
+        }
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+        .highlight {
+            color: #1a365d;
+            font-weight: 500;
+        }
+        .footer {
+            background-color: #001e3c !important;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+            color: #ffffff !important;
+        }
+        .footer h3, .footer h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+        .footer p {
+            font-size: 0.95rem;
+            color: #e0e0e0 !important;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+        .social-icons {
+            margin-top: 1.5rem;
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.15);
+            margin-right: 15px;
+            color: #ffffff !important;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+        }
+        .copyright p {
+            font-size: 0.85rem;
+            color: #b0b0b0 !important;
+            max-width: 100%;
+        }
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #1a365d !important;
+        }
+        .navbar {
+            background-color: transparent !important;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -37,31 +153,23 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="hero-title">Tulga-Ochir Sugar</h1>
+            <h1 class="hero-title">Tulga-Ochir Sugar</h1>
+            
+            <div class="about-section">
+                <h2 class="section-title">About</h2>
+                <div class="about-content">
+                    <p>I track global markets and macroeconomic trends daily, combining <span class="highlight">fundamental analysis</span> with <span class="highlight">quantitative approaches</span> to identify investment opportunities.</p>
                     
-                    <div class="about-section">
-                        <h2 class="section-title">About me</h2>
-                        <div class="about-content">
-                            <p>I consistently track global markets and macroeconomic trends on a daily basis. This routine allows me to stay informed about key developments that could impact investment decisions and market dynamics. By monitoring various asset classes and economic indicators, I maintain a comprehensive view of the financial landscape.</p>
-                            
-                            <p>My research methodology combines fundamental analysis with quantitative approaches. I believe this hybrid strategy provides a more robust framework for evaluating investment opportunities. While fundamental analysis helps me understand the intrinsic value and long-term prospects, quantitative tools enable me to identify patterns and make data-driven decisions.</p>
-                            
-                            <p>When it comes to decision-making, I prioritize risk management and long-term value creation. I avoid chasing short-term market fluctuations and instead focus on sustainable investment strategies. My approach emphasizes patience, discipline, and continuous learning, which I believe are essential qualities for successful investing in today's complex financial environment.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <img src="assets/images/profile.jpg" alt="Tulga-Ochir Sugar" class="profile-img" width="290" height="350">
+                    <p>My research methodology prioritizes risk management and long-term value creation, avoiding short-term market fluctuations in favor of sustainable investment strategies.</p>
+                    
+                    <p>I believe patience, discipline, and continuous learning are essential qualities for successful investing in today's complex financial environment.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-<!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -86,20 +194,3 @@
     <script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
