@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Market Overview for August 2025: A Month of Contradictions - Analysis of economic data, Fed independence concerns, and market rally broadening">
-    <meta name="keywords" content="market outlook, august 2025, federal reserve, trumpfed, economic data, ai deflation, market rally, small caps">
+    <meta name="description" content="Market Overview for July 2025: Navigating Policy Clarity and Fiscal Pressure">
+    <meta name="keywords" content="market outlook, july 2025, federal reserve, treasury issuance, crypto legislation, tariffs, fiscal pressure, government funding">
     <meta name="author" content="Tulga-Ochir Sugar">
-    <title>Market Overview – August 2025 | Tulga-Ochir Sugar</title>
+    <title>Market Overview – July 2025 | Tulga-Ochir Sugar</title>
     
     <!-- Preload critical resources -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
@@ -22,9 +22,9 @@
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "name": "Market Overview – August 2025",
-        "description": "A Month of Contradictions - Analysis of economic data, Fed independence concerns, and market rally broadening",
-        "url": "https://example.com/market-outlook/articles/q3-2025/august-2025.html",
+        "name": "Market Overview – July 2025",
+        "description": "Navigating Policy Clarity and Fiscal Pressure",
+        "url": "https://example.com/market-outlook/articles/q3-2025/july-2025.html",
         "isPartOf": {
             "@type": "WebSite",
             "name": "Tulga-Ochir Sugar",
@@ -34,7 +34,7 @@
             "@type": "Organization",
             "name": "Tulga-Ochir Sugar"
         },
-        "datePublished": "2025-08-31",
+        "datePublished": "2025-07-31",
         "author": {
             "@type": "Person",
             "name": "Tulga-Ochir Sugar"
@@ -65,6 +65,16 @@
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
+        }
+        .chart-placeholder {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 2rem 0;
         }
         .breadcrumb {
             background: transparent;
@@ -130,7 +140,30 @@
             border-color: rgba(0, 0, 0, 0.1);
         }
         .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280%2c%200%2c%200%2c%0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280%2c%200%2c%200%2c%200.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        /* Dark blue header background matching Market Outlook 2025 page */
+        .page-header {
+            background-color: #1a365d; /* Dunkelblau wie auf der Market Outlook Seite */
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        .page-header h1, .page-header p, .page-header .breadcrumb-item {
+            color: white;
+        }
+        .page-header .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .page-header .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .page-header .article-meta {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        /* Ensure content below header has proper spacing */
+        main.container.py-5 {
+            padding-top: 2rem;
         }
         .stat-box {
             background-color: #f8f9fa;
@@ -175,7 +208,7 @@
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
     
-    <!-- Navigation (matching the main market outlook page design with white background) -->
+    <!-- Navigation (KORRIGIERTE PFADE) -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -183,10 +216,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/index.html">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/portfolio/index.html">PORTFOLIO</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/tulga.eu/market-outlook/index.html">MARKET OUTLOOK</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/insights/index.html">INSIGHTS</a></li>
+                    <!-- Korrektur: 4 Ebenen nach oben zum Haupt-Index -->
+                    <li class="nav-item"><a class="nav-link" href="../../../index.html">HOME</a></li>
+                    <!-- Korrektur: 4 Ebenen nach oben, dann ins portfolio-Verzeichnis -->
+                    <li class="nav-item"><a class="nav-link" href="../../../portfolio/index.html">PORTFOLIO</a></li>
+                    <!-- Korrektur: 3 Ebenen nach oben zum market-outlook-Index -->
+                    <li class="nav-item"><a class="nav-link active" href="../../index.html">MARKET OUTLOOK</a></li>
+                    <!-- Korrektur: 4 Ebenen nach oben, dann ins insights-Verzeichnis -->
+                    <li class="nav-item"><a class="nav-link" href="../../../insights/index.html">INSIGHTS</a></li>
                 </ul>
             </div>
         </div>
@@ -195,17 +232,18 @@
     <!-- Page Header (consistent with main page) -->
     <section class="page-header" aria-labelledby="page-title">
         <div class="container text-center">
+            <!-- Breadcrumb Navigation (KORRIGIERTE PFADE) -->
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="../index.html">Market Outlook</a></li>
-                    <li class="breadcrumb-item"><a href="../index.html#q3-2025">Q3 2025</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">August 2025</li>
+                    <li class="breadcrumb-item"><a href="../../index.html">Market Outlook</a></li>
+                    <li class="breadcrumb-item"><a href="../../index.html#q3-2025">Q3 2025</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">July 2025</li>
                 </ol>
             </nav>
-            <h1 id="page-title" class="display-4 mt-3">Market Overview – August 2025</h1>
-            <p class="lead">A Month of Contradictions</p>
+            <h1 id="page-title" class="display-4 mt-3">Market Overview – July 2025</h1>
+            <p class="lead">Navigating Policy Clarity and Fiscal Pressure</p>
             <div class="article-meta mt-3">
-                <span class="me-3"><i class="far fa-calendar"></i> August 31, 2025</span>
+                <span class="me-3"><i class="far fa-calendar"></i> July 31, 2025</span>
                 <span class="me-3"><i class="far fa-clock"></i> 10 min read</span>
                 <span><i class="far fa-user"></i> Tulga-Ochir Sugar</span>
             </div>
@@ -215,113 +253,88 @@
     <!-- Main Content -->
     <main id="main-content" class="container py-5" role="main">
         <div class="article-content">
-            <p class="lead">August 2025 was a month defined by a stark paradox: while underlying U.S. economic data revealed significant cracks and concerns over political interference reached a fever pitch, equity markets shrugged off the gloom and climbed to new all-time highs. The narrative decisively shifted from being data-dependent to politically-driven, culminating in the widespread conviction that the Federal Reserve's independence was effectively over. This belief in a politically forced easing cycle fueled a long-awaited broadening of the market rally, with investors rotating into long-neglected small caps even as the real economy sputtered.</p>
+            <p class="lead">July 2025 was a month of significant transition, where the resolution of short-term policy uncertainties gave way to a growing awareness of a long-term fiscal and liquidity crisis. Markets began the month fixated on the finalization of new trade tariffs and landmark crypto legislation. While clarity on these fronts, coupled with easing geopolitical tensions, provided a tailwind for risk assets, this optimism was increasingly tempered by the looming reality of a massive flood of Treasury issuance and signs of a brewing government funding battle. This backdrop placed the Federal Reserve on a precarious tightrope, caught between sticky inflation and a weakening economy, all while equities climbed to new highs in a fragile, low-volatility environment.</p>
 
-            <h2 class="mt-5">A Deteriorating Economic Reality</h2>
-            <p>The month began with a barrage of troubling economic signals that painted a picture of a sharply slowing economy. The July jobs report came in weak at only 73,000 new jobs, but the real alarm was the massive downward revision to the prior month (from +144,000 to just +19,000). Similarly, headline GDP growth was dismissed as misleading, with the underlying annualized rate for the first half of 2025 closer to a stagnant 1.2%. This weakness was later corroborated by a key forward-looking indicator, the ISM Services index, which fell to 50.1—just barely in expansion territory.</p>
+            <h2 class="mt-5">Policy Overhangs Resolved, For Now</h2>
+            <p>The first half of the month was defined by the resolution of two major sources of market uncertainty:</p>
+            
+            <div class="key-point mt-4">
+                <h5>Tariff Finalization</h5>
+                <p>The Trump administration clarified its new tariff list on July 9. While the economic impact remains a concern, the finalization removed a significant risk premium associated with policy ambiguity, allowing corporations to plan with greater certainty.</p>
+            </div>
+            
+            <div class="key-point mt-4">
+                <h5>"Crypto Week" Delivers Landmark Legislation</h5>
+                <p>The U.S. Congress made significant strides in digital asset regulation. The GENIUS Act, a comprehensive framework for stablecoins, passed the Senate and was poised for adoption by the House. This move was seen as a major win for the industry, providing legal clarity and creating a new, structural source of demand for short-term U.S. Treasuries, which are mandated as backing for regulated stablecoins.</p>
+            </div>
+            
+            <p>Adding to the risk-on mood, reports of progress in Gaza ceasefire negotiations helped lower the geopolitical risk premium that had been weighing on global markets.</p>
+
+            <div class="section-divider"></div>
+
+            <h2>The Looming Liquidity Squeeze and Fiscal Strain</h2>
+            <p>While short-term risks subsided, a more formidable long-term challenge came into sharp focus. Following the passage of the "Big Beautiful Bill," the U.S. Treasury began the process of replenishing its Treasury General Account (TGA). This set the stage for an estimated $800 billion in new bond issuance over the next two quarters, creating a significant liquidity drain from the financial system as capital is reallocated from risk assets to government debt.</p>
             
             <div class="row mt-4">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-6 mb-3">
                     <div class="stat-box">
-                        <div class="stat-number">73,000</div>
-                        <div class="stat-label">July Jobs Report</div>
+                        <div class="stat-number">$800B</div>
+                        <div class="stat-label">Estimated New Bond Issuance</div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-6 mb-3">
                     <div class="stat-box">
-                        <div class="stat-number">1.2%</div>
-                        <div class="stat-label">Annualized GDP Growth (H1 2025)</div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="stat-box">
-                        <div class="stat-number">50.1</div>
-                        <div class="stat-label">ISM Services Index</div>
+                        <div class="stat-number">$333B</div>
+                        <div class="stat-label">TGA Balance by Late July</div>
                     </div>
                 </div>
             </div>
             
-            <p>Compounding these concerns was a growing crisis of confidence in the integrity of the data itself. The administration's dismissal of the head of the Bureau of Labor Statistics (BLS) sparked fears that official statistics could be politically engineered, a development that threatens the very foundation of market trust.</p>
+            <p>This pressure was compounded by a brewing fiscal crisis. The TGA balance steadily declined throughout the month, falling to approximately $333 billion by late July. With a September 30 government funding deadline approaching, the risk of a political showdown and potential government shutdown has risen significantly, threatening to weigh on consumer and business confidence in the months ahead.</p>
 
             <div class="section-divider"></div>
 
-            <h2>The "Trumpfed" Narrative Takes Hold</h2>
-            <p>Despite the grim economic data, markets rallied on the overriding belief that the Federal Reserve's path was no longer its own. The perception solidified that the Fed's independence was over and it was on a clear path to becoming a political tool of the administration. This "Trumpfed" narrative rendered traditional market signals moot; the debate was no longer if the Fed would cut rates, but how aggressively it would be forced to do so.</p>
+            <h2>The Federal Reserve's Tightrope Walk</h2>
+            <p>The Federal Reserve found itself in an increasingly difficult position, navigating conflicting economic signals and rising political pressure. Key data points painted a confusing picture:</p>
             
             <div class="key-point mt-4">
-                <h5>The Political Fed</h5>
-                <p>By the end of the month, a rate cut at the September 17th FOMC meeting was viewed as a 100% certainty. The market's focus shifted entirely to the subsequent path, with some traders betting on a far more aggressive easing cycle (8-10 cuts) than was currently priced in, anticipating that political will would trump any lingering inflation concerns.</p>
+                <h5>Sticky Inflation</h5>
+                <p>June's CPI and PPI reports surprised to the upside (0.3% MoM for both), suggesting that inflation, driven by tariffs and energy costs, was not fully contained.</p>
             </div>
+            
+            <div class="key-point mt-4">
+                <h5>Weakening Economy</h5>
+                <p>The housing sector showed clear signs of a downturn, with homebuilder sentiment falling to recessionary levels and mortgage rates hovering at a restrictive 6.75%.</p>
+            </div>
+            
+            <p>Ahead of its July 30 meeting, the market priced in a 95% probability of the Fed holding rates steady. However, dissent within the FOMC was reportedly growing, setting the stage for a potential rate cut in September. This delicate balancing act was made more challenging by the increasing politicization of monetary policy, highlighted by public disagreements between Fed Chair Powell and President Donald Trump, which introduced a new layer of uncertainty and risk for bond markets.</p>
+
+            <div class="section-divider"></div>
+
+            <h2>A Market Priced for Perfection</h2>
+            <p>Despite the looming fiscal and liquidity challenges, equity markets demonstrated remarkable resilience. The S&P 500 hit all-time highs four times in the final week of July, with its forward P/E multiple exceeding a lofty 22.7x. This rally occurred in an environment of extremely low volatility (VIX) and tight credit spreads, suggesting a market "priced for perfection" and highly vulnerable to any potential shock.</p>
             
             <div class="pull-quote">
-                <p>The perception solidified that the Fed's independence was over and it was on a clear path to becoming a political tool of the administration.</p>
+                <p>The brief spike of the 30-year Treasury yield above 5% served as a stark reminder of the market's sensitivity to concerns over future debt supply and political stability.</p>
             </div>
-
-            <div class="section-divider"></div>
-
-            <h2>The AI Deflation Engine and a Broadening Rally</h2>
-            <p>The case for aggressive rate cuts was bolstered by two key developments. First, the narrative around Artificial Intelligence as a powerful deflationary force gained significant traction. The view that a surge in AI-driven productivity would suppress long-term inflation gave the Fed the intellectual cover needed to prioritize growth and political demands over fighting the tariff-induced price pressures hitting businesses.</p>
             
-            <p>Second, and most significantly, the market rally finally began to broaden. After months of being driven by a handful of mega-cap tech stocks, August saw a decisive rotation into long-suffering small caps (Russell 2000) and other rate-sensitive sectors. This was the most tangible evidence of a shift in market psychology. The rationale was twofold: smaller companies benefit disproportionately from lower borrowing costs, and they stand to gain a competitive edge by leveraging new AI tools without the massive overhead of larger corporations.</p>
-            
-            <table class="performance-table">
-                <thead>
-                    <tr>
-                        <th>Index</th>
-                        <th>August Performance</th>
-                        <th>YTD Performance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>S&P 500</td>
-                        <td class="positive">+3.2%</td>
-                        <td class="positive">+14.5%</td>
-                    </tr>
-                    <tr>
-                        <td>NASDAQ</td>
-                        <td class="positive">+2.1%</td>
-                        <td class="positive">+18.7%</td>
-                    </tr>
-                    <tr>
-                        <td>Russell 2000</td>
-                        <td class="positive">+6.8%</td>
-                        <td class="positive">+5.3%</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="section-divider"></div>
-
-            <h2>Forward Outlook: All Eyes on the Jobs Report</h2>
-            <p>As August concluded, the market found itself in a state of confident anticipation. A flurry of late-month economic data, including revised GDP and the PCE inflation report, landed as expected and failed to move the needle. The stage is now set for the August jobs report on September 5, which is viewed as the final catalyst before the Fed's widely expected pivot.</p>
-            
-            <p>While the market is priced for a "Goldilocks" scenario, underlying risks remain. The Fed's reverse repo facility is nearly empty, removing a key liquidity buffer from the financial system. Furthermore, the real-world impact of tariffs continues to squeeze industrial giants like Deere & Co., signaling a divergence between a buoyant financial market and a sputtering real economy.</p>
-            
-            <div class="key-point mt-4">
-                <h5>Key Risks Ahead</h5>
-                <ul>
-                    <li>The Fed's reverse repo facility is nearly empty, removing a key liquidity buffer</li>
-                    <li>Tariff impacts continue to pressure industrial companies</li>
-                    <li>Market expectations for aggressive rate cuts may be overly optimistic</li>
-                    <li>Political interference with economic data threatens market credibility</li>
-                </ul>
-            </div>
+            <p>The outlook heading into August is one of cautious optimism overshadowed by significant structural headwinds. While markets have cheered policy clarity, the true test will be their ability to absorb the coming wave of Treasury supply and navigate the inevitable political brinkmanship around government funding in the fall.</p>
 
             <!-- Tags -->
             <div class="mt-5">
-                <span class="tag">Economic Contradictions</span>
-                <span class="tag">Trumpfed</span>
-                <span class="tag">Fed Independence</span>
-                <span class="tag">AI Deflation</span>
-                <span class="tag">Market Rally</span>
-                <span class="tag">Small Caps</span>
-                <span class="tag">Political Interference</span>
+                <span class="tag">Policy Clarity</span>
+                <span class="tag">Treasury Issuance</span>
+                <span class="tag">Fiscal Pressure</span>
+                <span class="tag">Federal Reserve</span>
+                <span class="tag">Crypto Legislation</span>
+                <span class="tag">Government Funding</span>
+                <span class="tag">Market Volatility</span>
             </div>
         </div>
     </main>
 
-    <!-- Scripts -->
+    <!-- Scripts (KORRIGIERTER PFAD) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../../assets/js/main.js"></script>
 </body>
 </html>
