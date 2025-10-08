@@ -142,6 +142,29 @@
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280%2c%200%2c%200%2c%200.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
+        /* Dark blue header background matching Market Outlook 2025 page */
+        .page-header {
+            background-color: #1a365d; /* Dunkelblau wie auf der Market Outlook Seite */
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        .page-header h1, .page-header p, .page-header .breadcrumb-item {
+            color: white;
+        }
+        .page-header .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .page-header .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .page-header .article-meta {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        /* Ensure content below header has proper spacing */
+        main.container.py-5 {
+            padding-top: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -156,10 +179,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/index.html">HOME</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/portfolio/index.html">PORTFOLIO</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/market-outlook/index.html">MARKET OUTLOOK</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/tulga.eu/insights/index.html">INSIGHTS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../portfolio/index.html">PORTFOLIO</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../index.html">MARKET OUTLOOK</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../insights/index.html">INSIGHTS</a></li>
                 </ul>
             </div>
         </div>
@@ -319,7 +342,30 @@
         </div>
     </main>
 
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Tulga-Ochir Sugar</h3>
+                    <p>Providing insightful market analysis and investment strategies based on comprehensive research and quantitative approaches.</p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/tulga-ochir-s/"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:mail@tulga.eu"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../../assets/js/main.js"></script>
 </body>
 </html>
