@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Equity: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 230px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 230px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 230px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Key Rule — "; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── FORMULA REFERENCE TABLE ── */
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+
+/* ── TRAP BOX ── */
+.trap {
+  background: #fff7ed;
+  border-left: 4px solid #f97316;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: #7c2d12;
+  font-size: 15.5px; line-height: 1.7;
+}
+.trap::before { content: "🪤 Exam Trap — "; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Equity · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Markets</div>
+  <a href="#r39">R39 — Market Organization</a>
+  <a href="#r40">R40 — Market Indexes</a>
+  <a href="#r41">R41 — Market Efficiency</a>
+  <div class="nav-section">Equity Securities</div>
+  <a href="#r42">R42 — Equity Securities</a>
+  <div class="nav-section">Company Analysis</div>
+  <a href="#r43">R43 — Analysis: Past & Present</a>
+  <a href="#r44">R44 — Industry Analysis</a>
+  <a href="#r45">R45 — Forecasting</a>
+  <div class="nav-section">Valuation</div>
+  <a href="#r46">R46 — Equity Valuation</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Formula Sheet</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Equity</h1>
+  <p class="subtitle">Intuition-First Study Guide · All 8 Readings</p>
+  <p class="meta">Every concept explained in plain English · Likely exam questions after every topic · Common traps flagged</p>
+</div>
+
+<!-- ════════════════ R39 ════════════════ -->
+<section id="r39">
+<div class="module-header">
+  <div class="lm-label">Reading 39</div>
+  <h2>Market Organization and Structure</h2>
+  <div class="one-liner">How financial markets are built, why they exist, and the mechanics of trading — orders, margins, and short selling.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>This reading is foundational infrastructure. The CFA exam uses it to test whether you know how a real trade actually works — order types, margin calls, short selling P&amp;L, and the difference between various market structures. The margin call calculation and short-selling profit formula are consistently tested numerically. Know them cold.</p>
+</div>
+
+<h3>Functions of the Financial System <span class="tag tag-exam">Exam</span></h3>
+
+<p>The financial system serves six core functions that the exam may ask you to identify or categorise:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Function</th><th>What It Means</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Saving</strong></td><td>Allow individuals to move wealth to the future</td><td>Purchasing Treasury bonds</td></tr>
+    <tr><td><strong>Borrowing</strong></td><td>Allow entities to move future income to the present</td><td>Corporate debt issuance</td></tr>
+    <tr><td><strong>Raising equity capital</strong></td><td>Companies sell ownership stakes for growth capital</td><td>IPO or rights offering</td></tr>
+    <tr><td><strong>Risk management</strong></td><td>Transfer risk to those willing to bear it</td><td>Buying put options, swaps</td></tr>
+    <tr><td><strong>Price discovery</strong></td><td>Markets aggregate dispersed information into prices</td><td>Stock exchange continuous trading</td></tr>
+    <tr><td><strong>Liquidity provision</strong></td><td>Allow assets to be converted to cash quickly</td><td>Market makers standing ready to trade</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Market Types and Classifications <span class="tag tag-critical">Critical</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Primary Market</h5>
+    <p>New securities are sold for the first time. Proceeds go to the <strong>issuer</strong>. Examples: IPOs, seasoned equity offerings (SEOs), rights offerings, private placements.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Secondary Market</h5>
+    <p>Previously issued securities trade between investors. Proceeds go to the <strong>seller</strong>, not the issuer. Provides liquidity and price discovery. Example: NYSE, NASDAQ.</p>
+  </div>
+</div>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Quote-Driven (Dealer) Markets</h5>
+    <p>Dealers post bid and ask prices and stand ready to trade from their own inventory. Provides continuous liquidity. Example: OTC bond markets, FX dealers.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Order-Driven Markets</h5>
+    <p>Buyers and sellers submit orders; a matching system pairs them. No dealer is required. Includes call markets (batch) and continuous markets. Example: most major equity exchanges.</p>
+  </div>
+</div>
+
+<div class="trap">Broker markets (agency markets) are distinct from dealer markets. A broker acts as an <strong>agent</strong> for a client and charges a commission — the broker does NOT take a position. A dealer takes a position and profits from the spread. Confusing agent vs principal is a classic exam trap.</div>
+
+<h3>Order Types <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Order Type</th><th>Execution Rule</th><th>Price Certainty</th><th>Execution Certainty</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Market Order</strong></td><td>Execute immediately at best available price</td><td>None — you get whatever the market gives</td><td>High (almost certain to fill)</td></tr>
+    <tr><td><strong>Limit Order</strong></td><td>Execute only at a specified price or better</td><td>High — worst price is your limit</td><td>Low (may not execute if price not reached)</td></tr>
+    <tr><td><strong>Stop (Loss) Order</strong></td><td>Becomes a market order once stop price is touched</td><td>None once triggered</td><td>Moderate</td></tr>
+    <tr><td><strong>Stop-Limit Order</strong></td><td>Becomes a limit order once stop price is touched</td><td>Partial (limit sets worst price)</td><td>Low (may not execute)</td></tr>
+    <tr><td><strong>Marketable Limit Order</strong></td><td>Limit set at or through current market price</td><td>Good — limit sets floor/ceiling</td><td>High</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">A buy limit order at $50 means: "I will buy, but only if I can get it at $50 or cheaper." A sell limit order at $55 means: "I will sell, but only at $55 or higher." Limit orders protect you from price but not from missing the trade. Stop orders protect you from price moves continuing against you — but once triggered, you're back to a market order and have no price guarantee.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor places a sell stop order at $40 for a stock currently trading at $45. What happens if the price falls to $39?</div>
+  <div class="exam-a"><strong>The order is triggered at $40 and becomes a market sell order. It will execute at the best available bid, which could be $39 or lower — not necessarily $40.</strong> Stop orders do not guarantee execution at the stop price; they simply activate the order. If the ask falls through $40 with no trades exactly at $40 (gapping), execution might be at $38 or $37. This is why stop orders are imperfect for loss protection.</div>
+</div>
+
+<h3>Margin Trading <span class="tag tag-critical">Critical</span></h3>
+
+<p>Buying on margin means borrowing from a broker to finance part of a purchase. The investor puts up equity (initial margin) and borrows the rest.</p>
+
+<div class="formula">\[ \text{Leverage Ratio} = \frac{\text{Value of Position}}{\text{Equity}} = \frac{1}{\text{Initial Margin \%}} \]</div>
+
+<div class="formula">\[ \text{Margin Call Price (Long)} = P_0 \times \frac{1 - \text{Initial Margin}}{1 - \text{Maintenance Margin}} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">An investor buys 200 shares at $50 on 40% initial margin. The maintenance margin is 25%. At what price will the investor receive a margin call?</div>
+  <div class="exam-a">
+    <strong>Step 1:</strong> Margin call price = P₀ × (1 − Initial Margin) / (1 − Maintenance Margin)<br>
+    = $50 × (1 − 0.40) / (1 − 0.25)<br>
+    = $50 × 0.60 / 0.75<br>
+    = $50 × 0.80 = <strong>$40.00</strong><br><br>
+    <strong>Verification:</strong> At $40, position = 200 × $40 = $8,000. Loan = 200 × $50 × 60% = $6,000. Equity = $8,000 − $6,000 = $2,000. Margin % = $2,000 / $8,000 = <strong>25% = maintenance margin. ✓</strong>
+  </div>
+</div>
+
+<h3>Short Selling <span class="tag tag-critical">Critical</span></h3>
+
+<p>Short selling involves borrowing shares from a broker, selling them, hoping the price falls, then buying them back at a lower price to return to the lender.</p>
+
+<div class="formula">\[ \text{Profit on Short} = P_{\text{short}} - P_{\text{cover}} - \text{Dividends Paid} - \text{Borrowing Costs} \]</div>
+
+<div class="formula">\[ \text{Margin Call Price (Short)} = P_{\text{short}} \times \frac{1 + \text{Initial Margin}}{1 + \text{Maintenance Margin}} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">An investor shorts 100 shares at $80, with 50% initial margin and 30% maintenance margin. At what price will a margin call occur?</div>
+  <div class="exam-a">
+    Margin call price = $80 × (1 + 0.50) / (1 + 0.30) = $80 × 1.50 / 1.30 = $80 × 1.1538 = <strong>$92.31</strong><br><br>
+    Intuition: the price RISES above the short price triggering a call — the short seller is losing money as the price climbs, and the broker wants more equity to cover the exposure.
+  </div>
+</div>
+
+<div class="key-rule">Short sellers must pay any dividends declared on the borrowed shares to the lender. So if a stock pays a $2 dividend while you are short, your P&amp;L is reduced by $2 per share. Forgetting to subtract dividends from short-selling profit is a common mistake.</div>
+
+<h3>Market Characteristics and Execution Quality</h3>
+
+<p>Good markets have five key characteristics:</p>
+<ul>
+  <li><strong>Liquidity</strong> — the ability to trade in size quickly without large price impact</li>
+  <li><strong>Transparency</strong> — pre-trade (quotes) and post-trade (transactions) information available</li>
+  <li><strong>Assurity of completion</strong> — confidence that a counterparty will settle</li>
+  <li><strong>Operational efficiency</strong> — low transaction costs (commissions, spreads, market impact)</li>
+  <li><strong>Informationally efficient</strong> — prices reflect all available information (leads into Reading 41)</li>
+</ul>
+
+</section><hr>
+
+<!-- ════════════════ R40 ════════════════ -->
+<section id="r40">
+<div class="module-header">
+  <div class="lm-label">Reading 40</div>
+  <h2>Security Market Indexes</h2>
+  <div class="one-liner">How indexes are built, what they measure, and why the weighting method changes everything.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>Index construction is a surprisingly deep topic. The CFA exam regularly tests your ability to calculate index returns under different weighting methods, and to identify the biases of each. Price-weighted and equal-weighted calculations appear most often numerically. Know the differences, their advantages, disadvantages, and what type of bias each introduces.</p>
+</div>
+
+<h3>Index Weighting Methods <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Method</th><th>Weight Determined By</th><th>Key Bias / Flaw</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Price-Weighted</strong></td><td>Share price (higher price = higher weight)</td><td>Biased toward high-priced stocks, not high-value companies. Stock splits distort the index.</td><td>DJIA, Nikkei 225</td></tr>
+    <tr><td><strong>Equal-Weighted</strong></td><td>Same weight for every stock</td><td>Biased toward small caps (requires constant rebalancing). Over-rebalancing costs.</td><td>Value Line Index</td></tr>
+    <tr><td><strong>Market-Cap Weighted</strong></td><td>Market capitalisation (price × shares)</td><td>Overweights overvalued stocks (momentum bias). Most popular method.</td><td>S&amp;P 500, MSCI</td></tr>
+    <tr><td><strong>Float-Adjusted Market Cap</strong></td><td>Free-float market cap (exclude insider/strategic holdings)</td><td>Slightly reduced momentum bias vs full market cap</td><td>Most modern global indexes</td></tr>
+    <tr><td><strong>Fundamental-Weighted</strong></td><td>Fundamental metrics (earnings, book value, dividends, revenue)</td><td>Value tilt; no momentum bias. More complex to maintain.</td><td>FTSE RAFI indexes</td></tr>
+  </tbody>
+</table></div>
+
+<div class="formula">\[ \text{Price-Weighted Index} = \frac{\sum P_i}{\text{Divisor}} \]</div>
+
+<div class="formula">\[ \text{Market-Cap Weighted Return} = \sum w_i \times R_i \quad \text{where } w_i = \frac{P_i \times Q_i}{\sum P_j \times Q_j} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">A price-weighted index has three stocks: Stock A ($60), Stock B ($30), Stock C ($10). The divisor is 3. What is the index level? If Stock A then splits 2-for-1, what is the new divisor to maintain the same index level?</div>
+  <div class="exam-a">
+    <strong>Initial index = ($60 + $30 + $10) / 3 = $100 / 3 = 33.33</strong><br><br>
+    After 2-for-1 split, Stock A price = $30. New sum = $30 + $30 + $10 = $70.<br>
+    New divisor = $70 / 33.33 = <strong>2.10</strong> (rounded)<br><br>
+    This is why the DJIA's divisor is a small decimal number (currently around 0.15) — decades of adjustments for splits and changes have eroded it.
+  </div>
+</div>
+
+<h3>Index Rebalancing and Reconstitution</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Rebalancing</h5>
+    <p>Adjusting weights back to target weights. Equal-weighted indexes require frequent rebalancing (after any price change, weights drift). Market-cap-weighted indexes self-rebalance (weights change automatically with prices).</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Reconstitution</h5>
+    <p>Adding/removing securities from the index based on criteria (market cap, liquidity, sector). Causes price pressure on additions (everyone must buy) and selling pressure on deletions. Creates an "index effect."</p>
+  </div>
+</div>
+
+<h3>Types of Indexes <span class="tag tag-exam">Exam</span></h3>
+
+<p>Indexes exist for virtually every asset class. The exam may test whether you can identify which index type is most appropriate for a given purpose:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Index Type</th><th>What It Measures</th><th>Unique Feature</th></tr></thead>
+  <tbody>
+    <tr><td>Equity</td><td>Stock market performance by region/sector/style</td><td>Style indexes: growth vs value; market cap: large/mid/small cap</td></tr>
+    <tr><td>Fixed Income</td><td>Bond market returns</td><td>More complex: must handle maturity, coupons, and credit quality changes</td></tr>
+    <tr><td>Commodity</td><td>Price changes of raw materials</td><td>Usually futures-based (not spot); roll yield is a component of return</td></tr>
+    <tr><td>Real Estate</td><td>Property market returns</td><td>REIT indexes are liquid; appraisal-based indexes are lagged and smoothed</td></tr>
+    <tr><td>Hedge Fund</td><td>Alternative manager performance</td><td>Self-reporting bias, survivorship bias; not investable benchmarks</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Hedge fund index data suffers from survivorship bias (failed funds aren't in the index) and self-selection bias (only funds that want to report do so). Hedge fund indexes overstate average performance. This is a classic exam trick question.</div>
+
+<h3>Uses of Security Market Indexes</h3>
+<ul>
+  <li><strong>Gauges of market sentiment</strong> — broad market direction</li>
+  <li><strong>Proxies for market portfolio</strong> — used in CAPM as the market portfolio</li>
+  <li><strong>Benchmarks for portfolio performance</strong> — active managers compared to index</li>
+  <li><strong>Model portfolio for index funds/ETFs</strong> — passive investing vehicles</li>
+  <li><strong>Measure of systematic risk (beta)</strong> — regression of stock returns vs index returns</li>
+</ul>
+
+</section><hr>
+
+<!-- ════════════════ R41 ════════════════ -->
+<section id="r41">
+<div class="module-header">
+  <div class="lm-label">Reading 41</div>
+  <h2>Market Efficiency</h2>
+  <div class="one-liner">When do prices already "know" everything? The three forms, anomalies that challenge them, and what it all means for investors.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>Market efficiency is one of the most conceptually tested topics in equity. The exam rarely asks you to calculate anything here — instead it tests whether you can correctly identify which form of efficiency is violated by a scenario, whether a strategy can earn excess returns in a given market, and how behavioral finance anomalies challenge the EMH. Know the three forms and their tests cold.</p>
+</div>
+
+<h3>The Efficient Market Hypothesis (EMH) <span class="tag tag-critical">Critical</span></h3>
+
+<p>The EMH states that security prices fully reflect all available information. In an efficient market, <strong>no investor can consistently earn risk-adjusted excess returns</strong> (i.e., alpha) using that information set.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Form</th><th>Information Reflected in Prices</th><th>What Doesn't Work</th><th>What Can Still Work</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Weak Form</strong></td><td>All past market data (prices, volume, trading patterns)</td><td>Technical analysis (chart reading)</td><td>Fundamental analysis, insider info</td></tr>
+    <tr><td><strong>Semi-Strong Form</strong></td><td>All publicly available information (incl. financial statements, news, macro data)</td><td>Technical analysis + Fundamental analysis</td><td>Insider information (trading on it)</td></tr>
+    <tr><td><strong>Strong Form</strong></td><td>All information — public AND private (insider)</td><td>Everything, including insider trading</td><td>Nothing — no one can outperform</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Think of efficiency like an information funnel. Weak form: prices already reflect the past. Semi-strong: prices already reflect the past AND today's news. Strong form: prices reflect even what the CEO whispers over dinner. Most real markets are somewhere between weak and semi-strong. Strong form is mostly a theoretical benchmark.</div>
+
+<h3>Tests of Market Efficiency <span class="tag tag-exam">Exam</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Form Being Tested</th><th>Test / Evidence</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td>Weak Form</td><td>Serial correlation tests (autocorrelation of returns)</td><td>Generally no significant autocorrelation — supports weak form efficiency</td></tr>
+    <tr><td>Weak Form</td><td>Filter rules / technical trading rules</td><td>After transaction costs, technical strategies do not consistently outperform</td></tr>
+    <tr><td>Semi-Strong</td><td>Event studies (earnings announcements, M&amp;A)</td><td>Prices adjust rapidly — no sustained drift after most events (supports semi-strong)</td></tr>
+    <tr><td>Semi-Strong</td><td>Mutual fund performance persistence</td><td>Most actively managed funds underperform after fees — supports semi-strong</td></tr>
+    <tr><td>Strong Form</td><td>Insider trading studies</td><td>Corporate insiders DO earn excess returns — strong form does NOT hold</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Market Anomalies (Challenges to EMH) <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Anomaly</th><th>Description</th><th>CFA Explanation / Caveat</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Calendar Effects</strong></td><td>January Effect (small caps outperform in Jan); Day-of-week effects</td><td>May be data-mined; largely disappears after publication</td></tr>
+    <tr><td><strong>Momentum Effect</strong></td><td>Recent winners tend to outperform in the short run (3–12 months)</td><td>Risk-based explanation? Or behavioral overconfidence?</td></tr>
+    <tr><td><strong>Value Effect</strong></td><td>Low P/E, low P/B stocks outperform growth stocks long-term</td><td>Could be compensation for higher risk (distress risk) — not necessarily a market inefficiency</td></tr>
+    <tr><td><strong>Small-Cap Effect</strong></td><td>Small-cap stocks outperform large-caps historically</td><td>Partly explained by higher liquidity risk and data mining</td></tr>
+    <tr><td><strong>Overreaction / Reversal</strong></td><td>Extreme past losers outperform over 3–5 years (long-run reversal)</td><td>Behavioral: investors overreact to bad news, creating cheapness</td></tr>
+    <tr><td><strong>Post-Earnings Drift</strong></td><td>Stocks drift after earnings surprises for weeks/months</td><td>Strong challenge to semi-strong efficiency</td></tr>
+  </tbody>
+</table></div>
+
+<div class="trap">The CFA curriculum distinguishes between genuine anomalies and findings that may simply reflect: (1) inadequate adjustment for risk, (2) data mining/snooping bias, (3) transaction costs that eliminate the profit, or (4) anomalies that disappear after publication. Don't assume all "anomalies" refute the EMH — the exam tests this nuance.</div>
+
+<h3>Behavioral Finance and Biases</h3>
+
+<p>Behavioral finance explains why investors behave irrationally and why prices can deviate from fundamental value. Key biases tested:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bias</th><th>Description</th><th>Market Effect</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Loss Aversion</strong></td><td>Losses felt more painfully than equivalent gains</td><td>Disposition effect (hold losers, sell winners)</td></tr>
+    <tr><td><strong>Overconfidence</strong></td><td>Investors overestimate their own ability</td><td>Excessive trading, momentum</td></tr>
+    <tr><td><strong>Representativeness</strong></td><td>Extrapolate recent patterns as if permanent</td><td>Overreaction, momentum, then reversal</td></tr>
+    <tr><td><strong>Anchoring</strong></td><td>Over-weight initial price/value reference points</td><td>Slow price adjustment to new information</td></tr>
+    <tr><td><strong>Herding</strong></td><td>Follow the crowd even against private information</td><td>Bubbles and crashes</td></tr>
+    <tr><td><strong>Availability Bias</strong></td><td>Weight recent or memorable events too heavily</td><td>Overpricing of recently salient stocks</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A portfolio manager announces that she uses a strategy based on past price patterns to identify stocks to buy. Under which form of market efficiency would her strategy be expected to generate excess returns?</div>
+  <div class="exam-a"><strong>Neither semi-strong nor strong form. Her strategy could only generate excess returns if markets are not even weak-form efficient.</strong> Since weak form efficiency states that past price data is already reflected in prices, technical analysis based on price patterns has no edge in a weak-form efficient market. The correct answer is: her strategy would only work in a market that is not even weak-form efficient.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R42 ════════════════ -->
+<section id="r42">
+<div class="module-header">
+  <div class="lm-label">Reading 42</div>
+  <h2>Overview of Equity Securities</h2>
+  <div class="one-liner">What equity actually is, every flavour of share type, how private equity works, and the real link between ROE and stock value.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>This reading is the definitional foundation of the equity section. The exam tests whether you know the exact features of different share types — especially preference shares — and can distinguish them. Convertible vs callable vs putable preference shares are a favourite test target. The return components and ROE decomposition are also high-probability exam topics.</p>
+</div>
+
+<h3>Common Shares (Ordinary Shares) <span class="tag tag-exam">Exam</span></h3>
+
+<p>Common shares represent a residual claim on a company's assets and earnings after all other obligations are settled. Key features:</p>
+<ul>
+  <li><strong>Voting rights</strong> — elect the board; one vote per share (statutory voting) or <em>cumulative voting</em> (concentrate votes on one director candidate)</li>
+  <li><strong>Residual claim</strong> — last in line in liquidation (after creditors and preference shareholders)</li>
+  <li><strong>Limited liability</strong> — maximum loss is the amount invested</li>
+  <li><strong>Participation in earnings</strong> — dividends at board discretion; no guaranteed payment</li>
+</ul>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Statutory Voting</h5>
+    <p>Each share gets one vote per director position. E.g., 100 shares voting on 3 directors = 100 votes per seat. Favours large shareholders.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Cumulative Voting</h5>
+    <p>Shares × seats = total votes, which can be concentrated on one candidate. E.g., 100 shares × 3 seats = 300 votes on one director. Favours minority shareholders.</p>
+  </div>
+</div>
+
+<h3>Preference Shares (Preferred Stock) <span class="tag tag-critical">Critical</span></h3>
+
+<p>Preference shares have a fixed dividend claim ahead of common shares, but no voting rights. They sit between debt and equity in the capital structure. The exam heavily tests the various types:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Key Feature</th><th>Who Benefits</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Cumulative</strong></td><td>Missed dividends accumulate; must be paid before any common dividend</td><td>Investor — protects against deferred dividends</td></tr>
+    <tr><td><strong>Non-Cumulative</strong></td><td>Missed dividends are lost permanently; no back-pay obligation</td><td>Issuer — not on the hook for missed payments</td></tr>
+    <tr><td><strong>Participating</strong></td><td>Receives fixed dividend PLUS shares in residual earnings if common dividend exceeds a threshold</td><td>Investor — upside participation</td></tr>
+    <tr><td><strong>Convertible</strong></td><td>Can be converted into common shares at a preset conversion ratio</td><td>Investor — captures equity upside</td></tr>
+    <tr><td><strong>Callable</strong></td><td>Issuer can redeem at a preset price before maturity</td><td>Issuer — can refinance if rates fall</td></tr>
+    <tr><td><strong>Putable</strong></td><td>Investor can force redemption at a preset price</td><td>Investor — downside protection</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Convertible preference shares are like a bond with an equity option embedded. When the stock price rises above the conversion price, the preference share value is driven by the common share price. When the stock falls below, the preference share behaves like a bond. This is the classic "floor + participation" structure.</div>
+
+<div class="trap">Preference shares are NOT debt — they are equity on the balance sheet. Dividends on preference shares are paid from after-tax earnings (unlike interest on debt, which is tax-deductible). Classifying preference share dividends as "interest expense" is a common mistake.</div>
+
+<h3>Private Equity <span class="tag tag-exam">Exam</span></h3>
+
+<p>Equity securities that are not listed on public exchanges. The main forms:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Stage</th><th>Type</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td>Startup / Early</td><td><strong>Venture Capital (VC)</strong></td><td>Funding for early-stage companies with high growth potential; high risk, high potential return; illiquid</td></tr>
+    <tr><td>Growth / Mature</td><td><strong>Private Equity (PE)</strong></td><td>Buying established companies (often via LBOs), improving operations, then exiting via IPO or sale</td></tr>
+    <tr><td>Distressed</td><td><strong>Distressed Investing</strong></td><td>Buying debt or equity of troubled companies at steep discounts; complex restructuring expertise required</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Private equity investors can't just sell on an exchange when they want to exit. They need a planned exit strategy — typically an IPO, a sale to a strategic buyer (trade sale), or a secondary buyout (sell to another PE firm). This illiquidity is why PE investors demand a return premium over public equity.</div>
+
+<h3>Return Components of Equity <span class="tag tag-formula">Formula</span></h3>
+
+<div class="formula">\[ \text{Total Return} = \text{Dividend Yield} + \text{Capital Gains Yield} \]</div>
+
+<div class="formula">\[ \text{Total Return} = \frac{D_1}{P_0} + \frac{P_1 - P_0}{P_0} \]</div>
+
+<div class="formula">\[ \text{Book Value per Share} = \frac{\text{Total Equity} - \text{Preference Equity}}{\text{Common Shares Outstanding}} \]</div>
+
+<div class="formula">\[ \text{Return on Equity (ROE)} = \frac{\text{Net Income}}{\text{Average Book Value of Equity}} \]</div>
+
+<div class="intuition">ROE is the engine of value. If a company earns a high ROE and retains earnings, book value grows faster. A company trading above book value (P/B &gt; 1) implies the market expects ROE to exceed the required return on equity. A company with ROE below its cost of equity destroys value even if it's profitable in accounting terms.</div>
+
+<h3>Depository Receipts</h3>
+
+<p>Allow investors to buy shares of foreign companies in their domestic market. Types:</p>
+<ul>
+  <li><strong>ADR (American Depositary Receipt)</strong> — foreign shares held by a US custodian bank; trades in USD on a US exchange</li>
+  <li><strong>GDR (Global Depositary Receipt)</strong> — similar, but listed on multiple global exchanges</li>
+  <li>Sponsored ADR: company participates and must meet SEC disclosure; Unsponsored: bank creates it without company involvement</li>
+</ul>
+
+</section><hr>
+
+<!-- ════════════════ R43 ════════════════ -->
+<section id="r43">
+<div class="module-header">
+  <div class="lm-label">Reading 43</div>
+  <h2>Company Analysis: Past and Present</h2>
+  <div class="one-liner">How to read a company's history, assess its business model, and decompose profitability to identify the real drivers of value.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>This reading is about being a financial detective. The exam tests your ability to use financial ratios, DuPont decomposition, and qualitative business model assessment to evaluate a company. The 3-factor and 5-factor DuPont decompositions are high-priority formula targets. Understanding how leverage amplifies (or destroys) ROE is critical for both this reading and valuation in R46.</p>
+</div>
+
+<h3>Business Model Analysis</h3>
+
+<p>Before diving into numbers, analysts assess the business model: how does this company create and capture value?</p>
+<ul>
+  <li><strong>Revenue model</strong>: subscription, transactional, licensing, asset-based, service?</li>
+  <li><strong>Pricing power</strong>: can the company raise prices without losing customers? (brand moat, switching costs)</li>
+  <li><strong>Cost structure</strong>: fixed vs variable costs determines operating leverage</li>
+  <li><strong>Capital intensity</strong>: how much investment is needed to generate $1 of revenue?</li>
+  <li><strong>Competitive position</strong>: is growth profitable (high ROIC) or does competition erode margins?</li>
+</ul>
+
+<h3>Revenue Analysis</h3>
+
+<p>Revenue growth can be decomposed into three drivers:</p>
+<div class="formula">\[ \text{Revenue Growth} = \underbrace{\text{Volume Growth}}_{\text{units sold}} + \underbrace{\text{Price Growth}}_{\text{pricing power}} + \underbrace{\text{Mix Effects}}_{\text{product mix shifts}} \]</div>
+
+<div class="intuition">A company growing revenue 10% via price increases is fundamentally different from one growing 10% via volume. Price-driven growth signals pricing power and often improves margins. Volume-driven growth may compress margins if unit economics are thin. The exam won't calculate this formula, but conceptual questions about revenue quality are common.</div>
+
+<h3>DuPont Decomposition <span class="tag tag-critical">Critical</span></h3>
+
+<p>DuPont breaks ROE into components to identify what is really driving returns. The 3-factor decomposition is most tested:</p>
+
+<div class="formula">\[ \text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Sales}}}_{\text{Net Profit Margin}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Asset Turnover}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Financial Leverage}} \]</div>
+
+<p>The extended 5-factor DuPont separates the tax burden and interest burden from profit margin:</p>
+
+<div class="formula">\[ \text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{EBT}}}_{\text{Tax Burden}} \times \underbrace{\frac{\text{EBT}}{\text{EBIT}}}_{\text{Interest Burden}} \times \underbrace{\frac{\text{EBIT}}{\text{Sales}}}_{\text{EBIT Margin}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Asset Turnover}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Leverage}} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Company A has ROE = 18%. Its net profit margin is 9%, and asset turnover is 1.2×. What is its financial leverage multiplier?</div>
+  <div class="exam-a">
+    ROE = Net Profit Margin × Asset Turnover × Leverage<br>
+    18% = 9% × 1.2 × Leverage<br>
+    Leverage = 18% / (9% × 1.2) = 18% / 10.8% = <strong>1.67×</strong><br><br>
+    This means the company has $1.67 of assets for every $1 of equity — or debt/equity = 0.67×. If ROE were only 10.8% without leverage, the company is using financial leverage to boost equity returns from 10.8% to 18%.
+  </div>
+</div>
+
+<div class="trap">A high ROE driven entirely by high leverage is a warning sign, not a strength. If the company earns returns below its cost of debt, leverage destroys value. Always decompose ROE — a 25% ROE driven by 5× leverage is very different from a 25% ROE driven by a 20% margin.</div>
+
+<h3>Quality of Earnings</h3>
+
+<p>The exam may ask you to identify characteristics of high vs low earnings quality:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Characteristic</th><th>High Quality</th><th>Low Quality / Red Flag</th></tr></thead>
+  <tbody>
+    <tr><td>Accruals</td><td>Net income closely tracks operating cash flow</td><td>Large positive accruals (earnings &gt;&gt; cash flow)</td></tr>
+    <tr><td>Revenue recognition</td><td>Conservative, matches delivery of goods/services</td><td>Aggressive: recognised before delivery, channel stuffing</td></tr>
+    <tr><td>Expense recognition</td><td>Expensed promptly and conservatively</td><td>Capitalised to delay expense recognition</td></tr>
+    <tr><td>Non-recurring items</td><td>Rare, clearly disclosed, genuinely one-time</td><td>Repeated "one-time" restructuring charges every year</td></tr>
+    <tr><td>Cash conversion</td><td>High operating cash flow / net income ratio</td><td>Low OCF / NI — earnings not being converted to cash</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Segment Analysis</h3>
+
+<p>For multi-segment companies, analyse each business unit separately: margins, growth rates, capital intensity, and competitive position may differ dramatically by segment. The exam may ask you to identify which segment drives most of the value or risk.</p>
+
+</section><hr>
+
+<!-- ════════════════ R44 ════════════════ -->
+<section id="r44">
+<div class="module-header">
+  <div class="lm-label">Reading 44</div>
+  <h2>Industry and Competitive Analysis</h2>
+  <div class="one-liner">Why the industry you're in matters as much as how well you run your company — Porter's Five Forces, the industry life cycle, and competitive positioning.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>This is one of the most conceptual equity readings. The exam tests whether you can apply Porter's Five Forces to a given scenario, identify where an industry is in its life cycle, and understand what external factors shape profitability. Life cycle stage identification and Five Forces application are the two most common exam question formats here.</p>
+</div>
+
+<h3>Industry Classification Systems</h3>
+
+<p>The CFA curriculum notes several industry classification approaches:</p>
+<ul>
+  <li><strong>GICS (Global Industry Classification Standard)</strong> — developed by MSCI and S&amp;P; 11 sectors → 24 industry groups → 69 industries → 158 sub-industries. Most widely used.</li>
+  <li><strong>ICB (Industry Classification Benchmark)</strong> — developed by FTSE Russell; 11 industries → 20 supersectors → 45 sectors → 173 subsectors.</li>
+  <li><strong>Cyclical vs Defensive</strong>: Cyclical industries (autos, materials) are sensitive to economic cycles. Defensive/non-cyclical (utilities, consumer staples) are relatively insensitive.</li>
+</ul>
+
+<h3>The Industry Life Cycle <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Stage</th><th>Growth Rate</th><th>Profitability</th><th>Competition</th><th>Investment Needed</th><th>Examples</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Embryonic</strong></td><td>Slow (product not yet proven)</td><td>Low/negative</td><td>Few early movers</td><td>Very high</td><td>Early electric vehicles (2010s), lab-grown meat</td></tr>
+    <tr><td><strong>Growth</strong></td><td>Rapid</td><td>Rising</td><td>Increasing but dominated by a few</td><td>High</td><td>Cloud computing (2010s), EVs now</td></tr>
+    <tr><td><strong>Shakeout</strong></td><td>Slowing</td><td>Declining (price wars)</td><td>Intense; weak players exit</td><td>Moderate</td><td>Streaming services, smartphones</td></tr>
+    <tr><td><strong>Mature</strong></td><td>GDP-like or below</td><td>Stable but modest</td><td>Moderate (consolidated oligopoly)</td><td>Low (maintenance capex)</td><td>Commercial banking, soft drinks</td></tr>
+    <tr><td><strong>Decline</strong></td><td>Negative</td><td>Low/contracting</td><td>Reducing (players exit)</td><td>Minimal (harvesting)</td><td>Print newspapers, landlines, CD manufacturing</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">The shakeout stage is particularly important for investors. It's where the most value can be created (by picking the survivors) or destroyed (by picking the loser). The transition from growth to shakeout is often triggered by overcapacity — too many players entered during the growth phase, and price competition compresses margins until the weak exit.</div>
+
+<h3>Porter's Five Forces <span class="tag tag-critical">Critical</span></h3>
+
+<p>Michael Porter's framework identifies five forces that determine industry-level profitability. The exam frequently asks you to apply these to a given scenario and judge whether they make an industry more or less attractive:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Force</th><th>What It Captures</th><th>HIGH force = ?</th><th>Key Drivers</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1. Rivalry Among Existing Competitors</strong></td><td>Price/quality competition between current players</td><td>Lower profitability</td><td># competitors, growth rate, product differentiation, exit barriers, capacity utilisation</td></tr>
+    <tr><td><strong>2. Threat of New Entrants</strong></td><td>How easily new competitors can enter</td><td>Lower margins (competitive pressure)</td><td>Capital requirements, economies of scale, brand loyalty, regulatory barriers, switching costs</td></tr>
+    <tr><td><strong>3. Threat of Substitutes</strong></td><td>Alternative products that meet the same need</td><td>Caps pricing power</td><td>Relative price-performance of substitutes, switching costs, buyer propensity to substitute</td></tr>
+    <tr><td><strong>4. Bargaining Power of Buyers</strong></td><td>Customers' ability to demand lower prices</td><td>Compresses margins</td><td>Concentration of buyers, purchase volume, switching costs, buyer's price sensitivity</td></tr>
+    <tr><td><strong>5. Bargaining Power of Suppliers</strong></td><td>Suppliers' ability to raise input costs</td><td>Compresses margins</td><td>Concentration of suppliers, uniqueness of input, switching costs, forward integration threat</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A pharmaceutical company sells a patented drug with no close substitutes. Its customers are large hospital chains that purchase in bulk. Which Porter force most significantly threatens the company's profitability?</div>
+  <div class="exam-a"><strong>Bargaining power of buyers.</strong> Despite the strong patent protection (low threat of substitutes, high entry barriers), the concentration of buyers (large hospital chains buying in bulk) gives them significant negotiating leverage to demand discounts. High buyer concentration with large purchase volumes is the textbook driver of high buyer bargaining power.</div>
+</div>
+
+<h3>Competitive Positioning: Cost vs Differentiation</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Cost Leadership Strategy</h5>
+    <p>Compete on being the lowest-cost producer. Works when: commodity-like products, price-sensitive customers, high economies of scale. Risk: technology disruption that erases cost advantage.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Differentiation Strategy</h5>
+    <p>Compete on unique features, brand, or quality that justify a price premium. Works when: customers value uniqueness, switching costs are high. Risk: competitor imitation, price-sensitive downturn.</p>
+  </div>
+</div>
+
+<h3>External Factors: PEST Analysis</h3>
+<ul>
+  <li><strong>Political/Regulatory</strong>: government regulation, trade policy, antitrust enforcement</li>
+  <li><strong>Economic</strong>: GDP growth, interest rates, inflation, credit availability</li>
+  <li><strong>Social/Demographic</strong>: aging population, urbanisation, consumer preferences</li>
+  <li><strong>Technological</strong>: disruption risk, R&amp;D intensity, automation, digitisation</li>
+</ul>
+
+</section><hr>
+
+<!-- ════════════════ R45 ════════════════ -->
+<section id="r45">
+<div class="module-header">
+  <div class="lm-label">Reading 45</div>
+  <h2>Company Analysis: Forecasting</h2>
+  <div class="one-liner">Building financial models — how to project revenue, margins, capital needs, and earnings from first principles.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>This reading is where qualitative analysis gets translated into numbers. The exam focuses on understanding the mechanics and limitations of different forecasting approaches, operating leverage, and the relationship between revenue growth, margins, and free cash flow generation. Operating leverage calculations (DOL) are the most quantitatively tested item here.</p>
+</div>
+
+<h3>Top-Down vs Bottom-Up Forecasting <span class="tag tag-exam">Exam</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Top-Down Approach</h5>
+    <p>Start with macro forecasts (GDP, industry growth) → estimate market share → derive company revenue. Ensures macro consistency but may miss company-specific drivers.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Bottom-Up Approach</h5>
+    <p>Start with individual product/segment revenue drivers → build up from first principles. Captures company-specific dynamics but may miss macro turning points.</p>
+  </div>
+</div>
+
+<h3>Revenue Forecasting Methods</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Method</th><th>How It Works</th><th>Best Used For</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Growth Rate Extrapolation</strong></td><td>Apply historical or consensus growth rate to current revenue</td><td>Stable, mature companies</td></tr>
+    <tr><td><strong>Market Share Approach</strong></td><td>Forecast total market × expected market share</td><td>Growth industries with reliable market data</td></tr>
+    <tr><td><strong>Regression Analysis</strong></td><td>Relate revenue to economic variables (GDP, commodity prices)</td><td>Cyclical companies with clear macro links</td></tr>
+    <tr><td><strong>Capacity-Based</strong></td><td>Capacity × utilisation rate × selling price per unit</td><td>Capital-intensive industries (airlines, utilities)</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Operating Leverage <span class="tag tag-critical">Critical</span></h3>
+
+<p>Operating leverage measures how sensitive operating income is to changes in revenue. It arises from fixed costs — the more fixed costs, the higher the operating leverage.</p>
+
+<div class="formula">\[ \text{Degree of Operating Leverage (DOL)} = \frac{\% \Delta \text{Operating Income}}{\% \Delta \text{Sales}} \]</div>
+
+<div class="formula">\[ \text{DOL} = \frac{Q(P - V)}{Q(P - V) - F} = \frac{\text{Contribution Margin}}{\text{Operating Income}} \]</div>
+
+<p>Where Q = quantity, P = price per unit, V = variable cost per unit, F = fixed costs.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">A company has revenue of $1,000, variable costs of $600, fixed costs of $250, and operating income of $150. What is its DOL? If sales increase 10%, what is the expected change in operating income?</div>
+  <div class="exam-a">
+    <strong>Contribution Margin = Revenue − Variable Costs = $1,000 − $600 = $400</strong><br>
+    <strong>DOL = Contribution Margin / Operating Income = $400 / $150 = 2.67×</strong><br><br>
+    If sales increase 10%: % Δ Operating Income = DOL × % Δ Sales = 2.67 × 10% = <strong>26.7%</strong><br>
+    New operating income = $150 × 1.267 = <strong>$190</strong><br><br>
+    Intuition: the company's fixed costs act as "leverage" — a 10% revenue gain amplifies to a 26.7% operating income gain. The downside is symmetric: a 10% revenue decline → 26.7% operating income decline.
+  </div>
+</div>
+
+<div class="key-rule">High operating leverage is a double-edged sword. Companies with high fixed-cost bases (airlines, steel mills, utilities) see outsized earnings growth in up-cycles but outsized earnings collapses in downturns. This is why cyclical companies with high DOL are riskier and typically trade at lower P/E multiples even at the peak of the cycle.</div>
+
+<h3>Capital Expenditure and Working Capital Forecasting</h3>
+
+<div class="formula">\[ \text{FCFF} = \text{EBIT}(1 - t) + \text{D\&A} - \Delta\text{Working Capital} - \text{Capex} \]</div>
+
+<div class="formula">\[ \text{FCFE} = \text{Net Income} + \text{D\&A} - \Delta\text{Working Capital} - \text{Capex} + \text{Net Borrowing} \]</div>
+
+<p>Forecasting capex typically uses one of three approaches:</p>
+<ul>
+  <li><strong>Historical capex / revenue ratio</strong> — simple but ignores investment cycles</li>
+  <li><strong>Management guidance</strong> — useful when credible</li>
+  <li><strong>Asset replacement schedule</strong> — maintenance capex + growth capex based on asset life</li>
+</ul>
+
+<h3>Scenario and Sensitivity Analysis</h3>
+
+<p>A single-point estimate is misleading — analysts should build at minimum a base, bull, and bear case. The exam may ask which variable is most important for sensitivity analysis (typically the variable with the highest elasticity relative to the key value driver — usually gross margin % or revenue growth rate).</p>
+
+</section><hr>
+
+<!-- ════════════════ R46 ════════════════ -->
+<section id="r46">
+<div class="module-header">
+  <div class="lm-label">Reading 46</div>
+  <h2>Equity Valuation: Concepts and Basic Tools</h2>
+  <div class="one-liner">The three families of valuation — dividends, cash flows, and multiples — with numerical examples for every formula the exam will test.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>This is the most numerically intense equity reading. Expect 3–5 direct calculation questions in the exam. The Gordon Growth Model (GGM), multi-stage DDM, P/E justified multiple, and EV/EBITDA are all heavily tested. Master the logic: every valuation method is ultimately asking "what is the present value of the cash flows I will receive from owning this asset?" The different methods are just different ways of estimating that same number.</p>
+</div>
+
+<h3>Intrinsic Value and Sources of Value <span class="tag tag-exam">Exam</span></h3>
+
+<p>Intrinsic value is the analyst's estimate of the "true" present value of a security. It differs from market price because:</p>
+<ul>
+  <li>Markets are not always efficient (see R41)</li>
+  <li>Different investors have different information</li>
+  <li>Short-term market prices reflect sentiment; intrinsic value is a long-run fundamental estimate</li>
+</ul>
+
+<div class="intuition">If your estimate of intrinsic value exceeds the market price → the stock is undervalued → consider buying. If market price exceeds intrinsic value → overvalued → consider selling or avoiding. The entire field of fundamental equity analysis is built on this simple inequality.</div>
+
+<h3>Dividend Discount Models (DDM) <span class="tag tag-critical">Critical</span></h3>
+
+<p>The DDM values a stock as the present value of all future dividends. The logic: the only cash you ever receive from a stock is dividends (including the liquidating dividend or terminal sale proceeds).</p>
+
+<h4>Gordon Growth Model (GGM) — One-Stage DDM</h4>
+
+<div class="formula">\[ V_0 = \frac{D_1}{r - g} = \frac{D_0(1+g)}{r - g} \]</div>
+
+<p>Where D₁ = expected dividend next period, r = required return on equity, g = constant dividend growth rate.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">A stock just paid a dividend of $2.00 (D₀ = $2.00). Dividends are expected to grow at 5% per year forever. The required return is 10%. What is the intrinsic value?</div>
+  <div class="exam-a">
+    <strong>D₁ = D₀ × (1 + g) = $2.00 × 1.05 = $2.10</strong><br>
+    <strong>V₀ = D₁ / (r − g) = $2.10 / (0.10 − 0.05) = $2.10 / 0.05 = $42.00</strong><br><br>
+    If the stock is currently trading at $38, it appears undervalued by $4. If trading at $46, it appears overvalued.
+  </div>
+</div>
+
+<div class="key-rule">The GGM only works when g &lt; r. If the growth rate exceeds the required return (g ≥ r), the formula produces a negative or infinite value — which is meaningless. For high-growth companies, use a multi-stage model. Also: a small change in g or r dramatically changes the output — the GGM is highly sensitive to its inputs.</div>
+
+<h4>Multi-Stage DDM (Two-Stage)</h4>
+
+<div class="formula">\[ V_0 = \sum_{t=1}^{n} \frac{D_t}{(1+r)^t} + \frac{V_n}{(1+r)^n} \]</div>
+
+<p>Where Vn = terminal value at end of high-growth phase = D_{n+1} / (r − g_L), and g_L = long-run sustainable growth rate.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">A company will pay dividends of $1.50, $1.80, and $2.16 over the next 3 years. After Year 3, dividends grow at 4% forever. The required return is 9%. Calculate the intrinsic value.</div>
+  <div class="exam-a">
+    <strong>Step 1 — PV of dividends in Years 1–3:</strong><br>
+    PV₁ = $1.50 / 1.09¹ = $1.376<br>
+    PV₂ = $1.80 / 1.09² = $1.515<br>
+    PV₃ = $2.16 / 1.09³ = $1.668<br><br>
+    <strong>Step 2 — Terminal value at Year 3:</strong><br>
+    D₄ = $2.16 × 1.04 = $2.246<br>
+    V₃ = $2.246 / (0.09 − 0.04) = $2.246 / 0.05 = $44.93<br><br>
+    <strong>Step 3 — PV of terminal value:</strong><br>
+    PV(V₃) = $44.93 / 1.09³ = $34.69<br><br>
+    <strong>V₀ = $1.376 + $1.515 + $1.668 + $34.69 = $39.25</strong>
+  </div>
+</div>
+
+<h3>Free Cash Flow to Equity (FCFE) Model <span class="tag tag-formula">Formula</span></h3>
+
+<div class="formula">\[ \text{FCFE} = \text{Net Income} - (1 - \text{DR}) \times (\text{Capex} - \text{Depreciation}) - (1 - \text{DR}) \times \Delta\text{Working Capital} \]</div>
+
+<p>Where DR = debt ratio (proportion of investment financed by debt). FCFE is then discounted at the required return on equity:</p>
+
+<div class="formula">\[ V_0 = \frac{\text{FCFE}_1}{r - g} \]</div>
+
+<div class="intuition">FCFE valuation is theoretically superior to DDM because it values the cash a company could pay to shareholders (whether or not it actually does). DDM only works for companies with stable, predictable dividends. For non-dividend-paying or irregular-dividend-paying companies, FCFE is the preferred approach.</div>
+
+<h3>Price Multiples <span class="tag tag-critical">Critical</span></h3>
+
+<p>Relative valuation methods compare a company's price to a fundamental metric and compare that ratio to peers or historical averages.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Multiple</th><th>Formula</th><th>Best Used For</th><th>Limitation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>P/E</strong></td><td>Price / EPS</td><td>Profitable mature companies; widely comparable</td><td>Meaningless if earnings are negative; affected by capital structure and accounting policies</td></tr>
+    <tr><td><strong>P/B</strong></td><td>Price / Book Value per Share</td><td>Financial companies (banks, insurers); asset-heavy businesses</td><td>Ignores intangibles; book value distorted by accounting differences</td></tr>
+    <tr><td><strong>P/S (Price/Sales)</strong></td><td>Price / Revenue per Share</td><td>Companies with negative earnings; startups; revenue-based models</td><td>Ignores profitability; high-margin and low-margin businesses are not comparable</td></tr>
+    <tr><td><strong>P/CF</strong></td><td>Price / Operating Cash Flow per Share</td><td>Companies with high non-cash charges (D&amp;A)</td><td>Operating CF can be manipulated via working capital</td></tr>
+    <tr><td><strong>EV/EBITDA</strong></td><td>(Market Cap + Debt − Cash) / EBITDA</td><td>Capital structure-neutral; M&amp;A (enterprise value basis); leveraged companies</td><td>Ignores capex; EBITDA ≠ free cash flow (especially for capex-intensive firms)</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Justified (Fundamental) P/E from the GGM</h4>
+
+<div class="formula">\[ \frac{P}{E} = \frac{D_1/E_1}{r - g} = \frac{\text{Payout Ratio}}{r - g} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">A company has a dividend payout ratio of 40%, ROE = 12%, and required return = 9%. What is the justified P/E multiple?</div>
+  <div class="exam-a">
+    <strong>Step 1:</strong> g = ROE × Retention Ratio = 12% × (1 − 0.40) = 12% × 0.60 = <strong>7.2%</strong><br>
+    <strong>Step 2:</strong> Justified P/E = Payout Ratio / (r − g) = 0.40 / (0.09 − 0.072) = 0.40 / 0.018 = <strong>22.2×</strong><br><br>
+    If the stock trades at 18× earnings, it appears undervalued relative to the fundamental P/E of 22.2×.
+  </div>
+</div>
+
+<div class="trap">The sustainable growth rate formula g = ROE × (1 − Payout Ratio) is critical and frequently combined with the GGM or justified P/E. Examiners love two-step questions: first calculate g from ROE, then plug into a valuation formula. Don't forget that higher ROE increases both g AND the justified P/E — double impact.</div>
+
+<h3>Asset-Based Valuation</h3>
+
+<div class="formula">\[ \text{Asset-Based Value} = \text{Fair Value of Assets} - \text{Fair Value of Liabilities} \]</div>
+
+<p>Asset-based valuation estimates value from the balance sheet, restated to fair (market) values. Best suited for:</p>
+<ul>
+  <li>Companies with significant tangible assets (real estate, natural resources, investment companies)</li>
+  <li>Liquidation analysis</li>
+  <li>Financial companies (banks, insurers) where assets can be valued relatively precisely</li>
+</ul>
+
+<div class="key-rule">Asset-based valuation usually represents a <strong>floor</strong> — the liquidation value. For a going concern, enterprise value typically exceeds asset-based value because of intangibles (brand, customer relationships, human capital) that don't appear on the balance sheet. If an asset-based value exceeds the market price, it may signal a liquidation opportunity.</div>
+
+<h3>Reconciling Valuation Methods</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Company Type</th><th>Preferred Method</th><th>Reason</th></tr></thead>
+  <tbody>
+    <tr><td>Stable dividend-paying company</td><td>DDM (GGM)</td><td>Dividends are predictable and sustainable</td></tr>
+    <tr><td>High-growth, non-dividend-paying</td><td>Multi-stage DDM or FCFE</td><td>GGM breaks down when g &gt; r or no dividends</td></tr>
+    <tr><td>Capital-intensive, leveraged</td><td>EV/EBITDA</td><td>Capital structure-neutral; useful for M&amp;A analysis</td></tr>
+    <tr><td>Loss-making / startup</td><td>P/S or asset-based</td><td>No earnings to capitalise; P/E meaningless</td></tr>
+    <tr><td>Financial company (bank, insurer)</td><td>P/B</td><td>Balance sheet is the main value driver; earnings are volatile</td></tr>
+  </tbody>
+</table></div>
+
+</section><hr>
+
+<!-- ════════════════ FORMULA SHEET ════════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Formula Sheet — All 8 Readings</h2>
+  <div class="one-liner">Every formula you need, in one place.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+  <thead><tr><th style="width:42%">Formula</th><th style="width:43%">Description</th><th>Reading</th></tr></thead>
+  <tbody>
+    <tr><td>\(\text{Leverage Ratio} = 1/\text{Initial Margin}\)</td><td>Trading leverage for margin account</td><td>39</td></tr>
+    <tr><td>\(\text{Margin Call} = P_0 \times \frac{1-\text{IM}}{1-\text{MM}}\)</td><td>Long margin call trigger price</td><td>39</td></tr>
+    <tr><td>\(\text{Margin Call (Short)} = P_0 \times \frac{1+\text{IM}}{1+\text{MM}}\)</td><td>Short margin call trigger price</td><td>39</td></tr>
+    <tr><td>\(\text{Short Profit} = P_{\text{short}} - P_{\text{cover}} - \text{Divs}\)</td><td>Net profit on short position</td><td>39</td></tr>
+    <tr><td>\(\text{Price-Wtd Index} = \sum P_i / \text{Divisor}\)</td><td>Price-weighted index calculation</td><td>40</td></tr>
+    <tr><td>\(\text{Cap-Wtd Return} = \sum w_i R_i\)</td><td>Market-cap weighted index return</td><td>40</td></tr>
+    <tr><td>\(\text{BVPS} = \frac{\text{Equity} - \text{Pref Equity}}{\text{Shares}}\)</td><td>Book value per common share</td><td>42</td></tr>
+    <tr><td>\(\text{ROE} = \frac{\text{Net Income}}{\text{Avg Equity}}\)</td><td>Return on equity</td><td>42 / 43</td></tr>
+    <tr><td>\(\text{ROE} = \text{Margin} \times \text{Turnover} \times \text{Leverage}\)</td><td>3-factor DuPont decomposition</td><td>43</td></tr>
+    <tr><td>\(\text{ROE} = \text{Tax} \times \text{Interest} \times \text{EBIT Margin} \times \text{Turnover} \times \text{Leverage}\)</td><td>5-factor DuPont decomposition</td><td>43</td></tr>
+    <tr><td>\(g = \text{ROE} \times b = \text{ROE} \times (1 - \text{Payout})\)</td><td>Sustainable dividend growth rate</td><td>43 / 46</td></tr>
+    <tr><td>\(\text{DOL} = \frac{Q(P-V)}{Q(P-V)-F}\)</td><td>Degree of operating leverage</td><td>45</td></tr>
+    <tr><td>\(\% \Delta \text{OI} = \text{DOL} \times \% \Delta \text{Sales}\)</td><td>Operating leverage impact formula</td><td>45</td></tr>
+    <tr><td>\(V_0 = \frac{D_1}{r-g}\)</td><td>Gordon Growth Model (GGM)</td><td>46</td></tr>
+    <tr><td>\(V_0 = \sum_{t=1}^{n} \frac{D_t}{(1+r)^t} + \frac{V_n}{(1+r)^n}\)</td><td>Multi-stage DDM</td><td>46</td></tr>
+    <tr><td>\(\frac{P}{E} = \frac{\text{Payout}}{r-g}\)</td><td>Justified P/E (fundamental)</td><td>46</td></tr>
+    <tr><td>\(\text{EV} = \text{Mkt Cap} + \text{Debt} - \text{Cash}\)</td><td>Enterprise value</td><td>46</td></tr>
+    <tr><td>\(\text{EV/EBITDA}: \text{EV} = \text{EBITDA} \times \text{Multiple}\)</td><td>EV-based valuation</td><td>46</td></tr>
+  </tbody>
+</table></div>
+
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

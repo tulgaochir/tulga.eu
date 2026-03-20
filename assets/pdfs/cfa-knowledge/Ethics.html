@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Ethics: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 240px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 240px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 240px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* ── STANDARD HEADER (sub-module for each standard) ── */
+.std-header {
+  margin-top: 52px;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2a4d7a 100%);
+  border-radius: 12px;
+  padding: 20px 28px;
+  margin-bottom: 24px;
+}
+.std-header .std-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 4px;
+}
+.std-header h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 800;
+  color: #fff; border: none; margin: 0; padding: 0;
+}
+.std-header .std-tagline {
+  margin-top: 6px; font-size: 14px;
+  color: rgba(255,255,255,.5);
+  font-style: italic;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Key Rule — "; }
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── TRAP BOX ── */
+.trap {
+  background: #fff7ed;
+  border-left: 4px solid #f97316;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: #7c2d12;
+  font-size: 15.5px; line-height: 1.7;
+}
+.trap::before { content: "🪤 Exam Trap — "; font-weight: 700; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+.tag-gips { background: var(--purple-light); color: var(--purple-dark); }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── COMPARE GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box.amber { background: #fff7ed; }
+.compare-box.red { background: var(--red-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+.compare-box.amber h5 { color: #92400e; }
+.compare-box.red h5 { color: var(--red-dark); }
+.compare-box p, .compare-box li { font-size: 14px; line-height: 1.6; }
+
+/* ── QUICK-REF BOX ── */
+.quick-ref {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+}
+.quick-ref .qr-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--purple-dark); margin-bottom: 6px;
+}
+.quick-ref p { color: var(--purple-dark); font-size: 15px; margin: 4px 0; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+  .compare-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Ethics · Intuition Guide</div>
+  </div>
+
+  <div class="nav-section">R89 — Foundation</div>
+  <a href="#r89">Ethics &amp; Trust</a>
+
+  <div class="nav-section">R90 — The Framework</div>
+  <a href="#r90">Code &amp; Standards Overview</a>
+
+  <div class="nav-section">R91 — Standards I–VII</div>
+  <a href="#std1">Standard I — Professionalism</a>
+  <a href="#std2">Standard II — Market Integrity</a>
+  <a href="#std3">Standard III — Duties to Clients</a>
+  <a href="#std4">Standard IV — Duties to Employers</a>
+  <a href="#std5">Standard V — Investment Analysis</a>
+  <a href="#std6">Standard VI — Conflicts of Interest</a>
+  <a href="#std7">Standard VII — CFA Membership</a>
+
+  <div class="nav-section">R92 — GIPS</div>
+  <a href="#gips">GIPS Standards</a>
+
+  <div class="nav-section">R93 — Application</div>
+  <a href="#application">Ethics Application</a>
+
+  <div class="nav-section">Reference</div>
+  <a href="#cheatsheet">Master Cheat Sheet</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Ethics</h1>
+  <p class="subtitle">Intuition-First Study Guide · Readings 89–93</p>
+  <p class="meta">Every standard explained with logic, examples, exam traps, and cases · Highest-weighted topic on the exam</p>
+</div>
+
+<!-- ════════════════ READING 89 ════════════════ -->
+<section id="r89">
+<div class="module-header">
+  <div class="lm-label">Reading 89</div>
+  <h2>Ethics and Trust in the Investment Profession</h2>
+  <div class="one-liner">Why ethics is not just a rule-book — it's the foundation of everything finance does.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🌐 Why This Reading Exists</div>
+  <p>Finance is unique: clients hand over their life savings to strangers and must trust them to act in their interest. Without that trust, capital markets cannot function. Ethics is not a box-ticking compliance exercise — it is what allows the entire profession to exist. The CFA Institute is asking: do you understand WHY the rules matter, not just what they say?</p>
+</div>
+
+<h3>What Is Ethics?</h3>
+<p>Ethics is a set of shared beliefs about what is good, acceptable, and obligatory — the moral principles that govern how a person or group makes decisions. In finance, it means placing clients' interests first, maintaining trust, and acting with integrity even when no one is watching and no rule explicitly forbids a behaviour.</p>
+
+<div class="analogy">A doctor has a legal obligation not to commit malpractice — but their ethical obligation goes further: they must also not recommend unnecessary procedures even if the patient can't tell the difference. The law sets a floor; ethics demands more.</div>
+
+<h3>The Three Layers of Behavioural Obligation</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Layer</th><th>What It Covers</th><th>Enforced By</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Legal/Regulatory</strong></td><td>Minimum required actions; what you must and cannot do by law</td><td>Government; regulators (SEC, FCA, MAS)</td></tr>
+    <tr><td><strong>Compliance/Firm Policy</strong></td><td>Firm rules that may exceed the law</td><td>Employer; CCO</td></tr>
+    <tr><td><strong>Ethical</strong></td><td>What a reasonable person of integrity would do; often exceeds laws and rules</td><td>Professional judgment; CFA Standards</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">The CFA Standards often require MORE than what is legally required. When a local law is stricter than the CFA Standards, follow local law. When the CFA Standards are stricter, follow the CFA Standards. Always follow the stricter of the two.</div>
+
+<h3>Why Ethics Failures Happen — The Three Causes</h3>
+<p>The CFA curriculum identifies three primary reasons why smart, trained professionals commit ethical violations:</p>
+<ul>
+  <li><strong>Overconfidence in their own ethical nature</strong> — "I would never do that." This blinds people to the gradual drift toward rationalising small compromises.</li>
+  <li><strong>Situational influences</strong> — Pressure from supervisors, organisational culture, fear of losing business, bonus incentives. Most ethics failures are not committed by "bad people" — they are committed by ordinary people under extraordinary pressure.</li>
+  <li><strong>Cognitive biases</strong> — Framing effects, confirmation bias, and in-group loyalty distort judgment without the person even realising it.</li>
+</ul>
+
+<div class="intuition">Enron's traders weren't cartoon villains. They were smart, well-paid professionals who started with small compromises, then rationalised each next step. Each individual step seemed defensible. The accumulation was catastrophic. This is the "slippery slope" of ethics failures — and why the CFA curriculum places such emphasis on recognising the warning signs early.</div>
+
+<h3>The Ethical Decision-Making Framework</h3>
+<p>The CFA curriculum's recommended framework for resolving ethical dilemmas involves six steps:</p>
+<ol>
+  <li><strong>Identify the facts</strong> — what do you actually know vs. assume?</li>
+  <li><strong>Identify the ethical issues</strong> — whose interests are at stake? What duties are in conflict?</li>
+  <li><strong>Identify the relevant principles</strong> — which CFA Standards, firm policies, or laws apply?</li>
+  <li><strong>Identify the conflicts</strong> — is there tension between loyalty to employer vs. loyalty to client? Between short-term and long-term interests?</li>
+  <li><strong>Consider alternatives</strong> — what are the possible courses of action and their consequences?</li>
+  <li><strong>Choose and act</strong> — make a decision that a reasonable, ethical professional would be proud of.</li>
+</ol>
+
+<div class="trap">The exam frequently presents a case where an action is <em>technically legal</em> but ethically questionable. The correct answer is usually the more ethical choice, not merely the legal one. Never assume "it's legal, so it's fine."</div>
+
+<h3>Trust and the Investment Profession</h3>
+<p>Investors face a fundamental <strong>principal-agent problem</strong>: the client (principal) delegates decisions to the manager (agent) but cannot perfectly monitor the agent's actions or verify their effort. Ethics — and the CFA charter — exists precisely to close this gap. When clients see "CFA Charterholder," they are meant to trust that the person has committed to a higher standard of conduct, not just a higher level of technical knowledge.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investment manager is technically complying with all applicable laws and his firm's policies when allocating a hot IPO solely to his most profitable clients. Is this consistent with the CFA Code of Ethics?</div>
+  <div class="exam-a"><strong>Answer: No.</strong> Legal compliance is necessary but not sufficient. The CFA Code requires that members treat ALL clients fairly (Standard III(B)). Allocating IPOs only to profitable clients violates fair dealing, even if no law prohibits it. Ethics requires doing what is right, not just what is permitted.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ READING 90 ════════════════ -->
+<section id="r90">
+<div class="module-header">
+  <div class="lm-label">Reading 90</div>
+  <h2>Code of Ethics and Standards of Professional Conduct</h2>
+  <div class="one-liner">The six-pillar Code and seven-standard framework — the rules you are being tested on.</div>
+</div>
+
+<h3>The Six Components of the Code of Ethics</h3>
+<p>Members and candidates must act with integrity, competence, diligence, and respect, placing the integrity of the investment profession and the interests of clients above their own personal interests. Memorise these six commitments:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>#</th><th>Commitment</th><th>The Core Idea</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Act with integrity, competence, diligence, and respect toward clients, employers, and the profession</td><td>Integrity is the baseline</td></tr>
+    <tr><td>2</td><td>Place integrity of capital markets and client interests above personal interests</td><td>Client-first, always</td></tr>
+    <tr><td>3</td><td>Use reasonable care and independent professional judgment</td><td>Think; don't just follow orders</td></tr>
+    <tr><td>4</td><td>Practice and encourage others to practice in an ethical manner</td><td>You're responsible for the culture around you</td></tr>
+    <tr><td>5</td><td>Promote the integrity and viability of the global capital markets for the benefit of society</td><td>The profession exists to serve society, not extract from it</td></tr>
+    <tr><td>6</td><td>Maintain and improve professional competence</td><td>Lifelong learning obligation</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Map of the Seven Standards</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Standard</th><th>Theme</th><th>Sub-standards</th></tr></thead>
+  <tbody>
+    <tr><td><strong>I — Professionalism</strong></td><td>Your conduct as a professional</td><td>I(A) Knowledge of the Law · I(B) Independence &amp; Objectivity · I(C) Misrepresentation · I(D) Misconduct</td></tr>
+    <tr><td><strong>II — Integrity of Capital Markets</strong></td><td>Market fairness</td><td>II(A) Material Nonpublic Information · II(B) Market Manipulation</td></tr>
+    <tr><td><strong>III — Duties to Clients</strong></td><td>Fiduciary obligations</td><td>III(A) Loyalty, Prudence &amp; Care · III(B) Fair Dealing · III(C) Suitability · III(D) Performance Presentation · III(E) Preservation of Confidentiality</td></tr>
+    <tr><td><strong>IV — Duties to Employers</strong></td><td>Loyalty and honesty to your firm</td><td>IV(A) Loyalty · IV(B) Additional Compensation · IV(C) Responsibilities of Supervisors</td></tr>
+    <tr><td><strong>V — Investment Analysis, Recommendations, and Actions</strong></td><td>Quality of investment work</td><td>V(A) Diligence &amp; Reasonable Basis · V(B) Communication with Clients · V(C) Record Retention</td></tr>
+    <tr><td><strong>VI — Conflicts of Interest</strong></td><td>Disclosure and management</td><td>VI(A) Disclosure of Conflicts · VI(B) Priority of Transactions · VI(C) Referral Fees</td></tr>
+    <tr><td><strong>VII — Responsibilities as a CFA Member/Candidate</strong></td><td>Protecting the CFA brand</td><td>VII(A) Conduct as Participant · VII(B) Reference to CFA Designation</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Think of the standards in order of "who you owe duties to": Standard I is about YOUR OWN conduct; Standard II protects the MARKET; Standards III–IV protect CLIENTS then EMPLOYERS; Standard V is about the QUALITY of your work; Standard VI manages CONFLICTS; Standard VII protects the CFA BRAND.</div>
+
+</section><hr>
+
+<!-- ════════════════ STANDARD I ════════════════ -->
+<section id="std1">
+<div class="module-header">
+  <div class="lm-label">Reading 91 — Standard I</div>
+  <h2>Professionalism</h2>
+  <div class="one-liner">Your baseline obligations as a competent, honest, law-abiding professional.</div>
+</div>
+
+<!-- I(A) -->
+<div class="std-header">
+  <div class="std-label">Standard I(A)</div>
+  <h3>Knowledge of the Law</h3>
+  <div class="std-tagline">You must know the rules — ignorance is not an excuse.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must understand and comply with all applicable laws, rules, and regulations (including the CFA Standards) of any government, regulatory organisation, licensing agency, or professional association governing their professional activities. In the event of conflict, members must comply with the more strict law or regulation.</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>✅ Must Do</h5>
+    <ul>
+      <li>Know the laws and regulations in every jurisdiction where you operate</li>
+      <li>When CFA Standards are stricter than local law → follow CFA Standards</li>
+      <li>When local law is stricter → follow local law</li>
+      <li><strong>Disassociate</strong> from any violation if you can't stop it</li>
+    </ul>
+  </div>
+  <div class="compare-box red">
+    <h5>❌ Not Required (Trap!)</h5>
+    <ul>
+      <li>You are <strong>NOT required to report</strong> violations to regulators under the CFA Standards (though local law may require it)</li>
+      <li>You do NOT need to be a lawyer — but you must know enough to recognise violations</li>
+    </ul>
+  </div>
+</div>
+
+<div class="key-rule">Reporting violations to authorities is NOT required by CFA Standards (though it may be required by local law). Disassociation IS required. This distinction is a classic exam trap.</div>
+
+<div class="analogy">You're a financial analyst at a firm and discover your firm is engaged in Ponzi-scheme activity. You cannot stop it. Under CFA Standards, you must: (1) consult compliance or legal, (2) disassociate from the activity (resign if necessary). You are NOT required to call the SEC — though US law may require it. Disassociate, don't participate.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A CFA member working in a country where securities laws are less strict than the CFA Standards should: A) Follow local law only, B) Follow the CFA Standards, C) Follow whichever is stricter.</div>
+  <div class="exam-a"><strong>Answer: C — Follow whichever is stricter.</strong> The CFA Standards require the member to always comply with the stricter of local law or CFA Standards. Here, the CFA Standards are stricter, so they prevail. If local law were stricter (e.g., more detailed disclosure requirements), local law would prevail.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Maria, a CFA charterholder, discovers her supervisor is misrepresenting fund performance to clients. She has raised the issue internally and been ignored. According to CFA Standards, Maria is LEAST likely required to: A) Disassociate from the activity, B) Report the violation to regulators, C) Resign if necessary to avoid participation.</div>
+  <div class="exam-a"><strong>Answer: B — Report to regulators.</strong> CFA Standards require disassociation (A and C), but do NOT require reporting to regulators. Reporting may be required by local law, but it is not mandated by the Standards themselves.</div>
+</div>
+
+<!-- I(B) -->
+<div class="std-header">
+  <div class="std-label">Standard I(B)</div>
+  <h3>Independence and Objectivity</h3>
+  <div class="std-tagline">Your analysis must be uncontaminated by outside pressures — financial or social.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must use independent judgment and must not offer, solicit, or accept any gift, benefit, compensation, or consideration that reasonably could be expected to compromise their independence and objectivity.</p>
+
+<h4>The Gifts Framework</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Gift Type</th><th>Acceptable?</th><th>Condition</th></tr></thead>
+  <tbody>
+    <tr><td>Modest gifts from clients (e.g., bottle of wine, dinner)</td><td>✅ Generally OK</td><td>Unlikely to compromise objectivity; no disclosure needed if modest</td></tr>
+    <tr><td>Lavish gifts (expensive travel, luxury gifts)</td><td>❌ Prohibited</td><td>Reasonably could compromise independence</td></tr>
+    <tr><td>Gifts from issuers (companies you cover)</td><td>⚠️ Extra caution</td><td>Creates direct conflict — analyst might soften opinion to keep receiving gifts</td></tr>
+    <tr><td>Travel paid by issuer</td><td>⚠️ Commercial travel OK; lavish travel ❌</td><td>Flying first-class on the issuer's private jet compromises objectivity</td></tr>
+    <tr><td>Performance bonuses tied to positive ratings</td><td>❌ Prohibited</td><td>Directly corrupts the analysis</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Soft Dollars (Directed Brokerage)</h4>
+<p>Soft dollars = using client brokerage commissions to pay for research and other services rather than receiving cash rebates. This is <strong>permitted</strong> under CFA Standards, but only if the research benefits clients and is disclosed.</p>
+
+<div class="key-rule">Soft dollars are only acceptable if: (1) the research benefits the client, not just the analyst's personal workflow, and (2) the arrangement is disclosed to the client. Using client brokerage to buy office furniture or pay personal expenses is prohibited.</div>
+
+<div class="trap">The exam often tests whether "modest" gifts from an issuer to an analyst covering that issuer are acceptable. The answer is usually NO — even modest gifts from the company you're recommending create an unacceptable appearance of bias. It's not just about the amount; it's about who is giving it.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A sell-side analyst receives an all-expenses-paid trip to a company's headquarters for a management presentation, including first-class flights and a five-star hotel booked by the company. Which CFA Standard is most at risk of being violated?</div>
+  <div class="exam-a"><strong>Answer: Standard I(B) — Independence and Objectivity.</strong> Accepting lavish travel paid for by the issuer the analyst covers compromises the analyst's independence. The analyst should arrange his own commercial travel and accommodation and expense it to his firm, not accept it from the company being analysed.</div>
+</div>
+
+<!-- I(C) -->
+<div class="std-header">
+  <div class="std-label">Standard I(C)</div>
+  <h3>Misrepresentation</h3>
+  <div class="std-tagline">Say nothing false — including omissions and plagiarism.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must not make any untrue statement or omit a fact that makes a statement misleading. This includes qualifications, services, performance, and the work of others (plagiarism).</p>
+
+<h4>Three Forms of Misrepresentation</h4>
+<ul>
+  <li><strong>False statements</strong> — "Our fund has never had a down year" (when it has).</li>
+  <li><strong>Misleading omissions</strong> — Showing only the best-performing quarter without context. A technically true statement that creates a false impression is still a misrepresentation.</li>
+  <li><strong>Plagiarism</strong> — Using another analyst's model or report without attribution. This includes quantitative models: if you use someone else's factor model, you must cite the source.</li>
+</ul>
+
+<div class="key-rule">Plagiarism applies not only to written reports but also to models, spreadsheets, and investment processes. If you download a portfolio construction model from a research provider and present it as your own proprietary methodology, that violates I(C).</div>
+
+<div class="trap">Reproducing factual data from sources like Bloomberg, Standard &amp; Poor's, or central banks does NOT require attribution — facts are not copyrightable. But analysis, opinions, and original models from a specific analyst DO require citation.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A portfolio manager presents a performance record showing only the 3-year period during which the fund outperformed. The full 5-year record includes two underperforming years. Has a Standard been violated?</div>
+  <div class="exam-a"><strong>Answer: Yes — Standard I(C) Misrepresentation</strong> (and likely III(D) Performance Presentation). Even though each individual year's data is accurate, selecting only the favourable period creates a false impression about the fund's track record. Omissions that make statements misleading are misrepresentations.</div>
+</div>
+
+<!-- I(D) -->
+<div class="std-header">
+  <div class="std-label">Standard I(D)</div>
+  <h3>Misconduct</h3>
+  <div class="std-tagline">Personal dishonesty is professional dishonesty — there is no firewall.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must not engage in any professional conduct involving dishonesty, fraud, or deceit, or commit any act that reflects adversely on their professional reputation, integrity, or competence.</p>
+
+<div class="analogy">A financial adviser who commits fraud in a personal business deal — completely unrelated to his investment job — still violates I(D). The CFA Standards do not confine professional conduct to "office hours." Your personal integrity is your professional integrity.</div>
+
+<div class="compare-grid">
+  <div class="compare-box red">
+    <h5>❌ Violates I(D)</h5>
+    <ul>
+      <li>DUI conviction (reflects on character/judgment)</li>
+      <li>Personal bankruptcy due to fraud</li>
+      <li>Personal gambling addiction leading to dishonest acts</li>
+      <li>Any conviction for theft, fraud, or deception</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>✅ Does NOT Violate I(D)</h5>
+    <ul>
+      <li>Personal bankruptcy from legitimate business failure (no fraud)</li>
+      <li>Past criminal conviction that was fully disclosed</li>
+      <li>Lifestyle choices that don't involve dishonesty</li>
+    </ul>
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">James, a CFA charterholder, is convicted of driving under the influence and serves community service. Has James violated the CFA Standards?</div>
+  <div class="exam-a"><strong>Answer: Yes — Standard I(D) Misconduct</strong> is violated. A DUI conviction reflects adversely on James's character and judgment. The CFA Standards hold that personal misconduct can compromise professional standing. Note: this does not necessarily mean automatic revocation of the charter — CFA Institute reviews each case — but a violation has occurred.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ STANDARD II ════════════════ -->
+<section id="std2">
+<div class="module-header">
+  <div class="lm-label">Reading 91 — Standard II</div>
+  <h2>Integrity of Capital Markets</h2>
+  <div class="one-liner">Markets only work if prices reflect information fairly — you must not undermine this.</div>
+</div>
+
+<!-- II(A) -->
+<div class="std-header">
+  <div class="std-label">Standard II(A)</div>
+  <h3>Material Nonpublic Information (MNPI) <span class="tag tag-critical">Most Tested</span></h3>
+  <div class="std-tagline">Insider trading — the clearest and most tested form of market manipulation.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members who possess material nonpublic information that could affect the value of an investment must not act or cause others to act on the information.</p>
+
+<h4>Step 1: Is It Material?</h4>
+<p>Information is <strong>material</strong> if a reasonable investor would consider it important in making an investment decision, OR if the information would likely have a significant impact on the price of the security. Examples of material information:</p>
+<ul>
+  <li>Earnings announcements, dividend changes, major asset sales or acquisitions</li>
+  <li>CEO resignation or appointment</li>
+  <li>Significant contract wins or losses</li>
+  <li>Regulatory approval or rejection of a drug</li>
+  <li>Impending bankruptcy or restructuring</li>
+</ul>
+
+<h4>Step 2: Is It Nonpublic?</h4>
+<p>Information is <strong>nonpublic</strong> until it has been effectively communicated to the general market — i.e., released through widely accessible channels (press release, SEC filing, earnings call transcript). Information whispered to a select few analysts on a roadshow is nonpublic even if technically "disclosed."</p>
+
+<div class="key-rule">Selective disclosure to a small group of analysts is still "nonpublic" from the market's perspective. Until information is available to all investors simultaneously (or at least through broadly accessible channels), it is nonpublic under the Standards.</div>
+
+<h4>The Mosaic Theory — The Critical Exception</h4>
+<p>An analyst can legally and ethically trade on conclusions drawn from combining (a) <strong>material public information</strong> + (b) <strong>non-material nonpublic information</strong>. This combination is called the "mosaic." The key is that no single piece is both material AND nonpublic.</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>✅ Mosaic Theory — PERMITTED</h5>
+    <p>Analyst talks to a company's suppliers (non-material nonpublic info about shipping volumes) + reads the public earnings report + uses industry data → concludes demand is surging → buys the stock.</p>
+  </div>
+  <div class="compare-box red">
+    <h5>❌ Insider Trading — PROHIBITED</h5>
+    <p>CFO tells analyst directly: "Our Q3 earnings will be 40% above consensus" (material AND nonpublic) → analyst buys the stock before the announcement.</p>
+  </div>
+</div>
+
+<h4>Firewall Requirements</h4>
+<p>Firms handling both investment banking and research must maintain <strong>information barriers (firewalls)</strong> to prevent MNPI from flowing from the deal team to the research/trading side. If MNPI is received, the analyst must place the security on a <strong>restricted list</strong> and cease making recommendations.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A fund manager meets with a company's CFO who mentions the company is "very pleased with how Q3 is tracking relative to estimates." The fund manager buys stock before Q3 is announced. Has a Standard been violated?</div>
+  <div class="exam-a"><strong>Answer: Yes — Standard II(A).</strong> The CFO's comment strongly implies earnings will exceed expectations — this is material (significant price impact) and nonpublic (disclosed only to this fund manager in a private meeting). The fund manager should NOT have traded. The correct action is to place the security on a restricted list and not trade until information is public.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Mosaic)</div>
+  <div class="exam-q">An analyst calls five different retail store managers (none of whom are company insiders) to gather feedback on foot traffic. Each piece of information is anecdotal and non-material on its own. She combines this with public industry data and concludes the company will miss earnings. Is she allowed to trade?</div>
+  <div class="exam-a"><strong>Answer: Yes — Mosaic Theory applies.</strong> Each piece of information from the store managers is non-material nonpublic information. Combined with public data, the analyst has constructed a mosaic of non-material pieces. Trading on this conclusion is permitted. There is no single "material nonpublic" piece.</div>
+</div>
+
+<!-- II(B) -->
+<div class="std-header">
+  <div class="std-label">Standard II(B)</div>
+  <h3>Market Manipulation</h3>
+  <div class="std-tagline">Don't create false impressions of prices or trading activity — in any form.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must not engage in practices that distort prices or artificially inflate trading volume with the intent to mislead market participants.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Description</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Information-based manipulation</strong></td><td>Spreading false or misleading information to move prices</td><td>Releasing a fake rumour that a company received a takeover bid</td></tr>
+    <tr><td><strong>Transaction-based manipulation</strong></td><td>Executing trades that create artificial price or volume signals</td><td>Wash trades (buying and selling to yourself to inflate volume), "painting the tape," spoofing</td></tr>
+    <tr><td><strong>Short-and-distort</strong></td><td>Short selling, then spreading negative rumours to drive down the price</td><td>Classic hedge fund manipulation tactic</td></tr>
+    <tr><td><strong>Pump-and-dump</strong></td><td>Buying shares, then spreading positive information to inflate the price, then selling</td><td>Common in small-cap and crypto markets</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Transaction-based manipulation is subtler than it sounds. A firm that executes a huge buy order to push the price up at the close (to inflate mark-to-market NAV) and then reverses the trade has manipulated the market even without spreading any false information. Intent matters: trades done to deceive, not to express genuine investment views, are manipulation.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A portfolio manager, near month-end, executes large buy orders in small-cap stocks she already holds to push up their prices before NAV is calculated, artificially inflating reported performance. Which Standards are most likely violated?</div>
+  <div class="exam-a"><strong>Answer: Standard II(B) — Market Manipulation</strong> and Standard I(C) — Misrepresentation. The trades are designed to create a false impression of value (manipulation) and the resulting NAV overstatement is a misrepresentation of performance. This also likely violates III(D) Performance Presentation.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ STANDARD III ════════════════ -->
+<section id="std3">
+<div class="module-header">
+  <div class="lm-label">Reading 91 — Standard III</div>
+  <h2>Duties to Clients</h2>
+  <div class="one-liner">Your clients are your principal — everything you do in their service must place their interests first.</div>
+</div>
+
+<!-- III(A) -->
+<div class="std-header">
+  <div class="std-label">Standard III(A)</div>
+  <h3>Loyalty, Prudence, and Care</h3>
+  <div class="std-tagline">The fiduciary duty — the highest standard of care the law knows.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members have a duty of loyalty, must act with reasonable care, and exercise prudent judgment. Members must act for the benefit of their clients and place their clients' interests before their employer's or their own interests. The client's best interest must always be the primary consideration.</p>
+
+<h4>Key Applications</h4>
+<ul>
+  <li><strong>Soft dollars (directed brokerage)</strong>: Using client brokerage commissions to pay for research is acceptable — but ONLY if the research benefits the client, not just the manager. Buying computers for the office with soft dollars is prohibited.</li>
+  <li><strong>Proxy voting</strong>: Must vote proxies in the <strong>best interests of the client</strong>, not the manager's convenience. Routine votes (board elections) can be pre-programmed; contentious votes (M&amp;A, executive pay) require client-specific consideration.</li>
+  <li><strong>Identifying the client</strong>: For pooled funds, the manager's duty runs to the FUND (all unit-holders equally), not to any individual investor. For pension funds, the client is the beneficiaries of the plan, not the sponsoring company.</li>
+</ul>
+
+<div class="key-rule">When managing a pension fund, the investment manager's duty runs to the plan beneficiaries (retirees and employees), NOT to the sponsoring corporation. If the sponsor asks the manager to invest in the sponsor's own stock to prop up the share price, this likely violates III(A).</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A pension fund manager receives a request from the fund's corporate sponsor to vote all proxies in favour of management in order to maintain good relations with the company. The manager should:</div>
+  <div class="exam-a"><strong>Answer: Vote proxies in the best interest of the plan beneficiaries</strong>, regardless of what the sponsor requests. The manager's duty under III(A) runs to the beneficiaries of the pension plan, not the sponsor. Voting mechanically in management's favour to maintain sponsor relations is a breach of the fiduciary duty.</div>
+</div>
+
+<!-- III(B) -->
+<div class="std-header">
+  <div class="std-label">Standard III(B)</div>
+  <h3>Fair Dealing</h3>
+  <div class="std-tagline">"Fair" does not mean "equal" — but it does mean no client gets a systematic advantage.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must deal fairly and objectively with all clients when providing investment analysis, making investment recommendations, taking investment action, or engaging in other professional activities.</p>
+
+<div class="key-rule">Fair dealing does NOT mean all clients receive identical service levels. Tiered service (offering premium services to larger clients for a fee) is permitted — but must be disclosed and cannot deny basic services to any client. It DOES mean: same information must go to all relevant clients simultaneously, not to favoured ones first.</div>
+
+<h4>Investment Recommendations — The Dissemination Obligation</h4>
+<p>When you change a recommendation (e.g., downgrade a stock from Buy to Sell), you must disseminate the new recommendation to ALL clients simultaneously before you or your firm trades on it. The firm cannot trade first, then tell clients.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Scenario</th><th>Compliant?</th><th>Reason</th></tr></thead>
+  <tbody>
+    <tr><td>Analyst emails all clients simultaneously, then firm executes trades</td><td>✅ Yes</td><td>Information disseminated to all before action</td></tr>
+    <tr><td>Analyst calls top 10 clients first, emails the rest later</td><td>❌ No</td><td>Preferential information — violates fair dealing</td></tr>
+    <tr><td>Firm offers a premium research tier at higher fees (disclosed)</td><td>✅ Yes</td><td>Tiered service is OK if disclosed and basic service maintained</td></tr>
+    <tr><td>IPO allocated entirely to firm's largest client</td><td>❌ No</td><td>IPOs must be allocated pro-rata or by formula, not by relationship</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A brokerage firm offers "premium research" to clients who trade more than $1M per year. These premium clients receive upgrades and downgrades one hour before all other clients. Is this a violation of Standard III(B)?</div>
+  <div class="exam-a"><strong>Answer: Yes — violation of III(B) Fair Dealing.</strong> The practice of giving certain clients earlier access to recommendations is preferential treatment regardless of whether the tier is disclosed. All clients must receive recommendations simultaneously. Tiered services (more detailed research, better execution, etc.) are permissible — but NOT earlier access to the same recommendation.</div>
+</div>
+
+<!-- III(C) -->
+<div class="std-header">
+  <div class="std-label">Standard III(C)</div>
+  <h3>Suitability</h3>
+  <div class="std-tagline">Know Your Client — and manage for their needs, not your convenience.</div>
+</div>
+
+<p><strong>The Rule:</strong> When managing portfolios, members must make reasonable inquiry into client's investment experience, risk and return objectives, and financial constraints and must update this information regularly. Investments must be suitable for the client and consistent with their portfolio objectives. For unsolicited requests, the member should still note any concerns but may execute the trade.</p>
+
+<h4>The Investment Policy Statement (IPS)</h4>
+<p>For individual clients, suitability starts with building a comprehensive IPS. The IPS documents:</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>IPS Component</th><th>What to Assess</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Return objective</strong></td><td>Required vs. desired return; absolute or relative</td><td>"Need 6% annualised to fund retirement in 20 years"</td></tr>
+    <tr><td><strong>Risk tolerance</strong></td><td>Ability to bear risk (financial) AND willingness (psychological)</td><td>High income but very loss-averse → lower risk allowed</td></tr>
+    <tr><td><strong>Time horizon</strong></td><td>When funds are needed; one or multiple horizons</td><td>"30 years to retirement, then 20 years of drawdown"</td></tr>
+    <tr><td><strong>Liquidity needs</strong></td><td>Any near-term cash requirements</td><td>"Need $50,000 in 6 months for house down payment"</td></tr>
+    <tr><td><strong>Tax considerations</strong></td><td>Tax-exempt vs. taxable; jurisdiction-specific</td><td>"Municipal bonds may be tax-efficient given 40% bracket"</td></tr>
+    <tr><td><strong>Legal/regulatory</strong></td><td>Any restrictions (trust deed, regulatory)</td><td>"Cannot hold more than 5% in any one security"</td></tr>
+    <tr><td><strong>Unique circumstances</strong></td><td>ESG preferences, concentrated positions, etc.</td><td>"No tobacco stocks; large concentration in employer stock"</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">When ability to bear risk and willingness to bear risk conflict, use the MORE CONSERVATIVE of the two. A wealthy 35-year-old who is extremely loss-averse should have a conservative portfolio, despite having the financial ability to take more risk.</div>
+
+<div class="trap">For unsolicited trades: if a client calls and asks to buy a highly speculative stock that is unsuitable for them, you should <strong>execute the trade</strong> (client autonomy) but note your concerns in writing. You do NOT refuse to execute unsolicited client orders. Refusal or overriding client instructions would itself be a problem.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A 65-year-old widow with low income calls her portfolio manager requesting to purchase leveraged oil futures with 90% of her savings. The portfolio manager should most likely:</div>
+  <div class="exam-a"><strong>Answer: Explain why the trade appears unsuitable and note the concern, but execute the trade if the client still requests it.</strong> Under III(C), the manager must inform the client of the mismatch with their risk profile, document the advice given, but ultimately respect the client's right to make decisions about their own money. The manager should NOT unilaterally refuse the order.</div>
+</div>
+
+<!-- III(D) -->
+<div class="std-header">
+  <div class="std-label">Standard III(D)</div>
+  <h3>Performance Presentation</h3>
+  <div class="std-tagline">Don't cherry-pick, don't mislead — show the full, honest picture.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must not make any statements — orally or in writing — that misrepresent the investment performance of portfolios or composite performance information. Best practice is GIPS compliance (see Reading 92).</p>
+
+<h4>Common Violations</h4>
+<ul>
+  <li>Showing only the time period of strong performance, not the full record</li>
+  <li>Excluding terminated accounts (survivorship bias)</li>
+  <li>Presenting simulated or back-tested results as actual performance without disclosure</li>
+  <li>Changing the benchmark after the fact to make performance look better</li>
+  <li>Presenting gross-of-fees returns without noting that net returns would be lower</li>
+  <li>Combining dissimilar portfolios into a "composite" to inflate returns</li>
+</ul>
+
+<div class="intuition">Survivorship bias is the most insidious performance manipulation: you only show the portfolios that survived (i.e., the ones that did well). The ones that were terminated due to poor performance disappear from the record. GIPS solves this by requiring ALL portfolios — including terminated — to be included in the composite.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A manager presents a 10-year composite performance of +12% per year. He notes that 3 portfolios were terminated during this period due to poor performance and excluded from the composite. Has a Standard been violated?</div>
+  <div class="exam-a"><strong>Answer: Yes — Standard III(D)</strong> and Standard I(C) Misrepresentation. Excluding terminated portfolios introduces survivorship bias. The composite must include all portfolios managed to the same strategy, including those terminated due to poor performance. Failure to include them produces an inflated and misleading return history.</div>
+</div>
+
+<!-- III(E) -->
+<div class="std-header">
+  <div class="std-label">Standard III(E)</div>
+  <h3>Preservation of Confidentiality</h3>
+  <div class="std-tagline">Client information stays with you — with very limited exceptions.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must keep information about current, former, and prospective clients confidential unless: (1) the information concerns illegal activity, (2) disclosure is required by law, or (3) the client has consented to disclosure.</p>
+
+<div class="compare-grid">
+  <div class="compare-box red">
+    <h5>❌ Not a Valid Exception</h5>
+    <ul>
+      <li>Curiosity of colleagues</li>
+      <li>Marketing ("our client Apple Inc. uses us")</li>
+      <li>Employer request without legal basis</li>
+      <li>Media inquiry</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>✅ Valid Exceptions</h5>
+    <ul>
+      <li>Client permission (explicit)</li>
+      <li>Court order or legal requirement</li>
+      <li>Information relates to illegal activities</li>
+      <li>Regulatory examination (regulators can demand records)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="trap">Confidentiality extends to FORMER and PROSPECTIVE clients, not just current ones. You must not share information about a client who left your firm three years ago any more than a current client.</div>
+
+</section><hr>
+
+<!-- ════════════════ STANDARD IV ════════════════ -->
+<section id="std4">
+<div class="module-header">
+  <div class="lm-label">Reading 91 — Standard IV</div>
+  <h2>Duties to Employers</h2>
+  <div class="one-liner">Loyalty to your employer — but not to the point of enabling wrongdoing.</div>
+</div>
+
+<!-- IV(A) -->
+<div class="std-header">
+  <div class="std-label">Standard IV(A)</div>
+  <h3>Loyalty (to Employer)</h3>
+  <div class="std-tagline">Act in your employer's interest — and don't take what isn't yours when you leave.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must act for the benefit of their employer and not deprive their employer of the advantage of their skills and abilities, engage in conduct that injures the employer, or divulge confidential information.</p>
+
+<h4>Leaving a Firm — What You Can and Cannot Take</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Permitted</th><th>Not Permitted</th></tr></thead>
+  <tbody>
+    <tr><td>Take your general skills, knowledge, and experience</td><td>Take client lists, client contact details, or account information</td></tr>
+    <tr><td>Make preparations to leave while still employed (e.g., incorporate a new entity)</td><td>Solicit clients or colleagues to join your new firm BEFORE resigning</td></tr>
+    <tr><td>Tell clients you are leaving and provide contact details for the new firm, if asked</td><td>Proactively call clients to switch their accounts before you leave</td></tr>
+    <tr><td>Use publicly available information about the industry</td><td>Take proprietary models, databases, or research from the old firm</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Whistleblowing: If you discover illegal activity at your employer, you may report it to authorities — even if this conflicts with your duty of loyalty to the employer. CFA Standards protect, and in some cases encourage, whistleblowing on illegal activity. Loyalty does not extend to protecting crimes.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Before resigning, Jennifer copies her client list and client portfolio details to take to her new employer. She also contacts her three best clients to inform them of her upcoming move. Has she violated Standard IV(A)?</div>
+  <div class="exam-a"><strong>Answer: Yes — partially.</strong> Copying the client list is a clear violation — that is proprietary firm data. Contacting clients to solicit them BEFORE she has resigned is also a violation. She may, after resigning, contact clients to inform them of her move. She may NOT proactively solicit clients to transfer their accounts while still employed at the old firm.</div>
+</div>
+
+<!-- IV(B) -->
+<div class="std-header">
+  <div class="std-label">Standard IV(B)</div>
+  <h3>Additional Compensation Arrangements</h3>
+  <div class="std-tagline">Getting paid by anyone other than your employer requires disclosure and written consent.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must not accept gifts, benefits, compensation, or consideration that competes with or might reasonably be expected to create a conflict of interest with the employer's interest unless they obtain written consent from all parties.</p>
+
+<div class="analogy">You work for an investment bank. A tech company offers you $10,000 to consult on their investor relations strategy in your spare time. This directly competes with your employer's advisory services — you must disclose to your employer in writing and obtain written consent before accepting.</div>
+
+<div class="key-rule">The key trigger is whether the arrangement COMPETES with the employer or creates a conflict. A side gig teaching guitar lessons is fine. A side gig providing investment advice to corporations is not — even if informal. Written disclosure to the employer (and their written consent) is required.</div>
+
+<!-- IV(C) -->
+<div class="std-header">
+  <div class="std-label">Standard IV(C)</div>
+  <h3>Responsibilities of Supervisors</h3>
+  <div class="std-tagline">If you manage people, you are responsible for ensuring they comply — period.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must make reasonable efforts to ensure that anyone subject to their supervision or authority complies with applicable laws, rules, regulations, and the Code and Standards.</p>
+
+<div class="key-rule">A supervisor can violate IV(C) even if no subordinate actually violated any standard — the violation is the FAILURE TO HAVE ADEQUATE COMPLIANCE PROCEDURES in place. You don't need to commit the fraud to violate this standard; failing to prevent it is enough.</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Situation</th><th>Supervisor's Response</th><th>IV(C) Violation?</th></tr></thead>
+  <tbody>
+    <tr><td>Firm has robust compliance procedures; subordinate commits fraud anyway</td><td>Investigate promptly; remediate</td><td>Likely NO — if procedures were genuinely adequate</td></tr>
+    <tr><td>No compliance procedures at all; subordinate commits fraud</td><td>—</td><td><strong>YES</strong> — failure to implement any system</td></tr>
+    <tr><td>Red flags were ignored by the supervisor before the fraud occurred</td><td>—</td><td><strong>YES</strong> — knew or should have known</td></tr>
+    <tr><td>Prior compliance failure discovered; supervisor upgrades procedures</td><td>More intensive supervision during transition</td><td>Can limit liability by acting promptly</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Lisa is head of research at an investment bank. She discovers that one of her analysts has been front-running client orders. Despite being told of the issue last year, Lisa took no action because she was "too busy." Which Standard has Lisa most clearly violated?</div>
+  <div class="exam-a"><strong>Answer: Standard IV(C) — Responsibilities of Supervisors.</strong> Lisa was aware of the misconduct (or at minimum the risk of it) and failed to act. A supervisor who knows of compliance failures and takes no action is liable. She should have immediately investigated, restricted the analyst's activities, and reported to compliance.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ STANDARD V ════════════════ -->
+<section id="std5">
+<div class="module-header">
+  <div class="lm-label">Reading 91 — Standard V</div>
+  <h2>Investment Analysis, Recommendations, and Actions</h2>
+  <div class="one-liner">Your investment work must be rigorous, communicated clearly, and supported by documented evidence.</div>
+</div>
+
+<!-- V(A) -->
+<div class="std-header">
+  <div class="std-label">Standard V(A)</div>
+  <h3>Diligence and Reasonable Basis</h3>
+  <div class="std-tagline">Every recommendation needs genuine intellectual work behind it.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must exercise diligence, independence, and thoroughness in analysing investments, making investment recommendations, and taking investment actions. Members must have a reasonable and adequate basis, supported by appropriate research and investigation, for any investment action or recommendation.</p>
+
+<h4>Key Nuances</h4>
+<ul>
+  <li><strong>Third-party research</strong>: You may rely on third-party research (e.g., broker research, rating agencies) but must apply reasonable judgment about whether the source is sound. You cannot abdicate judgment entirely.</li>
+  <li><strong>Quantitative models</strong>: If you use a quant model, you must understand it well enough to identify its assumptions and limitations. Plugging numbers into a "black box" without understanding it does not provide a reasonable basis.</li>
+  <li><strong>Group decisions</strong>: If you are part of an investment committee that reaches a consensus recommendation you disagree with, you may go along with the group decision BUT must document your dissent. You do not need to refuse to sign the report.</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An analyst is part of an investment committee that votes 5-2 to issue a Buy recommendation on a stock. The analyst believes the stock is overvalued and voted against. According to CFA Standards, the analyst:</div>
+  <div class="exam-a"><strong>Answer: May sign the group report</strong> but should document her dissenting view in her files. The Standards do not require her to refuse to be associated with the group decision. However, if the recommendation is based on a process she believes is fundamentally flawed (not just a difference of opinion), she may decline to participate. Documenting the dissent protects her under the Standards.</div>
+</div>
+
+<!-- V(B) -->
+<div class="std-header">
+  <div class="std-label">Standard V(B)</div>
+  <h3>Communication with Clients and Prospective Clients</h3>
+  <div class="std-tagline">Be clear, complete, and honest — especially about risks and limitations.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must disclose to clients and prospective clients the basic format and general principles of investment processes used to analyse investments, select securities, and construct portfolios. Members must promptly disclose any changes in these processes. Members must distinguish between fact and opinion.</p>
+
+<h4>Key Applications</h4>
+<ul>
+  <li><strong>Distinguish fact from opinion</strong>: "The company earned $2.00 per share last year" is a fact. "We believe the company will earn $3.00 next year" is an opinion. Both are acceptable — but mixing them without labelling them clearly violates V(B).</li>
+  <li><strong>Disclose process changes</strong>: If you switch from a value to a growth investment style, you must inform clients promptly. Clients entrusted you with a specific mandate; changing it without notice breaches V(B).</li>
+  <li><strong>Risk disclosure</strong>: Complex investment strategies — options, leverage, derivatives — must be explained including their risks, even if the client has not specifically asked.</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An analyst writes a research report stating: "XYZ will definitely achieve $5 EPS next year." Is this a violation?</div>
+  <div class="exam-a"><strong>Answer: Yes — Standard V(B)</strong> is violated. "Will definitely achieve" presents a forward-looking estimate as a certainty (fact), not an opinion. The report should clearly state this is an estimate or projection, not a guaranteed outcome. Future earnings are inherently uncertain.</div>
+</div>
+
+<!-- V(C) -->
+<div class="std-header">
+  <div class="std-label">Standard V(C)</div>
+  <h3>Record Retention</h3>
+  <div class="std-tagline">Keep your work — the records are your evidence and your protection.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must develop and maintain appropriate records to support their investment analyses, recommendations, actions, and other investment-related communications with clients and prospective clients.</p>
+
+<div class="quick-ref">
+  <div class="qr-label">📁 CFA Institute Recommended Retention Period</div>
+  <p><strong>7 years</strong> is the CFA Institute's recommended minimum retention period for records supporting investment decisions and client communications.</p>
+  <p>If no local law specifies retention, use 7 years. If local law requires longer, use local law. Records include emails, notes, models, Bloomberg printouts — anything supporting a decision.</p>
+</div>
+
+<div class="key-rule">When an analyst leaves a firm, the records belong to the FIRM, not the analyst. The analyst cannot take work product (models, research reports) when leaving. If the analyst sets up a new firm, they must recreate their research from scratch using publicly available information.</div>
+
+</section><hr>
+
+<!-- ════════════════ STANDARD VI ════════════════ -->
+<section id="std6">
+<div class="module-header">
+  <div class="lm-label">Reading 91 — Standard VI</div>
+  <h2>Conflicts of Interest</h2>
+  <div class="one-liner">Conflicts are inevitable — the obligation is to disclose and manage them, not to pretend they don't exist.</div>
+</div>
+
+<!-- VI(A) -->
+<div class="std-header">
+  <div class="std-label">Standard VI(A)</div>
+  <h3>Disclosure of Conflicts</h3>
+  <div class="std-tagline">Tell everyone who might be affected by your conflict — employer AND clients.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must make full and fair disclosure of all matters that could reasonably be expected to impair their independence and objectivity or interfere with their respective duties to their employer, clients, and prospective clients.</p>
+
+<h4>What Must Be Disclosed?</h4>
+<ul>
+  <li>Ownership of shares in a company you're recommending (personal holdings)</li>
+  <li>Compensation arrangements (e.g., being paid by the issuer for research)</li>
+  <li>Board membership of a company you cover as an analyst</li>
+  <li>Investment banking relationships: "Our firm has an investment banking relationship with XYZ, for which we have been compensated."</li>
+  <li>Family member's employment at a company you cover</li>
+</ul>
+
+<div class="analogy">An equity analyst covers retail stocks, and his wife is the CFO of one of those companies. He must disclose this relationship to his firm and on any research reports about that company. He probably shouldn't cover that company at all — but at minimum, full disclosure is required immediately.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A sell-side analyst issues a Buy recommendation on a company whose IPO was underwritten by the analyst's firm last year. What disclosure is most important under Standard VI(A)?</div>
+  <div class="exam-a"><strong>Answer:</strong> The analyst must prominently disclose the investment banking relationship and any compensation received. Investors need to understand that the analyst's firm has a financial relationship with the issuer, which could impair objectivity. This disclosure should appear in the research report itself, not buried in fine print.</div>
+</div>
+
+<!-- VI(B) -->
+<div class="std-header">
+  <div class="std-label">Standard VI(B)</div>
+  <h3>Priority of Transactions <span class="tag tag-critical">Critical</span></h3>
+  <div class="std-tagline">Client first. Firm second. Personal last. No exceptions.</div>
+</div>
+
+<p><strong>The Rule:</strong> Investment transactions for clients must have priority over investment transactions in which a member or candidate is the beneficial owner. Client transactions must take priority over the member's personal transactions and the firm's proprietary trading.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Priority Level</th><th>Who</th><th>Rationale</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1st — Highest Priority</strong></td><td>Client accounts</td><td>Fiduciary duty to clients; they come first always</td></tr>
+    <tr><td><strong>2nd</strong></td><td>Firm/employer accounts</td><td>Firm has obligations but no fiduciary role over clients</td></tr>
+    <tr><td><strong>3rd — Lowest Priority</strong></td><td>Member's personal accounts</td><td>Personal interests must never impair client service</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Front-running — trading for your personal account BEFORE executing client trades — is a clear violation of VI(B) AND is illegal. If you know you're about to buy 1 million shares of XYZ for a client (which will push the price up), you cannot buy XYZ personally first to profit from the price movement.</div>
+
+<h4>Blackout Periods and Personal Trading Policies</h4>
+<p>Best practice is for firms to maintain <strong>blackout periods</strong> during which employees cannot trade in securities currently being traded for client accounts. Many firms also require pre-clearance for personal trades. These are recommended practices under CFA Standards and commonly tested.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A portfolio manager is about to execute a large buy order for his firm's clients in a thinly-traded micro-cap stock. Before placing the client order, he buys 5,000 shares in his personal account. Which Standards has he most clearly violated?</div>
+  <div class="exam-a"><strong>Answer: Standard VI(B) — Priority of Transactions</strong> (front-running client order for personal gain) and likely Standard III(A) — Loyalty, Prudence, and Care (placing personal interests above clients'). This is one of the clearest-cut violations in the curriculum.</div>
+</div>
+
+<!-- VI(C) -->
+<div class="std-header">
+  <div class="std-label">Standard VI(C)</div>
+  <h3>Referral Fees</h3>
+  <div class="std-tagline">Disclose any payment you receive for sending clients to others — to everyone involved.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members must disclose to employers, clients, and prospective clients, as appropriate, any compensation or benefit received by, or paid to, others for recommending or referring investment products or services.</p>
+
+<div class="analogy">Your estate-planning attorney refers clients to you, and you refer investment clients to him. You pay each other a finder's fee. This arrangement must be disclosed to BOTH your employer and to every client who is referred. Clients have a right to know that your recommendation of the attorney is influenced by a financial arrangement.</div>
+
+<div class="key-rule">Disclosure must happen BEFORE or at the time of referral — not retroactively. And it must be disclosed to the employer, the client receiving the referral, AND any prospective clients, so they can properly evaluate the independence of the recommendation.</div>
+
+</section><hr>
+
+<!-- ════════════════ STANDARD VII ════════════════ -->
+<section id="std7">
+<div class="module-header">
+  <div class="lm-label">Reading 91 — Standard VII</div>
+  <h2>Responsibilities as a CFA Institute Member or CFA Candidate</h2>
+  <div class="one-liner">The CFA designation is a trust mark — protect it and don't misuse it.</div>
+</div>
+
+<!-- VII(A) -->
+<div class="std-header">
+  <div class="std-label">Standard VII(A)</div>
+  <h3>Conduct as Participants in CFA Institute Programs</h3>
+  <div class="std-tagline">Uphold the integrity of the examination process and the CFA program.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members and candidates must not engage in any conduct that compromises the reputation or integrity of CFA Institute or the CFA designation or the integrity, validity, or security of CFA Institute programs.</p>
+
+<h4>Key Prohibitions</h4>
+<ul>
+  <li>Cheating on the CFA examination</li>
+  <li>Sharing exam questions during or after the exam (questions are confidential)</li>
+  <li>Assisting other candidates improperly during the exam</li>
+  <li>Misrepresenting your association with CFA Institute</li>
+  <li>Engaging in conduct that harms the reputation of CFA Institute</li>
+</ul>
+
+<div class="trap">You cannot discuss the content of the exam with ANYONE — including other candidates — after the exam. The questions remain the intellectual property of CFA Institute and their confidentiality is binding indefinitely. Discussing specifics of "what was on the exam" violates VII(A) even if the exam is over.</div>
+
+<!-- VII(B) -->
+<div class="std-header">
+  <div class="std-label">Standard VII(B)</div>
+  <h3>Reference to CFA Institute, the CFA Designation, and the CFA Program <span class="tag tag-exam">Most Exam-Tested</span></h3>
+  <div class="std-tagline">How to (and how not to) use the letters "CFA" after your name.</div>
+</div>
+
+<p><strong>The Rule:</strong> Members and candidates must not misrepresent or exaggerate the meaning or implications of membership in CFA Institute, holding the CFA designation, or candidacy in the CFA program.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Usage</th><th>Acceptable?</th><th>Explanation</th></tr></thead>
+  <tbody>
+    <tr><td>"John Smith, CFA"</td><td>✅ Yes</td><td>Correct — charterholder uses it as a post-nominal</td></tr>
+    <tr><td>"John Smith is a CFA"</td><td>❌ No</td><td>CFA is a designation, not a noun. You "hold the CFA designation," you are not "a CFA"</td></tr>
+    <tr><td>"John Smith, CFA, MBA"</td><td>✅ Yes</td><td>Listing both credentials as post-nominals is fine</td></tr>
+    <tr><td>"John Smith, CFA (Pending)"</td><td>❌ No</td><td>Cannot imply partial completion = some form of designation</td></tr>
+    <tr><td>"John passed Level I of the CFA exam"</td><td>✅ Yes</td><td>Factually correct statement about progress — acceptable</td></tr>
+    <tr><td>"John Smith, Level II CFA Candidate"</td><td>✅ Yes</td><td>Acceptable description of candidacy status</td></tr>
+    <tr><td>"My Level I CFA knowledge gives me the edge"</td><td>❌ No</td><td>Implies Level I confers a partial designation</td></tr>
+    <tr><td>"CFA" in all-capital letters, larger font than the name</td><td>❌ No</td><td>Must not display the designation more prominently than the name</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">The CFA designation must NEVER be used as a noun. You are NOT "a CFA." The designation may ONLY be used as a post-nominal adjective ("Jane Doe, CFA" or "Jane Doe holds the CFA designation"). The exam loves to test this.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which of the following is the CORRECT way to reference the CFA designation? A) "As a CFA, I bring 15 years of experience." B) "As a CFA charterholder, I bring 15 years of experience." C) "I earned my CFA in 2019."</div>
+  <div class="exam-a"><strong>Answer: B.</strong> "CFA charterholder" is the correct noun form. Option A uses "CFA" as a noun — wrong. Option C implies CFA is a degree that one "earns" and "possesses" like a diploma — the preferred language is "holds the CFA designation."</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ GIPS ════════════════ -->
+<section id="gips">
+<div class="module-header">
+  <div class="lm-label">Reading 92</div>
+  <h2>Introduction to the Global Investment Performance Standards (GIPS)</h2>
+  <div class="one-liner">The global standard for calculating and presenting investment performance — making returns comparable and honest worldwide.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🌐 Why GIPS Exists</div>
+  <p>Before GIPS, every investment manager presented performance their own way. Some cherry-picked time periods; some excluded bad portfolios; some included simulated results alongside real results. Investors could not compare managers fairly. GIPS creates a single, globally consistent methodology that eliminates these games — making it possible to compare a New York fund manager with a Singapore one on equal footing.</p>
+</div>
+
+<h3>Who Must Comply and Why</h3>
+<p>GIPS compliance is <strong>voluntary</strong> — no law requires it. But once a firm claims compliance, it must comply with ALL GIPS requirements (cannot selectively comply). The goal is credibility: claiming GIPS compliance sends a signal to investors that the performance record is prepared on an honest, standardised basis.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>GIPS Concept</th><th>Definition</th><th>Why It Matters</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Firm</strong></td><td>The entity claiming GIPS compliance — usually defined as the investment management entity presented to clients</td><td>Must be defined consistently; can't gerrymander the "firm" definition to exclude bad strategies</td></tr>
+    <tr><td><strong>Composite</strong></td><td>A grouping of all actual, fee-paying, discretionary portfolios managed to the same investment mandate</td><td>Prevents cherry-picking: ALL portfolios with the same strategy must be in the same composite</td></tr>
+    <tr><td><strong>Discretionary portfolio</strong></td><td>One where the manager has full decision-making authority</td><td>Non-discretionary accounts (where client approves every trade) cannot be included</td></tr>
+    <tr><td><strong>Fee-paying</strong></td><td>The client pays management fees</td><td>Non-fee-paying demonstration accounts (e.g., model portfolios) may be excluded</td></tr>
+  </tbody>
+</table></div>
+
+<h3>The Five Core GIPS Principles</h3>
+<ol>
+  <li><strong>Define the firm</strong> — clearly and consistently; cannot change the definition to improve performance</li>
+  <li><strong>Create composites</strong> — all actual, fee-paying, discretionary portfolios with the same mandate must be grouped together</li>
+  <li><strong>Calculate total returns</strong> — including all dividends, interest, and realised/unrealised gains; gross or net of fees (must disclose which)</li>
+  <li><strong>Use asset-weighted composite returns</strong> — larger portfolios get proportionally more weight (so a $100M portfolio matters more than a $1M one)</li>
+  <li><strong>Show a minimum 5-year track record</strong> — or since firm inception if less than 5 years; after 5 years, must extend to 10 years over time</li>
+</ol>
+
+<div class="key-rule">When a new portfolio is added to a composite, it must be included at the BEGINNING of the next full performance measurement period after it meets the composite definition criteria — not retroactively. You cannot add a portfolio that did well last year retroactively to inflate past performance.</div>
+
+<h4>Composite Construction Rules</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+  <tbody>
+    <tr><td>All actual, fee-paying, discretionary portfolios must be included</td><td>No cherry-picking portfolios to exclude</td></tr>
+    <tr><td>Terminated portfolios must be included for the periods they were managed</td><td>Eliminates survivorship bias</td></tr>
+    <tr><td>Portfolios must be added within one full performance period of meeting criteria</td><td>Cannot wait and see if performance improves first</td></tr>
+    <tr><td>Returns are asset-weighted across portfolios</td><td>Larger portfolios have more influence on composite return</td></tr>
+    <tr><td>Cannot switch a portfolio to a different composite retroactively</td><td>Prevents retroactive reclassification to flatter returns</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Required Disclosures in GIPS-Compliant Presentations</h4>
+<ul>
+  <li>Composite description and creation date</li>
+  <li>Benchmark name and description (or "no appropriate benchmark")</li>
+  <li>List of composite descriptions available upon request</li>
+  <li>Fee schedule or note that returns are gross/net of fees</li>
+  <li>Whether leverage or derivatives are used</li>
+  <li>Dispersion measure (showing spread of individual portfolio returns within composite)</li>
+  <li>Number of portfolios in the composite (if &lt;5, may indicate "&lt;5")</li>
+</ul>
+
+<div class="trap">The exam often tests whether GIPS-compliant presentations must include certain data for ALL years. Remember: 5 years minimum initially, growing to 10 years. For the current period, a compliant presentation must show both composite returns AND an appropriate benchmark each year — you cannot show composite returns without a benchmark.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Under GIPS, when a portfolio is terminated (the client withdraws funds), the manager should: A) Remove the portfolio from the composite retroactively to maintain cleanliness, B) Keep the portfolio in the composite for all periods it was actively managed, C) Move it to a "terminated composite" immediately upon closure.</div>
+  <div class="exam-a"><strong>Answer: B.</strong> Terminated portfolios must remain in the composite for all periods they were managed. Removing them would introduce survivorship bias — favouring good-performing portfolios that remain and hiding the bad ones that closed. This is one of the key anti-manipulation features of GIPS.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A firm has managed money for 3 years. Under GIPS, the minimum performance history it must present in a compliant composite presentation is:</div>
+  <div class="exam-a"><strong>Answer: 3 years</strong> (all periods since inception). GIPS requires a minimum of 5 years, OR since inception if the firm or composite has been in existence less than 5 years. The firm cannot simply choose to present only 1 or 2 years — all periods since the composite's creation must be shown.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ ETHICS APPLICATION ════════════════ -->
+<section id="application">
+<div class="module-header">
+  <div class="lm-label">Reading 93</div>
+  <h2>Ethics in Practice — Case Applications</h2>
+  <div class="one-liner">The Standards only matter if you can apply them to real, messy situations.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📋 How Reading 93 Tests You</div>
+  <p>Reading 93 applies the Standards to realistic scenarios — a collection of mini-cases that blend two or three Standards together. The exam tests whether you can identify the MOST violated Standard and the BEST recommended action. This section summarises the highest-frequency case patterns and how to navigate them.</p>
+</div>
+
+<h3>High-Frequency Case Pattern 1: Analyst Pressure</h3>
+<p><strong>Scenario</strong>: A sell-side analyst issues a negative research report. The company's management calls the analyst's supervisor demanding the report be withdrawn, threatening to pull their investment banking business. The analyst is pressured to change the report.</p>
+<div class="key-rule">Standards violated: I(B) Independence and Objectivity, I(C) Misrepresentation, and potentially IV(A) Loyalty (if the analyst or firm capitulates). The correct response: the analyst must maintain the original, independently-formed opinion. The supervisor should support independence. Changing a research opinion due to banking pressure is a textbook violation.</div>
+
+<h3>High-Frequency Case Pattern 2: Performance Reporting Manipulation</h3>
+<p><strong>Scenario</strong>: A fund manager creates a composite by including only portfolios that have outperformed, excluding the three accounts that posted negative returns, and begins marketing this "excellent track record."</p>
+<div class="key-rule">Standards violated: III(D) Performance Presentation and I(C) Misrepresentation. All discretionary, fee-paying portfolios managed to the same mandate must be included. This is also a GIPS violation. Correct action: include all portfolios; disclose fully; if using GIPS, follow composite construction rules.</div>
+
+<h3>High-Frequency Case Pattern 3: Material Nonpublic Information at a Dinner</h3>
+<p><strong>Scenario</strong>: At an industry dinner, a portfolio manager overhears a CEO mention to a small group that "Q4 results will be a blowout." The portfolio manager buys the stock the next morning.</p>
+<div class="key-rule">Standards violated: II(A) Material Nonpublic Information. Even though the PM did not ask for the information and received it "accidentally," the information is material (significant price impact) and nonpublic (disclosed only to a handful of people). He should NOT trade. Correct action: consult compliance; add to restricted list; do not trade until information is publicly released.</div>
+
+<h3>High-Frequency Case Pattern 4: The Lavish Gift</h3>
+<p><strong>Scenario</strong>: An analyst receives a weekend in Monaco (€8,000 value) from a company she covers as a thank-you for a positive initiation of coverage report.</p>
+<div class="key-rule">Standards violated: I(B) Independence and Objectivity. The gift was received AFTER the positive report — but the more important concern is future objectivity. The analyst may be reluctant to downgrade the stock in the future, knowing the company sent gifts for positive reports. Should decline or return the gift and report the offer to compliance.</div>
+
+<h3>High-Frequency Case Pattern 5: Leaving a Firm</h3>
+<p><strong>Scenario</strong>: An analyst plans to leave his firm to start a competing business. Before resigning, he emails his client list to his personal email account and contacts his 10 best clients to tell them he's leaving and they should transfer their accounts to him.</p>
+<div class="key-rule">Standards violated: IV(A) Loyalty. Copying the client list is a clear violation (proprietary firm data). Proactively soliciting clients to move BEFORE resigning violates the duty of loyalty. He may inform clients of his departure AFTER resigning; he may contact them AFTER leaving to inform them of his new business. He may NOT solicit while still employed.</div>
+
+<h3>Decision Framework: How to Answer Ethics Questions</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Step</th><th>Action</th><th>Watch Out For</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Identify all the Standards potentially at play</td><td>Ethics questions often have 2–3 Standards; identify the MOST violated</td></tr>
+    <tr><td>2</td><td>Identify the most ethical course of action — not just the legal one</td><td>"It's legal" is never the right answer if ethics demands more</td></tr>
+    <tr><td>3</td><td>Consider who is harmed and who benefits from each action</td><td>Harm to clients is almost always the core of an ethics violation</td></tr>
+    <tr><td>4</td><td>Ask: would I be comfortable if Anthropic/CFA Institute could see exactly what I'm doing and why?</td><td>The "prudent investor" / "reasonable person" standard is your guide</td></tr>
+    <tr><td>5</td><td>Choose the action that protects client interests first, then market integrity, then employer, then self</td><td>This ordering maps directly to Standards I through VII</td></tr>
+  </tbody>
+</table></div>
+
+</section><hr>
+
+<!-- ════════════════ MASTER CHEAT SHEET ════════════════ -->
+<section id="cheatsheet">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Ethics Cheat Sheet — All Standards</h2>
+  <div class="one-liner">The critical rules, key distinctions, and exam traps in one place.</div>
+</div>
+
+<h3>Complete Standards Quick Reference</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Standard</th><th>Sub</th><th>The One-Line Rule</th><th>Top Exam Trap</th></tr></thead>
+  <tbody>
+    <tr><td>I — Professionalism</td><td>A</td><td>Always follow the STRICTER of local law or CFA Standards</td><td>Reporting to regulators is NOT required by CFA Standards (only disassociation is)</td></tr>
+    <tr><td>I — Professionalism</td><td>B</td><td>Gifts from issuers (esp. companies you cover) compromise independence even if modest</td><td>Soft dollars are OK if they benefit clients; commercial travel paid by issuer OK; lavish travel is not</td></tr>
+    <tr><td>I — Professionalism</td><td>C</td><td>True statements that create false impressions are still misrepresentations</td><td>Plagiarism applies to models and processes, not just written text; factual data doesn't need citation</td></tr>
+    <tr><td>I — Professionalism</td><td>D</td><td>Personal dishonesty = professional dishonesty (DUI, fraud = violation)</td><td>Business failure without fraud = does NOT violate I(D)</td></tr>
+    <tr><td>II — Market Integrity</td><td>A</td><td>Material + Nonpublic = cannot trade; mosaic theory (combining non-material pieces) is OK</td><td>Info overheard "accidentally" is still MNPI if it's material and nonpublic</td></tr>
+    <tr><td>II — Market Integrity</td><td>B</td><td>No false info, no artificial price/volume — includes end-of-day "painting the tape"</td><td>Transaction-based manipulation doesn't require false information</td></tr>
+    <tr><td>III — Duties to Clients</td><td>A</td><td>Soft dollars OK if they benefit clients; proxy votes must be cast in clients' best interest</td><td>For pension funds, duty runs to beneficiaries, NOT the sponsoring corporation</td></tr>
+    <tr><td>III — Duties to Clients</td><td>B</td><td>Same info to all clients simultaneously; tiered services OK if disclosed</td><td>Earlier access to the SAME recommendation is never OK even in a premium tier</td></tr>
+    <tr><td>III — Duties to Clients</td><td>C</td><td>When ability and willingness to bear risk conflict, use the more conservative</td><td>Execute unsolicited unsuitable trades — document concerns but don't refuse</td></tr>
+    <tr><td>III — Duties to Clients</td><td>D</td><td>Include terminated portfolios; no survivorship bias; no cherry-picked periods</td><td>Simulated/back-tested results must be labelled as such — not presented as actual</td></tr>
+    <tr><td>III — Duties to Clients</td><td>E</td><td>Confidentiality extends to former and prospective clients</td><td>Illegal activity is an exception — you may (and perhaps must by law) report it</td></tr>
+    <tr><td>IV — Duties to Employers</td><td>A</td><td>Can prepare to leave; cannot solicit clients before resigning; cannot take client data</td><td>Whistleblowing on illegal activity is permitted and supported</td></tr>
+    <tr><td>IV — Duties to Employers</td><td>B</td><td>Competing side work requires employer disclosure AND written consent</td><td>Teaching finance at university is NOT competing; running a hedge fund on the side IS</td></tr>
+    <tr><td>IV — Duties to Employers</td><td>C</td><td>Supervisors can violate IV(C) even without a subordinate committing any violation</td><td>Failure to have adequate procedures = violation, even if nothing bad happened yet</td></tr>
+    <tr><td>V — Investment Work</td><td>A</td><td>Must understand models used; can rely on third parties if you apply judgment</td><td>Group dissent: document disagreement but can still sign the report</td></tr>
+    <tr><td>V — Investment Work</td><td>B</td><td>Distinguish fact from opinion explicitly; disclose process changes promptly</td><td>"Will definitely" is always wrong — futures are opinions, not facts</td></tr>
+    <tr><td>V — Investment Work</td><td>C</td><td>7-year minimum retention recommended; records belong to the firm, not the analyst</td><td>Electronic records are acceptable; records cannot be taken when leaving a firm</td></tr>
+    <tr><td>VI — Conflicts</td><td>A</td><td>Disclose to employer AND clients; board memberships, personal holdings, banking relationships</td><td>Disclosure must be prominent, not buried in footnotes</td></tr>
+    <tr><td>VI — Conflicts</td><td>B</td><td>Client &gt; Firm &gt; Personal; front-running is prohibited; blackout periods are best practice</td><td>Personal trading in same securities as client trades = potential violation even without front-running</td></tr>
+    <tr><td>VI — Conflicts</td><td>C</td><td>Referral fees: disclose to employer AND client BEFORE services</td><td>Disclosure must happen before or at time of referral — retroactive disclosure is insufficient</td></tr>
+    <tr><td>VII — CFA Program</td><td>A</td><td>Exam questions are permanently confidential; no cheating or improper assistance</td><td>Discussing exam content with others after the exam still violates VII(A)</td></tr>
+    <tr><td>VII — CFA Program</td><td>B</td><td>"John Smith, CFA" ✅ — "I am a CFA" ❌ — "Level I CFA" (as designation) ❌</td><td>Passing Level I confers no partial designation; cannot imply it does</td></tr>
+  </tbody>
+</table></div>
+
+<h3>GIPS Quick Reference</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>GIPS Rule</th><th>Detail</th></tr></thead>
+  <tbody>
+    <tr><td>Compliance is voluntary; once claimed, must comply fully</td><td>Cannot selectively apply GIPS to some composites</td></tr>
+    <tr><td>All actual, fee-paying, discretionary portfolios with same mandate → same composite</td><td>No cherry-picking; all must be included</td></tr>
+    <tr><td>Terminated portfolios included for all periods managed</td><td>Eliminates survivorship bias</td></tr>
+    <tr><td>New portfolios added within 1 full performance period of meeting criteria</td><td>Cannot wait to see if performance improves first</td></tr>
+    <tr><td>Asset-weighted composite returns</td><td>Larger portfolios have more weight</td></tr>
+    <tr><td>Minimum 5-year history; or since inception if &lt;5 years</td><td>Growing to 10 years over time</td></tr>
+    <tr><td>Total returns required (dividends, interest, realised + unrealised gains)</td><td>Not just price appreciation</td></tr>
+    <tr><td>Must show benchmark alongside composite returns</td><td>Cannot present composite without benchmark comparison</td></tr>
+  </tbody>
+</table></div>
+
+<h3>The Most Tested Concepts — Final Frequency Ranking</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Rank</th><th>Topic</th><th>Why It's Tested Constantly</th></tr></thead>
+  <tbody>
+    <tr><td>🥇 1</td><td>MNPI / Insider Trading (II-A)</td><td>Most real-world relevance; mosaic theory nuance</td></tr>
+    <tr><td>🥈 2</td><td>CFA Designation Usage (VII-B)</td><td>Easy to get wrong; multiple wrong forms to distinguish</td></tr>
+    <tr><td>🥉 3</td><td>Suitability (III-C)</td><td>IPS construction; conflict between risk ability vs. willingness</td></tr>
+    <tr><td>4</td><td>Fair Dealing (III-B)</td><td>IPO allocation and tiered services scenarios</td></tr>
+    <tr><td>5</td><td>Independence &amp; Objectivity (I-B)</td><td>Gifts, soft dollars, analyst pressure</td></tr>
+    <tr><td>6</td><td>Priority of Transactions (VI-B)</td><td>Front-running and personal trading scenarios</td></tr>
+    <tr><td>7</td><td>GIPS — composite construction</td><td>Terminated portfolios; asset-weighting; minimum periods</td></tr>
+    <tr><td>8</td><td>Leaving a Firm (IV-A)</td><td>What you can/cannot take; when you can contact clients</td></tr>
+    <tr><td>9</td><td>Knowledge of the Law (I-A)</td><td>Stricter standard; reporting NOT required</td></tr>
+    <tr><td>10</td><td>Supervisors (IV-C)</td><td>Violations even without subordinate misconduct</td></tr>
+  </tbody>
+</table></div>
+
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

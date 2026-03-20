@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Derivatives: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 230px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 230px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 230px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Key Rule — "; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── FORMULA REFERENCE TABLE ── */
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+
+/* ── TRAP BOX ── */
+.trap {
+  background: #fff7ed;
+  border-left: 4px solid #f97316;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: #7c2d12;
+  font-size: 15.5px;
+}
+.trap::before { content: "🪤 Exam Trap — "; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Derivatives · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Foundations</div>
+  <a href="#r66">R66 — Derivative Features</a>
+  <a href="#r67">R67 — Forwards, Futures, Swaps, Options</a>
+  <a href="#r68">R68 — Benefits, Risks & Uses</a>
+  <div class="nav-section">Pricing Principles</div>
+  <a href="#r69">R69 — Arbitrage & Cost of Carry</a>
+  <div class="nav-section">Forwards & Futures</div>
+  <a href="#r70">R70 — Forward Contract Pricing</a>
+  <a href="#r71">R71 — Futures Contract Pricing</a>
+  <div class="nav-section">Swaps</div>
+  <a href="#r72">R72 — Swap Pricing & Valuation</a>
+  <div class="nav-section">Options</div>
+  <a href="#r73">R73 — Option Pricing & Valuation</a>
+  <a href="#r74">R74 — Put-Call Parity</a>
+  <a href="#r75">R75 — Binomial Model</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Formula Sheet</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Derivatives</h1>
+  <p class="subtitle">Intuition-First Study Guide · All 10 Readings</p>
+  <p class="meta">Every concept explained from first principles · Formulas with worked examples · Exam traps highlighted</p>
+</div>
+
+<!-- ════════════════ R66 ════════════════ -->
+<section id="r66">
+<div class="module-header">
+  <div class="lm-label">Reading 66</div>
+  <h2>Derivative Instrument and Derivative Market Features</h2>
+  <div class="one-liner">What is a derivative, where do they trade, and who's on the other side of your trade?</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 The Big Picture</div>
+  <p>A derivative is simply a contract. Its value derives from some other asset (the "underlying"). Understanding derivatives starts with one insight: <strong>a derivative is a zero-sum game</strong> — every dollar gained by the long position is a dollar lost by the short position. The underlying asset doesn't change; the derivative just transfers risk between two parties.</p>
+</div>
+
+<h3>What is a Derivative?</h3>
+<p>A <strong>derivative</strong> is a financial instrument whose value depends on the value of an underlying asset, rate, index, or other variable. The derivative itself is not the underlying — it is a contract about the underlying.</p>
+
+<div class="analogy">An insurance policy on your car is a derivative. Its value depends on your car (the underlying). If the car is totalled (underlying event occurs), the policy pays off. If nothing happens, the policy expires worthless. You didn't buy the car again — you bought a contract about the car.</div>
+
+<h4>Underlying Assets</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Category</th><th>Examples</th><th>Key Derivatives Traded</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Equities</strong></td><td>Individual stocks, stock indices (S&P 500)</td><td>Equity futures, index options, equity swaps</td></tr>
+    <tr><td><strong>Fixed Income</strong></td><td>Government bonds, T-bills</td><td>Bond futures, interest rate swaps, FRAs</td></tr>
+    <tr><td><strong>Currencies</strong></td><td>EUR/USD, GBP/JPY</td><td>Currency forwards, FX futures, currency swaps</td></tr>
+    <tr><td><strong>Commodities</strong></td><td>Oil, gold, wheat, natural gas</td><td>Commodity futures, commodity swaps</td></tr>
+    <tr><td><strong>Credit</strong></td><td>Corporate bond spreads, loan pools</td><td>Credit default swaps (CDS), CDOs</td></tr>
+    <tr><td><strong>Other Derivatives</strong></td><td>Options on futures ("options on futures")</td><td>Swaptions, options on futures</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Exchange-Traded vs. OTC Derivatives <span class="tag tag-critical">Critical</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Exchange-Traded (ETD)</h5>
+    <ul>
+      <li><strong>Standardised</strong> contracts (fixed size, expiry, terms)</li>
+      <li>Trade on organised exchanges (CME, Eurex)</li>
+      <li>Central counterparty clearing (CCP) eliminates bilateral default risk</li>
+      <li>Margin requirements: initial + variation margin</li>
+      <li>Daily mark-to-market (marking to market)</li>
+      <li>High liquidity, transparent prices</li>
+      <li>Cannot customise to exact needs</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Over-the-Counter (OTC)</h5>
+    <ul>
+      <li><strong>Customised</strong> — any terms the two parties agree on</li>
+      <li>Traded directly between dealers and end-users</li>
+      <li>Bilateral counterparty credit risk (unless cleared)</li>
+      <li>Less transparent — prices are negotiated</li>
+      <li>Larger notional amounts typical</li>
+      <li>Post-2008 reforms: more OTC now centrally cleared (ISDA/Dodd-Frank)</li>
+      <li>ISDA Master Agreement governs most OTC derivatives</li>
+    </ul>
+  </div>
+</div>
+
+<div class="intuition">Think of exchange-traded vs OTC like buying a stock vs buying a custom bond. A stock is standardised — 100 shares of Apple at a quoted price, guaranteed by the exchange. A custom bond is negotiated — you and the issuer agree on the exact coupon, maturity, and covenants. More flexibility, but more counterparty risk.</div>
+
+<h3>The Role of the Derivatives Dealer</h3>
+<p>Most OTC derivatives are initiated through a dealer (typically a large bank). The dealer acts as the market-maker: they take the opposite side of the client's trade, then hedge their own exposure elsewhere. The dealer earns a bid-ask spread, not by speculating on direction.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which of the following best describes a key difference between exchange-traded and OTC derivatives? A) Exchange-traded derivatives have no counterparty risk. B) OTC derivatives cannot be used for hedging. C) Exchange-traded derivatives always have longer maturities.</div>
+  <div class="exam-a"><strong>Answer: A.</strong> Exchange-traded derivatives use a central counterparty (CCP), which effectively eliminates bilateral counterparty default risk — the CCP guarantees both sides. OTC derivatives still carry counterparty (credit) risk unless they are centrally cleared. B and C are incorrect.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor enters a derivative contract. Over the life of the contract, the investor gains €5,000. The total gain or loss across both sides of this contract is:</div>
+  <div class="exam-a"><strong>Answer: Zero.</strong> Derivatives are zero-sum instruments — every gain by one party is exactly offset by a loss to the other party. The contract redistributes wealth between parties; it does not create wealth. This is a fundamental and frequently tested concept.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R67 ════════════════ -->
+<section id="r67">
+<div class="module-header">
+  <div class="lm-label">Reading 67</div>
+  <h2>Forward Commitment and Contingent Claim Features and Instruments</h2>
+  <div class="one-liner">The derivative family tree: two branches — obligations and rights.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 The Big Picture</div>
+  <p>Every derivative falls into one of two families. <strong>Forward commitments</strong> (forwards, futures, swaps) obligate both parties to perform — neither can walk away. <strong>Contingent claims</strong> (options) give the holder a right but not an obligation — the holder only exercises if it's advantageous. This distinction drives everything about how they are valued and used.</p>
+</div>
+
+<h3>Forward Commitments</h3>
+
+<h4>1. Forward Contracts</h4>
+<p>A privately negotiated (OTC) agreement to buy or sell an asset at a fixed price (<strong>forward price</strong>) on a specific future date. No money changes hands at initiation — the contract has zero cost to enter.</p>
+
+<ul>
+  <li><strong>Long forward:</strong> agrees to BUY at the forward price — profits if spot price rises above forward price at expiry</li>
+  <li><strong>Short forward:</strong> agrees to SELL at the forward price — profits if spot price falls below forward price at expiry</li>
+  <li>Settled by delivery of the underlying (physical settlement) or cash payment of the difference (cash settlement)</li>
+</ul>
+
+<div class="analogy">You agree today to buy 100 barrels of oil in 3 months at $80/barrel (the forward price). In 3 months, if oil is at $90, you profit $10/barrel (you buy at $80 what's worth $90). If oil is at $70, you lose $10/barrel (you're forced to pay $80 for something worth $70). You cannot walk away.</div>
+
+<h4>2. Futures Contracts</h4>
+<p>An exchange-traded, standardised forward contract. Key feature: <strong>daily marking to market</strong> (variation margin). Both parties post initial margin and gains/losses are settled daily in cash — you can't accumulate large losses without the exchange noticing.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Forward</th><th>Futures</th></tr></thead>
+  <tbody>
+    <tr><td>Trading venue</td><td>OTC (bilateral)</td><td>Exchange-traded</td></tr>
+    <tr><td>Standardisation</td><td>Fully customisable</td><td>Standardised terms</td></tr>
+    <tr><td>Settlement</td><td>Single settlement at expiry</td><td>Daily mark-to-market</td></tr>
+    <tr><td>Counterparty risk</td><td>Yes — bilateral credit risk</td><td>Minimal — CCP guaranteed</td></tr>
+    <tr><td>Liquidity</td><td>Illiquid (hard to exit)</td><td>Highly liquid</td></tr>
+    <tr><td>Margin requirement</td><td>Typically none at initiation</td><td>Initial + variation margin</td></tr>
+    <tr><td>Price transparency</td><td>Private</td><td>Public market price</td></tr>
+  </tbody>
+</table></div>
+
+<h4>3. Swaps</h4>
+<p>A series of forward contracts packaged together. The two parties exchange <strong>a series of cash flows</strong> over a specified period based on different references (e.g., fixed vs floating interest rates, or two different currencies).</p>
+
+<ul>
+  <li><strong>Interest Rate Swap (IRS):</strong> most common — exchange fixed payments for floating (SOFR-based) payments on a notional principal. Notional is NEVER exchanged — only the net difference in cash flows is paid.</li>
+  <li><strong>Currency Swap:</strong> exchange cash flows in different currencies, typically WITH exchange of principal at start and end.</li>
+  <li><strong>Equity Swap:</strong> exchange return on equity index for a fixed or floating rate.</li>
+  <li><strong>Credit Default Swap (CDS):</strong> protection buyer pays periodic premiums; protection seller pays the notional if the reference entity defaults.</li>
+</ul>
+
+<div class="intuition">A plain-vanilla interest rate swap is like splitting a fixed-rate mortgage into two parts and exchanging one part with someone else. One party wants to convert their fixed-rate exposure to floating; the other wants the opposite. They swap — and both get what they want without either refinancing their actual debt.</div>
+
+<h3>Contingent Claims</h3>
+
+<h4>4. Options</h4>
+<p>A contract giving the holder the <strong>right, but not the obligation</strong>, to buy (call) or sell (put) an underlying at a specified price (exercise/strike price) on or before a specified date. The buyer pays a <strong>premium</strong> upfront for this right.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Right Granted</th><th>Buyer Profits When...</th><th>Seller (Writer) Profits When...</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Call Option</strong></td><td>Right to BUY underlying at strike price</td><td>Underlying price rises above strike + premium</td><td>Underlying price stays below strike (option expires worthless — they keep premium)</td></tr>
+    <tr><td><strong>Put Option</strong></td><td>Right to SELL underlying at strike price</td><td>Underlying price falls below strike − premium</td><td>Underlying price stays above strike (option expires worthless — they keep premium)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">The option buyer has LIMITED downside (maximum loss = premium paid) and theoretically unlimited upside. The option writer (seller) has LIMITED upside (maximum gain = premium received) and potentially unlimited downside. This asymmetry is why options require a premium payment at initiation — unlike forwards/futures.</div>
+
+<h4>European vs. American Options</h4>
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>European Options</h5>
+    <ul>
+      <li>Can ONLY be exercised at expiration</li>
+      <li>Easier to value analytically (Black-Scholes)</li>
+      <li>Most index options and many OTC options</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>American Options</h5>
+    <ul>
+      <li>Can be exercised at ANY time before expiration</li>
+      <li>More valuable than European (additional flexibility)</li>
+      <li>Most exchange-traded stock options</li>
+    </ul>
+  </div>
+</div>
+
+<h4>5. Credit Derivatives <span class="tag tag-exam">Exam Focus</span></h4>
+<p>A <strong>Credit Default Swap (CDS)</strong> is the most important credit derivative. The protection buyer makes periodic premium payments (the "CDS spread") to the protection seller. If the reference entity defaults, the protection seller pays par value and receives the defaulted bonds.</p>
+
+<div class="analogy">A CDS is like credit insurance. You own a corporate bond but are worried the company might default. You buy CDS protection, paying a quarterly premium. If the company defaults, the CDS seller compensates you — just like an insurance payout. You've transferred the credit risk, but you still own the bond.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor buys a call option with a strike price of $50, paying a premium of $3. The stock price at expiry is $56. What is the investor's profit/loss?</div>
+  <div class="exam-a"><strong>Answer: Profit = $56 − $50 − $3 = $3 per share.</strong> The intrinsic value at expiry is $6 ($56 − $50), but you subtract the $3 premium paid upfront. Break-even is at $53 ($50 + $3). The investor exercises the call and profits $3 per share.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which of the following is a forward commitment (not a contingent claim)? A) Put option on a stock. B) Interest rate cap. C) Fixed-for-floating interest rate swap.</div>
+  <div class="exam-a"><strong>Answer: C.</strong> A swap is a series of forward contracts — both parties are obligated to make payments. Options (calls, puts) and interest rate caps/floors are contingent claims — the holder has the right but not the obligation to exercise. Caps and floors are packages of options on interest rates (caplets/floorlets).</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R68 ════════════════ -->
+<section id="r68">
+<div class="module-header">
+  <div class="lm-label">Reading 68</div>
+  <h2>Derivative Benefits, Risks and Issuer and Investor Uses</h2>
+  <div class="one-liner">Why derivatives exist — and why they can also cause catastrophe.</div>
+</div>
+
+<h3>Why Derivatives Exist: The Economic Benefits</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Benefit</th><th>Explanation</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Risk Allocation / Transfer</strong></td><td>Those who don't want risk can transfer it to those who do (or can bear it better)</td><td>Airline buys oil futures to lock in fuel costs; speculator takes the other side, bearing price risk in exchange for potential profit</td></tr>
+    <tr><td><strong>Price Discovery</strong></td><td>Futures markets aggregate information from many participants, producing forward-looking prices</td><td>Crude oil futures prices reflect market expectations of future supply/demand, visible to everyone</td></tr>
+    <tr><td><strong>Operational Efficiency</strong></td><td>Gaining exposure is faster and cheaper than transacting in the underlying</td><td>Buying S&P 500 futures is cheaper and faster than buying all 500 stocks</td></tr>
+    <tr><td><strong>Leverage</strong></td><td>Control large notional exposure with a small capital outlay (margin)</td><td>$5,000 margin controls $100,000 of futures contracts — 20:1 leverage</td></tr>
+    <tr><td><strong>Short Selling Made Easy</strong></td><td>Express bearish views without borrowing the underlying</td><td>Short equity futures to benefit from a market decline without stock-borrowing costs</td></tr>
+    <tr><td><strong>Completing Markets</strong></td><td>Enable payoff profiles that can't be replicated in spot markets</td><td>Volatility trades (e.g., buying straddles) are impossible without options</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Risks of Derivatives</h3>
+
+<h4>1. Leverage Risk (Amplification)</h4>
+<p>Because a small margin deposit controls a large notional position, gains and losses are magnified relative to the capital invested. A 5% move in the underlying can wipe out 100% of your margin if the leverage is 20:1.</p>
+
+<div class="key-rule">Derivatives don't create risk — they redistribute it. But leveraged derivatives can cause the holder to lose more than they intended to risk, or even more than their initial investment (in the case of short options).</div>
+
+<h4>2. Counterparty Credit Risk</h4>
+<p>In OTC derivatives, if your counterparty defaults before the contract expires, you lose the mark-to-market gain you were owed. Exchange-traded derivatives eliminate this via CCP, but OTC exposure remains (partially mitigated by netting agreements and collateral under ISDA CSA).</p>
+
+<h4>3. Liquidity Risk</h4>
+<p>OTC derivatives can be very difficult to exit. Unlike exchange-traded contracts you can close with an offsetting trade, an OTC contract must be novated (assigned to a new counterparty) or terminated early, often at unfavourable prices.</p>
+
+<h4>4. Interconnectedness / Systemic Risk</h4>
+<p>Derivatives create webs of interdependence. If one major dealer defaults (like Lehman Brothers in 2008), the losses cascade through all counterparties. This is why post-2008 regulation pushed OTC derivatives toward central clearing.</p>
+
+<h3>Uses by Issuers (Corporations)</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Use Case</th><th>Derivative Used</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Hedge FX exposure on foreign revenues</td><td>FX forwards or options</td><td>Lock in exchange rate to remove earnings uncertainty</td></tr>
+    <tr><td>Fix interest costs on floating-rate debt</td><td>Pay-fixed interest rate swap</td><td>Convert variable-rate borrowing to predictable fixed payments</td></tr>
+    <tr><td>Lock in commodity input prices</td><td>Commodity futures or forwards</td><td>Stabilise margins by fixing cost of raw materials (e.g., fuel, metals)</td></tr>
+    <tr><td>Manage pension fund duration</td><td>Interest rate futures or swaps</td><td>Match liability duration without selling/buying actual bonds</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Uses by Investors</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Use Case</th><th>Derivative Used</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Hedge equity portfolio against market decline</td><td>Buy index put options or sell index futures</td><td>Downside protection without liquidating the portfolio</td></tr>
+    <tr><td>Enhance yield on existing holdings</td><td>Write (sell) covered call options</td><td>Collect premium; caps upside but generates income</td></tr>
+    <tr><td>Gain market exposure quickly</td><td>Buy equity futures or total return swap</td><td>Faster and cheaper than buying a basket of stocks</td></tr>
+    <tr><td>Express a view on volatility</td><td>Buy a straddle (call + put, same strike)</td><td>Profit if underlying moves sharply in either direction</td></tr>
+    <tr><td>Access otherwise hard-to-reach markets</td><td>Total return swaps, commodity swaps</td><td>Get commodity or EM equity exposure without holding actual assets</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A US company expects to receive €10 million from a European client in 90 days. The company is concerned about EUR weakening against USD. What derivative strategy would best hedge this exposure?</div>
+  <div class="exam-a"><strong>Answer: Sell EUR forward (short EUR/USD forward).</strong> The company will receive €10M and needs to convert to USD. If EUR weakens, they receive fewer USD. By selling EUR forward, they lock in the current forward exchange rate — eliminating the FX risk. Alternatively, buying a EUR put / USD call option would provide a floor on the USD received while keeping upside.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R69 ════════════════ -->
+<section id="r69">
+<div class="module-header">
+  <div class="lm-label">Reading 69</div>
+  <h2>Arbitrage, Replication and the Cost of Carry in Pricing Derivatives</h2>
+  <div class="one-liner">Why derivative prices are what they are — the iron logic of no free lunches.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 The Big Picture</div>
+  <p>Derivative pricing rests on one principle: <strong>no arbitrage</strong>. If a derivative is mispriced, traders will buy the cheap asset and sell the expensive one simultaneously, earning a riskless profit. This pressure immediately corrects the mispricing. The "correct" forward price is therefore exactly the price at which no arbitrage is possible — and this is derived from the <strong>cost of carry</strong> model.</p>
+</div>
+
+<h3>The Law of One Price</h3>
+<p>If two portfolios produce identical future cash flows in all states of the world, they must have the same price today. If they don't, an arbitrage exists.</p>
+
+<div class="analogy">A €100 note in London and a €100 note in Paris are worth exactly the same (ignoring conversion costs). If they weren't, you'd buy cheap notes in Paris and sell them in London for a riskless profit. That trade instantly eliminates the price difference.</div>
+
+<h3>Replication</h3>
+<p>You can replicate the payoff of a forward contract with a <strong>portfolio of the underlying asset and a risk-free borrowing/lending position</strong>. Since the replicating portfolio has the same payoff as the forward, they must have the same price. This is how we derive the forward price.</p>
+
+<h4>Replication Portfolio for a Forward Contract</h4>
+<p>Consider a forward contract to buy stock S at price F in time T:</p>
+<ul>
+  <li><strong>Payoff at T:</strong> S<sub>T</sub> − F (long forward)</li>
+  <li><strong>Replication:</strong> Buy the stock today at S₀, borrow S₀ at the risk-free rate r. At T, you own the stock (worth S<sub>T</sub>) and owe S₀(1+r)^T. Net payoff: S<sub>T</sub> − S₀(1+r)^T</li>
+  <li><strong>For no arbitrage:</strong> F = S₀(1+r)^T</li>
+</ul>
+
+<div class="formula">\[ F_0 = S_0 \times (1 + r_f)^T \]</div>
+<p style="text-align:center; font-size:14px; color: var(--gray3); margin-top:4px;">Forward price for a non-dividend-paying asset (discrete compounding)</p>
+
+<div class="formula">\[ F_0 = S_0 \times e^{r_f T} \]</div>
+<p style="text-align:center; font-size:14px; color: var(--gray3); margin-top:4px;">Forward price (continuous compounding)</p>
+
+<h3>Cost of Carry — The General Framework <span class="tag tag-critical">Critical</span></h3>
+<p>The forward price equals the spot price plus the <strong>net cost of carry</strong>: all costs of holding the underlying asset minus all benefits received from holding it.</p>
+
+<div class="formula">\[ F_0 = S_0 \times (1 + r_f)^T + \text{Costs of Carry} - \text{Benefits of Carry} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Component</th><th>Effect on F₀</th><th>Examples</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Risk-free rate (r)</strong></td><td>Increases F₀</td><td>The financing cost of buying the underlying today instead of at T</td></tr>
+    <tr><td><strong>Storage costs (c)</strong></td><td>Increases F₀</td><td>Warehouse fees for commodities (oil, gold, wheat)</td></tr>
+    <tr><td><strong>Dividends (q) or coupon income</strong></td><td>Decreases F₀</td><td>Dividends on stock; coupon payments on bonds</td></tr>
+    <tr><td><strong>Convenience yield (y)</strong></td><td>Decreases F₀</td><td>Benefit of having physical commodity on hand (e.g., oil in reserve for unexpected demand)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="formula">\[ F_0 = (S_0 + c - i) \times (1 + r_f)^T \]</div>
+<p style="text-align:center; font-size:14px; color: var(--gray3); margin-top:4px;">Where c = PV of storage costs, i = PV of income/dividends received</p>
+
+<h4>Worked Example: Forward Price with Dividends</h4>
+<p>A stock trades at €50. The risk-free rate is 5% p.a. The stock pays a €2 dividend in 3 months. What is the 6-month forward price?</p>
+<ul>
+  <li>PV of dividend = €2 / (1.05)^(0.25) = €1.976</li>
+  <li>Adjusted spot = €50 − €1.976 = €48.024</li>
+  <li>F₀ = €48.024 × (1.05)^0.5 = €48.024 × 1.0247 = <strong>€49.21</strong></li>
+</ul>
+
+<div class="intuition">Why do dividends reduce the forward price? Because if you own the stock, you receive dividends during the holding period. The forward contract buyer misses out on those dividends — so the forward price is reduced to compensate. The forward seller effectively "gives up" the dividends to the spot holder.</div>
+
+<h3>Arbitrage Mechanics: Cash-and-Carry and Reverse Cash-and-Carry</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Cash-and-Carry (F₀ too HIGH)</h5>
+    <ul>
+      <li>Actual F₀ > Fair F₀</li>
+      <li><strong>Action:</strong> Buy spot, borrow funds, sell (go short) the overpriced forward</li>
+      <li>At expiry: deliver the asset, repay the loan</li>
+      <li>Lock in a riskless profit = Actual F₀ − Fair F₀</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Reverse Cash-and-Carry (F₀ too LOW)</h5>
+    <ul>
+      <li>Actual F₀ &lt; Fair F₀</li>
+      <li><strong>Action:</strong> Short sell the asset, invest proceeds, buy (go long) the underpriced forward</li>
+      <li>At expiry: receive delivery, return borrowed asset</li>
+      <li>Lock in a riskless profit = Fair F₀ − Actual F₀</li>
+    </ul>
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A non-dividend paying stock trades at $100. The risk-free rate is 4%. The 1-year forward price is quoted in the market at $108. Describe the arbitrage and calculate the riskless profit per share.</div>
+  <div class="exam-a"><strong>Fair forward price = $100 × 1.04 = $104.</strong> The market quote of $108 is too high. <strong>Cash-and-carry arbitrage:</strong> (1) Borrow $100 at 4%, buy the stock. (2) Simultaneously sell the forward at $108. At expiry: deliver the stock at $108, repay loan of $104. <strong>Riskless profit = $108 − $104 = $4 per share.</strong></div>
+</div>
+
+<div class="trap">Convenience yield is only relevant for physical commodities — it captures the benefit of having the actual physical good on hand (e.g., a refinery that needs oil immediately cannot use a futures contract). It is NOT applicable to financial assets like stocks or bonds.</div>
+
+</section><hr>
+
+<!-- ════════════════ R70 ════════════════ -->
+<section id="r70">
+<div class="module-header">
+  <div class="lm-label">Reading 70</div>
+  <h2>Pricing and Valuation of Forward Contracts</h2>
+  <div class="one-liner">Pricing sets the forward price at inception; valuation tracks its worth as markets move.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Critical Distinction</div>
+  <p><strong>Price vs. Value — this is the most important distinction in derivatives:</strong> The <em>forward price</em> (F₀) is fixed at initiation and never changes. The <em>value</em> of the forward contract changes continuously as the underlying spot price moves. At initiation, value = 0 by design. After initiation, value can be positive or negative.</p>
+</div>
+
+<h3>Forward Price at Initiation</h3>
+<p>The forward price F₀ is set so that the initial value of the contract is zero — no money changes hands at initiation.</p>
+
+<div class="formula">\[ F_0(T) = S_0 \times (1 + r_f)^T \quad \text{(no income or costs)} \]</div>
+<div class="formula">\[ F_0(T) = (S_0 - PV_0(\text{Benefits}) + PV_0(\text{Costs})) \times (1 + r_f)^T \]</div>
+
+<h3>Value of a Forward Contract During Its Life <span class="tag tag-critical">Critical</span></h3>
+<p>After initiation, as the spot price changes and time passes, the forward contract acquires value. Let t be the current time (0 &lt; t &lt; T), S<sub>t</sub> be the current spot price.</p>
+
+<div class="formula">\[ V_t(\text{Long}) = S_t - PV_t(\text{Future Benefits}) - \frac{F_0}{(1 + r_f)^{T-t}} \]</div>
+<div class="formula">\[ V_t(\text{Short}) = -V_t(\text{Long}) \]</div>
+
+<p>Simplified (no benefits or costs): the value of the long forward at time t is:</p>
+<div class="formula">\[ V_t = S_t - \frac{F_0}{(1 + r_f)^{T-t}} \]</div>
+
+<div class="intuition">Think of it this way: if you're long a forward at F₀, you've locked in buying at F₀. The contract is now worth the difference between what the asset is worth NOW (S<sub>t</sub>) and what you've locked in paying, discounted back from expiry. If S<sub>t</sub> has risen above your locked-in F₀, the contract is worth positive money to you. If S<sub>t</sub> has fallen, the contract is a liability.</div>
+
+<h4>Worked Example: Valuing a Forward Mid-Life</h4>
+<p>6 months ago, you entered a 1-year forward to buy a non-dividend stock at F₀ = $104 (spot was $100, r = 4%). Now (at t = 6 months), the stock is at $112. What is the value of your long forward position?</p>
+<ul>
+  <li>T − t = 0.5 years remaining</li>
+  <li>PV of F₀ = $104 / (1.04)^0.5 = $104 / 1.0198 = $101.98</li>
+  <li>V<sub>t</sub> = S<sub>t</sub> − PV(F₀) = $112 − $101.98 = <strong>$10.02</strong></li>
+</ul>
+
+<div class="key-rule">At expiration (t = T): V<sub>T</sub> = S<sub>T</sub> − F₀. The forward settles at the difference between the spot price at expiry and the locked-in forward price. If S<sub>T</sub> > F₀, long profits; if S<sub>T</sub> < F₀, long loses.</div>
+
+<h3>Forward Rate Agreements (FRAs) <span class="tag tag-exam">Exam Focus</span></h3>
+<p>An FRA is a forward contract on an interest rate. The buyer of an FRA locks in a borrowing rate; the seller locks in a lending rate. Settlement is at the beginning of the reference period (not the end).</p>
+
+<p>An <strong>FRA(1×4)</strong> is a 3-month rate, starting in 1 month. Notation: FRA(m×n) means the rate starts in m months and ends in n months, so the underlying period is (n − m) months.</p>
+
+<div class="formula">\[ \text{FRA Payment (at settlement)} = \frac{(\text{Floating Rate} - \text{FRA Rate}) \times \text{Days}/360}{1 + \text{Floating Rate} \times \text{Days}/360} \times \text{Notional} \]</div>
+
+<div class="intuition">The FRA settles at the beginning of the interest period (discounted), not at the end. This is because interest itself is paid at the end, so the settlement is the present value of what the rate difference would produce at the end of the period. Always discount the payment back.</div>
+
+<h3>Forward Currency Pricing (Covered Interest Rate Parity)</h3>
+<p>The forward FX rate is determined by the interest rate differential between two countries. Higher interest rate currency trades at a forward discount.</p>
+
+<div class="formula">\[ F_0 = S_0 \times \frac{(1 + r_d)^T}{(1 + r_f)^T} \]</div>
+<p style="text-align:center; font-size:14px; color: var(--gray3); margin-top:4px;">Where r<sub>d</sub> = domestic interest rate, r<sub>f</sub> = foreign interest rate, quoted as domestic/foreign</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">The EUR/USD spot rate is 1.10 (1 EUR = 1.10 USD). USD 1-year interest rate = 5%, EUR 1-year rate = 2%. What is the 1-year EUR/USD forward rate?</div>
+  <div class="exam-a"><strong>F₀ = 1.10 × (1.05/1.02) = 1.10 × 1.02941 = 1.1324.</strong> The USD has a higher interest rate, so it trades at a forward discount (EUR buys more USD in the forward than the spot). This reflects covered interest rate parity — if it didn't hold, you could borrow EUR cheaply, convert to USD, invest at 5%, then convert back via forward and earn a riskless profit.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A forward contract on a non-dividend-paying stock is entered at F₀ = $50. Three months later, with 3 months remaining to expiry, the stock is at $54. The annual risk-free rate is 4%. What is the value of the long forward position?</div>
+  <div class="exam-a"><strong>V = S<sub>t</sub> − F₀/(1+r)^(T−t) = $54 − $50/(1.04)^0.25 = $54 − $50/1.00995 = $54 − $49.51 = $4.49.</strong> The long forward has gained $4.49 in value because the stock has risen. If this were marked to market, the short party would owe $4.49 to the long party.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R71 ════════════════ -->
+<section id="r71">
+<div class="module-header">
+  <div class="lm-label">Reading 71</div>
+  <h2>Pricing and Valuation of Futures Contracts</h2>
+  <div class="one-liner">Like forwards, but with daily cash flows and some important differences.</div>
+</div>
+
+<h3>Futures Price vs. Forward Price</h3>
+<p>In theory, if interest rates are deterministic (non-stochastic), <strong>futures prices equal forward prices</strong> for the same underlying, maturity, and terms. In practice, they can differ slightly due to the daily marking-to-market of futures.</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>When Futures Price > Forward Price</h5>
+    <ul>
+      <li>When the underlying price is positively correlated with interest rates</li>
+      <li>Gains on long futures position happen when rates are high (good reinvestment) → futures more valuable</li>
+      <li>Example: T-bond futures — bond prices inversely correlate with rates, so actually futures &lt; forwards for bonds</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>When Futures Price &lt; Forward Price</h5>
+    <ul>
+      <li>When the underlying price is negatively correlated with interest rates</li>
+      <li>Example: Long-term bond futures — when rates fall, bond prices rise; margin gains happen when rates are low</li>
+    </ul>
+  </div>
+</div>
+
+<div class="key-rule">For the CFA exam, treat futures prices as equal to forward prices unless told otherwise. The difference is a second-order effect typically ignored at Level 1.</div>
+
+<h3>Marking to Market and Margin</h3>
+
+<h4>Initial Margin</h4>
+<p>A good-faith deposit required to enter a futures position. It is a fraction (typically 5–15%) of the contract's notional value. This is NOT a down payment — the full notional is still at risk.</p>
+
+<h4>Variation Margin (Daily Settlement)</h4>
+<p>Each day, gains and losses are credited or debited to your margin account. If your account falls below the <strong>maintenance margin</strong>, you receive a <strong>margin call</strong> and must deposit funds to restore the initial margin level.</p>
+
+<div class="analogy">Imagine a daily settling scorecard. At the end of each day, the "score" is tallied. If you've lost, cash leaves your account. If you've gained, cash enters. You can never owe more than today's price move times the notional — the CCP resets each day.</div>
+
+<h4>Worked Example: Mark-to-Market</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Day</th><th>Futures Price</th><th>Daily P&L (Long)</th><th>Margin Balance</th></tr></thead>
+  <tbody>
+    <tr><td>0 (enter)</td><td>$1,000</td><td>—</td><td>$5,000 (initial)</td></tr>
+    <tr><td>1</td><td>$1,010</td><td>+$10 × 100 = +$1,000</td><td>$6,000</td></tr>
+    <tr><td>2</td><td>$985</td><td>−$25 × 100 = −$2,500</td><td>$3,500</td></tr>
+    <tr><td>2 (margin call)</td><td>—</td><td>Must deposit $1,500</td><td>$5,000 (restored)</td></tr>
+    <tr><td>3</td><td>$990</td><td>+$5 × 100 = +$500</td><td>$5,500</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Contango and Backwardation <span class="tag tag-exam">Exam Focus</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Contango (Normal Market)</h5>
+    <ul>
+      <li>Futures price &gt; Spot price</li>
+      <li>The normal case for financial assets (cost of carry is positive)</li>
+      <li>Later expiry contracts priced higher</li>
+      <li>Upward-sloping forward curve</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Backwardation (Inverted Market)</h5>
+    <ul>
+      <li>Futures price &lt; Spot price</li>
+      <li>Common for commodities with high convenience yield</li>
+      <li>Occurs when immediate demand is very strong</li>
+      <li>Downward-sloping forward curve</li>
+    </ul>
+  </div>
+</div>
+
+<div class="intuition">Backwardation in oil futures: oil producers need to sell forward to lock in prices, and convenience yield is high (everyone wants oil NOW). The pressure of producers selling forward drives futures below spot. This is also called "normal backwardation" in some contexts — don't confuse the terms.</div>
+
+<h3>Basis and Basis Risk</h3>
+<div class="formula">\[ \text{Basis} = \text{Spot Price} - \text{Futures Price} \]</div>
+<p>Basis is not constant — it changes as time passes and as spot and futures prices move differently. <strong>Basis risk</strong> is the risk that the basis changes unexpectedly, causing a hedge to be imperfect.</p>
+
+<div class="key-rule">Basis converges to zero at expiry: as the futures contract approaches its delivery date, the futures price converges to the spot price (otherwise cash-and-carry arbitrage would exist). At expiry, Basis = 0.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor is long 10 crude oil futures contracts (100 barrels each). The initial margin is $5,000 per contract. At the end of Day 1, the futures price falls from $80/barrel to $78/barrel. What happens to the investor's margin account?</div>
+  <div class="exam-a"><strong>Loss = ($78 − $80) × 100 × 10 = −$2 × 1,000 = −$2,000.</strong> The margin account is debited $2,000. If this falls below the maintenance margin, a margin call is issued. Note: the total initial margin was $5,000 × 10 = $50,000. A $2,000 single-day loss on a $80,000 notional position is a 2.5% move that causes a 4% hit to the margin balance.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R72 ════════════════ -->
+<section id="r72">
+<div class="module-header">
+  <div class="lm-label">Reading 72</div>
+  <h2>Pricing and Valuation of Interest Rate and Other Swaps</h2>
+  <div class="one-liner">A swap is just a bundle of forwards — price it the same way.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 The Big Picture</div>
+  <p>An interest rate swap can be decomposed into a <strong>series of FRAs</strong> (forward rate agreements), one for each settlement date. Alternatively, it can be viewed as a <strong>fixed-rate bond vs. a floating-rate bond</strong> — the fixed-rate payer is short a fixed bond, long a floating bond. Both frameworks give the same answer for pricing and valuation.</p>
+</div>
+
+<h3>Plain Vanilla Interest Rate Swap Structure</h3>
+<p>In a fixed-for-floating swap with notional N:</p>
+<ul>
+  <li><strong>Fixed-rate payer</strong> pays the swap rate (FS) × N × period fraction, receives SOFR × N × period fraction</li>
+  <li><strong>Floating-rate payer</strong> pays SOFR × N × period fraction, receives FS × N × period fraction</li>
+  <li>Only the <strong>net</strong> payment is exchanged (netting reduces credit exposure)</li>
+  <li>Notional principal is NEVER exchanged (unlike currency swaps)</li>
+</ul>
+
+<div class="analogy">A company has issued a $100M floating-rate bond at SOFR + 200bps. It now wants to lock in a fixed payment. It enters a "pay fixed, receive floating" swap. The swap's floating receipts cancel out the floating bond payments — net effect: the company pays a fixed all-in rate. The swap has converted floating borrowing to fixed, without touching the original bond.</div>
+
+<h3>Pricing the Swap: The Swap Rate <span class="tag tag-critical">Critical</span></h3>
+<p>The <strong>swap rate (fixed rate)</strong> is set so that the swap's initial value is zero. This means the present value of all fixed payments must equal the present value of all expected floating payments.</p>
+
+<div class="formula">\[ \text{Swap Rate} = FS = \frac{1 - Z_N}{\sum_{i=1}^{N} Z_i} \]</div>
+<p style="text-align:center; font-size:14px; color: var(--gray3); margin-top:4px;">Where Z<sub>i</sub> = discount factor for period i (PV of $1 received at time i)</p>
+
+<p>Or equivalently:</p>
+<div class="formula">\[ \sum_{t=1}^{N} FS \cdot Z_t + Z_N = 1 \]</div>
+<p style="text-align:center; font-size:14px; color: var(--gray3); margin-top:4px;">PV(fixed payments) + PV(final notional exchange) = par (=1 on a per-unit basis)</p>
+
+<h4>Worked Example: Pricing a 2-Year Annual Pay Swap</h4>
+<p>Given spot rates: S₁ = 4%, S₂ = 5%. Calculate the swap rate.</p>
+<ul>
+  <li>Z₁ = 1/(1.04)¹ = 0.9615</li>
+  <li>Z₂ = 1/(1.05)² = 0.9070</li>
+  <li>FS = (1 − Z₂) / (Z₁ + Z₂) = (1 − 0.9070) / (0.9615 + 0.9070) = 0.0930 / 1.8685 = <strong>4.978% ≈ 4.98%</strong></li>
+</ul>
+
+<div class="intuition">The swap rate is just the coupon rate on a par bond with the same maturity and yield structure. A par bond has value exactly equal to its face value — meaning the PV of coupons + PV of face value = 1. The swap rate is the coupon rate that makes this true, given the current yield curve.</div>
+
+<h3>Valuing a Swap During Its Life <span class="tag tag-exam">Exam Focus</span></h3>
+<p>After initiation, interest rates change, and the swap acquires value. From the fixed-rate payer's perspective, the swap is like being long a floating-rate bond (worth par, since it resets) and short a fixed-rate bond.</p>
+
+<div class="formula">\[ V_{\text{fixed payer}} = V_{\text{floating}} - V_{\text{fixed}} \]</div>
+<div class="formula">\[ V_{\text{floating}} = 1 \quad \text{(resets to par at each coupon date)} \]</div>
+<div class="formula">\[ V_{\text{fixed}} = FS \cdot \sum Z_i + Z_N \]</div>
+
+<p>If rates have risen since the swap was initiated, the fixed-rate payer benefits (they locked in the old, lower fixed rate, and the market now demands more). The swap is worth positive to the fixed-rate payer.</p>
+
+<h3>Currency Swaps</h3>
+<p>Unlike interest rate swaps, currency swaps involve the <strong>exchange of principal in two different currencies</strong> at the start and end of the swap. During the swap, interest payments in both currencies are exchanged.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Interest Rate Swap</th><th>Currency Swap</th></tr></thead>
+  <tbody>
+    <tr><td>Principal exchange</td><td>No (never exchanged)</td><td>Yes — at inception AND maturity</td></tr>
+    <tr><td>Currency of cash flows</td><td>Single currency (net settlement)</td><td>Two different currencies</td></tr>
+    <tr><td>FX risk</td><td>None</td><td>Significant — payments are in different currencies</td></tr>
+    <tr><td>Credit exposure</td><td>Only interest differential</td><td>Principal + interest (larger notional at risk)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Six months into a 2-year annual pay fixed-for-floating swap (you pay fixed 5%), market rates have risen and the new 1.5-year swap rate is 6%. Has the swap gained or lost value to you as the fixed payer? Why?</div>
+  <div class="exam-a"><strong>The swap has GAINED value to the fixed payer.</strong> You locked in paying 5% fixed when the market now requires 6%. You are paying below-market rates — the swap is "in the money" for you. Equivalently: you are short a fixed-rate bond (you receive fixed = 5%). When rates rise, the fixed bond falls in value. Short position on a falling bond = profit. The fixed payer gains when rates rise.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R73 ════════════════ -->
+<section id="r73">
+<div class="module-header">
+  <div class="lm-label">Reading 73</div>
+  <h2>Pricing and Valuation of Options</h2>
+  <div class="one-liner">Six forces drive every option price — master these and you can price anything.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 The Big Picture</div>
+  <p>Unlike forward contracts (which have a zero initial value by design), options have a positive premium because they give one-sided rights. The option price has two components: <strong>intrinsic value</strong> (what it's worth if exercised right now) and <strong>time value</strong> (the extra premium for the possibility of future favourable moves). Time value always erodes to zero at expiry.</p>
+</div>
+
+<h3>Option Value Components</h3>
+<div class="formula">\[ \text{Option Price} = \text{Intrinsic Value} + \text{Time Value} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Component</th><th>Call</th><th>Put</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Intrinsic Value</strong></td><td>max(0, S − X) → profit if exercised NOW</td><td>max(0, X − S) → profit if exercised NOW</td></tr>
+    <tr><td><strong>Time Value</strong></td><td>Option Price − Intrinsic Value</td><td>Option Price − Intrinsic Value</td></tr>
+    <tr><td><strong>At Expiry</strong></td><td>Time Value = 0; Price = max(0, S<sub>T</sub> − X)</td><td>Time Value = 0; Price = max(0, X − S<sub>T</sub>)</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Moneyness <span class="tag tag-exam">Exam Focus</span></h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Status</th><th>Call (right to buy)</th><th>Put (right to sell)</th><th>Intrinsic Value</th></tr></thead>
+  <tbody>
+    <tr><td><strong>In-the-money (ITM)</strong></td><td>S &gt; X</td><td>S &lt; X</td><td>Positive</td></tr>
+    <tr><td><strong>At-the-money (ATM)</strong></td><td>S = X</td><td>S = X</td><td>Zero</td></tr>
+    <tr><td><strong>Out-of-the-money (OTM)</strong></td><td>S &lt; X</td><td>S &gt; X</td><td>Zero (but time value still positive)</td></tr>
+  </tbody>
+</table></div>
+
+<h3>The Six Factors Affecting Option Prices <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Factor</th><th>↑ Factor Effect on Call</th><th>↑ Factor Effect on Put</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Underlying Price (S)</strong></td><td>↑ Call Value</td><td>↓ Put Value</td><td>Higher S → call more ITM, put more OTM</td></tr>
+    <tr><td><strong>Strike Price (X)</strong></td><td>↓ Call Value</td><td>↑ Put Value</td><td>Higher X → call harder to reach, put easier to reach</td></tr>
+    <tr><td><strong>Time to Expiry (T)</strong></td><td>↑ Call Value (usually)</td><td>↑ Put Value (usually)</td><td>More time = more chance of favourable move (American always; European generally)</td></tr>
+    <tr><td><strong>Volatility (σ)</strong></td><td>↑ Call Value</td><td>↑ Put Value</td><td>Higher vol = bigger possible moves both up and down; option holder benefits from big moves, not harmed by bad moves (floor at zero)</td></tr>
+    <tr><td><strong>Risk-Free Rate (r)</strong></td><td>↑ Call Value</td><td>↓ Put Value</td><td>Higher r → PV of strike lower → call more valuable; higher r → PV of put payoff lower</td></tr>
+    <tr><td><strong>Dividends/Distributions (D)</strong></td><td>↓ Call Value</td><td>↑ Put Value</td><td>Dividend reduces stock price on ex-date → call less valuable, put more valuable</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Volatility affects both calls AND puts in the SAME direction — more volatility = more valuable for BOTH. This is the most commonly tested and counterintuitive fact. The holder benefits from large moves but loses a maximum of the premium regardless of direction.</div>
+
+<h3>Boundary Conditions for European Options</h3>
+
+<h4>Lower Bounds</h4>
+<div class="formula">\[ c \geq \max\!\left(0,\; S_0 - \frac{X}{(1+r_f)^T}\right) \]</div>
+<div class="formula">\[ p \geq \max\!\left(0,\; \frac{X}{(1+r_f)^T} - S_0\right) \]</div>
+<p>The call's lower bound is the current spot minus the PV of the strike. The put's lower bound is the PV of the strike minus the spot. Options can never have negative value (no one exercises an option at a loss).</p>
+
+<h4>Upper Bounds</h4>
+<div class="formula">\[ c \leq S_0 \quad \text{(a call can't be worth more than the stock itself)} \]</div>
+<div class="formula">\[ p \leq \frac{X}{(1+r_f)^T} \quad \text{(a European put can't be worth more than PV of strike)} \]</div>
+
+<h3>Early Exercise of American Options</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>American Call on Non-Dividend Stock</h5>
+    <ul>
+      <li>Early exercise is <strong>NEVER optimal</strong></li>
+      <li>Exercising destroys time value — better to sell the option</li>
+      <li>Therefore: American call = European call (same price)</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>American Put on Any Stock</h5>
+    <ul>
+      <li>Early exercise <strong>CAN be optimal</strong> for deep ITM puts</li>
+      <li>If S → 0, waiting adds little but you forego the time value of strike X</li>
+      <li>American put &gt; European put always</li>
+    </ul>
+  </div>
+</div>
+
+<div class="intuition">Why is early exercise of an American call on a non-dividend stock never optimal? Suppose you own a call with strike $50 and the stock is at $100. You could exercise and receive $50. But the call is worth at least $50 (the lower bound), and actually more, because it has time value left. You're better off selling the call than exercising it — you collect time value by selling. Only dividends change this: if the stock is about to pay a large dividend that reduces the stock price, early exercise before the ex-date can be worth it.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A European call on a non-dividend stock has S = €60, X = €55, T = 3 months, r = 4%, σ = 25%. The option's intrinsic value is €5. If the option trades at €7, what is the time value?</div>
+  <div class="exam-a"><strong>Time value = Option price − Intrinsic value = €7 − €5 = €2.</strong> The option is in-the-money (S = €60 > X = €55). The €2 time value reflects the probability of further favourable moves before expiry and the optionality that protects against a price reversal below the strike.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">If a stock's volatility increases significantly, what is the effect on the price of an at-the-money put option?</div>
+  <div class="exam-a"><strong>The put price increases.</strong> Higher volatility increases the probability of extreme moves in either direction. The put holder benefits from large downward moves but is protected (by paying only the premium) on upward moves. Higher volatility always benefits option holders regardless of whether the option is a call or a put.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R74 ════════════════ -->
+<section id="r74">
+<div class="module-header">
+  <div class="lm-label">Reading 74</div>
+  <h2>Option Replication Using Put-Call Parity</h2>
+  <div class="one-liner">One equation that connects calls, puts, stocks and bonds — and lets you create synthetic positions.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 The Big Picture</div>
+  <p>Put-call parity is the cornerstone of option pricing theory. It establishes a precise no-arbitrage relationship between call prices, put prices, the underlying stock, and a risk-free bond. If this relationship is violated, you can earn a riskless profit by buying the underpriced combination and selling the overpriced one. More importantly, it means you can <em>replicate</em> any one instrument using the other three.</p>
+</div>
+
+<h3>Put-Call Parity: The Formula <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">\[ c + \frac{X}{(1+r_f)^T} = p + S_0 \]</div>
+<p style="text-align:center; font-size:14px; color: var(--gray3); margin-top:4px;">For European options on non-dividend-paying stocks</p>
+
+<p>Verbally: <strong>Call + PV(Strike) = Put + Stock</strong>. Both sides create the same payoff profile at expiry.</p>
+
+<h4>Proof: Why Both Sides Have the Same Payoff at Expiry</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Scenario</th><th>Portfolio A: Call + PV(X) invested at r</th><th>Portfolio B: Put + Stock</th></tr></thead>
+  <tbody>
+    <tr><td>S<sub>T</sub> &gt; X (call ITM)</td><td>Call pays S<sub>T</sub> − X; bond pays X → total = <strong>S<sub>T</sub></strong></td><td>Put expires worthless (0); stock worth S<sub>T</sub> → total = <strong>S<sub>T</sub></strong></td></tr>
+    <tr><td>S<sub>T</sub> &lt; X (put ITM)</td><td>Call expires worthless (0); bond pays X → total = <strong>X</strong></td><td>Put pays X − S<sub>T</sub>; stock worth S<sub>T</sub> → total = <strong>X</strong></td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Portfolio A and Portfolio B always produce the same payoff in all future states. By the law of one price, they must have the same value today. This proves put-call parity: c + PV(X) = p + S₀.</div>
+
+<h3>Synthetic Positions from Put-Call Parity <span class="tag tag-exam">Exam Focus</span></h3>
+<p>You can rearrange put-call parity to solve for any one instrument in terms of the others:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Synthetic Position</th><th>Components</th><th>Formula</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Synthetic Long Call</strong></td><td>Long put + Long stock + Borrow PV(X)</td><td>c = p + S₀ − PV(X)</td></tr>
+    <tr><td><strong>Synthetic Long Put</strong></td><td>Long call + Short stock + Lend PV(X)</td><td>p = c − S₀ + PV(X)</td></tr>
+    <tr><td><strong>Synthetic Long Stock</strong></td><td>Long call + Short put + Lend PV(X)</td><td>S₀ = c − p + PV(X)</td></tr>
+    <tr><td><strong>Synthetic Risk-Free Bond</strong></td><td>Long stock + Long put + Short call</td><td>PV(X) = p + S₀ − c</td></tr>
+    <tr><td><strong>Synthetic Long Forward</strong></td><td>Long call + Short put (same strike)</td><td>F₀ equivalent payoff = c − p</td></tr>
+  </tbody>
+</table></div>
+
+<div class="analogy">Synthetic positions are like building a chair from other furniture. You can't find the exact chair you want, so you combine two stools and a cushion to get the same thing. Put-call parity tells you exactly which pieces to combine and how many of each.</div>
+
+<h3>Put-Call Parity for Options on Forwards/Futures</h3>
+<p>For European options on a forward or futures contract (where the underlying is a forward price F₀):</p>
+
+<div class="formula">\[ c + \frac{X}{(1+r_f)^T} = p + \frac{F_0}{(1+r_f)^T} \]</div>
+
+<p>Or equivalently: c − p = PV(F₀ − X). The difference between a call and a put price equals the PV of the difference between the forward price and the strike price.</p>
+
+<h3>Arbitrage Using Put-Call Parity</h3>
+<h4>Example: Detecting Mispricing</h4>
+<p>S = $100, X = $100, T = 1 year, r = 5%. Call trades at $10.00. What must the put trade at?</p>
+<ul>
+  <li>PV(X) = $100/1.05 = $95.24</li>
+  <li>Put = c − S₀ + PV(X) = $10.00 − $100 + $95.24 = <strong>$5.24</strong></li>
+  <li>If put actually trades at $7.00 (too expensive):</li>
+  <li>Arbitrage: Sell the put, sell the stock short, buy the call, invest PV(X) = $95.24</li>
+  <li>Riskless profit = $7.00 − $5.24 = $1.76 per share (at initiation)</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A European call option (S=$80, X=$85, T=6 months, r=4%) trades at $3.50. Using put-call parity, what is the no-arbitrage price of the corresponding European put?</div>
+  <div class="exam-a"><strong>p = c − S₀ + PV(X) = $3.50 − $80 + $85/(1.04)^0.5 = $3.50 − $80 + $85/1.0198 = $3.50 − $80 + $83.35 = $6.85.</strong> The put should trade at $6.85. Since the call is out-of-the-money (S < X), the put is in-the-money (S < X for a put) and commands a higher price — consistent with the calculation.</div>
+</div>
+
+<div class="trap">Put-call parity holds exactly ONLY for European options. American options have early exercise rights, so the simple parity does not hold exactly. For American options, put-call parity gives an inequality (bounds), not an exact equality.</div>
+
+</section><hr>
+
+<!-- ════════════════ R75 ════════════════ -->
+<section id="r75">
+<div class="module-header">
+  <div class="lm-label">Reading 75</div>
+  <h2>Valuing a Derivative Using a One-Period Binomial Model</h2>
+  <div class="one-liner">The most elegant idea in derivatives: value options without knowing probabilities.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 The Big Picture</div>
+  <p>The binomial model is the conceptual foundation of all options pricing. Its core insight is profound: you don't need to know what probability the stock will go up to price an option. Instead, you construct a <em>replicating portfolio</em> that exactly mimics the option's payoff. Since the portfolio and the option produce identical cash flows, they must have the same price — regardless of actual probabilities.</p>
+</div>
+
+<h3>The One-Period Binomial Framework</h3>
+<p>The stock can move in only two ways over the next period:</p>
+<ul>
+  <li><strong>Up:</strong> S moves to S<sup>+</sup> = S × u (where u &gt; 1)</li>
+  <li><strong>Down:</strong> S moves to S<sup>−</sup> = S × d (where 0 &lt; d &lt; 1)</li>
+</ul>
+
+<div class="formula">\[ S^+ = S_0 \cdot u \qquad S^- = S_0 \cdot d \]</div>
+
+<h3>Risk-Neutral Probability <span class="tag tag-critical">Critical</span></h3>
+<p>We use a <strong>risk-neutral probability</strong> π (not the real-world probability) such that the expected return on the stock equals the risk-free rate. This is the key trick — by repricing probabilities to make all assets earn the risk-free rate, we can discount option payoffs at the risk-free rate.</p>
+
+<div class="formula">\[ \pi = \frac{(1 + r_f) - d}{u - d} \qquad \text{(1 − π)} = \frac{u - (1+r_f)}{u - d} \]</div>
+
+<div class="key-rule">π is NOT the real-world probability of the stock going up. It is a synthetic probability that makes the model internally consistent in a no-arbitrage world. The real-world probability is irrelevant to option pricing — what matters is the possible payoffs and the risk-free rate.</div>
+
+<h3>Option Price: The Binomial Formula <span class="tag tag-critical">Critical</span></h3>
+<div class="formula">\[ c = \frac{\pi \cdot c^+ + (1 - \pi) \cdot c^-}{1 + r_f} \]</div>
+<div class="formula">\[ p = \frac{\pi \cdot p^+ + (1 - \pi) \cdot p^-}{1 + r_f} \]</div>
+<p style="text-align:center; font-size:14px; color: var(--gray3); margin-top:4px;">Where c⁺, c⁻ are the option payoffs in the up and down states respectively</p>
+
+<h4>Worked Example: Pricing a Call Option</h4>
+<p>Stock: S = $100, u = 1.10, d = 0.90, r<sub>f</sub> = 5%, X = $100 (ATM call).</p>
+<p><strong>Step 1: Calculate up and down stock prices.</strong></p>
+<ul>
+  <li>S<sup>+</sup> = $100 × 1.10 = $110</li>
+  <li>S<sup>−</sup> = $100 × 0.90 = $90</li>
+</ul>
+<p><strong>Step 2: Calculate option payoffs at expiry.</strong></p>
+<ul>
+  <li>c<sup>+</sup> = max(0, $110 − $100) = $10</li>
+  <li>c<sup>−</sup> = max(0, $90 − $100) = $0</li>
+</ul>
+<p><strong>Step 3: Calculate risk-neutral probability.</strong></p>
+<ul>
+  <li>π = (1.05 − 0.90) / (1.10 − 0.90) = 0.15 / 0.20 = <strong>0.75</strong></li>
+  <li>1 − π = 0.25</li>
+</ul>
+<p><strong>Step 4: Calculate option price.</strong></p>
+<div class="formula">\[ c = \frac{0.75 \times \$10 + 0.25 \times \$0}{1.05} = \frac{\$7.50}{1.05} = \mathbf{\$7.14} \]</div>
+
+<h3>The Replicating Portfolio Approach (Alternative Method)</h3>
+<p>Construct a portfolio of Δ shares of stock and a bond B that exactly replicates the option payoffs:</p>
+
+<div class="formula">\[ \Delta = \frac{c^+ - c^-}{S^+ - S^-} = \frac{\text{Change in option value}}{\text{Change in stock value}} \]</div>
+<p>This Δ is the <strong>hedge ratio</strong> (option delta) — the number of shares needed to hedge one option.</p>
+
+<h4>Continuing the Example:</h4>
+<ul>
+  <li>Δ = ($10 − $0) / ($110 − $90) = $10 / $20 = <strong>0.50</strong></li>
+  <li>Portfolio: Long 0.50 shares, short 1 call. This portfolio is riskless.</li>
+  <li>Up state: 0.50 × $110 − $10 = $55 − $10 = $45</li>
+  <li>Down state: 0.50 × $90 − $0 = $45 − $0 = $45 ✓ (same in both states)</li>
+  <li>PV of $45 = $45 / 1.05 = $42.86</li>
+  <li>Value of hedge portfolio today: 0.50 × $100 − c = $42.86 → c = $50 − $42.86 = <strong>$7.14</strong> ✓</li>
+</ul>
+
+<div class="intuition">The hedge portfolio is riskless — it pays $45 regardless of whether the stock goes up or down. You've engineered a synthetic T-bill using a mix of the stock and the call option. Since the payoff is riskless, it must earn exactly the risk-free rate. This constraint determines the call price exactly — no probabilities needed.</div>
+
+<h3>No-Arbitrage Constraint on u and d</h3>
+<p>For no-arbitrage to hold, we need:</p>
+<div class="formula">\[ d \lt (1 + r_f) \lt u \]</div>
+<p>If the risk-free rate is outside the range [d, u], an arbitrage exists — you could earn more than the risk-free rate with zero risk by combining the stock and the riskless asset.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A stock is priced at $50. In one period, it either rises to $60 (u = 1.20) or falls to $40 (d = 0.80). The risk-free rate is 6% per period. A put with strike $50 is written. Calculate the put's price using the binomial model.</div>
+  <div class="exam-a">
+    <strong>Step 1: Put payoffs.</strong> p⁺ = max(0, $50 − $60) = $0; p⁻ = max(0, $50 − $40) = $10.<br>
+    <strong>Step 2: Risk-neutral prob.</strong> π = (1.06 − 0.80)/(1.20 − 0.80) = 0.26/0.40 = 0.65; 1−π = 0.35.<br>
+    <strong>Step 3: Put price.</strong> p = (0.65 × $0 + 0.35 × $10)/1.06 = $3.50/1.06 = <strong>$3.30.</strong><br>
+    Verify with delta: Δ = ($0 − $10)/($60 − $40) = −0.50 (short 0.50 shares to replicate the put).
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">In the one-period binomial model, which of the following is used to determine the risk-neutral probability? A) The investor's risk aversion. B) The actual real-world probability of the up move. C) The up and down factors and the risk-free rate.</div>
+  <div class="exam-a"><strong>Answer: C.</strong> π = (1 + r_f − d)/(u − d). The risk-neutral probability is derived entirely from u, d, and r_f — not from any real-world probabilities or investor preferences. This is the crucial insight of risk-neutral pricing: the actual probability of an up move is irrelevant to option valuation.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ FORMULA SHEET ════════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Formula Sheet — All 10 Derivative Readings</h2>
+  <div class="one-liner">Every formula you need, in one place.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+  <thead><tr><th style="width:40%">Formula</th><th style="width:45%">Description</th><th>Reading</th></tr></thead>
+  <tbody>
+    <tr><td>\(F_0 = S_0 \cdot (1+r_f)^T\)</td><td>Forward price — no income/costs</td><td>69/70</td></tr>
+    <tr><td>\(F_0 = (S_0 - PV(\text{benefits}) + PV(\text{costs})) \cdot (1+r_f)^T\)</td><td>Forward price — with carry costs/benefits</td><td>69/70</td></tr>
+    <tr><td>\(F_0 = S_0 \cdot e^{r_f T}\)</td><td>Forward price — continuous compounding</td><td>69/70</td></tr>
+    <tr><td>\(V_t = S_t - F_0 / (1+r_f)^{T-t}\)</td><td>Long forward value mid-life</td><td>70</td></tr>
+    <tr><td>\(V_T = S_T - F_0\)</td><td>Forward payoff at expiry (long)</td><td>70</td></tr>
+    <tr><td>\(F_0 = S_0 \cdot (1+r_d)^T / (1+r_f)^T\)</td><td>Forward FX rate (covered interest parity)</td><td>70</td></tr>
+    <tr><td>\(\text{Basis} = S - F\)</td><td>Futures basis (converges to 0 at expiry)</td><td>71</td></tr>
+    <tr><td>\(FS = \frac{1-Z_N}{\sum Z_i}\)</td><td>Swap rate (fixed rate at initiation)</td><td>72</td></tr>
+    <tr><td>\(V_{\text{fixed payer}} = V_{\text{float}} - V_{\text{fixed bond}}\)</td><td>Swap value during life</td><td>72</td></tr>
+    <tr><td>\(c = \max(0, S - X)\)</td><td>Call option intrinsic value</td><td>73</td></tr>
+    <tr><td>\(p = \max(0, X - S)\)</td><td>Put option intrinsic value</td><td>73</td></tr>
+    <tr><td>\(c \geq \max(0, S_0 - X/(1+r)^T)\)</td><td>Call lower bound (European)</td><td>73</td></tr>
+    <tr><td>\(p \geq \max(0, X/(1+r)^T - S_0)\)</td><td>Put lower bound (European)</td><td>73</td></tr>
+    <tr><td>\(c + X/(1+r)^T = p + S_0\)</td><td>Put-call parity (European, no dividends)</td><td>74</td></tr>
+    <tr><td>\(\pi = \frac{(1+r_f) - d}{u - d}\)</td><td>Risk-neutral probability (up)</td><td>75</td></tr>
+    <tr><td>\(c = \frac{\pi \cdot c^+ + (1-\pi) \cdot c^-}{1+r_f}\)</td><td>Call price — binomial model</td><td>75</td></tr>
+    <tr><td>\(\Delta = \frac{c^+ - c^-}{S^+ - S^-}\)</td><td>Hedge ratio / option delta (binomial)</td><td>75</td></tr>
+    <tr><td>\(\text{FRA settlement} = \frac{(\text{FR}-\text{FRA rate}) \cdot \text{Days}/360}{1+\text{FR} \cdot \text{Days}/360} \cdot N\)</td><td>FRA cash settlement payment</td><td>70</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Common Exam Traps — Derivatives <span class="tag tag-critical">Critical</span></h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Trap</th><th>The Mistake</th><th>The Correct Thinking</th></tr></thead>
+  <tbody>
+    <tr><td>Swap notional exchange</td><td>Assuming notional is exchanged in an interest rate swap</td><td>Notional is NEVER exchanged in IRS; it IS exchanged at start and end in currency swaps</td></tr>
+    <tr><td>Zero initial value</td><td>Saying forwards/futures cost something to enter</td><td>Forwards/futures have zero value at initiation (no money changes hands); options require a premium</td></tr>
+    <tr><td>Put-call parity scope</td><td>Applying c + PV(X) = p + S₀ to American options</td><td>Put-call parity holds exactly only for European options; gives bounds for American options</td></tr>
+    <tr><td>Volatility and puts</td><td>Saying higher volatility hurts puts</td><td>Higher volatility ALWAYS increases both call and put values</td></tr>
+    <tr><td>Risk-neutral probability</td><td>Using actual (real-world) probability in binomial model</td><td>The binomial model uses risk-neutral probabilities derived from u, d, r — not actual probabilities</td></tr>
+    <tr><td>Early call exercise</td><td>Saying American call = European call always</td><td>Only true for non-dividend-paying stocks. With dividends, early exercise can be optimal just before ex-date</td></tr>
+    <tr><td>Futures vs. forward pricing</td><td>Always assuming futures price ≠ forward price</td><td>Treat as equal for exam purposes unless specifically told there is a correlation effect</td></tr>
+    <tr><td>FRA settlement timing</td><td>Collecting FRA settlement at the end of the reference period</td><td>FRA settles at the BEGINNING of the reference period (discounted PV of the payment)</td></tr>
+    <tr><td>Basis direction</td><td>Confusing basis as always positive</td><td>Basis = Spot − Futures. In contango (futures > spot), basis is negative. Basis converges to 0.</td></tr>
+    <tr><td>Fixed-rate payer in IRS</td><td>Thinking the fixed payer gains when rates fall</td><td>Fixed payer gains when rates RISE (they locked in a low rate; market now demands more)</td></tr>
+  </tbody>
+</table></div>
+
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

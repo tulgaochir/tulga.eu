@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Fixed Income: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 230px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 230px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 230px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+.intuition .label { font-weight: 700; display: block; margin-bottom: 4px; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Key Rule — "; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── FORMULA REFERENCE TABLE ── */
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Fixed Income · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Foundations</div>
+  <a href="#lm1">LM1 — Bond Features</a>
+  <a href="#lm2">LM2 — Cash Flows & Types</a>
+  <a href="#lm3">LM3 — Issuance & Trading</a>
+  <div class="nav-section">Markets</div>
+  <a href="#lm4">LM4 — Corporate Markets</a>
+  <a href="#lm5">LM5 — Government Markets</a>
+  <div class="nav-section">Valuation</div>
+  <a href="#lm6">LM6 — Bond Valuation</a>
+  <a href="#lm7">LM7 — Yield Spreads (Fixed)</a>
+  <a href="#lm8">LM8 — FRNs & Money Market</a>
+  <a href="#lm9">LM9 — Term Structure</a>
+  <div class="nav-section">Risk & Duration</div>
+  <a href="#lm10">LM10 — Interest Rate Risk</a>
+  <a href="#lm11">LM11 — Duration</a>
+  <a href="#lm12">LM12 — Convexity</a>
+  <a href="#lm13">LM13 — Curve-Based Risk</a>
+  <div class="nav-section">Credit</div>
+  <a href="#lm14">LM14 — Credit Risk</a>
+  <a href="#lm15">LM15 — Govt Credit</a>
+  <a href="#lm16">LM16 — Corp Credit</a>
+  <div class="nav-section">Structured Products</div>
+  <a href="#lm17">LM17 — Securitisation</a>
+  <a href="#lm18">LM18 — ABS Features</a>
+  <a href="#lm19">LM19 — MBS Features</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Formula Sheet</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Fixed Income</h1>
+  <p class="subtitle">Intuition-First Study Guide · All 19 Modules</p>
+  <p class="meta">Every concept explained in plain English · Likely exam questions after every topic</p>
+</div>
+
+<!-- ════════════════ LM1 ════════════════ -->
+<section id="lm1">
+<div class="module-header">
+  <div class="lm-label">Learning Module 1</div>
+  <h2>Fixed-Income Instrument Features</h2>
+  <div class="one-liner">The anatomy of a bond — what every bond has, and what it means.</div>
+</div>
+
+<h3>What is a Bond?</h3>
+<p>A bond is just a loan in tradeable form. The issuer borrows money, pays interest (coupons) periodically, and returns the principal at maturity. Because it's standardised and tradeable, you can buy and sell it on the market — unlike a bank loan which stays on the bank's books.</p>
+
+<div class="analogy">You lend your friend €1,000. They promise to pay you €50/year for 5 years, then return your €1,000 at the end. That's a bond. Now imagine that IOU is printed on a certificate that anyone can buy from you — that's a tradeable bond.</div>
+
+<h3>The Six Core Bond Features</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>What It Means</th><th>Why It Matters</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Issuer</strong></td><td>The borrower (government, company, bank)</td><td>Determines default risk and creditworthiness</td></tr>
+    <tr><td><strong>Maturity</strong></td><td>When the principal is repaid (1–30+ years)</td><td>Longer maturity = more interest rate risk</td></tr>
+    <tr><td><strong>Par Value (Face)</strong></td><td>The principal amount, e.g., €1,000 or €100</td><td>What gets repaid at maturity</td></tr>
+    <tr><td><strong>Coupon Rate</strong></td><td>Annual interest rate, e.g., 5%</td><td>Annual income = Coupon Rate × Par Value</td></tr>
+    <tr><td><strong>Seniority</strong></td><td>Who gets paid first if the issuer defaults</td><td>Senior secured gets most; equity gets nothing</td></tr>
+    <tr><td><strong>Covenants</strong></td><td>Legal rules the issuer must follow</td><td>Protect bondholders from risky issuer behaviour</td></tr>
+  </tbody>
+</table></div>
+
+<div class="formula">\[ \text{Annual Coupon Payment} = \text{Coupon Rate} \times \text{Par Value} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A bond has a par value of €1,000, a 6% annual coupon rate, and pays coupons semi-annually. What is each coupon payment?</div>
+  <div class="exam-a"><strong>Answer:</strong> Annual coupon = 6% × €1,000 = €60. Semi-annual payment = €60 ÷ 2 = <strong>€30</strong>. The CFA exam frequently tests whether you remember to divide by the payment frequency.</div>
+</div>
+
+<h3>Covenants — The Bondholder's Seatbelt</h3>
+<p>Covenants are legal restrictions in the bond contract (indenture) that protect investors. Once a bond is issued, the issuer could theoretically take on more debt or sell assets — covenants prevent that.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>What It Does</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Affirmative (positive)</strong></td><td>Things the issuer MUST do</td><td>Maintain insurance, provide audited accounts</td></tr>
+    <tr><td><strong>Negative (restrictive)</strong></td><td>Things the issuer CANNOT do</td><td>Cannot issue more debt above a ratio; cannot pay large dividends</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A bond covenant states the issuer must maintain a debt-to-equity ratio below 2.0×. This is best described as a:</div>
+  <div class="exam-a"><strong>Answer: Negative (restrictive) covenant.</strong> It restricts what the issuer can do (take on more leverage). Affirmative covenants require the issuer to DO something; negative covenants prohibit actions.</div>
+</div>
+
+<h3>Seniority — Who Gets Paid First?</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Priority</th><th>Debt Type</th><th>Typical Recovery Rate</th></tr></thead>
+  <tbody>
+    <tr><td>1st</td><td>First-lien secured debt</td><td>60–80%</td></tr>
+    <tr><td>2nd</td><td>Second-lien secured debt</td><td>30–60%</td></tr>
+    <tr><td>3rd</td><td>Senior unsecured debt</td><td>30–50%</td></tr>
+    <tr><td>4th</td><td>Subordinated debt</td><td>10–25%</td></tr>
+    <tr><td>Last</td><td>Equity</td><td>~0%</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Think of seniority like a waterfall: cash flows down from secured debt at the top, draining each level before reaching the next. Equity shareholders only get what's left over — which in bankruptcy is usually nothing.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A company defaults. Its senior secured bondholders recover 70% of face value. What can subordinated bondholders expect to recover relative to senior secured holders?</div>
+  <div class="exam-a"><strong>Answer:</strong> Less than 70%. Subordinated holders are junior in the payment waterfall — they only get paid after all senior claims are satisfied. In many defaults, subordinated bondholders recover very little or nothing.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM2 ════════════════ -->
+<section id="lm2">
+<div class="module-header">
+  <div class="lm-label">Learning Module 2</div>
+  <h2>Fixed-Income Cash Flows and Types</h2>
+  <div class="one-liner">Not all bonds pay cash flows the same way — the structure radically changes risk and pricing.</div>
+</div>
+
+<h3>Bond Cash Flow Structures</h3>
+
+<h4>1. Bullet Bond (Most Common)</h4>
+<p>Pay fixed coupons every period, then repay 100% of par at maturity. Cash flows: C, C, C, …, C + FV.</p>
+<div class="intuition">The most standard bond. Like a standard bank loan where you pay interest throughout and repay the full amount at the end.</div>
+
+<h4>2. Zero-Coupon Bond</h4>
+<p>No coupons at all. Issued at a deep discount; you get paid par at maturity. The "interest" is your price appreciation.</p>
+<div class="formula">\[ P = \frac{FV}{(1 + r)^N} \]</div>
+<div class="analogy">Like buying a voucher for €1,000 for only €700 today. Your €300 gain over time is your interest — but no cash until the end. Duration = Maturity (most interest rate sensitive bond type).</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A 5-year zero-coupon bond has a par value of €1,000. If the required yield is 4% (annual), what is its price?</div>
+  <div class="exam-a"><strong>Answer:</strong> P = 1,000 / (1.04)⁵ = 1,000 / 1.2167 = <strong>€821.93</strong>. Zero-coupon bond pricing is straightforward — discount the single cash flow at maturity.</div>
+</div>
+
+<h4>3. Amortizing Bond</h4>
+<p>Principal is repaid gradually over the bond's life, not all at maturity. Like a mortgage — each payment includes some interest AND some principal repayment. Early payments are mostly interest; later ones are mostly principal.</p>
+
+<h4>4. Floating-Rate Notes (FRNs)</h4>
+<p>The coupon rate resets periodically based on a benchmark rate (e.g., SOFR) plus a fixed spread (quoted margin).</p>
+<div class="formula">\[ \text{FRN Coupon} = MRR + QM \]</div>
+<p>Where MRR = Market Reference Rate (resets quarterly) and QM = Quoted Margin (fixed at issuance).</p>
+
+<div class="intuition">FRNs protect you from rising interest rates because the coupon adjusts upward. If SOFR goes from 2% to 5%, your coupon goes up too. But if the issuer's credit gets worse, the QM doesn't adjust — you still bear credit risk.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An FRN pays a coupon of SOFR + 150 bps, resetting quarterly. SOFR is currently 4.5%. What is the annualised coupon rate?</div>
+  <div class="exam-a"><strong>Answer:</strong> 4.5% + 1.50% = <strong>6.0%</strong>. The quarterly coupon payment = 6%/4 × par. Note: the coupon will change next quarter when SOFR is reset.</div>
+</div>
+
+<h3>Embedded Options — The Most Tested Concept in LM2 <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bond Type</th><th>Who Has the Option?</th><th>When Is It Used?</th><th>Effect on Investor</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Callable bond</strong></td><td>Issuer</td><td>Rates fall → issuer calls and refinances cheaply</td><td>Bad — you get principal back when you don't want it, must reinvest at lower rates</td></tr>
+    <tr><td><strong>Putable bond</strong></td><td>Investor</td><td>Rates rise → investor puts bond back at par, reinvests at higher rates</td><td>Good — you can exit at par to avoid losses</td></tr>
+    <tr><td><strong>Convertible bond</strong></td><td>Investor</td><td>Stock price rises above conversion price</td><td>Good — you can convert to equity and capture the upside</td></tr>
+  </tbody>
+</table></div>
+
+<div class="formula">\[ V_{\text{callable}} = V_{\text{bullet}} - V_{\text{call option}} \]</div>
+<div class="formula">\[ V_{\text{putable}} = V_{\text{bullet}} + V_{\text{put option}} \]</div>
+
+<div class="key-rule">Callable bonds are worth LESS than equivalent straight bonds (issuer took away upside). Putable bonds are worth MORE than equivalent straight bonds (investor has protection). You must pay for what you want.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A callable bond and an otherwise identical non-callable bond are compared. Which has a higher yield and why?</div>
+  <div class="exam-a"><strong>Answer:</strong> The <strong>callable bond has a higher yield</strong>. The issuer has the right to call it away from investors at the worst time (when rates fall). To compensate investors for bearing call risk, the issuer must offer a higher yield. Alternatively: callable bond price is lower → higher yield for the same coupons.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Convertible)</div>
+  <div class="exam-q">A convertible bond has a par value of €1,000, a conversion price of €25, and the current stock price is €28. What is the conversion value?</div>
+  <div class="exam-a"><strong>Answer:</strong> Conversion ratio = €1,000 / €25 = 40 shares. Conversion value = 40 × €28 = <strong>€1,120</strong>. Since €1,120 > €1,000 par, the bond is "in-the-money" — converting is beneficial.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM3 ════════════════ -->
+<section id="lm3">
+<div class="module-header">
+  <div class="lm-label">Learning Module 3</div>
+  <h2>Fixed-Income Issuance and Trading</h2>
+  <div class="one-liner">Where bonds come from and how they're bought and sold.</div>
+</div>
+
+<h3>Bond Market Sectors</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Sector</th><th>Examples</th><th>Key Feature</th></tr></thead>
+  <tbody>
+    <tr><td>Sovereign (government)</td><td>US Treasuries, UK Gilts, German Bunds</td><td>Lowest credit risk; the benchmark for all other bonds</td></tr>
+    <tr><td>Quasi-government / Agency</td><td>Fannie Mae, Freddie Mac</td><td>Government backing (explicit or implicit)</td></tr>
+    <tr><td>Municipal</td><td>City/state bonds</td><td>Often tax-exempt interest</td></tr>
+    <tr><td>Corporate — Investment Grade</td><td>Apple, Volkswagen bonds</td><td>BBB-/Baa3 or above; priced on rate risk</td></tr>
+    <tr><td>Corporate — High Yield</td><td>Leveraged buyout bonds</td><td>BB+/Ba1 or below; priced on default risk</td></tr>
+    <tr><td>Securitised</td><td>MBS, ABS, CLOs</td><td>Backed by pools of loans; complex structure</td></tr>
+  </tbody>
+</table></div>
+
+<h3>How Bonds Are Issued (Primary Market)</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Method</th><th>Simple Explanation</th><th>Who Uses It</th></tr></thead>
+  <tbody>
+    <tr><td>Underwritten offering</td><td>Investment bank buys the entire issue and resells it</td><td>Large corporate issuers</td></tr>
+    <tr><td>Best-efforts offering</td><td>Bank just tries to sell; doesn't guarantee it</td><td>Smaller or riskier issuers</td></tr>
+    <tr><td>Single-price (Dutch) auction</td><td>All winners pay the same lowest winning yield</td><td>US Treasuries — fairest method</td></tr>
+    <tr><td>Multi-price (discriminatory) auction</td><td>Each bidder pays their own bid yield</td><td>Some government markets</td></tr>
+    <tr><td>Private placement</td><td>Sold directly to one or a few investors; no public disclosure</td><td>Companies wanting speed/privacy</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">In a Dutch auction (used by US Treasury), think of it like an auction where everyone who bids above the clearing price all pay the same lowest winning price. This encourages aggressive bidding and broader participation.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">In a single-price (Dutch) Treasury auction, five investors bid as follows: Investor A bids 3.0% for €200M, B bids 3.1% for €300M, C bids 3.2% for €200M, D bids 3.3% for €100M (total supply = €800M). What yield do all winning bidders pay?</div>
+  <div class="exam-a"><strong>Answer:</strong> The auction fills from lowest to highest yield. A (3.0%) + B (3.1%) + C (3.2%) = €700M. Need €100M more → D's 3.3% clears the auction. All winning bidders pay the <strong>stop-out yield of 3.3%</strong>. This is the single price everyone pays.</div>
+</div>
+
+<h3>Secondary Market: OTC, Not Exchange</h3>
+<p>Unlike stocks, most bonds do NOT trade on exchanges. They trade over-the-counter (OTC) — directly between dealers and investors via phone or electronic platforms. Dealers buy bonds for their inventory and quote bid-ask spreads.</p>
+
+<div class="key-rule">The bid-ask spread widens for illiquid, high-yield, or structured bonds. In a crisis, spreads can explode — this is why "liquidity" is a component of credit spreads.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which statement about fixed-income secondary markets is most accurate? A) Most bonds trade on organised exchanges. B) Bonds trade primarily in OTC dealer markets. C) Bond trading is more transparent than equity trading.</div>
+  <div class="exam-a"><strong>Answer: B.</strong> Most bonds trade OTC through dealer networks, not on exchanges. Bond markets are generally less transparent than equity markets — prices are not always publicly visible.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM4 ════════════════ -->
+<section id="lm4">
+<div class="module-header">
+  <div class="lm-label">Learning Module 4</div>
+  <h2>Fixed-Income Markets for Corporate Issuers</h2>
+  <div class="one-liner">How companies borrow short-term and long-term — and the critical repo market.</div>
+</div>
+
+<h3>Short-Term Corporate Funding</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Instrument</th><th>What It Is</th><th>Key Risk</th></tr></thead>
+  <tbody>
+    <tr><td>Uncommitted credit line</td><td>Bank offers credit but can refuse to lend</td><td>Not reliable — bank can pull it</td></tr>
+    <tr><td>Committed credit line</td><td>Bank commits in writing; fee on unused amount (~0.5%)</td><td>More reliable; still revocable in extreme distress</td></tr>
+    <tr><td>Revolving credit (revolver)</td><td>Multi-year committed facility; most reliable</td><td>Has covenants; can be frozen if breached</td></tr>
+    <tr><td>Commercial paper (CP)</td><td>Short-term unsecured notes (&lt;270 days); sold at discount</td><td>Rollover risk — what if market won't buy at maturity?</td></tr>
+    <tr><td>Factoring</td><td>Sell your invoices (receivables) to a factor at a discount</td><td>Permanent solution — you lose the receivable</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Rollover risk: If a company funds itself with 90-day commercial paper, it must sell new CP every 90 days. In a panic (like 2008), the market may refuse to buy → company can't repay → default. Backup committed lines mitigate this.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A company regularly issues commercial paper to fund its operations. Which risk is it most exposed to?</div>
+  <div class="exam-a"><strong>Answer: Rollover risk</strong> — the risk that when its CP matures, it cannot issue new CP to repay the old. This is mitigated by maintaining a committed backup revolving credit line from a bank.</div>
+</div>
+
+<h3>Repurchase Agreements (Repos) — Critical <span class="tag tag-critical">Critical</span></h3>
+
+<p>A repo is the bond market's version of a secured overnight loan. A bank sells a bond to another party and agrees to buy it back tomorrow at a slightly higher price. The difference = interest.</p>
+
+<div class="analogy">You need €1M overnight. You hand over your government bond worth €1M as collateral, receive €1M cash, and tomorrow you pay back €1M + overnight interest and get your bond back. The bond is your collateral.</div>
+
+<div class="formula">\[ \text{Repo Interest} = \text{Principal} \times \text{Repo Rate} \times \frac{\text{Days}}{360} \]</div>
+<div class="formula">\[ \text{Repurchase Price} = \text{Sale Price} \times \left(1 + r \times \frac{\text{Days}}{360}\right) \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td>Repo</td><td>From the borrower's view (sells and repurchases)</td></tr>
+    <tr><td>Reverse repo</td><td>From the lender's view (buys and resells)</td></tr>
+    <tr><td>Haircut / Repo margin</td><td>Bond worth 102 secures a 100 loan — the 2% protects the lender if bond price falls</td></tr>
+    <tr><td>Overnight repo</td><td>Matures next day — most common</td></tr>
+    <tr><td>Term repo</td><td>Fixed maturity longer than one day</td></tr>
+    <tr><td>Open repo</td><td>No fixed maturity; rolled daily</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Calculation)</div>
+  <div class="exam-q">A dealer enters a repo: sells bonds worth €10,000,000 at a repo rate of 3.6%, for 30 days. What is the repurchase price?</div>
+  <div class="exam-a"><strong>Answer:</strong> Repo interest = €10,000,000 × 3.6% × 30/360 = €10,000,000 × 0.003 = <strong>€30,000</strong>. Repurchase price = €10,000,000 + €30,000 = <strong>€10,030,000</strong>.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Conceptual)</div>
+  <div class="exam-q">The repo rate is most likely to be higher when: A) the collateral is a highly liquid on-the-run Treasury, B) the collateral is an illiquid corporate bond, C) the loan maturity is very short.</div>
+  <div class="exam-a"><strong>Answer: B.</strong> Repo rates are higher for lower-quality/less liquid collateral because the lender faces more risk if the borrower defaults and collateral must be sold. On-the-run Treasuries command the lowest (most favourable) repo rates.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM5 ════════════════ -->
+<section id="lm5">
+<div class="module-header">
+  <div class="lm-label">Learning Module 5</div>
+  <h2>Fixed-Income Markets for Government Issuers</h2>
+  <div class="one-liner">Governments are special borrowers — understanding why determines how you analyze them.</div>
+</div>
+
+<h3>Why Sovereigns Are Different</h3>
+<p>Developed market (DM) governments can tax their entire economy and (if borrowing in their own currency) can print money to repay. This makes default nearly impossible — hence they're considered "risk-free" and are the benchmark for everything else.</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>🌍 Developed Market (DM)</h5>
+    <ul>
+      <li>Issues in own currency</li>
+      <li>Central bank can print money</li>
+      <li>Near-zero default risk (in local currency)</li>
+      <li>Deep, liquid market</li>
+      <li>e.g. US, Germany, Japan</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>🌏 Emerging Market (EM)</h5>
+    <ul>
+      <li>Often borrows in USD (can't print it)</li>
+      <li>Real default risk exists</li>
+      <li>Less institutional strength</li>
+      <li>Willingness to pay matters</li>
+      <li>e.g. Argentina, Sri Lanka</li>
+    </ul>
+  </div>
+</div>
+
+<div class="intuition">An EM country borrowing in USD is like a person taking a foreign currency mortgage — if their local currency collapses, their debt burden explodes. The US can always repay USD debt by printing dollars. Argentina cannot print dollars.</div>
+
+<h3>Types of Government Instruments</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Instrument</th><th>Maturity</th><th>How It Pays</th></tr></thead>
+  <tbody>
+    <tr><td>Treasury bills (T-bills)</td><td>1–12 months</td><td>Zero-coupon; sold at discount to par</td></tr>
+    <tr><td>Treasury notes</td><td>2–10 years</td><td>Fixed semi-annual coupons</td></tr>
+    <tr><td>Treasury bonds</td><td>&gt;10 years</td><td>Fixed semi-annual coupons</td></tr>
+    <tr><td>Inflation-linked (TIPS)</td><td>2–30 years</td><td>Principal indexed to CPI; coupon rate fixed but applied to rising principal</td></tr>
+  </tbody>
+</table></div>
+
+<h3>General Obligation vs. Revenue Bonds (Municipal)</h3>
+<div class="analogy">A city issues two bonds: one backed by all tax revenues it can collect (GO bond) vs. one backed only by toll revenue from a specific bridge (revenue bond). If traffic disappears, the revenue bond fails but the GO bond can still levy taxes.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which municipal bond type is generally considered safer, and why? A) Revenue bonds, B) General obligation bonds, C) They are equally safe.</div>
+  <div class="exam-a"><strong>Answer: B — General obligation bonds.</strong> They are backed by the full taxing power of the government ("full faith and credit"). Revenue bonds depend only on cash flows from a specific project — if that project fails, bondholders bear the loss.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">For a developed market sovereign borrowing in its domestic currency, which risk is most relevant to bond investors?</div>
+  <div class="exam-a"><strong>Answer: Interest rate risk (duration risk).</strong> DM sovereign bonds in local currency have essentially no default risk. The key risk is that interest rates rise and the bond's price falls — this is pure interest rate risk. For EM sovereigns or foreign-currency debt, default risk also becomes relevant.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM6 ════════════════ -->
+<section id="lm6">
+<div class="module-header">
+  <div class="lm-label">Learning Module 6</div>
+  <h2>Fixed-Income Bond Valuation: Prices and Yields</h2>
+  <div class="one-liner">The single most important relationship in all of finance: bond price ↔ yield.</div>
+</div>
+
+<h3>The Core Idea: Price = PV of All Cash Flows</h3>
+<p>A bond's price today is simply the sum of all its future cash flows, each discounted back to the present at the required yield.</p>
+
+<div class="formula">\[ P = \frac{C}{(1+r)^1} + \frac{C}{(1+r)^2} + \cdots + \frac{C+FV}{(1+r)^N} = \sum_{t=1}^{N} \frac{C}{(1+r)^t} + \frac{FV}{(1+r)^N} \]</div>
+
+<div class="intuition">If I promise to pay you €1,050 in one year and the market rate is 5%, you'd pay me €1,050/1.05 = €1,000 today. If the market rate rises to 10%, you'd only pay €1,050/1.10 = €954. Higher discount rate → lower price. This is why bond prices and yields always move in opposite directions.</div>
+
+<h3>The #1 Rule of Fixed Income: Price and Yield Move Opposite</h3>
+<div class="key-rule">This is ALWAYS true, no exceptions: if yield goes UP, bond price goes DOWN. If yield goes DOWN, price goes UP. Memorise this before anything else.</div>
+
+<h3>Premium, Discount, and Par Bonds</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Relationship</th><th>Price</th><th>Simple Intuition</th></tr></thead>
+  <tbody>
+    <tr><td>Coupon Rate <strong>&gt;</strong> YTM</td><td>Price <strong>&gt;</strong> Par (Premium)</td><td>Bond pays MORE than market requires → worth more than par</td></tr>
+    <tr><td>Coupon Rate <strong>=</strong> YTM</td><td>Price <strong>=</strong> Par</td><td>Bond pays exactly what market requires</td></tr>
+    <tr><td>Coupon Rate <strong>&lt;</strong> YTM</td><td>Price <strong>&lt;</strong> Par (Discount)</td><td>Bond pays LESS than market requires → worth less than par</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Calculation)</div>
+  <div class="exam-q">A 3-year bond has a par value of €1,000 and pays a 5% annual coupon. If the required yield is 6%, what is the bond's price?</div>
+  <div class="exam-a">
+    <strong>Answer:</strong> Since coupon rate (5%) &lt; YTM (6%), price should be &lt; €1,000 (discount bond).<br>
+    P = 50/(1.06)¹ + 50/(1.06)² + 1,050/(1.06)³<br>
+    P = 47.17 + 44.50 + 881.68 = <strong>€973.35</strong>
+  </div>
+</div>
+
+<h3>Full Price vs. Flat Price vs. Accrued Interest</h3>
+<p>When you buy a bond between coupon dates, the seller has earned some of the next coupon. You must pay them for it.</p>
+
+<div class="formula">\[ \text{Full Price (Dirty)} = \text{Flat Price (Clean)} + \text{Accrued Interest} \]</div>
+<div class="formula">\[ \text{Accrued Interest} = \frac{\text{Days since last coupon}}{\text{Days in period}} \times \frac{\text{Annual Coupon}}{m} \]</div>
+
+<div class="analogy">You buy a rental property mid-year. The previous owner has already earned 6 months of rent. You pay them the property price PLUS compensation for the 6 months of "rent" they earned but haven't received yet. That compensation = accrued interest.</div>
+
+<div class="key-rule">Bonds are QUOTED at flat (clean) prices, but you ACTUALLY PAY the full (dirty) price. Quote screens show clean prices; your settlement statement shows dirty price.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A bond pays a 6% semi-annual coupon on Jan 1 and Jul 1. An investor buys it on April 1. Using 30/360 day count, how many days of accrued interest are owed? (Annual coupon on €1,000 par)</div>
+  <div class="exam-a"><strong>Answer:</strong> From Jan 1 to April 1 = 3 months = 90 days (30/360). Days in coupon period = 180. AI = (90/180) × (60/2) = 0.5 × 30 = <strong>€15.00</strong>. You pay the clean price PLUS €15 in accrued interest.</div>
+</div>
+
+<h3>Pull to Par Effect</h3>
+<p>As a bond approaches maturity, its price moves toward par regardless of where it started. A premium bond's price gradually falls toward 100; a discount bond's price gradually rises toward 100.</p>
+<div class="intuition">At maturity, every bond pays exactly par — no matter what you paid. So price must converge to par as time runs out. This is "pull to par" — like a rubber band being pulled toward 100.</div>
+
+</section><hr>
+
+<!-- ════════════════ LM7 ════════════════ -->
+<section id="lm7">
+<div class="module-header">
+  <div class="lm-label">Learning Module 7</div>
+  <h2>Yield and Yield Spread Measures for Fixed-Rate Bonds</h2>
+  <div class="one-liner">How to measure a bond's yield and compare it to benchmarks — the language of bond relative value.</div>
+</div>
+
+<h3>Yield Measures</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Measure</th><th>What It Is</th><th>The Catch</th></tr></thead>
+  <tbody>
+    <tr><td>Current Yield</td><td>Annual coupon / Price</td><td>Ignores capital gains and time value — very crude</td></tr>
+    <tr><td><strong>YTM</strong></td><td>Single rate that equates price to PV of all cash flows (bond's IRR)</td><td>Assumes you hold to maturity AND reinvest coupons at YTM — rarely realistic</td></tr>
+    <tr><td>Yield to Call (YTC)</td><td>YTM but using call date as maturity and call price as FV</td><td>Only relevant for callable bonds</td></tr>
+    <tr><td>Yield to Worst (YTW)</td><td>Minimum of all possible yields (YTM, YTC1, YTC2…)</td><td>Always use YTW for callable bonds</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">For callable bonds, ALWAYS use Yield to Worst. The issuer will call when rates fall — giving investors the worst possible outcome. YTW is the most conservative and most honest yield measure.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A callable bond has a YTM of 5.2%, a yield to first call of 4.8%, and a yield to second call of 5.0%. What is the yield to worst?</div>
+  <div class="exam-a"><strong>Answer: 4.8%</strong> — the minimum of all possible yields. YTW = min(5.2%, 4.8%, 5.0%) = <strong>4.8%</strong>. If you quote 5.2%, you're being misleadingly optimistic; 4.8% is the most conservative and correct measure for this bond.</div>
+</div>
+
+<h3>Yield Spread Measures — The Key Four <span class="tag tag-critical">Critical</span></h3>
+
+<h4>1. G-Spread (Government Spread)</h4>
+<p>Bond YTM minus the YTM of a comparable maturity government bond. Simple but ignores the shape of the yield curve.</p>
+<div class="formula">\[ G\text{-Spread} = YTM_{\text{bond}} - YTM_{\text{govt benchmark}} \]</div>
+
+<h4>2. I-Spread (Interpolated Spread)</h4>
+<p>Bond YTM minus the swap rate for the same maturity. More consistent benchmark than government bonds (swap rates are continuous).</p>
+<div class="formula">\[ I\text{-Spread} = YTM_{\text{bond}} - \text{Swap Rate (same maturity)} \]</div>
+
+<h4>3. Z-Spread (Zero-Volatility Spread)</h4>
+<p>The constant spread added to EVERY point on the spot rate curve that makes the PV of cash flows equal to the market price. More precise than G or I spreads because it uses the full curve, not just one benchmark rate.</p>
+<div class="formula">\[ P = \frac{C}{(1+S_1+Z)^1} + \frac{C}{(1+S_2+Z)^2} + \cdots + \frac{C+FV}{(1+S_N+Z)^N} \]</div>
+
+<h4>4. OAS (Option-Adjusted Spread) <span class="tag tag-critical">Critical</span></h4>
+<p>The Z-spread MINUS the value of any embedded option. OAS strips out the option to give a "pure" credit/liquidity spread — apples-to-apples across all bond types.</p>
+<div class="formula">\[ OAS = Z\text{-Spread} - \text{Option Value (bps)} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bond Type</th><th>OAS vs. Z-Spread</th><th>Why?</th></tr></thead>
+  <tbody>
+    <tr><td>Callable bond</td><td>OAS <strong>&lt;</strong> Z-Spread</td><td>Call option belongs to issuer — removes value from investor's spread</td></tr>
+    <tr><td>Putable bond</td><td>OAS <strong>&gt;</strong> Z-Spread</td><td>Put option belongs to investor — investor "pays" for it via lower effective spread</td></tr>
+    <tr><td>Option-free bond</td><td>OAS <strong>=</strong> Z-Spread</td><td>No option to adjust for</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">OAS is the spread you actually earn for bearing credit and liquidity risk, after removing the option's effect. Two bonds with the same Z-spread but different OAS are NOT equally attractive — the one with a higher OAS is providing more pure credit compensation.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A callable bond has a Z-spread of 180 bps. The embedded call option is worth 40 bps. What is the OAS? Is this bond more or less attractive than an option-free bond with an OAS of 155 bps?</div>
+  <div class="exam-a"><strong>Answer:</strong> OAS = 180 − 40 = <strong>140 bps</strong>. The option-free bond (OAS 155 bps) offers more pure credit/liquidity compensation. The callable bond's higher Z-spread partly compensates you for the call risk — once you strip that out, it pays less for actual credit risk. The option-free bond is more attractive on an OAS basis.</div>
+</div>
+
+<h3>Converting Between Yield Periodicities</h3>
+<div class="formula">\[ EAY = \left(1 + \frac{YTM_{\text{semi}}}{2}\right)^2 - 1 \]</div>
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A bond has a semi-annual YTM of 6%. What is the effective annual yield?</div>
+  <div class="exam-a"><strong>Answer:</strong> EAY = (1 + 0.06/2)² − 1 = (1.03)² − 1 = 1.0609 − 1 = <strong>6.09%</strong>. Always higher than the stated semi-annual rate due to compounding.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM8 ════════════════ -->
+<section id="lm8">
+<div class="module-header">
+  <div class="lm-label">Learning Module 8</div>
+  <h2>Yield Measures for Floating-Rate Instruments & Money Market</h2>
+  <div class="one-liner">FRNs and money market tools use different conventions — knowing the conversions is exam-critical.</div>
+</div>
+
+<h3>FRN Pricing: Quoted Margin vs. Discount Margin</h3>
+<p>For FRNs, think of the Quoted Margin (QM) as the "coupon rate equivalent" and the Discount Margin (DM) as the "YTM equivalent."</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Condition</th><th>FRN Price</th><th>Analogy to Fixed Bond</th></tr></thead>
+  <tbody>
+    <tr><td>QM = DM</td><td>= Par (100)</td><td>Like coupon rate = YTM → price = par</td></tr>
+    <tr><td>QM &gt; DM</td><td>&gt; Par (Premium)</td><td>Like coupon &gt; YTM → premium bond</td></tr>
+    <tr><td>QM &lt; DM</td><td>&lt; Par (Discount)</td><td>Like coupon &lt; YTM → discount bond</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">QM is fixed at issuance and reflects the issuer's credit spread when the bond was issued. DM is the current spread the market requires. If the issuer's credit worsens after issuance, DM rises above QM → bond trades at discount. The logic is identical to a fixed-rate bond.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An FRN was issued with a quoted margin of 120 bps over SOFR. Since issuance, the issuer's credit quality has deteriorated and the discount margin is now 150 bps. The FRN is most likely trading at:</div>
+  <div class="exam-a"><strong>Answer: A discount (below par).</strong> DM (150 bps) &gt; QM (120 bps) → the bond pays less than the market now requires → price &lt; par. Just like a fixed bond where coupon rate &lt; YTM → discount price.</div>
+</div>
+
+<h3>Money Market: Discount Rate vs. Add-On Rate <span class="tag tag-critical">Critical</span></h3>
+<p>Money market instruments (T-bills, commercial paper) use unusual quotation conventions. The key: discount rates always understate the true return.</p>
+
+<div class="formula">\[ DR = \frac{FV - PV}{FV} \times \frac{360}{\text{Days}} \quad \text{(Discount Rate — uses FV in denominator)} \]</div>
+<div class="formula">\[ AOR = \frac{FV - PV}{PV} \times \frac{360}{\text{Days}} \quad \text{(Add-On Rate — uses PV in denominator)} \]</div>
+
+<div class="key-rule">AOR > DR for the same instrument because the denominator is smaller (PV < FV). Discount rates understate return. Always convert to AOR/BEY to compare instruments fairly.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Calculation)</div>
+  <div class="exam-q">A 90-day T-bill with face value €10,000 has a discount rate of 4%. What is the purchase price? What is the add-on rate?</div>
+  <div class="exam-a">
+    <strong>Purchase price:</strong> PV = FV × (1 − DR × Days/360) = €10,000 × (1 − 0.04 × 90/360) = €10,000 × 0.99 = <strong>€9,900</strong>.<br>
+    <strong>AOR</strong> = (10,000 − 9,900)/9,900 × 360/90 = 100/9,900 × 4 = <strong>4.04%</strong>. The add-on rate (4.04%) is higher than the discount rate (4%) — they're quoting the same bill.
+  </div>
+</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Instrument</th><th>Quotation Basis</th><th>Year Basis</th></tr></thead>
+  <tbody>
+    <tr><td>US T-bills</td><td>Discount rate</td><td>360 days</td></tr>
+    <tr><td>US Commercial Paper</td><td>Discount rate</td><td>360 days</td></tr>
+    <tr><td>Bank CDs (US)</td><td>Add-on rate</td><td>360 days</td></tr>
+    <tr><td>UK T-bills</td><td>Discount rate</td><td>365 days</td></tr>
+  </tbody>
+</table></div>
+
+</section><hr>
+
+<!-- ════════════════ LM9 ════════════════ -->
+<section id="lm9">
+<div class="module-header">
+  <div class="lm-label">Learning Module 9</div>
+  <h2>The Term Structure: Spot, Par, and Forward Rates</h2>
+  <div class="one-liner">The yield curve decoded — spot rates are theoretically correct; forward rates tell you what rates imply about the future.</div>
+</div>
+
+<h3>Spot Rates: The Theoretically Correct Rate</h3>
+<p>A spot rate is the yield on a zero-coupon bond for a specific maturity — the "pure" rate for that horizon. YTM is a blended average rate; spot rates are precise because they discount each cash flow at its own appropriate rate.</p>
+
+<div class="formula">\[ P = \frac{C}{(1+S_1)^1} + \frac{C}{(1+S_2)^2} + \cdots + \frac{C+FV}{(1+S_N)^N} \]</div>
+
+<div class="intuition">YTM is like averaging your commute time as if every leg of the journey takes the same time. Spot rates give each leg its own accurate time. On a curved yield curve, using YTM introduces small errors — spot rates eliminate them.</div>
+
+<h3>Bootstrapping: Deriving Spot Rates from Par Rates <span class="tag tag-critical">Critical</span></h3>
+<p>We observe par rates (from government bonds). To get spot rates, we "bootstrap" — work step by step from short to long maturities, solving for each unknown spot rate using the known shorter-term ones.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Bootstrapping)</div>
+  <div class="exam-q">The 1-year par rate is 3%, and the 2-year par rate is 4%. The 1-year spot rate equals the 1-year par rate = 3%. Find the 2-year spot rate S₂.</div>
+  <div class="exam-a">
+    Using: 1 = C/(1+S₁) + (1+C)/(1+S₂)² where C = 4% (2-year par rate).<br>
+    1 = 0.04/1.03 + 1.04/(1+S₂)²<br>
+    1 = 0.03883 + 1.04/(1+S₂)²<br>
+    1.04/(1+S₂)² = 0.96117<br>
+    (1+S₂)² = 1.0820 → <strong>S₂ = 4.02%</strong><br>
+    Note: S₂ slightly above the par rate because the yield curve is upward sloping.
+  </div>
+</div>
+
+<h3>Forward Rates: The Market's Implied Future Rate <span class="tag tag-critical">Critical</span></h3>
+<p>A forward rate is the rate implied for a future loan period. No arbitrage forces it: investing 2 years at the 2-year spot rate must give the same result as investing 1 year at the 1-year spot rate, then rolling over at the 1-year forward rate.</p>
+
+<div class="formula">\[ (1+S_2)^2 = (1+S_1)^1 \times (1+f_{1,1})^1 \]</div>
+<div class="formula">\[ f_{j,k} = \left[\frac{(1+S_{j+k})^{j+k}}{(1+S_j)^j}\right]^{1/k} - 1 \]</div>
+
+<div class="analogy">You can either lock in a 2-year rate now, or invest for 1 year and then renew for another year. In a no-arbitrage world, both paths must yield the same return. The forward rate is the rate that makes the second path equivalent to the first.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Forward Rate Calculation)</div>
+  <div class="exam-q">The 1-year spot rate is 3% and the 2-year spot rate is 4%. What is the 1-year forward rate, one year from now (f₁,₁)?</div>
+  <div class="exam-a">
+    <strong>Using:</strong> (1+S₂)² = (1+S₁)(1+f₁,₁)<br>
+    (1.04)² = (1.03)(1+f₁,₁)<br>
+    1.0816 = 1.03 × (1+f₁,₁)<br>
+    1+f₁,₁ = 1.0816/1.03 = 1.04913<br>
+    <strong>f₁,₁ = 4.91%</strong><br>
+    Intuition: The 2-year spot rate (4%) is higher than the 1-year (3%), so the forward rate must be higher than 4% to "average out" to 4%.
+  </div>
+</div>
+
+<h3>Yield Curve Shapes and What They Imply</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Curve Shape</th><th>What Forward Rates Imply</th><th>Economic Signal</th></tr></thead>
+  <tbody>
+    <tr><td>Normal (upward)</td><td>Forward rates &gt; current spot rates</td><td>Market expects rates to rise; term premium for lending longer</td></tr>
+    <tr><td>Flat</td><td>Forward ≈ spot rates</td><td>No clear expectation about rate direction</td></tr>
+    <tr><td><strong>Inverted (downward)</strong></td><td>Forward rates &lt; current spot rates</td><td>Market expects rates to FALL → historically signals recession ahead</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">An inverted yield curve (short rates > long rates) is historically the most reliable recession predictor. Why? Because it signals the market expects the central bank to cut rates sharply in response to an economic slowdown.</div>
+
+</section><hr>
+
+<!-- ════════════════ LM10 ════════════════ -->
+<section id="lm10">
+<div class="module-header">
+  <div class="lm-label">Learning Module 10</div>
+  <h2>Interest Rate Risk and Return</h2>
+  <div class="one-liner">Why reinvestment risk and price risk fight each other — and how duration is the magic balance point.</div>
+</div>
+
+<h3>Three Sources of Return from a Bond</h3>
+<p>When you invest in a bond, your total return comes from three places:</p>
+<ol>
+  <li><strong>Coupon payments</strong> — the cash interest received</li>
+  <li><strong>Reinvestment income</strong> — interest earned on reinvested coupons</li>
+  <li><strong>Capital gain or loss</strong> — if you sell before maturity or rates change</li>
+</ol>
+
+<div class="intuition">Here's the critical insight: when rates RISE, you earn more on reinvesting coupons (reinvestment gain) BUT your bond price falls (capital loss). When rates FALL, your bond price rises but you earn less reinvesting coupons. These two effects trade off — and at exactly one horizon, they perfectly cancel each other out. That horizon is the Macaulay Duration.</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Your Horizon</th><th>If Rates Rise</th><th>If Rates Fall</th></tr></thead>
+  <tbody>
+    <tr><td>Shorter than MacDur</td><td>Capital loss dominates → net loss</td><td>Price gain dominates → net gain</td></tr>
+    <tr><td><strong>= Macaulay Duration</strong></td><td><strong>Capital loss ≈ reinvestment gain → immunised</strong></td><td><strong>Price gain ≈ reinvestment loss → immunised</strong></td></tr>
+    <tr><td>Longer than MacDur</td><td>Reinvestment gain dominates → net gain</td><td>Reinvestment loss dominates → net loss</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Macaulay Duration: Three Meanings in One <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">\[ MacDur = \frac{\displaystyle\sum_{t=1}^{N} t \cdot \frac{CF_t}{(1+r)^t}}{P} \]</div>
+
+<p>Macaulay Duration simultaneously means:</p>
+<ol>
+  <li><strong>Weighted average time</strong> to receive cash flows (in years)</li>
+  <li><strong>Immunisation horizon</strong> — set investment horizon = MacDur to immunise against rate changes</li>
+  <li><strong>The foundation</strong> for Modified Duration (the actual price sensitivity measure)</li>
+</ol>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bond Type</th><th>MacDur vs. Maturity</th><th>Why?</th></tr></thead>
+  <tbody>
+    <tr><td>Zero-coupon bond</td><td>MacDur = Maturity</td><td>Only one cash flow, at maturity</td></tr>
+    <tr><td>Coupon bond</td><td>MacDur &lt; Maturity</td><td>Coupons received earlier pull duration down</td></tr>
+    <tr><td>Higher coupon bond</td><td>Lower MacDur</td><td>More cash flows early → shorter weighted average</td></tr>
+    <tr><td>Longer maturity bond</td><td>Higher MacDur</td><td>Cash flows extend further into the future</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A pension fund has a liability to pay out in exactly 8 years. To immunise this liability against interest rate changes, the fund should invest in bonds with a Macaulay Duration of:</div>
+  <div class="exam-a"><strong>Answer: 8 years.</strong> Setting MacDur = investment horizon is the immunisation strategy. If rates change, the reinvestment effect and price effect exactly offset each other at the 8-year horizon, so the fund can always meet its obligation. This is the fundamental insight behind duration-matching strategies.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A perpetual bond (perpetuity) pays a coupon at a yield of 5%. What is its Macaulay Duration?</div>
+  <div class="exam-a"><strong>Answer:</strong> MacDur (perpetuity) = (1+r)/r = 1.05/0.05 = <strong>21 years</strong>. A perpetuity never returns principal, so its duration is surprisingly finite but large.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM11 ════════════════ -->
+<section id="lm11">
+<div class="module-header">
+  <div class="lm-label">Learning Module 11</div>
+  <h2>Yield-Based Bond Duration Measures</h2>
+  <div class="one-liner">Modified Duration is the number every bond trader uses every single day — it directly answers "how much does my bond move?"</div>
+</div>
+
+<h3>Modified Duration: The Price Sensitivity Number</h3>
+<p>Modified Duration converts Macaulay Duration into a price sensitivity measure. It answers: "If yield changes by 1%, how much does my bond price change?"</p>
+
+<div class="formula">\[ ModDur = \frac{MacDur}{1 + r/m} \]</div>
+<div class="formula">\[ \%\Delta P \approx -ModDur \times \Delta y \]</div>
+
+<div class="analogy">ModDur = 7 means: if yields rise by 1%, your bond loses approximately 7% in value. If yields rise by 0.5%, you lose ~3.5%. The negative sign captures the inverse relationship.</div>
+
+<div class="key-rule">The formula is approximate (linear). The actual price change is slightly better than predicted because of convexity — but ModDur gets you 95% of the answer.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A bond has a Macaulay Duration of 7.5 years. The YTM is 6% (semi-annual). What is the Modified Duration? If yields rise by 50 bps, what is the approximate price change?</div>
+  <div class="exam-a">
+    <strong>ModDur</strong> = 7.5 / (1 + 0.06/2) = 7.5 / 1.03 = <strong>7.28 years</strong><br>
+    <strong>%ΔP</strong> ≈ −7.28 × 0.0050 = −<strong>3.64%</strong><br>
+    If the bond is currently priced at €1,000, it falls by approximately €36.40.
+  </div>
+</div>
+
+<h3>Approximate Modified Duration (No MacDur Required)</h3>
+<p>When you don't have the MacDur, you can estimate ModDur by pricing the bond at yield ± Δy:</p>
+<div class="formula">\[ ApproxModDur = \frac{P_- - P_+}{2 \times P_0 \times \Delta y} \]</div>
+<p>Where P₋ = price if yield falls by Δy, P₊ = price if yield rises by Δy, P₀ = current price.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Approximate Duration)</div>
+  <div class="exam-q">A bond is priced at €1,000. If yield falls by 50 bps, price rises to €1,036. If yield rises by 50 bps, price falls to €965. What is the approximate modified duration?</div>
+  <div class="exam-a"><strong>Answer:</strong> ApproxModDur = (1,036 − 965) / (2 × 1,000 × 0.005) = 71 / 10 = <strong>7.1</strong>. This bond moves ~7.1% for each 1% change in yield.</div>
+</div>
+
+<h3>PVBP (Price Value of a Basis Point) / DV01 <span class="tag tag-critical">Critical</span></h3>
+<p>PVBP converts duration into dollar terms — how much money do I make or lose per basis point move?</p>
+<div class="formula">\[ PVBP = \frac{ModDur \times \text{Full Price}}{10{,}000} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A portfolio holds €50,000,000 of bonds with a Modified Duration of 6.0. What is the PVBP? If yields rise by 25 bps, what is the approximate P&L?</div>
+  <div class="exam-a">
+    <strong>PVBP</strong> = 6.0 × €50,000,000 / 10,000 = <strong>€30,000 per bps</strong>.<br>
+    <strong>P&L</strong> = −€30,000 × 25 = −<strong>€750,000</strong> loss.
+  </div>
+</div>
+
+<h3>Portfolio Duration</h3>
+<div class="formula">\[ D_{\text{portfolio}} = \sum_i w_i \times D_i \]</div>
+<p>Where w_i = market value weight. Portfolio duration is just the weighted average of individual bond durations.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A portfolio: 60% in a bond with ModDur = 4.0, 40% in a bond with ModDur = 9.0. Portfolio duration?</div>
+  <div class="exam-a"><strong>Answer:</strong> D_port = 0.60 × 4.0 + 0.40 × 9.0 = 2.4 + 3.6 = <strong>6.0</strong>.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM12 ════════════════ -->
+<section id="lm12">
+<div class="module-header">
+  <div class="lm-label">Learning Module 12</div>
+  <h2>Yield-Based Bond Convexity</h2>
+  <div class="one-liner">Convexity is the reason bonds perform better than duration alone predicts — for option-free bonds, it's always your friend.</div>
+</div>
+
+<h3>The Problem with Duration: It's a Straight Line</h3>
+<p>Duration approximates price changes as if the price-yield relationship is a straight line. In reality, the price-yield curve is… curved (convex). For big yield moves, the straight-line approximation misses value.</p>
+
+<div class="intuition">Duration says: if yields rise 2%, I lose 14% (ModDur 7). Reality: you lose maybe 12.7% because the curve bends in your favour. This "bonus" is convexity. Convexity is always positive for option-free bonds, always working in your favour.</div>
+
+<div class="formula">\[ \frac{\Delta P}{P} \approx -ModDur \times \Delta y + \frac{1}{2} \times Convexity \times (\Delta y)^2 \]</div>
+<div class="formula">\[ ApproxConv = \frac{P_- + P_+ - 2P_0}{P_0 \times (\Delta y)^2} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Full Price Change)</div>
+  <div class="exam-q">A bond has ModDur = 8.0 and Convexity = 80. Yields rise by 150 bps. Estimate the percentage price change.</div>
+  <div class="exam-a">
+    <strong>Duration effect:</strong> −8.0 × 0.015 = −12.00%<br>
+    <strong>Convexity effect:</strong> +½ × 80 × (0.015)² = +40 × 0.000225 = +0.90%<br>
+    <strong>Total ΔP/P ≈ −12.00% + 0.90% = −11.10%</strong><br>
+    (Without convexity adjustment, you'd predict −12%, overestimating the loss)
+  </div>
+</div>
+
+<h3>Factors That Affect Convexity</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Factor</th><th>Effect on Convexity</th><th>Intuition</th></tr></thead>
+  <tbody>
+    <tr><td>Longer maturity</td><td>Higher convexity</td><td>Cash flows further out → more curvature</td></tr>
+    <tr><td>Lower coupon</td><td>Higher convexity</td><td>Cash flows more concentrated at maturity → more curvature</td></tr>
+    <tr><td>Lower yield</td><td>Higher convexity</td><td>Distant cash flows discounted less → more curvature</td></tr>
+    <tr><td>Zero-coupon bond</td><td>Highest for its duration</td><td>Only one terminal cash flow — maximum curvature</td></tr>
+    <tr><td>Callable bond (low yields)</td><td><strong>Negative</strong> convexity!</td><td>Price is capped by call option → curve bends against you</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Negative Convexity — Callable Bonds' Dark Side</h3>
+<p>When yields fall, normally bond prices rise. But a callable bond has a ceiling — the issuer will call it near the call price. So as yields fall, the price appreciation slows and eventually reverses. This is negative convexity.</p>
+
+<div class="key-rule">Negative convexity means the bond performs worse than duration predicts when yields fall (price is capped) AND worse when yields rise (same as any bond). It's lose-lose. Callable bonds must offer higher yields to compensate.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Two bonds are identical except one is callable and one is not. When interest rates fall significantly, which bond's price increases more?</div>
+  <div class="exam-a"><strong>Answer: The non-callable bond.</strong> The callable bond exhibits negative convexity at low yields — its price is capped near the call price because the issuer will redeem it. The straight bond continues to appreciate as yields fall. This is why callable bonds have lower effective duration and negative convexity at low yields.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM13 ════════════════ -->
+<section id="lm13">
+<div class="module-header">
+  <div class="lm-label">Learning Module 13</div>
+  <h2>Curve-Based and Empirical Risk Measures</h2>
+  <div class="one-liner">When bonds have options or credit risk, standard duration breaks down — here's what to use instead.</div>
+</div>
+
+<h3>Effective Duration: For Bonds with Options</h3>
+<p>Modified Duration assumes fixed cash flows. But callable/putable bonds have uncertain cash flows that change with interest rates. Effective Duration uses a parallel curve shift and option pricing model to measure sensitivity.</p>
+
+<div class="formula">\[ EffDur = \frac{P_- - P_+}{2 \times P_0 \times \Delta Curve} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Situation</th><th>Use This Duration</th><th>Why?</th></tr></thead>
+  <tbody>
+    <tr><td>Plain fixed-rate bond</td><td>Modified Duration</td><td>Cash flows are certain — formula is exact</td></tr>
+    <tr><td>Callable, putable, or MBS</td><td>Effective Duration</td><td>Cash flows are uncertain — need option-adjusted measure</td></tr>
+    <tr><td>High-yield bond</td><td>Empirical Duration</td><td>Credit spreads move with rates — analytical formulas mislead</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A portfolio manager is measuring the interest rate sensitivity of a callable bond. Should they use modified duration or effective duration?</div>
+  <div class="exam-a"><strong>Answer: Effective duration.</strong> Modified duration assumes fixed cash flows and therefore ignores the probability that the call option is exercised. When rates fall, the issuer may call the bond — effectively shortening its maturity. Effective duration uses option pricing models to account for this and gives a more accurate sensitivity measure.</div>
+</div>
+
+<h3>Key Rate Duration (Partial Duration) <span class="tag tag-critical">Critical</span></h3>
+<p>Effective duration measures sensitivity to a parallel yield curve shift (all rates move equally). But yield curves rarely shift in parallel — sometimes only the long end moves. Key rate durations measure sensitivity to specific points on the curve (e.g., 2Y, 5Y, 10Y).</p>
+
+<div class="key-rule">Sum of all key rate durations = effective duration. A bullet bond has key rate duration concentrated at its maturity. A barbell (short + long bonds) has durations at both ends of the curve.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A portfolio has an effective duration of 6.0. Its key rate durations are: 2Y = 0.5, 5Y = 1.5, 10Y = 2.5, 30Y = 1.5. Sum = 6.0. If only the 10-year rate rises by 50 bps, by approximately what percentage does the portfolio's value change?</div>
+  <div class="exam-a"><strong>Answer:</strong> ΔP/P ≈ −KeyRateDur₁₀ × Δy₁₀ = −2.5 × 0.005 = <strong>−1.25%</strong>. Only the 10Y key rate duration matters for a non-parallel shift at the 10Y point.</div>
+</div>
+
+<h3>Empirical Duration: For High-Yield Bonds</h3>
+<p>For investment-grade bonds, analytical duration works well because credit spreads don't correlate much with benchmark yields. For high-yield bonds, there's a complication: when safe-haven buying drives Treasury yields down (flight-to-safety), HY spreads blow out. The two effects work against each other.</p>
+
+<div class="intuition">Analytical duration predicts: "Treasury yields fell 1% → my HY bond should gain 5% in price." Reality: "Treasury yields fell 1% (flight to safety), HY spreads widened 300 bps → my HY bond actually fell in value." Empirical duration captures this from historical data.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">For a high-yield corporate bond, empirical duration is likely to be lower than analytical duration. Why?</div>
+  <div class="exam-a"><strong>Answer:</strong> In risk-off environments, Treasury yields fall (safe-haven buying) while HY credit spreads widen simultaneously. These effects partially offset each other. Empirical duration measures the actual (net) price sensitivity from historical data, which is lower than the analytical figure that ignores the spread-rate correlation.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM14 ════════════════ -->
+<section id="lm14">
+<div class="module-header">
+  <div class="lm-label">Learning Module 14</div>
+  <h2>Credit Risk</h2>
+  <div class="one-liner">Credit risk has two dimensions — probability of default AND how much you lose if they do. You can lose money even without a default.</div>
+</div>
+
+<h3>The Two Dimensions of Credit Risk</h3>
+<div class="formula">\[ \text{Expected Loss} = \text{Probability of Default (PD)} \times \text{Loss Given Default (LGD)} \]</div>
+<div class="formula">\[ LGD = 1 - \text{Recovery Rate} \]</div>
+
+<div class="analogy">If someone owes you €100 and has a 5% chance of defaulting, but you'd recover 60% in bankruptcy: Expected Loss = 5% × 40% = €2. A bond with 1% PD but 90% LGD: EL = 0.9% — can be worse than a 5% PD bond with good collateral.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Bond A has a PD of 2% and a recovery rate of 40%. Bond B has a PD of 3% and a recovery rate of 70%. Which bond has a higher expected loss?</div>
+  <div class="exam-a">
+    <strong>Bond A:</strong> EL = 2% × (1−40%) = 2% × 60% = <strong>1.20%</strong><br>
+    <strong>Bond B:</strong> EL = 3% × (1−70%) = 3% × 30% = <strong>0.90%</strong><br>
+    Bond A has higher expected loss (1.20% > 0.90%) despite lower PD — because of the worse recovery.
+  </div>
+</div>
+
+<h3>Credit Spread = Compensation, Not Free Money</h3>
+<div class="formula">\[ \text{Yield Spread} = \text{Expected Loss} + \text{Risk Premium} + \text{Liquidity Premium} \]</div>
+<div class="intuition">High-yield bonds offer higher yields — but those higher yields are compensation for bearing default risk, spread widening risk, and illiquidity risk. None of it is "free money."</div>
+
+<h3>You Can Lose Money WITHOUT a Default <span class="tag tag-critical">Critical</span></h3>
+<p>Even if the company never defaults, spread widening causes mark-to-market losses:</p>
+<div class="formula">\[ \frac{\Delta P}{P} \approx -ModDur \times \Delta\text{Spread} + \frac{1}{2} \times Conv \times (\Delta\text{Spread})^2 \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A 5-year bond has a modified duration of 4.5 and its credit spread widens by 80 bps. Ignoring convexity, approximately what is the price impact?</div>
+  <div class="exam-a"><strong>Answer:</strong> ΔP/P ≈ −4.5 × 0.008 = <strong>−3.6%</strong>. The company has not defaulted — but the bond loses 3.6% in market value purely from spread widening. This is credit spread risk, a key but often underestimated risk.</div>
+</div>
+
+<h3>Credit Rating Scale</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Agency</th><th>Investment Grade (BBB or above)</th><th>High Yield / Speculative</th></tr></thead>
+  <tbody>
+    <tr><td>S&P / Fitch</td><td>AAA → BB+</td><td>BB+ and below → D (default)</td></tr>
+    <tr><td>Moody's</td><td>Aaa → Baa3</td><td>Ba1 and below → C (default)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule"><strong>Fallen angel</strong> = downgraded from IG to HY. <strong>Rising star</strong> = upgraded from HY to IG. Ratings lag the market — spreads react faster than ratings change.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A bond rated BB+ by S&P is best described as: A) Investment grade, B) High yield, C) In default.</div>
+  <div class="exam-a"><strong>Answer: B — High yield (speculative grade).</strong> Investment grade begins at BBB− (S&P/Fitch) or Baa3 (Moody's). BB+ is one notch below IG — the highest high-yield rating, sometimes called "crossover" or "fallen angel" territory.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM15 ════════════════ -->
+<section id="lm15">
+<div class="module-header">
+  <div class="lm-label">Learning Module 15</div>
+  <h2>Credit Analysis for Government Issuers</h2>
+  <div class="one-liner">Sovereign credit is different: you need to assess willingness to pay, not just ability.</div>
+</div>
+
+<h3>The Key Insight: Willingness vs. Ability to Pay</h3>
+<p>Unlike a corporation, a government cannot be forced into bankruptcy. Courts can't seize a country's central bank or army. So even if a government has the economic capacity to repay, it may choose not to (political reasons). This is why <strong>willingness to pay is as important as ability to pay</strong>.</p>
+
+<div class="analogy">Argentina has defaulted multiple times despite being a large economy with agricultural wealth. The defaults were choices — political decisions — not pure inability. For EM sovereigns, political analysis is credit analysis.</div>
+
+<h3>Five Qualitative Factors in Sovereign Credit</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Factor</th><th>Key Question</th><th>Why It Matters</th></tr></thead>
+  <tbody>
+    <tr><td>Institutional quality</td><td>Rule of law? Anti-corruption? Stability?</td><td>Stable institutions → consistent debt culture → lower default risk</td></tr>
+    <tr><td>Fiscal flexibility</td><td>Can they adjust taxes and spending?</td><td>Countries that can raise taxes in a crisis can always service debt</td></tr>
+    <tr><td>Monetary effectiveness</td><td>Is the central bank independent?</td><td>Independent CB prevents money printing to fund deficits → lower inflation risk</td></tr>
+    <tr><td>Economic diversification</td><td>Is GDP just one export commodity?</td><td>Diversified economy has more stable tax revenue base</td></tr>
+    <tr><td>External position</td><td>Reserve currency? Current account?</td><td>Reserve currency = global demand for bonds → cheapest possible borrowing cost</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Key Quantitative Metrics</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Metric</th><th>Formula</th><th>Direction</th></tr></thead>
+  <tbody>
+    <tr><td>Debt/GDP</td><td>Total government debt / Nominal GDP</td><td>Higher = worse</td></tr>
+    <tr><td>Budget deficit/GDP</td><td>Annual deficit / GDP</td><td>Higher = worse (debt growing faster)</td></tr>
+    <tr><td>External debt/GDP</td><td>Foreign-currency debt / GDP</td><td>Higher = worse (FX risk)</td></tr>
+    <tr><td>FX reserves / Short-term debt</td><td>Central bank reserves / near-term obligations</td><td>Higher = better (can meet near-term payments)</td></tr>
+    <tr><td>Current account balance</td><td>Exports − Imports (% GDP)</td><td>Surplus = better (earns FX)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An emerging market country has a high external debt/GDP ratio and a current account deficit. These factors most likely indicate:</div>
+  <div class="exam-a"><strong>Answer: Elevated credit risk.</strong> High external debt in foreign currency means the country cannot "print" its way out (can't print USD or EUR). A current account deficit means the country is a net importer, earning less foreign currency than it spends — making it harder to service external debt. Both factors increase default risk.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM16 ════════════════ -->
+<section id="lm16">
+<div class="module-header">
+  <div class="lm-label">Learning Module 16</div>
+  <h2>Credit Analysis for Corporate Issuers</h2>
+  <div class="one-liner">The 4 Cs and key ratios — this is what a credit analyst actually does every day.</div>
+</div>
+
+<h3>The 4 Cs of Corporate Credit</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>C</th><th>What It Assesses</th><th>Key Question</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Capacity</strong></td><td>Ability to service debt from operating cash flows</td><td>Does EBITDA comfortably cover interest payments?</td></tr>
+    <tr><td><strong>Collateral</strong></td><td>Assets available to secure debt or recover in default</td><td>If they fail, what can creditors grab and sell?</td></tr>
+    <tr><td><strong>Covenants</strong></td><td>Legal protections in the bond indenture</td><td>Are there tight maintenance covenants protecting bondholders?</td></tr>
+    <tr><td><strong>Character</strong></td><td>Management integrity and track record</td><td>Have they been transparent? Have they ever misled bondholders?</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Key Credit Ratios <span class="tag tag-critical">Critical</span></h3>
+
+<h4>Leverage Ratios — Lower is Better for Bondholders</h4>
+<div class="formula">\[ \text{Debt/EBITDA} = \frac{\text{Total Debt}}{\text{EBITDA}} \quad \text{(most important leverage ratio)} \]</div>
+<div class="formula">\[ \text{Net Debt/EBITDA} = \frac{\text{Total Debt} - \text{Cash}}{\text{EBITDA}} \]</div>
+
+<h4>Coverage Ratios — Higher is Better for Bondholders</h4>
+<div class="formula">\[ \text{Interest Coverage (EBITDA/Interest)} = \frac{\text{EBITDA}}{\text{Interest Expense}} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Ratio</th><th>Investment Grade (typical)</th><th>High Yield (typical)</th></tr></thead>
+  <tbody>
+    <tr><td>Debt/EBITDA</td><td>&lt; 3.0×</td><td>&gt; 4.0× (can be 7–8× for LBOs)</td></tr>
+    <tr><td>EBITDA/Interest</td><td>&gt; 5×</td><td>&lt; 3× (near 1× = distressed)</td></tr>
+    <tr><td>FCF/Debt</td><td>&gt; 10%</td><td>&lt; 5% or negative</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Coverage ratio of 2× means: EBITDA is twice the interest bill. One bad year that cuts EBITDA in half → can barely pay interest → near default. Coverage of 8× means 7 bad years in a row before reaching danger — that's investment grade safety.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A company has EBITDA of €150M, total debt of €750M, cash of €50M, and interest expense of €40M. Calculate: Debt/EBITDA, Net Debt/EBITDA, and Interest Coverage.</div>
+  <div class="exam-a">
+    <strong>Debt/EBITDA</strong> = 750/150 = <strong>5.0×</strong> (High Yield territory)<br>
+    <strong>Net Debt/EBITDA</strong> = (750−50)/150 = 700/150 = <strong>4.67×</strong><br>
+    <strong>Interest Coverage</strong> = 150/40 = <strong>3.75×</strong> (borderline IG/HY)
+  </div>
+</div>
+
+<h3>Notching: Senior Secured vs. Senior Unsecured</h3>
+<p>Different bonds from the same issuer have different ratings because they have different recovery rates in default:</p>
+<ul>
+  <li>Senior secured: 1–2 notches ABOVE the issuer rating (better recovery from collateral)</li>
+  <li>Senior unsecured: the benchmark issuer rating</li>
+  <li>Subordinated: 1–2 notches BELOW issuer rating (worse recovery)</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An issuer is rated BB by S&P. What rating would you expect for its senior secured notes and its subordinated notes?</div>
+  <div class="exam-a"><strong>Answer:</strong> Senior secured ≈ <strong>BB+ or BBB−</strong> (1–2 notches higher — better recovery). Subordinated ≈ <strong>B+ or B</strong> (1–2 notches lower — worse recovery). The notching difference is wider for HY issuers where recovery uncertainty is greater.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM17 ════════════════ -->
+<section id="lm17">
+<div class="module-header">
+  <div class="lm-label">Learning Module 17</div>
+  <h2>Fixed-Income Securitisation</h2>
+  <div class="one-liner">Pooling loans and turning them into bonds — the SPE is the legal magic that makes it work.</div>
+</div>
+
+<h3>What is Securitisation?</h3>
+<p>A bank makes 10,000 car loans. Instead of keeping them (tying up capital), it packages them into a pool and sells bonds backed by those loans. Investors buy the bonds and receive the loan repayments. The bank gets its money back and can make more loans.</p>
+
+<div class="analogy">Imagine a fruit farmer who sells their entire apple harvest in advance to a juice company. The juice company then sells "apple juice futures" to investors. The farmer gets cash upfront; investors get the juice revenue. The SPE is like the juice company — a separate legal entity that holds the apples (loans).</div>
+
+<h3>The Securitisation Process</h3>
+<ol>
+  <li>Bank (originator) makes loans to borrowers</li>
+  <li>Bank sells the loan pool to an SPE (Special Purpose Entity)</li>
+  <li>SPE issues ABS bonds to investors, using loan proceeds to pay the bank</li>
+  <li>Loan repayments flow from borrowers → SPE → ABS investors</li>
+  <li>A servicer manages collections, delinquencies, and enforcement</li>
+</ol>
+
+<h3>The SPE: Why It's Critical <span class="tag tag-critical">Critical</span></h3>
+<p>The SPE creates "bankruptcy remoteness" — if the originating bank goes bankrupt, the loan pool stays inside the SPE and ABS investors are protected. Without this legal firewall, ABS investors would just be unsecured creditors of the failing bank.</p>
+
+<div class="key-rule">For bankruptcy remoteness to work, the transfer must be a "true sale" — the bank genuinely sells the loans (doesn't just pledge them as collateral). If a court decides it wasn't a true sale, the loans could be pulled back into the bank's estate in bankruptcy.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">In a securitisation, why is the Special Purpose Entity (SPE) critical to the structure?</div>
+  <div class="exam-a"><strong>Answer:</strong> The SPE provides <strong>bankruptcy remoteness</strong>. If the originator goes bankrupt, the loan assets in the SPE are legally separate and are NOT available to the originator's general creditors. ABS investors therefore only bear the credit risk of the underlying loan pool, not the credit risk of the originating bank. Without the SPE, ABS would be just another form of bank bond.</div>
+</div>
+
+<h3>Covered Bonds vs. Securitisation</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Covered Bond</th><th>ABS/MBS (Securitisation)</th></tr></thead>
+  <tbody>
+    <tr><td>Assets on balance sheet?</td><td>Yes — stay on bank's books</td><td>No — sold to SPE (true sale)</td></tr>
+    <tr><td>Recourse to issuer?</td><td>Dual recourse: pool AND issuing bank</td><td>No recourse to originator — SPE only</td></tr>
+    <tr><td>Bankruptcy protection</td><td>Pool is ring-fenced</td><td>Full bankruptcy remoteness via SPE</td></tr>
+    <tr><td>Originator risk</td><td>Bank risk remains</td><td>Bank risk eliminated for investors</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which of the following statements best distinguishes covered bonds from securitisation? A) Covered bonds have lower credit risk. B) Covered bonds give investors recourse to both the cover pool and the issuing bank. C) Only securitisation uses an SPE.</div>
+  <div class="exam-a"><strong>Answer: B.</strong> Covered bonds have dual recourse — to the cover pool first, then to the issuing bank. ABS/securitisation is "true sale" — investors only have recourse to the SPE's assets, not the originator. C is also true but B is the best distinguishing feature.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM18 ════════════════ -->
+<section id="lm18">
+<div class="module-header">
+  <div class="lm-label">Learning Module 18</div>
+  <h2>Asset-Backed Securities (ABS) Features</h2>
+  <div class="one-liner">How credit enhancement protects investors — and the different types of non-mortgage ABS.</div>
+</div>
+
+<h3>Credit Enhancement: How ABS Gets its Rating</h3>
+<p>Most underlying loans in a pool are not AAA quality. Credit enhancement creates a buffer so that senior bond investors are protected even if some loans default.</p>
+
+<h4>Internal Enhancement (more reliable)</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Method</th><th>How It Works</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Subordination (tranching)</strong></td><td>Junior tranches absorb first losses; senior tranches protected</td></tr>
+    <tr><td><strong>Overcollateralisation</strong></td><td>Pool assets worth €110 backing €100 of bonds — €10 buffer absorbs initial losses</td></tr>
+    <tr><td><strong>Excess spread</strong></td><td>Loans pay 8% interest; bonds pay 5% → 3% "excess" accumulates as a reserve</td></tr>
+    <tr><td><strong>Reserve accounts</strong></td><td>Cash set aside at inception to cover future shortfalls</td></tr>
+  </tbody>
+</table></div>
+
+<h4>External Enhancement (less reliable — 2008 showed why)</h4>
+<ul>
+  <li><strong>Bond insurance</strong>: Monoline insurer guarantees payments — but if they go bankrupt, guarantee is worthless</li>
+  <li><strong>Letters of credit</strong>: Bank commits to cover losses up to a limit</li>
+  <li><strong>Corporate guarantees</strong>: Parent entity guarantees ABS payments</li>
+</ul>
+
+<div class="key-rule">The 2008 financial crisis exposed external enhancement's fatal flaw: monoline insurers guaranteed trillions in structured bonds, then became insolvent themselves. The "insurance" was worthless. Internal subordination is much more robust.</div>
+
+<h3>Non-Mortgage ABS Types</h3>
+
+<h4>Auto Loan ABS</h4>
+<p>Backed by car loans. Simple and predictable: loans amortise, maturities are short (3–5 years), prepayment risk is low (prepayment penalties common), and recovery through vehicle repossession is well-established.</p>
+
+<h4>Credit Card ABS</h4>
+<p>The structurally complex one. Credit card balances <em>revolve</em> — cardholders pay down and charge up again. This makes cash flows unpredictable.</p>
+<ul>
+  <li><strong>Lockout/revolving period</strong>: Principal repaid by cardholders is re-invested to buy new receivables — ABS investors receive only interest during this period</li>
+  <li><strong>Amortisation period</strong>: After lockout, principal flows through to investors</li>
+  <li><strong>Early amortisation trigger</strong>: If excess spread falls below a threshold → immediate principal repayment begins (protects investors)</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Credit card ABS has a "lockout period." During this period, investors:</div>
+  <div class="exam-a"><strong>Answer:</strong> Receive only interest payments. Principal repayments by cardholders are reinvested to purchase new receivables, maintaining the pool balance. This allows the ABS to have a predictable structure despite the revolving nature of credit card balances. After the lockout period ends, principal flows through to investors.</div>
+</div>
+
+<h3>Collateralised Debt Obligations (CDOs/CLOs)</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Tranche</th><th>Rating</th><th>Loss Absorption</th><th>Return</th></tr></thead>
+  <tbody>
+    <tr><td>Senior (AAA)</td><td>Highest</td><td>Last to absorb losses — protected by all below</td><td>Lowest yield</td></tr>
+    <tr><td>Mezzanine (BBB–BB)</td><td>Middle</td><td>Absorbs losses after equity is exhausted</td><td>Medium yield</td></tr>
+    <tr><td>Equity/Junior</td><td>Unrated</td><td>First to absorb losses — "first loss" tranche</td><td>Highest yield (residual)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">CLO tranching is exactly like a corporate capital structure: equity holders take first loss (like common equity), senior secured bondholders get paid first (like AAA). The whole thing is just corporate capital structure theory applied to a pool of leveraged loans.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A CLO has €500M in assets. The senior tranche = €350M (AAA), mezzanine = €100M (BB), equity = €50M. If €60M of loans default with zero recovery, which tranches are affected?</div>
+  <div class="exam-a"><strong>Answer:</strong> The equity tranche (€50M) is wiped out first. The remaining €10M of losses hits the mezzanine tranche, reducing it to €90M. The <strong>senior tranche is unaffected</strong> (€350M still fully protected). This is the waterfall structure.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ LM19 ════════════════ -->
+<section id="lm19">
+<div class="module-header">
+  <div class="lm-label">Learning Module 19</div>
+  <h2>Mortgage-Backed Securities (MBS) Features</h2>
+  <div class="one-liner">Prepayment risk is the unique MBS challenge — homeowners have an option you're short, and it works against you in both directions.</div>
+</div>
+
+<h3>Prepayment Risk — The Defining Feature of MBS <span class="tag tag-critical">Critical</span></h3>
+<p>A homeowner can prepay their mortgage at any time by selling or refinancing. This creates an embedded call option held by the borrower — and you, the MBS investor, are short that option.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Risk</th><th>When It Happens</th><th>Impact on MBS Investor</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Contraction risk</strong></td><td>Rates fall → homeowners refinance → faster prepayments</td><td>Get principal back when you don't want it (must reinvest at lower rates); price appreciation capped</td></tr>
+    <tr><td><strong>Extension risk</strong></td><td>Rates rise → prepayments slow → effective maturity extends</td><td>Stuck with below-market coupon for longer; cash flows discounted at higher rates</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Unlike a callable bond where you face ONE bad scenario (rates fall and it gets called), MBS investors face BOTH: contraction risk when rates fall AND extension risk when rates rise. You are short an embedded option in both directions simultaneously.</div>
+
+<h3>Prepayment Measures</h3>
+<div class="formula">\[ SMM = 1 - (1-CPR)^{1/12} \quad \text{(Single Monthly Mortality — monthly prepayment rate)} \]</div>
+<div class="formula">\[ CPR = 1 - (1-SMM)^{12} \quad \text{(Conditional Prepayment Rate — annualised)} \]</div>
+<p>PSA model (standard assumption): CPR starts at 0.2%/month, rising 0.2%/month until month 30 = 6% CPR, then stays constant at 6%.</p>
+<ul>
+  <li><strong>200 PSA</strong> = 2× the standard model → twice as fast prepayments</li>
+  <li><strong>50 PSA</strong> = half speed → slower prepayments (extension risk scenario)</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A mortgage pool has a CPR of 12%. What is the SMM?</div>
+  <div class="exam-a"><strong>Answer:</strong> SMM = 1 − (1 − 0.12)^(1/12) = 1 − (0.88)^(1/12) = 1 − 0.9894 = <strong>1.06%</strong> per month. Approximately 1.06% of the remaining mortgage balance is prepaid each month.</div>
+</div>
+
+<h3>Agency vs. Non-Agency RMBS</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Agency (Ginnie Mae, Fannie, Freddie)</th><th>Non-Agency (Private)</th></tr></thead>
+  <tbody>
+    <tr><td>Credit guarantee</td><td>Yes — government or GSE-backed</td><td>No — full credit risk remains</td></tr>
+    <tr><td>Key risk</td><td>Prepayment risk only (no default risk)</td><td>Prepayment risk + credit risk</td></tr>
+    <tr><td>Loan types</td><td>Conforming loans (meet size/LTV/credit criteria)</td><td>Non-conforming (jumbo, subprime, alt-A)</td></tr>
+    <tr><td>Credit enhancement</td><td>Not needed (guaranteed)</td><td>Required — tranching, overcollateralisation</td></tr>
+  </tbody>
+</table></div>
+
+<h3>CMO Tranche Structures <span class="tag tag-critical">Critical</span></h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Tranche Type</th><th>How It Works</th><th>Prepayment Exposure</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Sequential-pay</strong></td><td>All principal goes to Class A first, then B, then C...</td><td>A = contraction risk; later classes = extension risk</td></tr>
+    <tr><td><strong>PAC (Planned Amortisation)</strong></td><td>Stable cash flows within a prepayment band; support tranches absorb variability outside the band</td><td>Protected within the band — this is why PAC investors pay up (highest price)</td></tr>
+    <tr><td><strong>TAC (Targeted Amortisation)</strong></td><td>Protected from contraction only (faster prepayments)</td><td>Still bears extension risk — less protection than PAC</td></tr>
+    <tr><td><strong>IO (Interest Only)</strong></td><td>Receives only interest payments; no principal</td><td><strong>Price FALLS when rates fall</strong> — potentially negative duration!</td></tr>
+    <tr><td><strong>PO (Principal Only)</strong></td><td>Bought at deep discount; receives only principal</td><td><strong>Price RISES strongly when rates fall</strong> — very high positive duration</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">IO strips defy intuition: normally bonds gain when rates fall. But IO strips LOSE when rates fall — because when rates fall, everyone refinances and prepays → principal vanishes → no more interest to pay → IO is worth nothing. IO strips have <em>negative duration</em>, making them powerful hedges for bond portfolios. IO + PO together = a whole pass-through (they're literally the same bond split into two pieces).</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor is long an IO strip on an RMBS. Interest rates decline sharply. What is the most likely impact on the IO strip's value?</div>
+  <div class="exam-a"><strong>Answer: The IO strip's value FALLS.</strong> When rates fall, homeowners refinance → faster prepayments → principal is paid back quickly → the interest payment pool shrinks → IO receives less and less interest. Potentially the entire pool pays off early and the IO is worthless. This is why IO strips exhibit negative duration — they lose value when rates fall.</div>
+</div>
+
+<h3>CMBS vs. RMBS: Key Differences</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>RMBS</th><th>CMBS</th></tr></thead>
+  <tbody>
+    <tr><td>Pool size</td><td>Thousands of homogeneous residential mortgages</td><td>Few to dozens of commercial properties — concentrated</td></tr>
+    <tr><td>Prepayment protection</td><td>Limited — refinancing is common</td><td>Strong: lockout, defeasance, yield maintenance</td></tr>
+    <tr><td>Credit analysis</td><td>Statistical/pool-level</td><td>Individual property and tenant analysis required</td></tr>
+    <tr><td>Key metrics</td><td>LTV, credit score</td><td>DSC ratio AND LTV (both critical)</td></tr>
+    <tr><td>Unique risk</td><td>Contraction + extension risk</td><td>Balloon risk (large payment at maturity; refinancing risk)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="formula">\[ DSC = \frac{NOI}{\text{Annual Debt Service}} \quad \text{(must be > 1.0 to cover debt; >1.25 to get new loan)} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A commercial property generates €2.5M in NOI and has annual debt service of €1.8M. What is the DSC ratio? Is this sufficient for a new origination?</div>
+  <div class="exam-a"><strong>DSC = 2.5/1.8 = 1.39×.</strong> This exceeds the typical 1.25× threshold required for new loan originations. The property generates sufficient income to cover debt service with a 39% cushion. If NOI falls by more than 28% (to €1.8M), the loan would be in default on coverage.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ FORMULA SHEET ════════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Formula Sheet — All 19 Modules</h2>
+  <div class="one-liner">Every formula you need, in one place.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+  <thead><tr><th style="width:40%">Formula</th><th style="width:45%">Description</th><th>LM</th></tr></thead>
+  <tbody>
+    <tr><td>\(\text{Coupon} = \text{Rate} \times \text{Par}\)</td><td>Annual coupon payment</td><td>1</td></tr>
+    <tr><td>\(V_{\text{callable}} = V_{\text{bullet}} - V_{\text{call}}\)</td><td>Callable bond decomposition</td><td>2</td></tr>
+    <tr><td>\(V_{\text{putable}} = V_{\text{bullet}} + V_{\text{put}}\)</td><td>Putable bond decomposition</td><td>2</td></tr>
+    <tr><td>\(\text{Repo Interest} = P \times r \times t/360\)</td><td>Repo interest calculation</td><td>4</td></tr>
+    <tr><td>\(P = \sum \frac{C}{(1+r)^t} + \frac{FV}{(1+r)^N}\)</td><td>Bond price (YTM discounting)</td><td>6</td></tr>
+    <tr><td>\(\text{Full Price} = \text{Flat Price} + AI\)</td><td>Dirty vs. clean price</td><td>6</td></tr>
+    <tr><td>\(AI = \frac{\text{Days since coupon}}{\text{Days in period}} \times \frac{\text{Annual Coupon}}{m}\)</td><td>Accrued interest</td><td>6</td></tr>
+    <tr><td>\(EAY = \left(1 + \frac{YTM_\text{semi}}{2}\right)^2 - 1\)</td><td>Effective annual yield conversion</td><td>7</td></tr>
+    <tr><td>\(YTW = \min(YTM,\ YTC,\ YTP\ldots)\)</td><td>Yield to worst</td><td>7</td></tr>
+    <tr><td>\(OAS = Z\text{-Spread} - \text{Option Value}\)</td><td>Option-adjusted spread</td><td>7</td></tr>
+    <tr><td>\(DR = \frac{FV-PV}{FV} \times \frac{360}{Days}\)</td><td>Money market discount rate</td><td>8</td></tr>
+    <tr><td>\(AOR = \frac{FV-PV}{PV} \times \frac{360}{Days}\)</td><td>Add-on rate / BEY</td><td>8</td></tr>
+    <tr><td>\(P = \sum \frac{C}{(1+S_t)^t} + \frac{FV}{(1+S_N)^N}\)</td><td>Bond price using spot rates</td><td>9</td></tr>
+    <tr><td>\((1+S_2)^2 = (1+S_1)(1+f_{1,1})\)</td><td>Forward rate from spot rates</td><td>9</td></tr>
+    <tr><td>\(f_{j,k} = \left[\frac{(1+S_{j+k})^{j+k}}{(1+S_j)^j}\right]^{1/k} - 1\)</td><td>General forward rate</td><td>9</td></tr>
+    <tr><td>\(MacDur = \frac{\sum t \cdot PV(CF_t)}{P}\)</td><td>Macaulay duration</td><td>10</td></tr>
+    <tr><td>\(MacDur_\infty = \frac{1+r}{r}\)</td><td>Perpetuity Macaulay duration</td><td>10</td></tr>
+    <tr><td>\(ModDur = \frac{MacDur}{1+r/m}\)</td><td>Modified duration</td><td>11</td></tr>
+    <tr><td>\(\%\Delta P \approx -ModDur \times \Delta y\)</td><td>Price change from duration</td><td>11</td></tr>
+    <tr><td>\(ApproxModDur = \frac{P_- - P_+}{2 \times P_0 \times \Delta y}\)</td><td>Approximate modified duration</td><td>11</td></tr>
+    <tr><td>\(PVBP = \frac{ModDur \times P}{10{,}000}\)</td><td>Price value of a basis point</td><td>11</td></tr>
+    <tr><td>\(D_\text{port} = \sum w_i D_i\)</td><td>Portfolio duration</td><td>11</td></tr>
+    <tr><td>\(\frac{\Delta P}{P} \approx -D \cdot \Delta y + \frac{1}{2} Conv \cdot (\Delta y)^2\)</td><td>Full price change with convexity</td><td>12</td></tr>
+    <tr><td>\(ApproxConv = \frac{P_- + P_+ - 2P_0}{P_0 \times (\Delta y)^2}\)</td><td>Approximate convexity</td><td>12</td></tr>
+    <tr><td>\(EffDur = \frac{P_- - P_+}{2 \times P_0 \times \Delta Curve}\)</td><td>Effective duration</td><td>13</td></tr>
+    <tr><td>\(EL = PD \times LGD\)</td><td>Expected credit loss</td><td>14</td></tr>
+    <tr><td>\(LGD = 1 - \text{Recovery Rate}\)</td><td>Loss given default</td><td>14</td></tr>
+    <tr><td>\(\frac{\Delta P}{P} \approx -D \cdot \Delta\text{Spread} + \frac{1}{2} Conv \cdot (\Delta\text{Spread})^2\)</td><td>Price impact of spread change</td><td>14</td></tr>
+    <tr><td>\(\text{Debt/EBITDA},\quad \frac{EBITDA}{\text{Interest}},\quad \frac{FCF}{\text{Debt}}\)</td><td>Key corporate credit ratios</td><td>16</td></tr>
+    <tr><td>\(CPR = 1-(1-SMM)^{12}\)</td><td>Annual prepayment rate</td><td>19</td></tr>
+    <tr><td>\(SMM = 1-(1-CPR)^{1/12}\)</td><td>Monthly prepayment rate</td><td>19</td></tr>
+    <tr><td>\(DSC = \frac{NOI}{\text{Debt Service}}\)</td><td>CMBS coverage ratio</td><td>19</td></tr>
+  </tbody>
+</table></div>
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

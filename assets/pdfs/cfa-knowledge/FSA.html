@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Financial Statement Analysis: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 240px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand { padding: 0 18px 16px; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 8px; }
+#sidebar .brand-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 800; color: #fff; letter-spacing: 0.3px; }
+#sidebar .brand-sub { font-size: 11px; color: rgba(255,255,255,.4); font-family: 'Plus Jakarta Sans', sans-serif; }
+#sidebar .nav-section { padding: 14px 18px 4px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,.3); }
+#sidebar a { display: block; padding: 6px 18px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11.5px; font-weight: 500; color: rgba(255,255,255,.65); text-decoration: none; transition: all .15s; line-height: 1.4; border-left: 2px solid transparent; }
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+#main { margin-left: 240px; padding: 56px 68px 100px; max-width: 980px; }
+.hero { text-align: center; padding: 64px 0 52px; border-bottom: 3px solid var(--navy); margin-bottom: 64px; }
+.hero h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 36px; font-weight: 800; color: var(--navy); margin-bottom: 10px; letter-spacing: -0.5px; }
+.hero .subtitle { font-size: 19px; font-style: italic; color: var(--gold); margin-bottom: 6px; }
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+.module-header { margin-top: 80px; background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); border-radius: 14px; padding: 28px 34px; margin-bottom: 36px; position: relative; overflow: hidden; }
+.module-header::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 100%; background: linear-gradient(135deg, transparent, rgba(184,133,42,.1)); }
+.module-header .lm-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 6px; }
+.module-header h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; font-weight: 800; color: #fff; line-height: 1.25; }
+.module-header .one-liner { margin-top: 10px; font-size: 15px; color: rgba(255,255,255,.55); font-style: italic; font-family: 'Crimson Pro', serif; }
+h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); margin: 36px 0 12px; padding-bottom: 7px; border-bottom: 2px solid var(--blue-light); }
+h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; color: var(--blue-dark); margin: 24px 0 8px; }
+p { margin: 11px 0; }
+.intuition { background: var(--green-light); border-left: 4px solid #22c55e; border-radius: 0 10px 10px 0; padding: 15px 20px; margin: 20px 0; color: var(--green-dark); font-size: 16px; line-height: 1.7; }
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+.exam { background: var(--gold-light); border: 1.5px solid var(--gold-mid); border-radius: 12px; padding: 18px 22px; margin: 24px 0; }
+.exam-header { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.exam-q { font-size: 15.5px; line-height: 1.7; color: #3d2a0a; margin-bottom: 10px; }
+.exam-a { font-size: 14.5px; line-height: 1.65; color: #5c3d14; padding-top: 8px; border-top: 1px solid var(--gold-mid); }
+.exam-a strong { color: var(--navy); }
+.formula { background: var(--purple-light); border-left: 4px solid #7c3aed; border-radius: 0 10px 10px 0; padding: 14px 22px; margin: 18px 0; text-align: center; overflow-x: auto; }
+.analogy { background: var(--blue-light); border-left: 4px solid #3b82f6; border-radius: 0 10px 10px 0; padding: 14px 20px; margin: 18px 0; color: var(--blue-dark); font-size: 15.5px; line-height: 1.7; }
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+.key-rule { background: var(--red-light); border-left: 4px solid #ef4444; border-radius: 0 10px 10px 0; padding: 13px 20px; margin: 18px 0; color: var(--red-dark); font-size: 15.5px; font-weight: 600; }
+.key-rule::before { content: "⚠️ Key Rule — "; }
+.big-picture { background: linear-gradient(135deg, #fef9ec, #fef3c7); border: 1.5px solid #f59e0b; border-radius: 12px; padding: 22px 26px; margin: 44px 0 12px; }
+.bp-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #b45309; margin-bottom: 8px; }
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+.tag { display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle; }
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+.compare-box { border-radius: 10px; padding: 16px 18px; }
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+@media (max-width: 900px) { #sidebar { display: none; } #main { margin-left: 0; padding: 28px 18px; } }
+@media print { #sidebar { display: none; } #main { margin-left: 0; } .module-header { break-before: page; } }
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">FSA · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Foundations</div>
+  <a href="#r27">R27 — Intro to FSA</a>
+  <a href="#r28">R28 — Income Statements</a>
+  <a href="#r29">R29 — Balance Sheets</a>
+  <div class="nav-section">Cash Flows</div>
+  <a href="#r30">R30 — Cash Flows I</a>
+  <a href="#r31">R31 — Cash Flows II</a>
+  <div class="nav-section">Deep Dives</div>
+  <a href="#r32">R32 — Inventories</a>
+  <a href="#r33">R33 — Long-Term Assets</a>
+  <a href="#r34">R34 — Liabilities & Equity</a>
+  <a href="#r35">R35 — Income Taxes</a>
+  <div class="nav-section">Quality & Technique</div>
+  <a href="#r36">R36 — Reporting Quality</a>
+  <a href="#r37">R37 — Analysis Techniques</a>
+  <a href="#r38">R38 — FS Modeling</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Formula Sheet</a>
+</nav>
+
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Financial Statement Analysis</h1>
+  <p class="subtitle">Intuition-First Study Guide · All 12 Readings</p>
+  <p class="meta">Every concept explained in plain English · Exam questions after every topic</p>
+</div>
+
+<!-- ════════════════ R27 ════════════════ -->
+<section id="r27">
+<div class="module-header">
+  <div class="lm-label">Reading 27</div>
+  <h2>Introduction to Financial Statement Analysis</h2>
+  <div class="one-liner">The six-step framework, key reports, and who sets the rules.</div>
+</div>
+
+<h3>The Six-Step FSA Framework</h3>
+<p>Before diving into any numbers, an analyst follows a structured process. Think of it as a research methodology — you wouldn't just grab random ratios.</p>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Step</th><th>What You Do</th><th>Why It Matters</th></tr></thead>
+<tbody>
+  <tr><td>1. State objective</td><td>Define the question (creditworthiness? equity valuation?)</td><td>Different objectives require different analysis</td></tr>
+  <tr><td>2. Gather data</td><td>Collect financial statements, industry data, management commentary</td><td>Garbage in, garbage out</td></tr>
+  <tr><td>3. Process data</td><td>Calculate ratios, create common-size statements, make adjustments</td><td>Raw data isn't useful without processing</td></tr>
+  <tr><td>4. Analyze & interpret</td><td>Draw conclusions from processed data</td><td>Numbers tell a story — this is where you read it</td></tr>
+  <tr><td>5. Report</td><td>Communicate findings; comply with Code & Standards</td><td>Analysis is useless if not communicated well</td></tr>
+  <tr><td>6. Update</td><td>Periodically repeat, revise recommendations</td><td>Companies change; so should your analysis</td></tr>
+</tbody>
+</table></div>
+
+<h3>Key Reports and Information Sources</h3>
+<p>Financial statements are prepared according to standards set by the IASB (IFRS, used globally) or the FASB (U.S. GAAP, used in the United States). Regulatory authorities like the SEC enforce compliance.</p>
+
+<div class="key-rule">Footnotes are audited and often more important than the statements themselves. They reveal accounting methods, assumptions, estimates, contingencies, and related-party transactions. Always read them.</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Source</th><th>What It Contains</th><th>Exam Tip</th></tr></thead>
+<tbody>
+  <tr><td><strong>Financial statements</strong></td><td>Income statement, balance sheet, cash flow, equity changes</td><td>The core — always start here</td></tr>
+  <tr><td><strong>Footnotes</strong></td><td>Accounting methods, estimates, contingencies</td><td>Audited — treat with high confidence</td></tr>
+  <tr><td><strong>MD&A</strong></td><td>Management's discussion of results, trends, liquidity</td><td>NOT audited — management's spin</td></tr>
+  <tr><td><strong>Auditor's report</strong></td><td>Unqualified, qualified, adverse, or disclaimer</td><td>Unqualified = "clean" opinion</td></tr>
+  <tr><td><strong>Proxy statement</strong></td><td>Board elections, executive compensation</td><td>Filed with SEC; good governance info</td></tr>
+</tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which step of the FSA framework involves calculating ratios, creating common-size statements, and making adjustments to financial data?</div>
+  <div class="exam-a"><strong>Answer: Step 3 — Process the data.</strong> This is the "crunch the numbers" step. Don't confuse it with Step 4 (analyze/interpret), which draws conclusions from the processed data.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An auditor issues a qualified opinion. This most likely means:</div>
+  <div class="exam-a"><strong>Answer:</strong> The financial statements make specific exceptions to applicable accounting standards, and the auditor has explained the effects. It's a yellow flag — not as bad as adverse, but not clean either.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R28 ════════════════ -->
+<section id="r28">
+<div class="module-header">
+  <div class="lm-label">Reading 28</div>
+  <h2>Analyzing Income Statements</h2>
+  <div class="one-liner">Revenue recognition, expense matching, EPS — the most tested FSA reading.</div>
+</div>
+
+<h3>Revenue Recognition — The Five-Step Model <span class="tag tag-critical">Critical</span></h3>
+<p>Under converged IFRS/U.S. GAAP standards, revenue is recognized using a five-step process:</p>
+<ol>
+  <li>Identify the contract(s) with a customer</li>
+  <li>Identify the separate performance obligations in the contract</li>
+  <li>Determine the transaction price</li>
+  <li>Allocate the price to the performance obligations</li>
+  <li>Recognize revenue when (or as) a performance obligation is satisfied</li>
+</ol>
+
+<div class="intuition">Revenue is recognized when earned, not when cash is received. If you sell a magazine subscription and get paid upfront, you only recognize revenue as each issue is delivered — the rest sits as "unearned revenue" (a liability).</div>
+
+<div class="key-rule">If payment is received BEFORE goods/services are delivered → create an unearned revenue liability. Revenue recognized only as obligations are satisfied.</div>
+
+<h3>Expense Recognition — Capitalize vs. Expense</h3>
+<p>The decision to capitalize or expense a cost is one of the most impactful accounting choices. Capitalizing spreads the cost over multiple periods via depreciation; expensing hits the income statement immediately.</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Capitalize (Year 1)</h5>
+    <ul>
+      <li>Higher net income (Year 1)</li>
+      <li>Higher assets & equity</li>
+      <li>Higher CFO (cost in CFI)</li>
+      <li>Higher ROE & ROA initially</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Expense (Year 1)</h5>
+    <ul>
+      <li>Lower net income (Year 1)</li>
+      <li>Lower assets & equity</li>
+      <li>Lower CFO (cost in CFO)</li>
+      <li>Lower ROE & ROA initially</li>
+    </ul>
+  </div>
+</div>
+
+<div class="key-rule">Under IFRS, research costs are expensed; development costs may be capitalized if criteria are met. Under U.S. GAAP, BOTH research and development costs are expensed (except software for sale, once technically feasible).</div>
+
+<h3>Earnings Per Share (EPS) <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">\[ \text{Basic EPS} = \frac{\text{Net Income} - \text{Preferred Dividends}}{\text{Weighted Average Common Shares}} \]</div>
+
+<h4>Diluted EPS — Three Types of Dilutive Securities</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Security</th><th>Numerator Adjustment</th><th>Denominator Adjustment</th><th>Dilutive If…</th></tr></thead>
+<tbody>
+  <tr><td><strong>Stock options/warrants</strong></td><td>None</td><td>Treasury stock method: net new shares = options − (proceeds / avg price)</td><td>Exercise price &lt; average market price</td></tr>
+  <tr><td><strong>Convertible preferred</strong></td><td>Add back preferred dividends</td><td>Add shares from conversion</td><td>Per-share impact &lt; basic EPS</td></tr>
+  <tr><td><strong>Convertible bonds</strong></td><td>Add back after-tax interest</td><td>Add shares from conversion</td><td>Per-share impact &lt; basic EPS</td></tr>
+</tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Calculation)</div>
+  <div class="exam-q">XXX Corp. has net income of $1.2M, 500,000 shares outstanding, and 100,000 options with exercise price $15. Average market price is $20. Calculate diluted EPS.</div>
+  <div class="exam-a"><strong>Answer:</strong> Treasury stock method: 100,000 shares created. Proceeds = 100,000 × $15 = $1.5M. Shares repurchased = $1.5M / $20 = 75,000. Net new shares = 25,000. Diluted EPS = $1,200,000 / 525,000 = <strong>$2.29</strong> (vs. basic EPS of $2.40). Options are dilutive because exercise price ($15) &lt; average price ($20).</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A company has basic EPS of $1.25. Its convertible bonds would add $70,000 after-tax interest and 100,000 shares. Are the bonds dilutive?</div>
+  <div class="exam-a"><strong>Answer:</strong> Per-share impact = $70,000 / 100,000 = $0.70. Since $0.70 &lt; $1.25 basic EPS, the bonds ARE dilutive and must be included. If per-share impact exceeded basic EPS, they'd be antidilutive and excluded.</div>
+</div>
+
+<h3>Common-Size Income Statements</h3>
+<p>A vertical common-size income statement expresses every line item as a percentage of revenue, eliminating size effects. This allows comparison across time and across firms of different sizes.</p>
+
+<div class="formula">\[ \text{Gross Profit Margin} = \frac{\text{Revenue} - \text{COGS}}{\text{Revenue}} \qquad \text{Net Profit Margin} = \frac{\text{Net Income}}{\text{Revenue}} \]</div>
+
+</section><hr>
+
+<!-- ════════════════ R29 ════════════════ -->
+<section id="r29">
+<div class="module-header">
+  <div class="lm-label">Reading 29</div>
+  <h2>Analyzing Balance Sheets</h2>
+  <div class="one-liner">Assets = Liabilities + Equity — but the devil is in the measurement.</div>
+</div>
+
+<h3>Intangible Assets</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Type</th><th>Treatment</th><th>Key Rule</th></tr></thead>
+<tbody>
+  <tr><td>Internally created intangibles</td><td>Expensed as incurred</td><td>IFRS: research expensed, development may be capitalized. U.S. GAAP: both expensed</td></tr>
+  <tr><td>Purchased intangibles (finite life)</td><td>Capitalized, amortized</td><td>Similar to tangible assets</td></tr>
+  <tr><td>Purchased intangibles (indefinite life)</td><td>Not amortized; tested for impairment annually</td><td>Includes goodwill</td></tr>
+</tbody>
+</table></div>
+
+<h3>Goodwill</h3>
+<div class="formula">\[ \text{Goodwill} = \text{Purchase Price} - \text{Fair Value of Identifiable Net Assets} \]</div>
+
+<div class="intuition">Goodwill only arises from acquisitions — you cannot create goodwill internally and put it on your balance sheet. It represents the premium the buyer paid for things like brand reputation, customer loyalty, and expected synergies. Goodwill is never amortized, but must be tested for impairment at least annually.</div>
+
+<h3>Measurement of Financial Assets</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Classification</th><th>Balance Sheet</th><th>Unrealized Gains/Losses</th></tr></thead>
+<tbody>
+  <tr><td>Held-to-maturity (debt only)</td><td>Amortized cost</td><td>Not recognized</td></tr>
+  <tr><td>Available-for-sale / FVOCI</td><td>Fair value</td><td>Other comprehensive income (OCI)</td></tr>
+  <tr><td>Trading / FVPL</td><td>Fair value</td><td>Income statement (P&L)</td></tr>
+</tbody>
+</table></div>
+
+<h3>Liquidity & Solvency Ratios from the Balance Sheet</h3>
+<div class="formula">\[ \text{Current Ratio} = \frac{\text{Current Assets}}{\text{Current Liabilities}} \qquad \text{Quick Ratio} = \frac{\text{Cash + Marketable Securities + Receivables}}{\text{Current Liabilities}} \]</div>
+<div class="formula">\[ \text{Debt-to-Equity} = \frac{\text{Total Debt}}{\text{Total Equity}} \qquad \text{Financial Leverage} = \frac{\text{Total Assets}}{\text{Total Equity}} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Company A has a higher current ratio but lower quick ratio than Company B. What does this imply?</div>
+  <div class="exam-a"><strong>Answer:</strong> Company A has relatively more inventory than Company B. The quick ratio excludes inventory from current assets. A high current ratio but low quick ratio suggests potential liquidity concerns if inventory is illiquid or obsolete.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R30 ════════════════ -->
+<section id="r30">
+<div class="module-header">
+  <div class="lm-label">Reading 30</div>
+  <h2>Analyzing Statements of Cash Flows I</h2>
+  <div class="one-liner">Cash is king — accruals lie, but cash flows don't.</div>
+</div>
+
+<h3>Three Sections of the Cash Flow Statement</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Section</th><th>What It Captures</th><th>Examples (U.S. GAAP)</th></tr></thead>
+<tbody>
+  <tr><td><strong>CFO</strong> (Operating)</td><td>Cash from core business operations</td><td>Cash from customers, cash paid to suppliers, interest paid, taxes paid, dividends received</td></tr>
+  <tr><td><strong>CFI</strong> (Investing)</td><td>Cash for long-term asset purchases/sales</td><td>Purchase/sale of PP&E, purchase/sale of investments</td></tr>
+  <tr><td><strong>CFF</strong> (Financing)</td><td>Cash from/to capital providers</td><td>Debt issued/repaid, equity issued/repurchased, dividends paid</td></tr>
+</tbody>
+</table></div>
+
+<div class="key-rule">Under U.S. GAAP: Interest paid = CFO, Dividends paid = CFF, Interest/dividends received = CFO. Under IFRS: Companies have flexibility — interest/dividends paid can be CFO or CFF; interest/dividends received can be CFO or CFI.</div>
+
+<h3>Direct vs. Indirect Method <span class="tag tag-critical">Critical</span></h3>
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Direct Method</h5>
+    <ul>
+      <li>Shows actual cash receipts and payments</li>
+      <li>Starts with cash from customers</li>
+      <li>Preferred by standard setters</li>
+      <li>Rarely used in practice</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Indirect Method</h5>
+    <ul>
+      <li>Starts with net income</li>
+      <li>Adjusts for noncash items and working capital changes</li>
+      <li>Shows why NI ≠ CFO</li>
+      <li>Used by most companies</li>
+    </ul>
+  </div>
+</div>
+
+<h4>Indirect Method Adjustments</h4>
+<div class="formula">\[ \text{CFO} = \text{Net Income} + \text{Noncash Charges} - \text{Working Capital Investment} \]</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Adjustment</th><th>Add or Subtract?</th><th>Why</th></tr></thead>
+<tbody>
+  <tr><td>Depreciation/amortization</td><td><strong>Add back</strong></td><td>Noncash charge that reduced NI</td></tr>
+  <tr><td>Gain on asset sale</td><td><strong>Subtract</strong></td><td>Gain was in NI but cash is in CFI</td></tr>
+  <tr><td>Loss on asset sale</td><td><strong>Add back</strong></td><td>Loss was in NI but cash is in CFI</td></tr>
+  <tr><td>Increase in receivables</td><td><strong>Subtract</strong></td><td>Revenue earned but not collected = use of cash</td></tr>
+  <tr><td>Decrease in inventory</td><td><strong>Add</strong></td><td>Cash freed up from selling inventory</td></tr>
+  <tr><td>Increase in accounts payable</td><td><strong>Add</strong></td><td>Expenses incurred but not yet paid = source of cash</td></tr>
+  <tr><td>Increase in deferred tax liability</td><td><strong>Add</strong></td><td>Tax expense > tax paid = noncash tax</td></tr>
+</tbody>
+</table></div>
+
+<div class="analogy">Think of each working capital adjustment this way: if an operating asset INCREASED, the company "used" cash to build that asset → subtract. If an operating liability INCREASED, the company "borrowed" from suppliers → add. Just reverse the logic for decreases.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Calculation)</div>
+  <div class="exam-q">Net income is $78,000. Receivables increased $52,000. Payables increased $29,000. Depreciation was $12,000. Unrealized gain on trading securities was $15,000. What is CFO?</div>
+  <div class="exam-a"><strong>Answer:</strong> CFO = $78,000 + $12,000 (depreciation) − $15,000 (unrealized gain) − $52,000 (↑ receivables) + $29,000 (↑ payables) = <strong>$52,000</strong>.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R31 ════════════════ -->
+<section id="r31">
+<div class="module-header">
+  <div class="lm-label">Reading 31</div>
+  <h2>Analyzing Statements of Cash Flows II</h2>
+  <div class="one-liner">Free cash flow, quality of earnings, and cash-based performance ratios.</div>
+</div>
+
+<h3>Free Cash Flow <span class="tag tag-critical">Critical</span></h3>
+<div class="formula">\[ \text{FCFF} = \text{NI} + \text{NCC} + \text{Int}(1-t) - \text{FCInv} - \text{WCInv} \]</div>
+<div class="formula">\[ \text{FCFF} = \text{CFO} + \text{Int}(1-t) - \text{FCInv} \]</div>
+<div class="formula">\[ \text{FCFE} = \text{CFO} - \text{FCInv} + \text{Net Borrowing} \]</div>
+
+<div class="intuition">FCFF is the cash available to ALL investors (debt + equity). FCFE is the cash available only to equity holders — after paying interest and adjusting for net debt. If a company consistently generates positive FCFF but negative FCFE, it's servicing too much debt.</div>
+
+<h3>Cash Flow Patterns — What They Tell You</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>CFO</th><th>CFI</th><th>CFF</th><th>Interpretation</th></tr></thead>
+<tbody>
+  <tr><td>+</td><td>−</td><td>−</td><td>Mature, healthy company: funding investments and repaying debt from operations</td></tr>
+  <tr><td>+</td><td>−</td><td>+</td><td>Growing company: operations profitable but raising capital for expansion</td></tr>
+  <tr><td>−</td><td>−</td><td>+</td><td>Growth or startup: burning cash, investing heavily, raising capital</td></tr>
+  <tr><td>−</td><td>+</td><td>+</td><td>Distressed: selling assets and raising cash to fund losses</td></tr>
+</tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A company has CFO of $400M, interest expense of $50M (tax rate 25%), and capital expenditures of $200M. What is FCFF?</div>
+  <div class="exam-a"><strong>Answer:</strong> FCFF = CFO + Int(1−t) − FCInv = $400M + $50M(0.75) − $200M = $400M + $37.5M − $200M = <strong>$237.5M</strong>.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R32 ════════════════ -->
+<section id="r32">
+<div class="module-header">
+  <div class="lm-label">Reading 32</div>
+  <h2>Analysis of Inventories</h2>
+  <div class="one-liner">FIFO vs. LIFO — one of the most-tested areas in all of FSA.</div>
+</div>
+
+<h3>FIFO vs. LIFO — Assuming Rising Prices <span class="tag tag-critical">Critical</span></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Item</th><th>FIFO</th><th>LIFO</th></tr></thead>
+<tbody>
+  <tr><td>COGS</td><td>Lower (older, cheaper costs)</td><td>Higher (newer, expensive costs)</td></tr>
+  <tr><td>Ending inventory (BS)</td><td>Higher (recent costs)</td><td>Lower (old costs)</td></tr>
+  <tr><td>Gross profit & NI</td><td>Higher</td><td>Lower</td></tr>
+  <tr><td>Taxes paid</td><td>Higher</td><td>Lower → <strong>better cash flow</strong></td></tr>
+  <tr><td>Current ratio</td><td>Higher (higher inventory)</td><td>Lower</td></tr>
+  <tr><td>Inventory turnover</td><td>Lower</td><td>Higher (high COGS / low inventory)</td></tr>
+  <tr><td>Debt-to-equity</td><td>Lower (higher equity)</td><td>Higher</td></tr>
+</tbody>
+</table></div>
+
+<div class="key-rule">FIFO gives a better balance sheet (inventory at recent cost). LIFO gives a better income statement (COGS at recent cost). In a real sense, LIFO cash flows are superior because taxes are lower. If prices are falling, all effects reverse.</div>
+
+<h3>Inventory Valuation — Lower of Cost or NRV</h3>
+<p>Under IFRS, inventory is reported at the lower of cost or net realizable value (NRV = expected selling price − completion and selling costs). Write-ups are allowed under IFRS (limited to prior write-downs). Under U.S. GAAP, no write-ups are allowed.</p>
+
+<h3>LIFO Liquidation</h3>
+<div class="intuition">A LIFO liquidation occurs when a LIFO firm sells more inventory than it buys — digging into old, cheap layers. This artificially inflates COGS savings and boosts profit margins unsustainably. The LIFO reserve will shrink, which is your red flag in the footnotes.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">During rising prices, compared to LIFO, a firm using FIFO will have a:</div>
+  <div class="exam-a"><strong>Answer: Higher current ratio.</strong> FIFO inventory on the balance sheet reflects more recent (higher) costs → higher current assets → higher current ratio. FIFO also produces lower COGS, higher gross margin, but higher taxes.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R33 ════════════════ -->
+<section id="r33">
+<div class="module-header">
+  <div class="lm-label">Reading 33</div>
+  <h2>Analysis of Long-Term Assets</h2>
+  <div class="one-liner">Capitalization, depreciation, impairment — how PP&E and intangibles age on the books.</div>
+</div>
+
+<h3>Impairment — IFRS vs. U.S. GAAP <span class="tag tag-critical">Critical</span></h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>IFRS</th><th>U.S. GAAP</th></tr></thead>
+<tbody>
+  <tr><td><strong>Test</strong></td><td>Carrying value > recoverable amount</td><td>Step 1: Carrying value > undiscounted future cash flows</td></tr>
+  <tr><td><strong>Write-down to</strong></td><td>Recoverable amount (higher of fair value less selling costs OR value in use)</td><td>Fair value (or discounted CF if FV unknown)</td></tr>
+  <tr><td><strong>Reversal allowed?</strong></td><td>Yes (limited to original loss)</td><td>No (for assets held for use)</td></tr>
+</tbody>
+</table></div>
+
+<div class="intuition">Impairment charges are a backdoor for earnings management. Management can time them during "bad" years (big bath), making future years look better — lower asset base means lower depreciation, higher ROA and ROE going forward. Watch for clusters of impairments when new management takes over.</div>
+
+<h3>Useful Disclosure Ratios</h3>
+<div class="formula">\[ \text{Average Age} = \frac{\text{Accumulated Depreciation}}{\text{Annual Depreciation Expense}} \]</div>
+<div class="formula">\[ \text{Total Useful Life} = \frac{\text{Gross PP\&E}}{\text{Annual Depreciation Expense}} \]</div>
+<div class="formula">\[ \text{Remaining Life} = \frac{\text{Net PP\&E}}{\text{Annual Depreciation Expense}} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Under IFRS, equipment has a carrying value of $800,000, value in use of $785,000, and fair value less selling costs of $760,000. Is it impaired, and by how much?</div>
+  <div class="exam-a"><strong>Answer:</strong> Recoverable amount = max($785,000, $760,000) = $785,000. Since carrying value ($800,000) > recoverable amount ($785,000), the asset is impaired. Impairment loss = $800,000 − $785,000 = <strong>$15,000</strong>.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R34 ════════════════ -->
+<section id="r34">
+<div class="module-header">
+  <div class="lm-label">Reading 34</div>
+  <h2>Topics in Long-Term Liabilities and Equity</h2>
+  <div class="one-liner">Leases, pensions, and how debt really works on the balance sheet.</div>
+</div>
+
+<h3>Lease Classification — Finance vs. Operating</h3>
+<p>A lease is a finance lease if it meets ANY of five criteria: (1) ownership transfers, (2) bargain purchase option likely exercised, (3) lease term covers most of asset's life, (4) PV of payments ≥ asset's fair value, (5) asset is specialized. Otherwise, it's an operating lease.</p>
+
+<h4>Lessee Accounting — Both types put assets and liabilities on the balance sheet</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>Finance Lease</th><th>Operating Lease (U.S. GAAP)</th></tr></thead>
+<tbody>
+  <tr><td>Balance sheet</td><td>ROU asset + lease liability</td><td>ROU asset + lease liability (equal at all times)</td></tr>
+  <tr><td>Income statement</td><td>Interest expense + amortization (separately)</td><td>Single lease expense = payment amount</td></tr>
+  <tr><td>Early-year expense</td><td>Higher (front-loaded interest)</td><td>Constant (straight-line)</td></tr>
+  <tr><td>Total expense</td><td>Same over full life</td><td>Same over full life</td></tr>
+  <tr><td>Cash flow statement</td><td>Interest → CFO, Principal → CFF</td><td>Entire payment → CFO</td></tr>
+</tbody>
+</table></div>
+
+<div class="key-rule">Under IFRS, there is no distinction in lessee accounting — both finance and operating leases create ROU assets/liabilities and report interest + amortization separately (like finance lease treatment). The U.S. GAAP operating lease treatment (single expense, equal ROU and liability) is unique to U.S. GAAP.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Compared to a finance lease, an operating lease under U.S. GAAP in Year 1 will report:</div>
+  <div class="exam-a"><strong>Answer: Lower total expense in Year 1.</strong> Finance leases have front-loaded expense (high interest + amortization early on). Operating leases report a constant, straight-line lease expense each year. Same total over the lease life, but different timing.</div>
+</div>
+
+<h3>Defined Benefit Pensions</h3>
+<p>Companies report a net pension asset or liability: the fair value of plan assets minus the estimated pension obligation (PBO). Three components of pension cost: service cost (CFO), interest cost, and expected return on plan assets. Actuarial gains/losses and past service costs go through OCI under IFRS.</p>
+
+</section><hr>
+
+<!-- ════════════════ R35 ════════════════ -->
+<section id="r35">
+<div class="module-header">
+  <div class="lm-label">Reading 35</div>
+  <h2>Analysis of Income Taxes</h2>
+  <div class="one-liner">DTAs, DTLs, and the gap between what companies tell the tax authorities and what they tell you.</div>
+</div>
+
+<h3>The Core Relationship <span class="tag tag-critical">Critical</span></h3>
+<div class="formula">\[ \text{Income Tax Expense} = \text{Taxes Payable} + \Delta\text{DTL} - \Delta\text{DTA} \]</div>
+
+<div class="intuition">Think of tax expense as what the company SHOULD owe based on accounting income. Taxes payable is what they ACTUALLY owe the government right now. The difference creates deferred tax items — essentially IOUs to or from the tax authorities.</div>
+
+<h3>DTAs and DTLs — When Are They Created?</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Deferred Tax Item</th><th>Created When…</th><th>Classic Example</th></tr></thead>
+<tbody>
+  <tr><td><strong>DTL</strong> (future tax owed)</td><td>Tax expense > taxes payable (taxable income < pretax income)</td><td>Accelerated depreciation for tax, straight-line for accounting → more depreciation on tax return early → less tax now, more later</td></tr>
+  <tr><td><strong>DTA</strong> (future tax saving)</td><td>Taxes payable > tax expense (taxable income > pretax income)</td><td>Warranty provisions: expense recognized in income statement before tax deduction is allowed; tax loss carryforwards</td></tr>
+</tbody>
+</table></div>
+
+<div class="key-rule">Permanent differences (e.g., tax-exempt municipal bond interest, non-deductible fines) do NOT create DTAs or DTLs. They cause the effective tax rate to differ from the statutory rate, but they never reverse.</div>
+
+<h3>Three Tax Rates to Know</h3>
+<div class="formula">\[ \text{Statutory Rate} = \text{Rate set by law} \]</div>
+<div class="formula">\[ \text{Effective Rate} = \frac{\text{Income Tax Expense}}{\text{Pretax Income}} \]</div>
+<div class="formula">\[ \text{Cash Tax Rate} = \frac{\text{Cash Taxes Paid}}{\text{Pretax Income}} \]</div>
+
+<h3>Valuation Allowance (U.S. GAAP)</h3>
+<p>If a company doubts it will have enough future taxable income to use its DTAs, it must create a valuation allowance (contra asset). Increasing the valuation allowance reduces the net DTA, increases tax expense, and decreases net income. This is a potential earnings management tool.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A company increases its valuation allowance against DTAs. What is the effect on income tax expense and net income?</div>
+  <div class="exam-a"><strong>Answer:</strong> Increasing the valuation allowance reduces the net DTA → increases income tax expense → <strong>decreases net income</strong>. This signals that management is less confident about future profitability.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">How should an analyst treat a DTL that is not expected to reverse due to growing capital expenditures?</div>
+  <div class="exam-a"><strong>Answer: Treat it as equity</strong>, not as a liability. If the company keeps investing in new assets, accelerated tax depreciation on new assets keeps the DTL growing — it effectively never reverses. Reclassifying it to equity lowers leverage ratios.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R36 ════════════════ -->
+<section id="r36">
+<div class="module-header">
+  <div class="lm-label">Reading 36</div>
+  <h2>Financial Reporting Quality</h2>
+  <div class="one-liner">How to detect when companies stretch, bend, or break the rules.</div>
+</div>
+
+<h3>Spectrum of Financial Reporting Quality</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Quality Level</th><th>Description</th></tr></thead>
+<tbody>
+  <tr><td><strong>GAAP-compliant, decision-useful</strong></td><td>Highest quality — sustainable, adequate returns</td></tr>
+  <tr><td><strong>GAAP-compliant but low quality</strong></td><td>Within rules but aggressive choices that inflate earnings</td></tr>
+  <tr><td><strong>Non-compliant (aggressive)</strong></td><td>Biased choices that don't follow standards</td></tr>
+  <tr><td><strong>Fictitious (fraudulent)</strong></td><td>Fabricated transactions, numbers are made up</td></tr>
+</tbody>
+</table></div>
+
+<h3>Common Manipulation Techniques</h3>
+
+<h4>Revenue Manipulation</h4>
+<ul>
+  <li><strong>Channel stuffing:</strong> Shipping excess inventory to distributors to book revenue early</li>
+  <li><strong>Bill-and-hold:</strong> Recognizing revenue before goods are shipped</li>
+  <li><strong>Barter transactions:</strong> Inflating revenue through non-arm's-length exchanges</li>
+</ul>
+
+<h4>Expense Manipulation</h4>
+<ul>
+  <li><strong>Capitalizing operating expenses:</strong> Moves expense from income statement to balance sheet</li>
+  <li><strong>Extending asset lives:</strong> Reduces annual depreciation, inflates income</li>
+  <li><strong>Understating bad debt reserves:</strong> Lower expense, higher income</li>
+  <li><strong>Big bath charges:</strong> Taking massive write-offs in a bad year to boost future earnings</li>
+</ul>
+
+<h4>Cash Flow Manipulation</h4>
+<ul>
+  <li><strong>Stretching payables:</strong> Delays supplier payments to inflate CFO</li>
+  <li><strong>Capitalizing interest:</strong> Moves interest from CFO to CFI</li>
+</ul>
+
+<h3>Warning Signs</h3>
+<div class="key-rule">Revenue growing faster than peers, declining receivables turnover, decreasing asset turnover, growing gap between NI and CFO, frequent "nonrecurring" charges, related-party transactions, changes in accounting methods or estimates, qualified audit opinions, management turnover. One flag is curious; three is a pattern.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An analyst notices that a company's revenue has been growing 15% annually while its accounts receivable have been growing 30% annually. This most likely indicates:</div>
+  <div class="exam-a"><strong>Answer: Aggressive revenue recognition or declining collection quality.</strong> If receivables grow faster than revenue, the company may be booking revenue it hasn't collected, offering extended terms to boost sales, or engaging in channel stuffing.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R37 ════════════════ -->
+<section id="r37">
+<div class="module-header">
+  <div class="lm-label">Reading 37</div>
+  <h2>Financial Analysis Techniques</h2>
+  <div class="one-liner">The ratio toolkit, DuPont decomposition, and common-size analysis.</div>
+</div>
+
+<h3>The Four Ratio Categories</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Category</th><th>What It Measures</th><th>Key Ratios</th></tr></thead>
+<tbody>
+  <tr><td><strong>Activity</strong></td><td>Efficiency of asset use</td><td>Receivables turnover, inventory turnover, total asset turnover</td></tr>
+  <tr><td><strong>Liquidity</strong></td><td>Ability to pay short-term obligations</td><td>Current ratio, quick ratio, cash ratio, defensive interval</td></tr>
+  <tr><td><strong>Solvency</strong></td><td>Ability to meet long-term obligations</td><td>Debt-to-equity, debt-to-capital, interest coverage</td></tr>
+  <tr><td><strong>Profitability</strong></td><td>Ability to generate profits</td><td>Gross/net/operating margins, ROA, ROE, ROIC</td></tr>
+</tbody>
+</table></div>
+
+<h3>Key Activity Ratios</h3>
+<div class="formula">\[ \text{Receivables Turnover} = \frac{\text{Revenue}}{\text{Avg Receivables}} \qquad \text{DSO} = \frac{365}{\text{Receivables Turnover}} \]</div>
+<div class="formula">\[ \text{Inventory Turnover} = \frac{\text{COGS}}{\text{Avg Inventory}} \qquad \text{DOH} = \frac{365}{\text{Inventory Turnover}} \]</div>
+<div class="formula">\[ \text{Cash Conversion Cycle} = \text{DSO} + \text{DOH} - \text{Payables Period} \]</div>
+
+<div class="intuition">The cash conversion cycle tells you how many days a company's cash is tied up in its operating cycle. A shorter cycle means faster cash generation. Negative cycles (like Amazon) mean the company collects from customers before paying suppliers — effectively using supplier cash to fund operations.</div>
+
+<h3>DuPont Analysis <span class="tag tag-critical">Critical</span></h3>
+
+<h4>3-Part (Original) DuPont</h4>
+<div class="formula">\[ \text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Revenue}}}_{\text{Net Profit Margin}} \times \underbrace{\frac{\text{Revenue}}{\text{Avg Assets}}}_{\text{Asset Turnover}} \times \underbrace{\frac{\text{Avg Assets}}{\text{Avg Equity}}}_{\text{Financial Leverage}} \]</div>
+
+<h4>5-Part (Extended) DuPont</h4>
+<div class="formula">\[ \text{ROE} = \underbrace{\frac{\text{NI}}{\text{EBT}}}_{\text{Tax Burden}} \times \underbrace{\frac{\text{EBT}}{\text{EBIT}}}_{\text{Interest Burden}} \times \underbrace{\frac{\text{EBIT}}{\text{Revenue}}}_{\text{EBIT Margin}} \times \underbrace{\frac{\text{Revenue}}{\text{Avg Assets}}}_{\text{Turnover}} \times \underbrace{\frac{\text{Avg Assets}}{\text{Avg Equity}}}_{\text{Leverage}} \]</div>
+
+<div class="key-rule">DuPont's power is DECOMPOSITION, not calculation. If ROE stays flat but margins are falling and leverage is rising, the company is masking operational weakness with debt — a red flag. The 5-part version shows whether ROE is being maintained by tax optimization or debt loading.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A company's ROE remained at ~18% for three years. DuPont analysis shows net margin fell from 7.0% to 5.3%, asset turnover fell from 1.33 to 1.17, while leverage rose from 1.93 to 2.78. What should the analyst conclude?</div>
+  <div class="exam-a"><strong>Answer:</strong> The stable ROE is misleading. Both operational efficiency (margin) and asset utilization (turnover) have deteriorated. ROE is being propped up by significantly higher financial leverage, which increases risk. The analyst should be concerned about sustainability and rising default risk.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Using the extended DuPont, more leverage does not always lead to higher ROE because:</div>
+  <div class="exam-a"><strong>Answer:</strong> As leverage rises, interest expense increases, which reduces the interest burden ratio (EBT/EBIT). The negative effect of higher interest payments can offset the positive effect of the leverage multiplier.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R38 ════════════════ -->
+<section id="r38">
+<div class="module-header">
+  <div class="lm-label">Reading 38</div>
+  <h2>Introduction to Financial Statement Modeling</h2>
+  <div class="one-liner">Building pro forma statements and understanding competitive forces.</div>
+</div>
+
+<h3>Sales-Based Pro Forma Model — 8 Steps</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Step</th><th>What You Model</th><th>Method</th></tr></thead>
+<tbody>
+  <tr><td>1</td><td>Revenue growth</td><td>Market growth × market share, trend growth, or GDP-relative</td></tr>
+  <tr><td>2</td><td>COGS</td><td>% of sales, or detailed by cost component</td></tr>
+  <tr><td>3</td><td>SG&A</td><td>Fixed, growing with revenue, or mixed</td></tr>
+  <tr><td>4</td><td>Financing costs</td><td>Interest rates × debt levels</td></tr>
+  <tr><td>5</td><td>Tax expense</td><td>Historical effective rates, segment analysis</td></tr>
+  <tr><td>6</td><td>Balance sheet</td><td>Working capital items flow from income statement</td></tr>
+  <tr><td>7</td><td>PP&E</td><td>CapEx for maintenance + growth, net of depreciation</td></tr>
+  <tr><td>8</td><td>Cash flow statement</td><td>Built from completed IS and BS</td></tr>
+</tbody>
+</table></div>
+
+<h3>Porter's Five Forces — Impact on Financials</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Force</th><th>Pricing Power When…</th><th>Financial Impact</th></tr></thead>
+<tbody>
+  <tr><td>Threat of substitutes</td><td>Low substitutes, high switching costs</td><td>Higher margins, sustainable revenue</td></tr>
+  <tr><td>Industry rivalry</td><td>Low rivalry (concentrated industry)</td><td>Less price competition</td></tr>
+  <tr><td>Supplier power</td><td>Many suppliers, low supplier concentration</td><td>Lower input costs</td></tr>
+  <tr><td>Buyer power</td><td>Fragmented customer base</td><td>Less price pressure from customers</td></tr>
+  <tr><td>Threat of new entrants</td><td>High barriers to entry</td><td>Sustainable economic profits</td></tr>
+</tbody>
+</table></div>
+
+<div class="key-rule">Behavioral biases matter for analysts too. Confirmation bias makes analysts seek data that supports their existing view. Overconfidence leads to forecast ranges that are too narrow. Anchoring causes analysts to under-adjust from initial estimates. Always seek disconfirming evidence.</div>
+
+</section><hr>
+
+<!-- ════════════════ FORMULA SHEET ════════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Formula Sheet — All 12 Readings</h2>
+  <div class="one-liner">Every formula you need, in one place.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+<thead><tr><th style="width:42%">Formula</th><th style="width:42%">Description</th><th>Reading</th></tr></thead>
+<tbody>
+  <tr><td>\(\text{Basic EPS} = \frac{\text{NI} - \text{Pref Div}}{\text{WACS}}\)</td><td>Basic earnings per share</td><td>28</td></tr>
+  <tr><td>\(\text{Diluted EPS: Treasury Stock Method}\)</td><td>Net new shares = options − (proceeds / avg price)</td><td>28</td></tr>
+  <tr><td>\(\text{Current Ratio} = \frac{\text{CA}}{\text{CL}}\)</td><td>Liquidity measure</td><td>29</td></tr>
+  <tr><td>\(\text{Quick Ratio} = \frac{\text{Cash + MS + AR}}{\text{CL}}\)</td><td>Stringent liquidity</td><td>29</td></tr>
+  <tr><td>\(\text{Goodwill} = \text{Price} - \text{FV Net Assets}\)</td><td>Excess purchase price in acquisitions</td><td>29</td></tr>
+  <tr><td>\(\text{CFO} = \text{NI} + \text{NCC} - \text{WCInv}\)</td><td>Indirect method CFO</td><td>30</td></tr>
+  <tr><td>\(\text{FCFF} = \text{CFO} + \text{Int}(1-t) - \text{FCInv}\)</td><td>Free cash flow to the firm</td><td>31</td></tr>
+  <tr><td>\(\text{FCFE} = \text{CFO} - \text{FCInv} + \text{Net Borrowing}\)</td><td>Free cash flow to equity</td><td>31</td></tr>
+  <tr><td>\(\text{Inventory Turnover} = \frac{\text{COGS}}{\text{Avg Inv}}\)</td><td>Efficiency of inventory management</td><td>32</td></tr>
+  <tr><td>\(\text{CCC} = \text{DSO} + \text{DOH} - \text{Payables Period}\)</td><td>Cash conversion cycle</td><td>37</td></tr>
+  <tr><td>\(\text{Average Age} = \frac{\text{Accum Depr}}{\text{Annual Depr}}\)</td><td>Estimate asset age from disclosures</td><td>33</td></tr>
+  <tr><td>\(\text{Remaining Life} = \frac{\text{Net PP\&E}}{\text{Annual Depr}}\)</td><td>Estimate remaining asset life</td><td>33</td></tr>
+  <tr><td>\(\text{Tax Exp} = \text{Tax Payable} + \Delta\text{DTL} - \Delta\text{DTA}\)</td><td>Income tax expense decomposition</td><td>35</td></tr>
+  <tr><td>\(\text{Effective Tax Rate} = \frac{\text{Tax Expense}}{\text{Pretax Income}}\)</td><td>Actual tax burden</td><td>35</td></tr>
+  <tr><td>\(\text{ROE} = \text{Margin} \times \text{Turnover} \times \text{Leverage}\)</td><td>3-part DuPont decomposition</td><td>37</td></tr>
+  <tr><td>\(\text{ROE} = \frac{\text{NI}}{\text{EBT}} \times \frac{\text{EBT}}{\text{EBIT}} \times \frac{\text{EBIT}}{\text{Rev}} \times \frac{\text{Rev}}{\text{Assets}} \times \frac{\text{Assets}}{\text{Equity}}\)</td><td>5-part Extended DuPont</td><td>37</td></tr>
+  <tr><td>\(\text{Debt-to-Equity} = \frac{\text{Total Debt}}{\text{Total Equity}}\)</td><td>Solvency ratio</td><td>37</td></tr>
+  <tr><td>\(\text{Interest Coverage} = \frac{\text{EBIT}}{\text{Interest Expense}}\)</td><td>Ability to cover interest</td><td>37</td></tr>
+  <tr><td>\(\text{ROA} = \frac{\text{Net Income}}{\text{Avg Total Assets}}\)</td><td>Return on assets</td><td>37</td></tr>
+  <tr><td>\(\text{Gross Margin} = \frac{\text{Rev} - \text{COGS}}{\text{Rev}}\)</td><td>Profitability before operating expenses</td><td>28</td></tr>
+</tbody>
+</table></div>
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

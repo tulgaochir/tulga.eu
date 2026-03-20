@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Alternative Investments: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 240px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 240px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 240px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--purple-dark);
+  line-height: 1.8;
+}
+.formula .formula-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: #7c3aed; margin-bottom: 6px;
+}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Key Rule — "; }
+
+/* ── TRAP BOX ── */
+.trap {
+  background: #fff7ed;
+  border-left: 4px solid #f97316;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: #7c2d12;
+  font-size: 15.5px;
+}
+.trap::before { content: "🪤 Exam Trap — "; font-weight: 700; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── FORMULA REFERENCE TABLE ── */
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ── COMPARE GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+
+/* ── WORKED EXAMPLE ── */
+.worked {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.worked-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--green-dark); margin-bottom: 10px;
+}
+.worked-step {
+  font-size: 14.5px; line-height: 1.7;
+  color: #14532d;
+  margin: 6px 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+  .compare-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Alternative Investments · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Foundations</div>
+  <a href="#r76">R76 — Features &amp; Structures</a>
+  <div class="nav-section">Performance</div>
+  <a href="#r77">R77 — Performance &amp; Returns</a>
+  <div class="nav-section">Private Capital</div>
+  <a href="#r78">R78 — Private Equity &amp; Debt</a>
+  <div class="nav-section">Real Assets</div>
+  <a href="#r79">R79 — Real Estate &amp; Infrastructure</a>
+  <a href="#r80">R80 — Natural Resources</a>
+  <div class="nav-section">Hedge Funds</div>
+  <a href="#r81">R81 — Hedge Funds</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Formula Sheet</a>
+  <a href="#traps">Common Exam Traps</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Alternative Investments</h1>
+  <p class="subtitle">Intuition-First Study Guide · All 6 Readings (R76–R81)</p>
+  <p class="meta">Concepts explained from first principles · Worked fee calculations · Exam traps highlighted throughout</p>
+</div>
+
+<!-- ════════════════ R76 ════════════════ -->
+<section id="r76">
+<div class="module-header">
+  <div class="lm-label">Reading 76</div>
+  <h2>Alternative Investment Features, Methods &amp; Structures</h2>
+  <div class="one-liner">What alternative investments are, how you access them, and how the fund is set up — including the fee machinery.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Alternative investments are everything that is <em>not</em> a publicly traded stock, bond, or cash. The defining features — illiquidity, high fees, information asymmetry, complexity — all flow from this single fact. Every other concept in R76 is a direct consequence: limited partnerships exist because illiquid assets need committed capital; performance fees exist because of information asymmetry; high-water marks exist because performance fees can otherwise be gamed.</p>
+</div>
+
+<h3>What Makes an Investment "Alternative"?</h3>
+<p>Traditional investments are long-only positions in publicly traded stocks, bonds, and cash. Alternatives are everything else. The CFA curriculum classifies them into three buckets:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bucket</th><th>Sub-categories</th><th>Core Feature</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Private Capital</strong></td><td>Private equity (LBOs, VC), private debt (direct lending, distressed, mezzanine, unitranche, venture debt)</td><td>Companies not yet listed — illiquid, long horizon</td></tr>
+    <tr><td><strong>Real Assets</strong></td><td>Real estate, infrastructure, natural resources (commodities, farmland, timberland), digital assets</td><td>Physical or quasi-physical assets with inflation-hedging properties</td></tr>
+    <tr><td><strong>Hedge Funds</strong></td><td>Equity hedge, event-driven, relative value, opportunistic (macro, managed futures)</td><td>Flexible strategies using leverage and derivatives; can go short</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Why invest in alternatives at all? Two reasons: (1) diversification — alternatives tend to have low correlations with stocks and bonds, so adding them reduces portfolio volatility; (2) return premium — you get compensated for the illiquidity and complexity with higher expected returns. But watch out: correlations spike during crises, precisely when diversification is most needed.</div>
+
+<h3>The Five Structural Features of Alternatives <span class="tag tag-critical">Critical</span></h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Why It Exists</th><th>Consequence for Investors</th></tr></thead>
+  <tbody>
+    <tr><td>Specialized manager knowledge</td><td>Assets are complex, non-standard</td><td>High management fees are justified (or at least charged)</td></tr>
+    <tr><td>Low correlations with traditional assets</td><td>Different return drivers (illiquidity, private markets)</td><td>Diversification benefit — but correlations rise in crises</td></tr>
+    <tr><td>Asset illiquidity</td><td>Assets don't trade on public markets</td><td>Long lockup periods; investors need patience and deep pockets</td></tr>
+    <tr><td>Long time horizons</td><td>Value creation takes years (restructuring companies, growing crops)</td><td>Investors must commit capital for 7–12 years in PE</td></tr>
+    <tr><td>Large minimum investments</td><td>Only accredited/sophisticated investors</td><td>Accessible mainly to institutions and HNWIs</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Three Access Methods: Fund vs Co-invest vs Direct <span class="tag tag-critical">Critical</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Fund Investing</h5>
+    <p>Pool your capital with others. A professional manager selects, manages, and exits investments. You pay management + incentive fees but have no control. Best for investors without in-house expertise.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Co-Investing</h5>
+    <p>You invest in the fund AND get the right to invest directly alongside the manager in specific deals. Lower overall fees. Lets you build skills toward direct investing. Manager benefits: more capital deployed.</p>
+  </div>
+</div>
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Direct Investing</h5>
+    <p>You buy assets yourself — no outside manager, no management fees, full control. Requires specialist in-house team. Less diversified. Higher minimum investment per asset. Used by sovereign wealth funds, large pensions.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Which to Choose?</h5>
+    <p>No expertise → Fund investing. Want to learn and reduce fees → Co-investing. Large institution with specialist team → Direct investing.</p>
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor wants to gain exposure to private equity but lacks the in-house expertise to evaluate individual deals. The most appropriate access method is:</div>
+  <div class="exam-a"><strong>Answer: Fund investing.</strong> With fund investing, the due diligence on individual portfolio companies is performed by the fund manager. Direct investing and co-investing require the investor to conduct its own deal-by-deal evaluation.</div>
+</div>
+
+<h3>Limited Partnership Structure <span class="tag tag-critical">Critical</span></h3>
+<p>Most alternative funds are structured as limited partnerships. Know every piece:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Party</th><th>Role</th><th>Liability</th><th>Key Point</th></tr></thead>
+  <tbody>
+    <tr><td><strong>General Partner (GP)</strong></td><td>Fund manager — makes all investment decisions</td><td>Unlimited — bears all partnership debt</td><td>Also invests own money to align interests</td></tr>
+    <tr><td><strong>Limited Partners (LPs)</strong></td><td>Investors — provide capital, no management role</td><td>Limited to their investment amount</td><td>Accredited investors only; commit capital upfront but draw down over time</td></tr>
+    <tr><td><strong>Committed Capital</strong></td><td>Total amount LPs agree to invest</td><td>—</td><td>Not all invested immediately — GP calls capital as needed</td></tr>
+    <tr><td><strong>Dry Powder</strong></td><td>Committed but not yet invested capital</td><td>—</td><td>The "ammunition" available to invest</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Why is management fee based on <em>committed</em> capital (not invested) for private equity? Because if it were based on invested capital, the GP would have an incentive to deploy capital rapidly rather than selectively. Basing fees on the full commitment penalises slow deployment less — aligning the GP toward quality over speed.</div>
+
+<h3>Fee Structures — The Most-Tested Mechanics <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">
+  <div class="formula-label">Fee Basis</div>
+  Hedge Fund management fee: % of AUM (assets under management — NAV)<br>
+  Private Equity management fee: % of COMMITTED capital (not invested capital)<br><br>
+  Performance fee (incentive fee / carried interest): % of profits<br>
+  Usually: 20% of profits for PE; 20% of gains for HF<br>
+  Always subject to hurdle rate and high-water mark provisions
+</div>
+
+<h4>Hurdle Rate: Hard vs Soft</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>How It Works</th><th>Example (8% hurdle, 20% perf fee, 12% return)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Soft hurdle</strong></td><td>Once return exceeds hurdle, performance fee is on the <em>entire</em> return</td><td>Perf fee = 20% × 12% = <strong>2.4%</strong></td></tr>
+    <tr><td><strong>Hard hurdle</strong></td><td>Performance fee only on gains <em>above</em> the hurdle rate</td><td>Perf fee = 20% × (12% − 8%) = 20% × 4% = <strong>0.8%</strong></td></tr>
+    <tr><td><strong>Catch-up clause</strong></td><td>LPs get hurdle first; GP then "catches up" to 20% of total, then splits 80/20</td><td>8% to LPs; next 2% to GP (GP now has 20% of first 10%); remaining 2% split 80/20 → GP: 2% + 80%×0% = 2%</td></tr>
+  </tbody>
+</table></div>
+
+<div class="trap">Hard vs Soft hurdle: hard hurdle favours the investor (fee only on excess gains). Soft hurdle favours the GP (fee on the total return once hurdle is exceeded). A catch-up clause is functionally similar to a soft hurdle — the LP gets the hurdle rate first, then the GP catches up to its target carry percentage before further gains are shared.</div>
+
+<h4>High-Water Mark</h4>
+<p>The high-water mark (HWM) is the highest net-asset-value previously recorded for the fund. No performance fee is paid until the fund exceeds its HWM. This prevents the GP from earning fees on gains that merely offset previous losses.</p>
+
+<div class="analogy">If the fund was worth $110M last year (HWM = $110M) and dropped to $90M, then recovered to $105M, no performance fee is paid yet — the fund hasn't cleared the $110M HWM. Only gains above $110M will trigger a performance fee. Different investors have different HWMs because they invested at different times.</div>
+
+<h4>Waterfall — Deal-by-Deal vs Whole-of-Fund <span class="tag tag-critical">Critical</span></h4>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Structure</th><th>Also Called</th><th>How It Works</th><th>Who Benefits?</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Deal-by-deal waterfall</strong></td><td>American waterfall</td><td>Performance fee paid on each profitable deal as it is exited, even if other deals in the fund lose money</td><td>GP — gets paid early on winners before losers are realised</td></tr>
+    <tr><td><strong>Whole-of-fund waterfall</strong></td><td>European waterfall</td><td>LPs receive 100% of invested capital + hurdle rate back first; then GP receives its carry</td><td>LP — gets all capital returned before GP earns carry</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">A clawback provision protects LPs in a deal-by-deal (American) waterfall. If early wins generate carry that later losses reverse, the LP can claw back the excess carry already paid. Without a clawback, the GP keeps the carry on early wins even if the fund net return is negative.</div>
+
+<div class="worked">
+  <div class="worked-header">📊 Worked Example — Waterfall &amp; Clawback</div>
+  <div class="worked-step">Fund invests $100M in Deal A (sold for $130M: +$30M) and $100M in Deal B (liquidated for $80M: −$20M). Net gain = $10M. Performance fee = 20%.</div>
+  <div class="worked-step"><strong>American (deal-by-deal):</strong> Fee on Deal A = 20% × $30M = <strong>$6M</strong>. No fee on Deal B (loss). Total carry paid = $6M. But net fund gain is only $10M → GP earned 60% of gains. Without clawback: LP receives $200M invested + $10M − $6M = $204M (net return 2%).</div>
+  <div class="worked-step"><strong>European (whole-of-fund):</strong> Fee = 20% × $10M = <strong>$2M</strong>. LP receives $200M + $10M − $2M = $208M (net return 4%).</div>
+  <div class="worked-step"><strong>With clawback (American):</strong> After Deal B, LP claws back $4M of the $6M paid. Net carry = $2M. Same result as European waterfall.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">For an investor in a private equity fund, which waterfall structure is most advantageous?</div>
+  <div class="exam-a"><strong>Answer: European (whole-of-fund) waterfall.</strong> LPs receive their invested capital plus the hurdle rate back first, before the GP earns any carry. The American (deal-by-deal) waterfall is most advantageous to the GP because carry can be paid on individual winning deals before the overall fund result is known. A clawback provision can partially offset this disadvantage.</div>
+</div>
+
+<h3>Side Letters and Key LP Protections</h3>
+<ul>
+  <li><strong>Side letters:</strong> Private agreements between the GP and specific LPs that modify the partnership terms for that investor only (e.g., lower fees, more transparency, excusal rights)</li>
+  <li><strong>Most-favoured-nation (MFN) clause:</strong> LP requires that any better terms offered to other LPs also apply to them</li>
+  <li><strong>Excusal right:</strong> LP's right to withhold a capital contribution that the GP would otherwise require (e.g., due to ESG conflicts)</li>
+  <li><strong>Master limited partnership (MLP):</strong> Publicly traded limited partnership — most common in natural resources and real estate</li>
+</ul>
+
+</section><hr>
+
+<!-- ════════════════ R77 ════════════════ -->
+<section id="r77">
+<div class="module-header">
+  <div class="lm-label">Reading 77</div>
+  <h2>Alternative Investment Performance and Returns</h2>
+  <div class="one-liner">How to measure returns that have irregular cash flows, leverage, and complex fees — and how those measures can be gamed.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Alternative investment returns are hard to measure because: cash flows are lumpy and irregular; assets may not have market prices; fees are multi-layered; and the reported data suffers from systematic biases. Understanding the J-curve, IRR, MOIC, fair value levels, and bias types is essential for exam success.</p>
+</div>
+
+<h3>The J-Curve Effect <span class="tag tag-critical">Critical</span></h3>
+<p>Alternative investment funds — especially private equity — go through three phases, and the return profile creates a characteristic "J" shape over the fund's life:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Phase</th><th>What Happens</th><th>Returns</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1. Capital Commitment</strong></td><td>GP identifies deals, makes capital calls from LPs. No investments producing income yet. Management fees charged immediately.</td><td>Negative — fees paid, no returns yet</td></tr>
+    <tr><td><strong>2. Capital Deployment</strong></td><td>Capital invested in portfolio companies. Early-stage companies not yet profitable; turnarounds still being restructured.</td><td>Negative/breakeven — investments made but not yet delivering</td></tr>
+    <tr><td><strong>3. Capital Distribution</strong></td><td>Portfolio companies exit via IPO, trade sale, etc. Capital + profits returned to LPs.</td><td>Strongly positive — the "hockey stick" at the end of the J</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">The J-curve is why alternatives require patience. Early investors see negative returns (like paying for a restaurant before the food arrives), then positive returns arrive in a rush at the end. This is also why you should compare funds of the same "vintage year" — a fund in Year 2 and a fund in Year 8 will show wildly different returns even if both are equally good.</div>
+
+<div class="key-rule">Because the GP controls the timing of capital calls and distributions, money-weighted return (IRR) is the appropriate performance measure — it accounts for the timing and magnitude of all cash flows. Time-weighted return (used for traditional funds) would not be appropriate here.</div>
+
+<h3>IRR vs MOIC — Two Ways to Measure Success <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">
+  <div class="formula-label">Key Return Metrics</div>
+  IRR (Money-Weighted Rate of Return): Solves for r in NPV = 0
+  IRR accounts for TIMING of cash flows
+  
+  MOIC (Multiple of Invested Capital) = Total Capital Returned / Total Capital Invested
+  MOIC does NOT account for timing — a "naive" but intuitive check
+  
+  Example: Fund returns $200M on $100M invested over 5 years
+  MOIC = 200/100 = 2.0× (doubled the money)
+  IRR ≈ 15% per year (exact calculation requires cash flow timing)
+</div>
+
+<div class="trap">MOIC ignores time. A 2× MOIC over 3 years is excellent; a 2× MOIC over 10 years is mediocre. IRR captures this distinction. Exam questions will sometimes present a high MOIC with a long time horizon to trick you into thinking performance is good — always ask how long it took.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A private equity fund invested $50M and returned total distributions of $115M over a 7-year period. Calculate the MOIC and state the limitation of this measure.</div>
+  <div class="exam-a"><strong>MOIC = $115M / $50M = 2.3×.</strong> The fund returned 2.3 times the invested capital. <strong>Limitation:</strong> MOIC does not account for the timing of cash flows. $115M returned in Year 1 would represent a much higher IRR than $115M returned in Year 7. Comparing MOIC across funds with different investment periods can be misleading.</div>
+</div>
+
+<h3>The Effect of Leverage on Returns <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">
+  <div class="formula-label">Leveraged Return Formula</div>
+  Leveraged Return = r + (V_B / V_0) × (r − r_B)
+  
+  Where:
+  r  = portfolio return (on total assets)
+  r_B = cost of borrowing
+  V_B = value of borrowed capital
+  V_0 = value of investor's equity
+  
+  If r > r_B: leverage amplifies gains ✓
+  If r &lt; r_B: leverage amplifies losses ✗
+</div>
+
+<div class="analogy">Think of leverage like buying a house: you put 20% down, borrow 80%. If the house rises 10%, your equity return is 50% (the gain on the full property divided by your small equity stake). But if the house falls 10%, your equity is wiped out. Hedge funds and private equity use exactly this logic — borrow cheap, invest at higher returns, pocket the spread.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A fund invests $100M of equity and borrows $50M at 4%. The total $150M portfolio earns a 9% return. What is the leveraged return on the equity investment?</div>
+  <div class="exam-a">
+    <strong>Portfolio return = 9% × $150M = $13.5M</strong><br>
+    Borrowing cost = 4% × $50M = $2M<br>
+    Return to equity = $13.5M − $2M = <strong>$11.5M</strong><br>
+    Leveraged return = $11.5M / $100M = <strong>11.5%</strong><br>
+    (vs. 9% unleveraged — leverage added 2.5 percentage points because r = 9% > r_B = 4%)
+  </div>
+</div>
+
+<h3>Fair Value Hierarchy — Valuation of Illiquid Assets</h3>
+<p>Alternative investments often involve assets with no observable market prices. Accounting standards require fair value, but what exactly "fair value" means depends on data quality:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Level</th><th>Inputs Used</th><th>Examples</th><th>Reliability</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Level 1</strong></td><td>Quoted prices in active markets</td><td>Exchange-traded stocks, listed bonds</td><td>Highest — observable market prices</td></tr>
+    <tr><td><strong>Level 2</strong></td><td>Observable inputs, not direct quotes</td><td>Many OTC derivatives (priced via models using market rates)</td><td>Medium — model-dependent but observable inputs</td></tr>
+    <tr><td><strong>Level 3</strong></td><td>Unobservable inputs — management assumptions</td><td>Private equity holdings, real estate, illiquid real assets</td><td>Lowest — largely subjective</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Level 3 assets are where bias hides. Because these assets are rarely revalued (no market transactions), their book values may be stale. This makes reported volatility appear lower than it truly is, reported correlations with other assets appear lower, and reported Sharpe ratios appear higher. Reported alternative investment returns are structurally biased upward by Level 3 valuation smoothing.</div>
+
+<h3>Fee Calculations — Worked Example <span class="tag tag-critical">Critical</span></h3>
+
+<div class="worked">
+  <div class="worked-header">📊 Worked Example — Hedge Fund Fees (2 &amp; 20 with Soft Hurdle + HWM)</div>
+  <div class="worked-step"><strong>Setup:</strong> Fund starts at $110M. Management fee = 2% of beginning AUM. Performance fee = 20% of gains net of mgmt fee, with 5% soft hurdle and high-water mark.</div>
+  <div class="worked-step"><strong>Year 1 (AUM rises to $100.2M before fees):</strong></div>
+  <div class="worked-step">Mgmt fee = 2% × $110M = $2.2M</div>
+  <div class="worked-step">Net return after mgmt fee = ($100.2M − $2.2M − $110M) / $110M = −10.9% → below hurdle, NO performance fee</div>
+  <div class="worked-step">Year-end NAV = $100.2M − $2.2M = $98.0M (HWM remains $110M)</div>
+  <div class="worked-step"><strong>Year 2 (AUM rises to $119M before fees):</strong></div>
+  <div class="worked-step">Mgmt fee = 2% × $98M = $1.96M</div>
+  <div class="worked-step">NAV net of mgmt fee = $119M − $1.96M = $117.04M</div>
+  <div class="worked-step">Gains above HWM ($110M): $117.04M − $110M = $7.04M → return = 6.4% > 5% soft hurdle</div>
+  <div class="worked-step">Performance fee = 20% × $7.04M = $1.41M (soft hurdle → fee on full gain above HWM, not just excess)</div>
+  <div class="worked-step">Total fees Year 2 = $1.96M + $1.41M = $3.37M → Year-end NAV = $119M − $3.37M = <strong>$115.63M</strong></div>
+  <div class="worked-step">Year 2 return after fees = ($115.63M − $98M) / $98M = <strong>18.0%</strong></div>
+</div>
+
+<h3>Biases in Alternative Investment Performance Data</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bias</th><th>Mechanism</th><th>Effect on Reported Returns</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Survivorship bias</strong></td><td>Only surviving (successful) funds remain in databases; failed funds are excluded</td><td>Overstates returns — the failures are hidden</td></tr>
+    <tr><td><strong>Backfill bias</strong></td><td>When a fund is added to an index, its historical returns are backfilled — but only successful funds choose to be included</td><td>Overstates returns — losing history selectively excluded</td></tr>
+    <tr><td><strong>Selection bias</strong></td><td>Funds self-select into databases; index providers may assign categories inconsistently</td><td>Distorts return and correlation estimates</td></tr>
+    <tr><td><strong>Stale pricing bias</strong></td><td>Level 3 assets not marked to market frequently</td><td>Understates volatility and correlations; overstates Sharpe ratios</td></tr>
+  </tbody>
+</table></div>
+
+<div class="trap">Survivorship bias is especially severe for hedge funds — estimates suggest over 25% fail within the first 3 years. A database that excludes these failures will dramatically overstate expected returns. The effect of backfill bias is cumulative with survivorship bias because failed funds never get their bad years backfilled either.</div>
+
+<h3>Lockup Periods and Redemption Restrictions</h3>
+<ul>
+  <li><strong>Lockup period:</strong> Time after investing during which redemptions are not permitted (or incur heavy fees)</li>
+  <li><strong>Notice period:</strong> 30–90 days advance warning required before redemption — allows orderly position reduction</li>
+  <li><strong>Gate:</strong> A temporary restriction on redemptions (e.g., max 25% of fund AUM per quarter) — prevents a "run on the fund"</li>
+  <li><strong>Founders class shares:</strong> Better terms (lower fees, shorter lockups) offered to early investors as incentive to commit capital at inception</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A hedge fund has a 1-year lockup period and a 90-day notice period. An investor who invested 6 months ago wants to redeem immediately. What restrictions apply?</div>
+  <div class="exam-a"><strong>The investor cannot redeem yet</strong> — the lockup period prevents redemption during the first 12 months of investment. Even after the lockup expires, the investor must give 90 days' notice before the fund is required to process the redemption. This prevents forced liquidation of illiquid positions.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R78 ════════════════ -->
+<section id="r78">
+<div class="module-header">
+  <div class="lm-label">Reading 78</div>
+  <h2>Investments in Private Capital: Equity &amp; Debt</h2>
+  <div class="one-liner">From seed-stage startups to leveraged buyouts — the full spectrum of private capital, how it works, and how to exit.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Private capital means providing funding to companies outside the public markets. The two main flavours are private equity (you own a piece of the company) and private debt (you lend money to the company). Private equity itself splits between venture capital (funding young, risky companies) and leveraged buyouts (acquiring mature companies with lots of debt). Understanding the continuum of risk/return — from senior direct lending at the bottom to early-stage VC at the top — is the key to this reading.</p>
+</div>
+
+<h3>Private Equity — Two Key Strategies <span class="tag tag-critical">Critical</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Leveraged Buyout (LBO)</h5>
+    <p><strong>Target:</strong> Mature, cash-generative companies</p>
+    <p><strong>Structure:</strong> Acquire using 60–80% debt; private equity provides the rest as equity</p>
+    <p><strong>Value creation:</strong> Improve operations, cut costs, grow revenue, use cash flows to pay down debt (deleveraging)</p>
+    <p><strong>Exit:</strong> IPO, trade sale, or secondary sale in ~5 years</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Venture Capital (VC)</h5>
+    <p><strong>Target:</strong> Early-stage companies with high growth potential but unproven business models</p>
+    <p><strong>Structure:</strong> Equity stake (common equity, convertible preferred, or convertible debt)</p>
+    <p><strong>Value creation:</strong> VC investors sit on boards, provide mentorship, make introductions</p>
+    <p><strong>Exit:</strong> IPO or acquisition in 5–10 years</p>
+  </div>
+</div>
+
+<div class="analogy">LBOs are like buying a rental property with a mortgage — you use leverage to acquire a cash-flowing asset, use the rental income to pay the mortgage, and eventually sell at a profit. VCs are like angel-funding a startup — high risk, high reward, long wait.</div>
+
+<h3>VC Investment Stages — A Must-Know Sequence <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Stage</th><th>Company Status</th><th>Investor Type</th><th>Use of Funds</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Pre-seed / Angel</strong></td><td>Idea only; no product, no revenue</td><td>Individual angels, not VC funds</td><td>Business plan, market research</td></tr>
+    <tr><td><strong>Seed capital</strong></td><td>Product concept; needs development</td><td><strong>VC funds typically start here</strong></td><td>Product development, initial marketing</td></tr>
+    <tr><td><strong>Early-stage / Start-up</strong></td><td>Product exists; start of commercial production and sales</td><td>VC funds</td><td>Fund operations, ramp up sales</td></tr>
+    <tr><td><strong>Later-stage / Expansion</strong></td><td>Revenue growing; needs capital for rapid growth</td><td>VC funds, growth equity</td><td>Expand production, enter new markets</td></tr>
+    <tr><td><strong>Mezzanine stage</strong></td><td>Preparing for IPO</td><td>VC funds, mezzanine investors</td><td>Pre-IPO preparations (not mezzanine debt — different use of the word)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="trap">There are two uses of the word "mezzanine" in private capital: <strong>(1) Mezzanine-stage financing</strong> = the stage of VC investing just before an IPO. <strong>(2) Mezzanine debt</strong> = subordinated debt sitting between senior secured and equity in the capital structure, often with warrants or conversion features. They sound the same but mean very different things. The exam will test this distinction.</div>
+
+<h3>Private Equity Exit Strategies</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Exit Method</th><th>Description</th><th>Pros / Cons</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Trade sale</strong></td><td>Sell to a strategic buyer (competitor, supplier) via direct sale or auction</td><td>✓ Strategic buyer pays synergy premium; ✓ fast; ✗ management may resist; ✗ few bidders</td></tr>
+    <tr><td><strong>IPO</strong></td><td>List shares on public exchange via underwriters</td><td>✓ Typically highest price; ✓ raises new capital; ✗ high cost; ✗ complex compliance; ✗ market risk</td></tr>
+    <tr><td><strong>Direct listing</strong></td><td>Shares listed without underwriters; existing shares sold directly</td><td>✓ Lower cost than IPO; ✗ no new capital raised</td></tr>
+    <tr><td><strong>SPAC</strong></td><td>Shell company raises capital via IPO, then acquires a private company</td><td>✓ Flexible; ✓ speed; ✗ dilution risk; ✗ SPAC sponsor conflicts; ✗ increasing regulatory scrutiny</td></tr>
+    <tr><td><strong>Secondary sale</strong></td><td>Sell to another PE firm or group of investors</td><td>✓ Private, no market uncertainty; ✗ no premium from public markets</td></tr>
+    <tr><td><strong>Recapitalization</strong></td><td>Portfolio company borrows to pay a dividend to PE fund; fund retains ownership</td><td>✓ Extracts cash without full exit; ✗ company takes on more debt; ✗ not a true exit</td></tr>
+    <tr><td><strong>Write-off / Liquidation</strong></td><td>Investment fails; take the loss and move on</td><td>✗ Loss of capital; "the price of learning"</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A private equity firm sells one of its portfolio companies to a competitor in the same industry. This exit method is best described as a:</div>
+  <div class="exam-a"><strong>Trade sale.</strong> A trade sale involves selling a portfolio company to a strategic buyer — typically a competitor, supplier, or customer who values the company for operational synergies rather than purely financial returns. This is distinct from a secondary sale (to another PE firm) or a public listing (IPO/direct listing).</div>
+</div>
+
+<h3>Private Debt — Five Categories <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Description</th><th>Risk Level</th><th>Key Feature</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Direct lending</strong></td><td>Loans made directly to private companies by a fund; no bank intermediary</td><td>Low-medium</td><td>Senior, secured; covenants protect lender</td></tr>
+    <tr><td><strong>Venture debt</strong></td><td>Debt to early-stage (VC-backed) companies not yet profitable</td><td>High</td><td>Often includes warrants; founders keep control</td></tr>
+    <tr><td><strong>Mezzanine debt</strong></td><td>Subordinated debt below senior secured; above equity</td><td>Medium-high</td><td>Often has warrants/conversion rights to compensate for extra risk</td></tr>
+    <tr><td><strong>Distressed debt</strong></td><td>Debt of financially troubled companies (near bankruptcy or in default)</td><td>High</td><td>Fund often takes active role in restructuring the company</td></tr>
+    <tr><td><strong>Unitranche debt</strong></td><td>Blended single loan combining secured and unsecured tranches</td><td>Medium</td><td>Single rate reflecting the blend; between senior and subordinated in priority</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Risk-Return Spectrum of Private Capital</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Risk</th><th>Expected Return</th></tr></thead>
+  <tbody>
+    <tr><td>Infrastructure debt</td><td>Lowest</td><td>Lowest</td></tr>
+    <tr><td>Senior direct lending</td><td>Low</td><td>Low-medium</td></tr>
+    <tr><td>Senior real estate debt</td><td>Low-medium</td><td>Medium</td></tr>
+    <tr><td>Unitranche debt</td><td>Medium</td><td>Medium</td></tr>
+    <tr><td>Mezzanine debt</td><td>Medium-high</td><td>Medium-high</td></tr>
+    <tr><td>LBO / Buyout equity</td><td>High</td><td>High</td></tr>
+    <tr><td>VC / Early-stage equity</td><td>Highest</td><td>Highest</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Diversification and Vintage Year Considerations</h3>
+<p>Private capital correlations with public equity indexes range from 0.63 to 0.83 — significant but not complete. Key insight: <strong>diversify across vintage years.</strong></p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Vintage Year Phase</th><th>Best Strategy to Invest In</th><th>Logic</th></tr></thead>
+  <tbody>
+    <tr><td>Economic expansion</td><td>Early-stage / VC companies</td><td>High growth environment benefits young companies the most</td></tr>
+    <tr><td>Economic contraction / recession</td><td>Distressed debt funds</td><td>Cheap prices on troubled companies; restructuring value is unlocked in recovery</td></tr>
+  </tbody>
+</table></div>
+
+</section><hr>
+
+<!-- ════════════════ R79 ════════════════ -->
+<section id="r79">
+<div class="module-header">
+  <div class="lm-label">Reading 79</div>
+  <h2>Real Estate and Infrastructure</h2>
+  <div class="one-liner">Two asset classes that offer stable income, inflation protection, and diversification — but require understanding of risk tiers and access structures.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Real estate and infrastructure share a common DNA: large, long-lived assets that generate relatively stable income streams. Both can be accessed directly (owning property/roads) or indirectly (REITs, ETFs, MLPs). The key exam skill is ranking them on the risk-return spectrum: for real estate it's debt → core → core-plus → value-add → opportunistic; for infrastructure it's secondary-stage brownfield → brownfield → greenfield.</p>
+</div>
+
+<h3>Real Estate — The Four-Quadrant Framework <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th></th><th>Private Market</th><th>Public Market</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Equity</strong></td><td>Direct property ownership, limited partnerships, joint ventures</td><td>Equity REITs, real estate company stocks, real estate ETFs</td></tr>
+    <tr><td><strong>Debt</strong></td><td>Individual mortgages, private real estate–backed loans</td><td>RMBS, CMBS, mortgage REITs, mortgage ETFs</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">The quadrant tells you about two independent dimensions: (1) are you an owner or a lender? (equity vs debt) and (2) is your investment tradeable? (public vs private). A mortgage REIT is public + debt: it lends money to property owners and its shares trade on exchanges. A private limited partnership is private + equity: you own property through a fund but can't sell your stake easily.</div>
+
+<h3>Direct vs Indirect Real Estate Investment</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Direct Investment</h5>
+    <p><strong>Pros:</strong> Full control over decisions (buy/sell/renovate/tenant selection); tax benefits (depreciation deductions); diversification vs stocks/bonds</p>
+    <p><strong>Cons:</strong> Illiquid; operationally complex; requires expertise; high minimum capital; concentrated (few properties)</p>
+  </div>
+  <div class="compare-box right">
+    <h5>REITs (Indirect)</h5>
+    <p><strong>Pros:</strong> Liquid (exchange-traded); professional management; diversified across many properties; exempt from double taxation; low minimum investment</p>
+    <p><strong>Cons:</strong> Higher correlation with equity market than direct RE; no control; management fees reduce returns</p>
+  </div>
+</div>
+
+<div class="trap">REITs are exempt from double taxation (they pass income directly to shareholders who pay tax once). This is a key advantage vs corporations that pay corporate tax + shareholder tax. Also: REITs are exchange-traded so they do NOT face redemption/liquidation risk (unlike open-end mutual funds). These two facts are frequently tested.</div>
+
+<h3>REIT Investment Strategy Risk Spectrum <span class="tag tag-critical">Critical</span></h3>
+<p>Know this hierarchy from lowest to highest risk:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Strategy</th><th>Risk</th><th>Return Character</th><th>Fund Structure</th></tr></thead>
+  <tbody>
+    <tr><td><strong>First mortgage debt / CMBS</strong></td><td>Lowest</td><td>Bond-like (fixed income)</td><td>—</td></tr>
+    <tr><td><strong>Core</strong></td><td>Low</td><td>Bond-like (stable rental income from quality properties)</td><td>Open-end (indefinite life)</td></tr>
+    <tr><td><strong>Core-plus</strong></td><td>Low-medium</td><td>Slightly more equity-like (modest redevelopment)</td><td>Closed-end</td></tr>
+    <tr><td><strong>Value-add</strong></td><td>Medium-high</td><td>Equity-like (significant redevelopment)</td><td>Closed-end</td></tr>
+    <tr><td><strong>Opportunistic</strong></td><td>Highest</td><td>Equity-like (distressed, speculative, large-scale)</td><td>Closed-end</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Core and core-plus REITs typically use open-end fund structures (investors can enter/exit at any time — like an open-end mutual fund). Riskier strategies (value-add, opportunistic) use closed-end structures because they need committed capital for longer periods to execute multi-year redevelopment plans.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Rank the following from least to most risky: (A) First mortgage on a commercial property, (B) Core-plus real estate strategy, (C) Opportunistic real estate strategy, (D) Core real estate strategy.</div>
+  <div class="exam-a"><strong>Answer: A → D → B → C.</strong><br>First mortgage (A) is senior debt — least risky. Core (D) is next — stable, quality properties with bond-like returns. Core-plus (B) involves some redevelopment risk. Opportunistic (C) involves large-scale redevelopment, distressed properties, or speculation — highest risk.</div>
+</div>
+
+<h3>Infrastructure — Greenfield vs Brownfield <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Definition</th><th>Risk</th><th>Return Pattern</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Secondary-stage brownfield</strong></td><td>Fully operational, established infrastructure</td><td>Lowest</td><td>Stable, predictable cash flows</td><td>Existing toll road generating steady tolls</td></tr>
+    <tr><td><strong>Brownfield</strong></td><td>Existing infrastructure being expanded or privatised</td><td>Medium</td><td>Stable-to-growing cash flows; some construction risk</td><td>Privatisation of a public utility</td></tr>
+    <tr><td><strong>Greenfield</strong></td><td>New infrastructure to be built from scratch</td><td>Highest</td><td>Negative early (construction); positive and growing later</td><td>New airport, new toll road, renewable energy plant</td></tr>
+  </tbody>
+</table></div>
+
+<div class="analogy">Brownfield is like buying a house that's already standing — you know what you're getting. Greenfield is like buying vacant land and building from scratch — you bear all the construction risk and the uncertainty of whether people will actually use it when it's done.</div>
+
+<h4>Infrastructure Cash Flow Types</h4>
+<ul>
+  <li><strong>Availability payments:</strong> Government pays for making infrastructure available (e.g., a prison that government uses)</li>
+  <li><strong>Usage-based payments:</strong> Revenue depends on actual usage (e.g., toll road — demand risk exists)</li>
+  <li><strong>Take-or-pay:</strong> Buyer must pay a minimum volume regardless of actual usage — provides revenue floor</li>
+</ul>
+
+<div class="key-rule">Demand-based infrastructure (usage fees) is riskier than availability-based (government pays regardless of usage). The riskiest greenfield projects are those with uncertain future demand (e.g., new rail lines). The safest infrastructure is secondary-stage with availability payments or take-or-pay contracts.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which infrastructure investment is most likely to offer the highest expected return: (A) first-lien mortgage on an existing toll road, (B) equity in a new airport in a developed country, or (C) equity in a new passenger rail line in a developing country?</div>
+  <div class="exam-a"><strong>Answer: (C).</strong> Highest risk = highest expected return. A new (greenfield) passenger rail in a developing country combines construction risk, demand uncertainty, and emerging market risk — the full risk trilogy. (A) is debt in a brownfield (lowest risk). (B) is greenfield equity in a developed market (medium risk).</div>
+</div>
+
+<h3>Infrastructure Risks to Know</h3>
+<ul>
+  <li><strong>Regulatory risk:</strong> Government can change pricing rules, tariffs, or operating requirements</li>
+  <li><strong>Construction risk:</strong> Greenfield projects may run over budget or be delayed</li>
+  <li><strong>Operational risk:</strong> Ongoing risk of operations once built</li>
+  <li><strong>Financial leverage risk:</strong> Infrastructure is often heavily debt-financed</li>
+  <li><strong>Demand risk:</strong> Especially for usage-based payment models</li>
+</ul>
+
+<p>Infrastructure debt tends to be safer than infrastructure equity. Long-term infrastructure equity investors benefit from low correlation with public markets, inflation-linked revenues, and long-duration cash flows that match liability profiles of pension plans and life insurers.</p>
+
+</section><hr>
+
+<!-- ════════════════ R80 ════════════════ -->
+<section id="r80">
+<div class="module-header">
+  <div class="lm-label">Reading 80</div>
+  <h2>Natural Resources</h2>
+  <div class="one-liner">Farmland, timberland, and commodities — real assets whose returns are driven by physical supply, demand, and the cost of carrying inventory.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Natural resources are unique in that their returns are driven by the physical world: weather, geology, geopolitical supply shocks. The most exam-heavy concept is commodity futures pricing — specifically contango vs backwardation and what each means for long-only investors. Farmland and timberland also appear, with their distinctive risk/return and the key "optionality" feature of timberland.</p>
+</div>
+
+<h3>Farmland vs Timberland — Key Contrasts <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Farmland</th><th>Timberland</th></tr></thead>
+  <tbody>
+    <tr><td>Typical investor</td><td>Individuals / families</td><td>Institutions (large lot sizes)</td></tr>
+    <tr><td>Expertise required</td><td>Less specialised</td><td>More specialised — TIMOs (Timberland Investment Management Organisations)</td></tr>
+    <tr><td>Harvest flexibility</td><td><strong>None</strong> — crops must be harvested when ready</td><td><strong>High</strong> — trees can be held and harvested when prices are favourable</td></tr>
+    <tr><td>Financing</td><td>Bank loans, private debt; newer REITs available</td><td>Bank loans, private debt; few public vehicles</td></tr>
+    <tr><td>Return drivers</td><td>Crop prices, land appreciation, rental income</td><td>Timber prices, land appreciation, carbon credits</td></tr>
+    <tr><td>ESG relevance</td><td>Agricultural land consumes carbon → attractive for ESG investors</td><td>Forests sequester carbon → very attractive for ESG/climate investors</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Timberland's harvest flexibility is a <strong>real option</strong> with significant economic value: the investor can delay cutting trees when lumber prices are low and harvest when prices are high. Farmland does NOT have this option — crops must be harvested when mature or they spoil. This is one reason timberland can outperform on a risk-adjusted basis.</div>
+
+<h3>Commodities — Methods of Exposure</h3>
+<p>You can gain commodity exposure through:</p>
+<ul>
+  <li><strong>Physical ownership:</strong> Buy and store the actual commodity (gold bars, grain silos) — incurs storage costs</li>
+  <li><strong>Futures and derivatives:</strong> Most common method — no storage, leveraged, liquid; futures trade on exchanges (no counterparty risk)</li>
+  <li><strong>ETFs / ETNs:</strong> Exchange-traded products that hold physical commodities or futures — accessible to retail investors</li>
+  <li><strong>Managed futures / CTAs:</strong> Actively managed funds trading commodity futures; can be LP-structured or mutual fund–structured</li>
+  <li><strong>Commodity producer equity:</strong> Buy shares in oil companies, miners, etc. — indirect exposure mixed with company-specific risk</li>
+</ul>
+
+<h3>Commodity Futures Pricing — Contango vs Backwardation <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">
+  <div class="formula-label">Commodity Futures Pricing Formula</div>
+  Futures Price ≈ Spot Price × (1 + Risk-free rate) + Storage costs − Convenience yield
+  
+  Or more simply:
+  Futures Price = Spot Price + Net Cost of Carry
+  
+  Net Cost of Carry = Storage costs + Finance cost − Convenience yield
+  
+  When Net Cost of Carry > 0: Futures > Spot → CONTANGO
+  When Net Cost of Carry &lt; 0: Futures &lt; Spot → BACKWARDATION
+</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Term</th><th>Condition</th><th>Futures vs Spot</th><th>Effect on Long-Only Investors</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Contango</strong></td><td>Low/zero convenience yield; storage costs dominate; commodity readily available</td><td>Futures price > Spot price</td><td><strong>Negative roll yield</strong> — as futures approach expiry, price must fall to spot → investors lose on rollover</td></tr>
+    <tr><td><strong>Backwardation</strong></td><td>High convenience yield; commodity in short supply; immediate delivery is valuable</td><td>Futures price &lt; Spot price</td><td><strong>Positive roll yield</strong> — as futures approach expiry, price must rise to spot → investors gain on rollover</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Convenience yield is the non-monetary benefit of physically having the commodity available right now. Think of it as the insurance premium of holding oil in your own tank. If oil is scarce, refineries will pay a premium for immediate delivery (high convenience yield → backwardation). If oil is plentiful and storage is cheap, the future is worth more than today's price because of financing costs (low convenience yield → contango). Oil futures typically trade in contango during glut periods (like 2020).</div>
+
+<div class="trap">Long-only commodity investors WANT backwardation (positive roll yield = extra return as expiring futures rise toward spot). They SUFFER in contango (negative roll yield = futures fall toward spot on expiry, creating a drag). The exam will test whether you know which direction benefits or harms the long investor — it's counterintuitive at first because you'd think cheaper futures = good for buyers, but the roll dynamic reverses this.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A commodity's spot price is $50. Storage costs are $2 per year, and the risk-free rate is 3%. The convenience yield is $8 per year. Is the commodity likely in contango or backwardation? What is the impact on a long-only investor?</div>
+  <div class="exam-a">
+    <strong>Net cost of carry = Storage ($2) + Finance (3% × $50 = $1.50) − Convenience yield ($8) = −$4.50 (negative)</strong><br><br>
+    Negative net cost of carry → <strong>Backwardation</strong> (futures price &lt; spot price).<br><br>
+    For a long-only investor: <strong>Positive roll yield</strong> — as the futures contract approaches expiry, the futures price rises toward the spot price, generating a gain upon rolling. Long-only investors benefit from backwardation.
+  </div>
+</div>
+
+<h3>Why Commodities in a Portfolio?</h3>
+<ul>
+  <li><strong>Inflation hedge:</strong> Commodity prices have positive correlation with inflation — when inflation rises, commodity returns tend to rise too. Unlike stocks and bonds (which suffer in high inflation), commodities protect purchasing power.</li>
+  <li><strong>Diversification:</strong> Historically low correlation with global equity and bond returns</li>
+  <li><strong>Geopolitical sensitivity:</strong> Supply shocks (wars, sanctions) hit commodity prices first — exposure provides a geopolitical hedge</li>
+  <li><strong>Weather sensitivity:</strong> Agricultural commodities are highly weather-dependent, which is uncorrelated with financial market risk</li>
+</ul>
+
+<div class="key-rule">Commodity returns have HIGH volatility but LOW correlation with traditional assets. Net effect: adding commodities to a traditional portfolio reduces overall portfolio variance even though commodities themselves are volatile. This is the power of low correlation in portfolio construction.</div>
+
+</section><hr>
+
+<!-- ════════════════ R81 ════════════════ -->
+<section id="r81">
+<div class="module-header">
+  <div class="lm-label">Reading 81</div>
+  <h2>Hedge Funds</h2>
+  <div class="one-liner">Private pooled vehicles with maximum strategy flexibility — using long/short positions, leverage, and derivatives across every asset class.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Hedge funds are not a single strategy — they are a legal structure (private limited partnership) with flexible mandates. The key exam areas are: the four strategy categories (equity hedge, event-driven, relative value, opportunistic), the three sources of return (market beta, strategy beta, alpha), fund structures (master-feeder vs SMA), and the biases that distort performance data.</p>
+</div>
+
+<h3>What Makes a Hedge Fund Different? <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Hedge Funds</th><th>Mutual Funds / ETFs</th><th>Private Equity</th></tr></thead>
+  <tbody>
+    <tr><td>Regulation</td><td>Light — lightly regulated</td><td>Heavy — publicly regulated</td><td>Light</td></tr>
+    <tr><td>Trading</td><td>Public/private, long/short, derivatives, leverage</td><td>Mostly long-only, public markets</td><td>Illiquid private companies</td></tr>
+    <tr><td>Liquidity</td><td>Periodic redemptions (with lockups)</td><td>Daily (open-end) or intraday (ETF)</td><td>Very illiquid; 7–12 year horizon</td></tr>
+    <tr><td>Time horizon</td><td>Short to medium (months to years)</td><td>Continuous</td><td>Long (5–10+ years)</td></tr>
+    <tr><td>Fees</td><td>High: "2 and 20" (mgmt + incentive)</td><td>Low: typically &lt;1%</td><td>High: "2 and 20" on committed capital</td></tr>
+    <tr><td>Transparency</td><td>Low — strategies are proprietary</td><td>Daily holdings disclosed (ETFs)</td><td>Limited reporting</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Four Hedge Fund Strategy Categories <span class="tag tag-critical">Critical</span></h3>
+
+<h4>1. Equity Hedge Strategies</h4>
+<p>Take long and short positions in equities and equity derivatives. Goal: generate alpha while managing or eliminating market beta exposure.</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>Sub-strategy</th><th>Approach</th><th>Net Exposure</th></tr></thead>
+  <tbody>
+    <tr><td>Fundamental long/short</td><td>Long undervalued stocks, short overvalued stocks</td><td>Net long bias</td></tr>
+    <tr><td>Fundamental growth</td><td>Long high-growth companies, short low/no growth</td><td>Net long bias</td></tr>
+    <tr><td>Fundamental value</td><td>Long cheap stocks, short expensive stocks</td><td>Net long bias</td></tr>
+    <tr><td>Market neutral</td><td>Equal long and short positions to eliminate market beta</td><td>Zero net exposure; uses leverage for return</td></tr>
+    <tr><td>Short bias</td><td>Predominantly short overvalued stocks; contrarian</td><td>Net short — profits in market downturns</td></tr>
+  </tbody>
+</table></div>
+
+<h4>2. Event-Driven Strategies</h4>
+<p>Profit from corporate events that create pricing anomalies. Typically long-biased.</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>Sub-strategy</th><th>Trade Idea</th><th>Key Risk</th></tr></thead>
+  <tbody>
+    <tr><td>Merger arbitrage</td><td>Long target company (which trades below acquisition price), short acquirer</td><td>Deal falls apart — "deal break" risk</td></tr>
+    <tr><td>Distressed / restructuring</td><td>Buy securities of companies in bankruptcy at a discount; profit from recovery</td><td>Restructuring fails; recovery worse than expected</td></tr>
+    <tr><td>Activist shareholder</td><td>Buy enough equity to influence strategy (restructuring, dividend, sale)</td><td>Management resists; activism fails to unlock value</td></tr>
+    <tr><td>Special situations</td><td>Invest around spinoffs, buybacks, asset sales, capital distributions</td><td>Transaction doesn't materialise as expected</td></tr>
+  </tbody>
+</table></div>
+
+<h4>3. Relative Value Strategies</h4>
+<p>Buy a security and short a related security, profiting when the pricing discrepancy is resolved. Less directional exposure — profit from spreads, not market direction.</p>
+<ul>
+  <li><strong>Convertible arbitrage:</strong> Long convertible bond, short the underlying equity; exploit mispricing between the two</li>
+  <li><strong>Fixed income arbitrage:</strong> Exploit yield spreads between related bonds (e.g., similar maturities, different issuers)</li>
+  <li><strong>Multi-strategy:</strong> Exploit discrepancies across asset classes simultaneously</li>
+</ul>
+
+<h4>4. Opportunistic / Macro Strategies</h4>
+<p>Top-down, macro-driven bets on economies, currencies, interest rates, and commodities. High conviction, large positions.</p>
+<ul>
+  <li><strong>Global macro:</strong> Long/short positions in currencies, equities, bonds, or commodities based on economic forecasts. Benefits from heightened volatility around central bank decisions, elections, crises.</li>
+  <li><strong>Managed futures / CTAs:</strong> Systematic or discretionary trading of commodity and financial futures. Note: commodity prices have a self-correcting price mechanism (high prices → less demand → lower prices), unlike equities.</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A hedge fund manager buys convertible bonds issued by a company and simultaneously sells short shares of the same company's common stock. This strategy is best described as:</div>
+  <div class="exam-a"><strong>Convertible arbitrage</strong>, which is a type of <strong>relative value strategy</strong>. The fund is exploiting the pricing discrepancy between the convertible bond (which has embedded equity-like optionality) and the underlying common equity. The short position in the stock hedges the equity component of the convertible, leaving the fund exposed to the mispricing spread between the two securities.</div>
+</div>
+
+<h3>Three Sources of Hedge Fund Return <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">
+  <div class="formula-label">Return Decomposition</div>
+  Total HF Return = Market Beta + Strategy Beta + Alpha
+  
+  Market beta = return earned from broad market exposure (anyone can get this via index fund)
+  Strategy beta = return from exposure to specific sector/factor (e.g., value premium, credit spread)
+  Alpha = return from superior manager skill — security selection, timing
+  
+  Hedge funds use LEVERAGE to magnify strategy beta and alpha
+  High fees act as a DRAG that erodes the alpha delivered to investors
+</div>
+
+<div class="intuition">The whole justification for a hedge fund's high fees is alpha — pure skill-based return that can't be replicated by passive investing. But if you decompose a hedge fund's return and most of it is market beta (which you could get for 5 bps in an index ETF) and strategy beta (which you could get from factor ETFs), then the "2 and 20" fee is wildly expensive for what you're actually getting. This is the core critique of hedge funds.</div>
+
+<h3>Fund Structures: Master-Feeder vs SMA</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Master-Feeder Structure</h5>
+    <p>Two feeder funds (offshore + onshore) flow capital into a master fund that makes all investments. Tax-efficient; bypasses some regulatory requirements; economies of scale. Standard structure for large institutional hedge funds with global investors.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Separately Managed Account (SMA)</h5>
+    <p>Custom portfolio for a single large investor. Pros: tailored to investor's risk/return objectives, negotiated lower fees. Cons: manager has no stake so incentive alignment is weaker; receives only manager's most liquid trades; requires more operational oversight.</p>
+  </div>
+</div>
+
+<h3>Fund-of-Funds — Extra Layer, Extra Cost</h3>
+<p>A fund-of-funds (FoF) invests in multiple hedge funds. Advantages: diversification across strategies; manager expertise in selecting funds; access to otherwise unavailable funds; shorter lockups. Disadvantages: <strong>double fee layer</strong> (typically "1 and 10" on top of underlying fund fees of "2 and 20").</p>
+
+<div class="trap">Fund-of-funds charges a fee ON TOP of the fees charged by the underlying hedge funds. If the underlying funds charge "2 and 20" and the FoF charges "1 and 10", an investor is paying a 3% management fee AND both performance fee layers. This double fee structure dramatically reduces net returns. Despite this, FoFs persist because they offer diversification and access for investors who cannot meet direct hedge fund minimums.</div>
+
+<h3>Performance Biases in Hedge Fund Indexes</h3>
+<p>All alternative investment performance biases apply, but they are especially severe for hedge funds:</p>
+<ul>
+  <li><strong>Survivorship bias:</strong> 25%+ of hedge funds fail within 3 years — excluded from most indexes</li>
+  <li><strong>Backfill bias:</strong> Funds with good track records voluntarily enter databases, then backfill historical returns — only winners self-select</li>
+  <li><strong>Selection bias:</strong> Index providers assign categories inconsistently</li>
+  <li><strong>Stale pricing:</strong> Illiquid hedge fund holdings may not be marked to market, understating true volatility</li>
+</ul>
+
+<div class="key-rule">Net effect of all biases: hedge fund index returns are overstated and volatility is understated. The reported Sharpe ratio of hedge funds is too high. Investors who rely on index data for performance expectations will be systematically disappointed. The reported low correlations with traditional assets are partly an artifact of stale pricing.</div>
+
+</section><hr>
+
+<!-- ════════════════ FORMULA SHEET ════════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Formula Sheet — Alternative Investments</h2>
+  <div class="one-liner">Every formula and key calculation across all six readings.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+  <thead><tr><th style="width:42%">Formula / Rule</th><th style="width:45%">Description</th><th>Reading</th></tr></thead>
+  <tbody>
+    <tr><td>Mgmt Fee (HF) = AUM × mgmt rate</td><td>Hedge fund management fee on net asset value</td><td>76</td></tr>
+    <tr><td>Mgmt Fee (PE) = Committed Capital × mgmt rate</td><td>Private equity fee on committed (not invested) capital</td><td>76</td></tr>
+    <tr><td>Perf Fee (soft hurdle) = rate × Total Return</td><td>Once hurdle is cleared, fee on the whole return</td><td>76</td></tr>
+    <tr><td>Perf Fee (hard hurdle) = rate × (Return − Hurdle)</td><td>Fee only on excess above hurdle rate</td><td>76</td></tr>
+    <tr><td>MOIC = Total Capital Returned / Total Capital Invested</td><td>Money multiple; ignores timing of cash flows</td><td>77</td></tr>
+    <tr><td>IRR: solve NPV = 0</td><td>Money-weighted return; accounts for timing; most appropriate for alt investments</td><td>77</td></tr>
+    <tr><td>Leveraged Return = r + (V_B/V_0) × (r − r_B)</td><td>Return on equity with leverage; amplifies both gains and losses</td><td>77</td></tr>
+    <tr><td>After-fee Return = (End Value − Fees) / Begin Value − 1</td><td>Net investor return after management + performance fees</td><td>77</td></tr>
+    <tr><td>Futures Price = Spot + Net Cost of Carry</td><td>Commodity futures pricing</td><td>80</td></tr>
+    <tr><td>Net Cost of Carry = Storage + Finance − Convenience yield</td><td>Net cost: positive → contango; negative → backwardation</td><td>80</td></tr>
+    <tr><td>Contango: Futures > Spot (NCoCy &gt; 0)</td><td>Negative roll yield for long-only investors</td><td>80</td></tr>
+    <tr><td>Backwardation: Futures &lt; Spot (NCoC &lt; 0)</td><td>Positive roll yield for long-only investors</td><td>80</td></tr>
+    <tr><td>American waterfall perf fee = 20% × each deal gain</td><td>Deal-by-deal; pays GP early; favours GP</td><td>76</td></tr>
+    <tr><td>European waterfall: LPs first receive capital + hurdle</td><td>Whole-of-fund; favours LPs</td><td>76</td></tr>
+    <tr><td>Clawback: LP recovers excess carry if subsequent losses reverse gains</td><td>Protects LPs in American waterfall structures</td><td>76</td></tr>
+  </tbody>
+</table></div>
+</section>
+
+<!-- ════════════════ EXAM TRAPS ════════════════ -->
+<section id="traps">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master List of Common Exam Traps</h2>
+  <div class="one-liner">The mistakes candidates make most often — know these cold.</div>
+</div>
+
+<div class="trap">R76 — <strong>Management fee basis:</strong> Hedge fund fees = % of AUM (NAV). Private equity fees = % of COMMITTED capital (not invested capital, not NAV). The exam will frequently swap these.</div>
+
+<div class="trap">R76 — <strong>Hard vs soft hurdle:</strong> Hard hurdle = fee only on EXCESS above hurdle. Soft hurdle = fee on TOTAL return once hurdle is cleared. Hard hurdle is better for the investor. Soft hurdle can produce much higher fees on the same return.</div>
+
+<div class="trap">R76 — <strong>American vs European waterfall:</strong> American (deal-by-deal) favours the GP. European (whole-of-fund) favours the LP. A clawback provision limits GP advantage in American waterfalls.</div>
+
+<div class="trap">R77 — <strong>IRR vs MOIC:</strong> High MOIC over a long period may represent poor IRR. A 2× MOIC in 3 years (IRR ≈ 26%) is far better than 2× over 10 years (IRR ≈ 7%). Never compare MOICs without knowing the holding period.</div>
+
+<div class="trap">R77 — <strong>J-curve timing:</strong> Positive returns come in the CAPITAL DISTRIBUTION phase (Phase 3), not early. J-curve returns are negative in Phases 1 and 2. Comparing funds of different ages is meaningless without adjusting for lifecycle phase.</div>
+
+<div class="trap">R77 — <strong>Level 3 valuations:</strong> Stale Level 3 values make alternative investments appear LESS volatile and LESS correlated with traditional assets than they truly are. This is why diversification benefits of alternatives are often overstated in the data.</div>
+
+<div class="trap">R78 — <strong>VC first invests at seed stage:</strong> Angel/pre-seed investing is done by individuals, not VC funds. VC funds typically begin investing at the seed stage. The exam will test whether you correctly place VC fund entry.</div>
+
+<div class="trap">R78 — <strong>Mezzanine confusion:</strong> "Mezzanine-stage financing" = timing of VC investment before IPO. "Mezzanine debt" = subordinated debt with equity-like features. These are completely different concepts using the same word. Context determines meaning.</div>
+
+<div class="trap">R79 — <strong>REIT double-taxation exemption:</strong> REITs pass income directly to shareholders, avoiding corporate-level tax. This is a key structural advantage. REITs are also exchange-traded and therefore immune to redemption runs (unlike open-end mutual funds).</div>
+
+<div class="trap">R79 — <strong>Infrastructure risk ranking:</strong> Secondary-stage brownfield (least risky) → brownfield → greenfield (most risky). Demand-based payment (usage fees) > availability payments in risk. The exam loves asking you to rank these.</div>
+
+<div class="trap">R80 — <strong>Contango vs backwardation and long investors:</strong> Backwardation = GOOD for long-only investors (positive roll yield). Contango = BAD for long-only investors (negative roll yield). This is backwards from intuition ("cheap futures should be good for buyers") — the roll dynamic is the key insight.</div>
+
+<div class="trap">R80 — <strong>Timberland harvest flexibility:</strong> Only TIMBERLAND has the optionality to delay harvest. Farmland crops must be harvested when ready. This fundamental difference affects risk/return and is a favourite exam distinction.</div>
+
+<div class="trap">R81 — <strong>Convertible arbitrage is RELATIVE VALUE, not event-driven:</strong> Students often misclassify convertible arbitrage. It is a relative value strategy (exploiting the spread between the convertible and the underlying equity). Merger arbitrage is event-driven.</div>
+
+<div class="trap">R81 — <strong>Hedge funds magnify strategy beta and alpha with leverage — NOT market beta:</strong> Hedge funds seek to REDUCE or ELIMINATE market beta exposure through short positions. They use leverage to amplify the alpha and strategy beta that remain. If a fund earns only market beta, the high fees are unjustified.</div>
+
+<div class="trap">R81 — <strong>Fund-of-funds fees:</strong> FoFs charge fees ON TOP of underlying fund fees. The total fee burden is substantial. Despite this, FoFs provide diversification, manager selection expertise, and access for investors who cannot meet single-fund minimums.</div>
+
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Corporate Issuers: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 230px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 230px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 230px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Key Rule — "; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── FORMULA REFERENCE TABLE ── */
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+
+/* ── THREE-COL GRID ── */
+.three-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+  margin: 18px 0;
+}
+.three-box {
+  border-radius: 10px; padding: 15px 16px;
+  background: var(--gray1);
+  border: 1.5px solid var(--gray2);
+}
+.three-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Corporate Issuers · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Entity Structure</div>
+  <a href="#r20">R20 — Org Forms & Ownership</a>
+  <div class="nav-section">Stakeholders</div>
+  <a href="#r21">R21 — Investors & Stakeholders</a>
+  <a href="#r22">R22 — Corporate Governance</a>
+  <div class="nav-section">Financial Management</div>
+  <a href="#r23">R23 — Working Capital & Liquidity</a>
+  <a href="#r24">R24 — Capital Investments</a>
+  <div class="nav-section">Financing</div>
+  <a href="#r25">R25 — Capital Structure</a>
+  <div class="nav-section">Strategy</div>
+  <a href="#r26">R26 — Business Models</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Formula Sheet</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Corporate Issuers</h1>
+  <p class="subtitle">Intuition-First Study Guide · Readings 20–26</p>
+  <p class="meta">Why concepts matter · Key formulas with worked examples · Common exam traps · All LOS covered</p>
+</div>
+
+<!-- ════════════ R20 ════════════ -->
+<section id="r20">
+<div class="module-header">
+  <div class="lm-label">Reading 20</div>
+  <h2>Organizational Forms, Corporate Issuer Features, and Ownership</h2>
+  <div class="one-liner">How businesses are legally structured — and why it determines everything from liability to taxation.</div>
+</div>
+
+<div class="big-picture">
+<div class="bp-label">Why This Reading Matters</div>
+<p>Before a company can raise capital, investors need to understand its legal form. The form determines who bears losses, who controls the firm, how profits are taxed, and how easily shares can be transferred. The corporation dominates capital markets precisely because it solves these problems most elegantly. This reading is foundational vocabulary for the entire Corporate Issuers topic.</p>
+</div>
+
+<h3>The Four Organizational Forms Compared <span class="tag tag-critical">Critical</span></h3>
+<p>Every business structure is defined by five key features: separate legal entity, owner-operator separation, liability type, tax treatment, and capital access. The CFA exam loves testing the differences across structures.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Sole Proprietorship</th><th>General Partnership</th><th>Limited Partnership</th><th>Corporation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Separate legal entity?</strong></td><td>No</td><td>No</td><td>No</td><td><strong>Yes</strong></td></tr>
+    <tr><td><strong>Owner–operator separation?</strong></td><td>No (same person)</td><td>No (partners run it)</td><td>Partial (GPs run; LPs passive)</td><td><strong>Yes</strong> (board hires managers)</td></tr>
+    <tr><td><strong>Liability</strong></td><td>Unlimited</td><td>Unlimited (all partners)</td><td>GPs: unlimited; LPs: limited to investment</td><td><strong>Limited</strong> (shareholders)</td></tr>
+    <tr><td><strong>Tax treatment</strong></td><td>Personal income</td><td>Personal income</td><td>Personal income (pass-through)</td><td>Potentially double-taxed</td></tr>
+    <tr><td><strong>Capital access</strong></td><td>Very limited</td><td>Limited</td><td>Better (LPs invest capital)</td><td><strong>Best</strong> (public equity + debt markets)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">The corporation is the dominant form for large businesses because limited liability allows millions of strangers to invest without risking more than what they paid. No rational person would buy 100 shares of a bank if they could be sued for the bank's entire debts.</div>
+
+<div class="key-rule">A corporation is the ONLY form that is a separate legal entity from its owners. This is the single most important distinguishing feature — it enables limited liability, perpetual existence, and easy share transferability.</div>
+
+<h3>Key Features of Corporations</h3>
+<p>A corporation is formed by filing <em>articles of incorporation</em> with a regulatory body. As a legal entity, it can hire employees, enter contracts, borrow money, sue, and be sued — all independently of its shareholders.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>What It Means</th><th>Exam Relevance</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Shareholders</strong></td><td>Owners with limited liability and residual claim</td><td>Lose only their investment if bankrupt</td></tr>
+    <tr><td><strong>Voting rights</strong></td><td>Shareholders elect the board of directors</td><td>Board then hires/fires management</td></tr>
+    <tr><td><strong>Dividends</strong></td><td>Board may distribute earnings as dividends</td><td>Not obligated to pay dividends</td></tr>
+    <tr><td><strong>Transferability</strong></td><td>Shares can be bought/sold (public companies on exchanges)</td><td>Free float = actively traded shares</td></tr>
+    <tr><td><strong>Perpetual life</strong></td><td>Exists beyond individual shareholders</td><td>Unlike a sole proprietorship which ends at death</td></tr>
+    <tr><td><strong>Double taxation</strong></td><td>Profits taxed at corporate level, then dividends taxed at personal level</td><td>See formula below</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Double Taxation Formula <span class="tag tag-formula">Formula</span></h4>
+<p>This formula appears directly in exam questions. Know how to calculate the effective tax rate on pre-tax profits:</p>
+
+<div class="formula">\[ \text{Effective Tax Rate} = t_c + t_p \times (1 - t_c) \]</div>
+<p>Where \(t_c\) = corporate tax rate, \(t_p\) = personal (dividend) tax rate. Alternatively, work it numerically starting from $100 of pre-tax profit.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">ABC Corp has a corporate tax rate of 25%. Shareholders pay 20% tax on dividends. The company pays out 100% of after-tax profits as dividends. What is the effective tax rate on pre-tax corporate profits?</div>
+  <div class="exam-a"><strong>Method 1 (Formula):</strong> 0.25 + 0.20 × (1 − 0.25) = 0.25 + 0.15 = <strong>40%</strong><br><br>
+  <strong>Method 2 (Numerical — always works):</strong> Start with $100 pretax profit. Corporate tax @25% = $25. After-tax profit = $75. Dividend tax @20% = $15. Total tax = $25 + $15 = $40. Effective rate = 40/100 = <strong>40%</strong><br><br>
+  <strong>Trap:</strong> Many candidates simply add 25% + 20% = 45%. This is wrong — personal tax only applies to the after-tax amount that reaches shareholders.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A corporation retains 60% of after-tax profits and pays out 40% as dividends. Corporate tax = 25%, personal dividend tax = 20%. What is the effective tax rate on the corporation's pretax profits?</div>
+  <div class="exam-a"><strong>Answer:</strong> Only the portion paid as dividends faces personal tax. Starting with $100: Corporate tax = $25. After-tax = $75. Dividends = 40% × $75 = $30. Personal tax = 20% × $30 = $6. Total tax = $25 + $6 = $31. Effective rate = <strong>31%</strong>. Retaining earnings reduces the double-tax burden — a key reason growth firms pay few dividends.</div>
+</div>
+
+<h3>Public vs. Private Companies <span class="tag tag-critical">Critical</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Public Limited Company</h5>
+    <ul>
+      <li>Shares listed on a stock exchange — price/volume transparent</li>
+      <li>High regulatory burden: quarterly/annual filings, material event disclosures</li>
+      <li><strong>Free float</strong> = shares actively traded (not held by insiders)</li>
+      <li>Access to large, diversified shareholder base</li>
+      <li>Greater scrutiny — management under market pressure</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Private Limited Company</h5>
+    <ul>
+      <li>Shares do NOT trade on exchange — value not readily observable</li>
+      <li>Limited regulatory requirements; less disclosure</li>
+      <li>Raise capital via <strong>private placements</strong> (accredited investors only)</li>
+      <li>Can take longer-term view without quarterly earnings pressure</li>
+      <li>Harder to exit — must wait for IPO, sale, or acquisition</li>
+    </ul>
+  </div>
+</div>
+
+<h4>Ways a Private Company Goes Public</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Method</th><th>How It Works</th><th>Key Distinction</th></tr></thead>
+  <tbody>
+    <tr><td><strong>IPO</strong></td><td>Company issues new shares to the public; underwritten by investment bank</td><td>Raises new capital; most common</td></tr>
+    <tr><td><strong>Direct Listing</strong></td><td>Exchange lists existing shares directly — no new shares issued</td><td>No new capital raised; no underwriter; faster</td></tr>
+    <tr><td><strong>SPAC</strong></td><td>A "blank check" shell company raises capital via IPO, then acquires a private company</td><td>Target company doesn't need to be identified at IPO time</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">In a direct listing, NO new capital is raised and NO underwriter is involved. This is the most common exam trap for this topic. SPACs are "blank check" companies — they raise money before knowing their acquisition target.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A private company wants to go public quickly without raising any new equity capital. It should most likely use a:</div>
+  <div class="exam-a"><strong>Answer: Direct listing.</strong> An IPO raises new capital (shares are newly issued). A SPAC also involves a separate entity raising capital. Only a direct listing puts existing shares on an exchange without issuing new ones or raising fresh capital.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════ R21 ════════════ -->
+<section id="r21">
+<div class="module-header">
+  <div class="lm-label">Reading 21</div>
+  <h2>Investors and Other Stakeholders</h2>
+  <div class="one-liner">Debt vs equity — two fundamentally different risk/return profiles that create natural conflicts of interest.</div>
+</div>
+
+<div class="big-picture">
+<div class="bp-label">Why This Reading Matters</div>
+<p>Understanding who has claims on a company — and the nature of those claims — is foundational to corporate finance. Debtholders and equity holders want different things from management. ESG adds a third dimension: non-financial stakeholders who increasingly affect a company's value. Exam questions test your ability to identify whose interests are served by various corporate actions.</p>
+</div>
+
+<h3>Debt vs. Equity: Different Claims, Different Motivations <span class="tag tag-critical">Critical</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Debtholders (Lenders / Bondholders)</h5>
+    <ul>
+      <li><strong>Contractual, legal claim</strong> to promised interest + principal</li>
+      <li>Higher priority: paid before equity in any scenario</li>
+      <li><strong>Limited upside</strong> — best outcome is to receive all promised payments. Growth above that does NOT benefit debtholders.</li>
+      <li>Bears downside risk if company value falls below debt value</li>
+      <li>Prefer <strong>less risk</strong> — want stable, predictable cash flows</li>
+      <li>Protected by covenants and collateral</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Equity Holders (Shareholders)</h5>
+    <ul>
+      <li><strong>Residual claim</strong> — get what's left after all other claims paid</li>
+      <li>Lowest priority in bankruptcy — often get nothing</li>
+      <li><strong>Unlimited upside</strong> — benefit fully from company growth</li>
+      <li>Loss limited to investment (limited liability)</li>
+      <li>May prefer <strong>more risk</strong> — higher risk → higher expected return on equity</li>
+      <li>Voting rights to influence management via board</li>
+    </ul>
+  </div>
+</div>
+
+<div class="analogy">Imagine a building worth $1M with a $600K mortgage. If the building rises to $1.5M, the homeowner captures the full $500K gain — the lender still gets only their $600K back. But if the building falls to $400K, the lender bears the $200K loss while the owner simply walks away. This perfectly illustrates the asymmetric upside (equity) vs. capped upside (debt) payoff.</div>
+
+<h4>The Leverage Effect on ROE <span class="tag tag-formula">Formula</span></h4>
+<p>Leverage amplifies returns in both directions. This is the fundamental reason debt and equity holders have conflicting interests about how much risk to take.</p>
+
+<div class="formula">\[ ROE = \frac{\text{Net Income}}{\text{Equity}} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A company has revenues of $1,000 and operating expenses of $800. Assets = $1,000. Calculate ROE under two scenarios: (A) 100% equity financing, and (B) 50% debt at 10% interest, 50% equity. Assume no taxes.</div>
+  <div class="exam-a">
+  <strong>Scenario A (100% equity):</strong><br>
+  Operating profit = $1,000 − $800 = $200. Equity = $1,000. ROE = $200/$1,000 = <strong>20%</strong>.<br><br>
+  <strong>Scenario B (50/50 debt/equity):</strong><br>
+  Debt = $500 @ 10% → Interest = $50. Net income = $200 − $50 = $150. Equity = $500. ROE = $150/$500 = <strong>30%</strong>.<br><br>
+  <strong>Insight:</strong> Leverage boosted ROE from 20% to 30% because the return on assets (20%) exceeded the cost of debt (10%). BUT: if revenues fell 15% to $850: Operating profit = $50. Scenario A ROE = 5%; Scenario B ROE = 0%. Leverage also amplifies losses — debtholders still get their $50 interest regardless.
+  </div>
+</div>
+
+<div class="key-rule">Equity holders benefit from leverage when return on assets &gt; cost of debt. Debtholders receive no extra return from this upside — they only bear the downside if things go badly. This misaligned incentive is the root of most shareholder-creditor conflicts.</div>
+
+<h3>Stakeholder Groups and Their Interests</h3>
+<p>Under <strong>stakeholder theory</strong>, a company must balance the interests of multiple groups — not just maximize shareholder returns. Under <strong>shareholder theory</strong>, the primary goal is maximizing equity value.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Stakeholder</th><th>Primary Interest</th><th>Mechanism for Influence</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Shareholders</strong></td><td>Profitability, growth, share price appreciation, dividends</td><td>Voting rights, shareholder resolutions, proxy contests</td></tr>
+    <tr><td><strong>Bondholders / Public Debt</strong></td><td>Timely interest and principal payments; low default risk</td><td>Bond indentures, covenants, creditor committees</td></tr>
+    <tr><td><strong>Banks / Private Lenders</strong></td><td>Creditworthiness, collateral; may hold equity too</td><td>Loan covenants; access to non-public info</td></tr>
+    <tr><td><strong>Board of Directors</strong></td><td>Protect shareholders; oversee management</td><td>Hire/fire CEO; set strategy; audit oversight</td></tr>
+    <tr><td><strong>Senior Management</strong></td><td>Employment security, compensation, firm success</td><td>Run day-to-day operations; compensation tied to performance</td></tr>
+    <tr><td><strong>Employees</strong></td><td>Wages, career growth, job security, working conditions</td><td>Labor unions, employment contracts, ESOPs</td></tr>
+    <tr><td><strong>Suppliers</strong></td><td>Ongoing business relationship; timely payments</td><td>Contracts; short-term creditor status</td></tr>
+    <tr><td><strong>Customers</strong></td><td>Quality products, reasonable prices, reliability</td><td>Purchasing decisions; reputational pressure</td></tr>
+    <tr><td><strong>Government / Regulators</strong></td><td>Tax revenue, employment, compliance with laws</td><td>Legislation, regulatory agencies, fines</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Board Structure: One-Tier vs. Two-Tier</h4>
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>One-Tier Board (Anglo-American)</h5>
+    <ul>
+      <li>Inside directors (executives, founders) + independent directors on one board</li>
+      <li>Majority must be independent (exchange requirement)</li>
+      <li>Risk: inside directors may favor management interests</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Two-Tier Board (Continental Europe)</h5>
+    <ul>
+      <li><strong>Supervisory board</strong>: independent directors only — oversees management</li>
+      <li><strong>Management board</strong>: inside directors — run the company</li>
+      <li>Cleaner separation between oversight and operations</li>
+    </ul>
+  </div>
+</div>
+
+<div class="key-rule">A <strong>staggered board</strong> elects only a fraction of directors each year — it protects incumbents from sudden takeovers but also entrenches poor management. Minority shareholders prefer <strong>non-staggered, majority-independent boards</strong> where they can vote out the full board at once.</div>
+
+<h3>ESG Factors <span class="tag tag-exam">Exam Focus</span></h3>
+<p>ESG stands for Environmental, Social, and Governance. Investors increasingly analyze ESG factors because they can materially affect cash flows and firm value. The CFA exam tests your ability to classify specific situations into the correct ESG category.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Category</th><th>Examples</th><th>Financial Impact Channel</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Environmental</strong></td><td>Carbon emissions, pollution, deforestation, water usage, waste management</td><td>Regulatory fines, cleanup costs, stranded assets, reputational damage</td></tr>
+    <tr><td><strong>Social</strong></td><td>Data privacy, labor practices, diversity &amp; inclusion, community relations</td><td>Employee productivity, customer loyalty, litigation risk</td></tr>
+    <tr><td><strong>Governance</strong></td><td>Board composition, executive pay, anti-corruption policies, lobbying</td><td>Manager alignment, fraud prevention, capital cost</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">ESG risks flow differently to debt vs. equity investors. Equity holders bear the brunt of any adverse ESG outcome (they lose residual value first). Debtholders are insulated unless losses are large enough to threaten default. Long-maturity debtholders face more ESG exposure than short-term lenders — a coal plant may be profitable today but become a stranded asset in 10 years.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A company shuts down a coal-fired power plant because new carbon regulations make it unprofitable to retrofit. This is best described as an example of:</div>
+  <div class="exam-a"><strong>Answer: Stranded asset (Environmental factor).</strong> A stranded asset is one that becomes unviable due to regulatory or market transitions. This is an environmental factor — not governance (which covers board structure, pay, etc.) or social (which covers employee/community relations).</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A pension fund holds 10-year bonds of a coal company. Compared to a holder of 2-year bonds of the same company, who has greater ESG exposure?</div>
+  <div class="exam-a"><strong>Answer: The 10-year bondholder.</strong> ESG risks (especially environmental/transition risk) are often delayed — the company may be compliant today but face severe constraints in 5–8 years. Long-maturity debt investors have more time exposure to these future risks, whereas the short-term bondholder expects repayment before most ESG risks materialize.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════ R22 ════════════ -->
+<section id="r22">
+<div class="module-header">
+  <div class="lm-label">Reading 22</div>
+  <h2>Corporate Governance: Conflicts, Mechanisms, Risks, and Benefits</h2>
+  <div class="one-liner">Who watches the watchers? Corporate governance is the answer — and getting it wrong is very costly.</div>
+</div>
+
+<div class="big-picture">
+<div class="bp-label">Why This Reading Matters</div>
+<p>Corporate governance is not just compliance box-ticking. It's the set of systems that determines whether a company's managers act in shareholders' interests or their own. Poor governance destroys value through empire-building, excessive compensation, and outright fraud. This reading is tested heavily on both the conceptual level (what is a principal-agent conflict?) and the practical level (which governance mechanism addresses which conflict?).</p>
+</div>
+
+<h3>The Principal-Agent Problem <span class="tag tag-critical">Critical</span></h3>
+<p>A <strong>principal-agent relationship</strong> exists when one party (the principal) hires another party (the agent) to act on their behalf. The conflict arises because the agent's self-interest may diverge from the principal's interests.</p>
+
+<div class="analogy">In corporate governance, shareholders are principals; management and board members are agents. A CEO with a salary contract and no equity stake might prefer a "quiet life" (low risk, no bold moves) while shareholders want growth-maximizing risk-taking. Neither is wrong — they just have different incentives.</div>
+
+<p><strong>Agency costs</strong> are the costs of the principal-agent conflict. They have three components:</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>Type of Agency Cost</th><th>Description</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Monitoring costs</strong></td><td>Cost of watching the agent</td><td>Board of directors fees, external audit costs, financial reporting expenses</td></tr>
+    <tr><td><strong>Bonding costs</strong></td><td>Cost of assuring principals that agent acts in their interest</td><td>Insurance policies guaranteeing performance; non-compete agreements</td></tr>
+    <tr><td><strong>Residual losses</strong></td><td>Value lost even with adequate monitoring + bonding</td><td>Suboptimal investment decisions that monitoring couldn't prevent</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Common Principal-Agent Conflicts to Know <span class="tag tag-critical">Critical</span></h3>
+
+<h4>1. Shareholders vs. Management</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Conflict Type</th><th>What Managers May Do</th><th>Why It's Bad for Shareholders</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Insufficient effort</strong></td><td>Avoid difficult decisions, take no initiative</td><td>Suboptimal capital allocation, missed opportunities</td></tr>
+    <tr><td><strong>Empire building</strong></td><td>Pursue unnecessary acquisitions to increase firm size</td><td>Overpaying for acquisitions; compensation tied to size not returns</td></tr>
+    <tr><td><strong>Entrenchment</strong></td><td>Take inadequate risks; imitate competitors; pursue projects only they can run</td><td>Value destruction; impossibility of replacement</td></tr>
+    <tr><td><strong>Self-dealing</strong></td><td>Use company resources for personal benefit (perks, related-party deals)</td><td>Direct wealth transfer from shareholders to managers</td></tr>
+    <tr><td><strong>Risk appetite mismatch</strong></td><td>Cash-heavy managers avoid risk (job risk); option-heavy managers take too much risk</td><td>Options have no downside — management "gambles" with others' money</td></tr>
+  </tbody>
+</table></div>
+
+<h4>2. Controlling vs. Minority Shareholders</h4>
+<p>A controlling shareholder (majority owner) may push the company to pursue actions that benefit them but harm minority shareholders — such as diversifying to reduce their concentrated portfolio risk, or engaging in related-party transactions that benefit the controlling family.</p>
+<p><strong>Dual-class share structures</strong> exacerbate this: founders may retain super-voting shares (e.g., 10 votes/share) while public investors hold ordinary shares (1 vote/share), giving founders effective control even with &lt;50% economic ownership. CFA Institute <em>opposes</em> dual-class structures.</p>
+
+<h4>3. Shareholders vs. Creditors</h4>
+<div class="key-rule">Shareholders may prefer management to take actions that increase firm risk — they capture the upside, while creditors absorb the downside. Specifically: issuing new debt (dilutes existing creditors' collateral) or increasing dividends (depletes assets that secure debt) benefit shareholders at creditors' expense.</div>
+
+<h3>Governance Mechanisms <span class="tag tag-exam">Exam Focus</span></h3>
+<p>For each stakeholder group, a different set of tools protects their interests:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Stakeholder</th><th>Primary Mechanism</th><th>Examples</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Shareholders</strong></td><td>Proxy voting; shareholder activism; takeover threat</td><td>Annual general meetings (AGM); proxy contests; hostile takeover; shareholder lawsuits; poison pills (defense)</td></tr>
+    <tr><td><strong>Creditors</strong></td><td>Bond indentures and covenants; collateral; creditor committees</td><td>Max leverage covenants; minimum interest coverage; ad hoc committees in distress</td></tr>
+    <tr><td><strong>Employees</strong></td><td>Labor laws; unions; ESOPs</td><td>Collective bargaining; employment contracts; stock ownership plans</td></tr>
+    <tr><td><strong>Customers/Suppliers</strong></td><td>Contracts; social media pressure</td><td>Service level agreements; public boycotts; supplier codes of conduct</td></tr>
+    <tr><td><strong>Government</strong></td><td>Regulation; listing requirements; governance codes</td><td>SEC filings (US); comply-or-explain governance codes (UK)</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Board Committees and Their Roles</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th>Committee</th><th>Responsibilities</th><th>Composition Requirement</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Audit Committee</strong></td><td>Financial reporting oversight; internal controls; appoint external auditor; review audit findings</td><td>Must be independent directors (required by most regulators)</td></tr>
+    <tr><td><strong>Nominating/Governance Committee</strong></td><td>Board election policies; governance code compliance; ethics policies; director nominations</td><td>Typically independent directors</td></tr>
+    <tr><td><strong>Compensation Committee</strong></td><td>Recommend director and senior manager pay; oversight of benefit plans</td><td><strong>Must be independent</strong> — managers cannot evaluate/compensate themselves</td></tr>
+    <tr><td><strong>Risk Committee</strong></td><td>Risk policy and tolerance; enterprise-wide risk oversight (financial services)</td><td>Industry-specific; often mandated for banks</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Shareholder Activism Mechanisms</h4>
+<ul>
+  <li><strong>Proxy contest:</strong> Activist seeks proxies from other shareholders to vote for their proposals (board nominees, strategy changes)</li>
+  <li><strong>Tender offer:</strong> Activist bids to buy enough shares to gain control</li>
+  <li><strong>Hostile takeover:</strong> Acquiring company bypasses board, goes directly to shareholders — discipline effect keeps management aligned</li>
+  <li><strong>Poison pill:</strong> Existing shareholders can buy new shares at a discount if a hostile bidder crosses a threshold — dilutes the acquirer</li>
+  <li><strong>Staggered board defense:</strong> Even after winning a proxy fight, acquirer can't replace whole board immediately — slows hostile control</li>
+</ul>
+
+<h3>Risks and Benefits of Corporate Governance</h3>
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>⚠️ Risks of POOR Governance</h5>
+    <ul>
+      <li>Accounting fraud or poor recordkeeping</li>
+      <li>Suboptimal risk-taking (too much or too little)</li>
+      <li>Excessive management compensation misaligned with performance</li>
+      <li>Self-dealing and related-party transactions</li>
+      <li>Regulatory violations → legal and reputational risk</li>
+      <li>Debt default / bankruptcy from poor financial management</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>✅ Benefits of GOOD Governance</h5>
+    <ul>
+      <li>Better operational efficiency (aligned incentives)</li>
+      <li>Lower cost of debt (reduced default risk → lower spread)</li>
+      <li>Improved financial performance</li>
+      <li>Reduced legal and regulatory risk</li>
+      <li>Greater transparency → lower cost of capital</li>
+      <li>Higher firm value over time</li>
+    </ul>
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A company's CEO is also the chairman of the board, controls 55% of voting shares, and sets his own compensation. Which governance failure does this most likely represent?</div>
+  <div class="exam-a"><strong>Answer: Multiple governance failures.</strong> (1) <strong>Board independence</strong> — the CEO/chair dual role eliminates independent oversight of management. (2) <strong>Self-dealing in compensation</strong> — the compensation committee should be composed of independent directors, not the executive himself. (3) <strong>Controlling shareholder vs. minority conflict</strong> — 55% voting control means minority shareholders have no meaningful checks. The exam might ask which single option is the BEST description — the compensation self-setting is likely the most direct "principal-agent" violation.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">Information asymmetry between managers and shareholders is most likely to be GREATER for which type of company?</div>
+  <div class="exam-a"><strong>Answer: Large, complex, multi-business companies; companies with low institutional ownership; companies with opaque financial statements; companies operating in many geographic markets.</strong> The key insight: information asymmetry is about how much managers know that shareholders DON'T know. Large/complex companies have more information that's difficult for outsiders to assess. Low institutional ownership means less sophisticated monitoring.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════ R23 ════════════ -->
+<section id="r23">
+<div class="module-header">
+  <div class="lm-label">Reading 23</div>
+  <h2>Working Capital and Liquidity</h2>
+  <div class="one-liner">A profitable company can still go bankrupt if it can't pay its bills — liquidity is about timing, not just profitability.</div>
+</div>
+
+<div class="big-picture">
+<div class="bp-label">Why This Reading Matters</div>
+<p>Many students confuse profitability with liquidity. A business can earn positive accounting profits but still face a cash crisis if it carries too much inventory or its customers pay slowly. Working capital management is about optimizing the cash cycle — getting cash in quickly and paying it out efficiently. This reading is formula-heavy and directly tested with numerical questions.</p>
+</div>
+
+<h3>The Cash Conversion Cycle (CCC) <span class="tag tag-critical">Critical</span></h3>
+<p>The CCC measures how many days it takes for a company to convert its investments in inventory into actual cash. It's the most tested concept in this reading.</p>
+
+<div class="formula">\[ CCC = DOH + DSO - DPO \]</div>
+<p>Where:</p>
+<ul>
+  <li><strong>DOH</strong> = Days of Inventory on Hand — how long inventory sits before being sold</li>
+  <li><strong>DSO</strong> = Days Sales Outstanding — how long until customers pay their bills</li>
+  <li><strong>DPO</strong> = Days Payable Outstanding — how long the company takes to pay its suppliers</li>
+</ul>
+
+<div class="intuition">Think of the CCC as a cash "gap." You pay for inventory (cash goes out), wait for it to sell, wait for customers to pay you — then finally cash comes back in. The longer this cycle, the more capital is trapped in operations. Higher DPO helps because you're essentially borrowing interest-free from your suppliers.</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>CCC Component</th><th>To DECREASE it (shorten CCC)</th><th>Potential Downside</th></tr></thead>
+  <tbody>
+    <tr><td><strong>↓ DOH</strong></td><td>Reduce inventory levels</td><td>Supply chain disruptions; inability to meet demand spikes</td></tr>
+    <tr><td><strong>↓ DSO</strong></td><td>Tighten customer credit terms; collect faster</td><td>Lost sales from customers who need longer credit</td></tr>
+    <tr><td><strong>↑ DPO</strong></td><td>Delay supplier payments; extend payment terms</td><td>Supplier relationship damage; may forgo early payment discounts</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">Company A has DOH = 45 days, DSO = 30 days, DPO = 20 days. Company B has DOH = 20 days, DSO = 15 days, DPO = 35 days. Which company manages its cash more efficiently?</div>
+  <div class="exam-a"><strong>Company B:</strong> CCC(A) = 45 + 30 − 20 = <strong>55 days</strong>. CCC(B) = 20 + 15 − 35 = <strong>0 days</strong>. A CCC of 0 means the company collects cash from customers before it even has to pay suppliers — like a retailer that gets paid cash immediately while paying suppliers on 35-day terms. Lower CCC = less capital trapped in operations = more efficient.</div>
+</div>
+
+<h3>The Cost of Trade Credit <span class="tag tag-formula">Formula</span></h3>
+<p>Suppliers offer payment terms like <strong>"2/10 net 30"</strong> = take a 2% discount if you pay within 10 days; otherwise full payment is due in 30 days. Forgoing the discount is an implicit form of borrowing.</p>
+
+<div class="formula">\[ EAR_{\text{trade credit}} = \left(1 + \frac{\text{discount}}{1 - \text{discount}}\right)^{365/(\text{net days} - \text{discount days})} - 1 \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A supplier offers terms of "2/10 net 30." The bank offers a line of credit at 8%. Should the company pay early or use bank financing?</div>
+  <div class="exam-a"><strong>Step 1:</strong> Cost of forgoing the discount: You use $1 of financing for 30 − 10 = 20 days. You pay 2/(1 − 0.02) = 2.04% for 20 days.<br><br>
+  <strong>EAR</strong> = (1 + 0.02/0.98)^(365/20) − 1 = (1.02041)^18.25 − 1 ≈ <strong>44.6%</strong><br><br>
+  <strong>Decision:</strong> Trade credit costs 44.6% vs. bank credit at 8%. The company should borrow from the bank at 8% to pay the invoice within 10 days and capture the 2% discount.<br><br>
+  <strong>Trap:</strong> Many students think "forgoing a 2% discount is only 2% cost." It's not — it's 2% for only 20 days, which annualizes to a much higher rate. Always annualize trade credit costs before comparing.</div>
+</div>
+
+<h3>Liquidity: Sources and Measures <span class="tag tag-critical">Critical</span></h3>
+<p>Liquidity refers to a company's ability to meet short-term obligations. Sources of liquidity come in two tiers:</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Primary Sources (Normal operations)</h5>
+    <ul>
+      <li>Cash and marketable securities on hand</li>
+      <li>Bank borrowings (credit lines)</li>
+      <li>Cash generated from operations (operating cash flow)</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Secondary Sources (Stress signals ⚠️)</h5>
+    <ul>
+      <li>Suspending/cutting dividends</li>
+      <li>Delaying capital investments (capex)</li>
+      <li>Selling assets (often at a discount)</li>
+      <li>Issuing additional equity</li>
+      <li>Restructuring/extending debt maturities</li>
+      <li>Bankruptcy protection filing</li>
+    </ul>
+  </div>
+</div>
+
+<div class="key-rule">Using secondary liquidity sources sends a <strong>negative signal</strong> to the market — it implies the company cannot fund itself through normal operations. Secondary sources are also more expensive (e.g., asset fire sales, equity dilution at depressed prices).</div>
+
+<h4>Liquidity Ratios <span class="tag tag-formula">Formula</span></h4>
+<p>Three ratios measure short-term liquidity, each more conservative than the last:</p>
+
+<div class="formula">\[ \text{Current Ratio} = \frac{\text{Current Assets}}{\text{Current Liabilities}} \]</div>
+<div class="formula">\[ \text{Quick Ratio} = \frac{\text{Cash} + \text{Marketable Securities} + \text{Receivables}}{\text{Current Liabilities}} \]</div>
+<div class="formula">\[ \text{Cash Ratio} = \frac{\text{Cash} + \text{Marketable Securities}}{\text{Current Liabilities}} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Ratio</th><th>Excludes</th><th>Stringency</th><th>When to Use</th></tr></thead>
+  <tbody>
+    <tr><td>Current Ratio</td><td>Nothing</td><td>Least strict</td><td>Broad view of short-term coverage</td></tr>
+    <tr><td>Quick Ratio</td><td>Inventory</td><td>Moderate</td><td>When inventory is illiquid or hard to sell quickly</td></tr>
+    <tr><td>Cash Ratio</td><td>Inventory + Receivables</td><td>Most strict</td><td>"Worst case" immediate liquidity</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">Year 1: Cash $50, Receivables $100, Inventory $200, Current Liabilities $200. Year 2: Cash $30, Receivables $80, Inventory $250, Current Liabilities $220. Compute all three liquidity ratios and interpret the trend.</div>
+  <div class="exam-a">
+  <strong>Year 1:</strong> Current = (50+100+200)/200 = 1.75 | Quick = (50+100)/200 = 0.75 | Cash = 50/200 = 0.25<br>
+  <strong>Year 2:</strong> Current = (30+80+250)/220 = 1.64 | Quick = (30+80)/220 = 0.50 | Cash = 30/220 = 0.14<br><br>
+  <strong>Interpretation:</strong> All three ratios are declining — liquidity is deteriorating. The quick and cash ratios are falling faster, signaling that the deterioration is driven by rising inventory (the least liquid current asset) and falling cash.
+  </div>
+</div>
+
+<h4>Drags and Pulls on Liquidity</h4>
+<ul>
+  <li><strong>Drag on liquidity</strong> — cash <em>inflows</em> lag: excess inventory builds up (DOH ↑) or receivables slow (DSO ↑)</li>
+  <li><strong>Pull on liquidity</strong> — cash <em>outflows</em> accelerate: suppliers demand faster payments (DPO ↓)</li>
+</ul>
+
+<h3>Working Capital Management Approaches</h3>
+<div class="three-grid">
+  <div class="three-box">
+    <h5>Conservative</h5>
+    High current assets + long-term financing. Lower return, higher cost of capital, but maximum liquidity and flexibility. Permanent &amp; variable working capital funded with long-term debt/equity.
+  </div>
+  <div class="three-box">
+    <h5>Moderate</h5>
+    Permanent current assets funded long-term; variable (seasonal) current assets funded short-term. Balanced risk/return tradeoff.
+  </div>
+  <div class="three-box">
+    <h5>Aggressive</h5>
+    Low current assets + short-term financing. Higher return (lower cost), but vulnerable to market disruptions and rollover risk. May fail to meet obligations.
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A firm finances an increase in accounts receivable by issuing 5-year notes. This is best described as:</div>
+  <div class="exam-a"><strong>Conservative working capital management.</strong> Financing a current asset (receivables) with long-term debt provides more permanent, stable funding — reducing rollover risk. An aggressive approach would fund receivables with short-term borrowings.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════ R24 ════════════ -->
+<section id="r24">
+<div class="module-header">
+  <div class="lm-label">Reading 24</div>
+  <h2>Capital Investments and Capital Allocation</h2>
+  <div class="one-liner">Which projects to fund — and how to evaluate them — may be the most important financial decision a manager makes.</div>
+</div>
+
+<div class="big-picture">
+<div class="bp-label">Why This Reading Matters</div>
+<p>Capital allocation — deciding which long-term investments to undertake — is the primary driver of firm value creation over time. Get it right and you outcompete. Get it wrong and you destroy shareholder wealth. NPV and IRR are the core tools, but the exam also tests real options, ROIC, and the classic pitfalls that cause managers to make bad capital decisions. This reading bridges corporate finance with equity valuation.</p>
+</div>
+
+<h3>Types of Capital Investments</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Purpose</th><th>Analysis Required</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Going Concern</strong></td><td>Maintain existing business; reduce costs</td><td>Minimal — focus on whether to continue + replace equipment</td><td>Replacing an aging machine with a newer model; annual depreciation ≈ going concern capex</td></tr>
+    <tr><td><strong>Regulatory/Compliance</strong></td><td>Meet government or insurance requirements</td><td>Evaluate alternative compliance methods — no revenue generation</td><td>Installing pollution control equipment; workplace safety upgrades</td></tr>
+    <tr><td><strong>Expansion</strong></td><td>Grow the business in existing markets or enter new ones</td><td>Full analysis: forecast revenues, expenses, IRR, NPV</td><td>Opening new retail outlets; launching new product lines</td></tr>
+    <tr><td><strong>Other (New Ventures)</strong></td><td>Entirely new lines of business; acquisitions</td><td>Full analysis with high uncertainty; similar to a startup evaluation</td><td>Acquiring a company in a new industry; exploring a new technology</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Analysts often use a company's annual depreciation expense as a proxy for its going concern capex needs — the idea being that you need to invest roughly what is depreciating just to stand still. Any capex above depreciation represents net new investment (growth capex).</div>
+
+<h3>The Capital Allocation Process</h3>
+<p>Capital allocation = evaluating projects whose cash flows extend beyond one year. The four steps:</p>
+<ol>
+  <li><strong>Idea generation</strong> — the most important step; ideas come from employees, management, strategic analysis</li>
+  <li><strong>Analyze project proposals</strong> — forecast after-tax incremental cash flows; calculate NPV and IRR</li>
+  <li><strong>Create firm-wide capital budget</strong> — prioritize projects; consider timing, resources, strategic fit</li>
+  <li><strong>Monitor and post-audit</strong> — compare actual vs. projected results; identify systematic forecasting errors; improve future decisions</li>
+</ol>
+
+<h3>Net Present Value (NPV) <span class="tag tag-critical">Critical</span></h3>
+<p>NPV is the sum of the present values of all expected incremental after-tax cash flows from a project, discounted at the firm's cost of capital (adjusted for project risk).</p>
+
+<div class="formula">\[ NPV = \sum_{t=0}^{N} \frac{CF_t}{(1 + r)^t} = -CF_0 + \frac{CF_1}{(1+r)} + \frac{CF_2}{(1+r)^2} + \cdots + \frac{CF_N}{(1+r)^N} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>NPV Result</th><th>Decision</th><th>What It Means</th></tr></thead>
+  <tbody>
+    <tr><td>NPV &gt; 0</td><td><strong>Accept</strong></td><td>Project adds value; expected to increase shareholder wealth</td></tr>
+    <tr><td>NPV = 0</td><td>Indifferent</td><td>Project earns exactly the required return; no value added or destroyed</td></tr>
+    <tr><td>NPV &lt; 0</td><td><strong>Reject</strong></td><td>Project destroys value; expected to decrease shareholder wealth</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A company invests $5,000 today. Expected after-tax cash flows: Year 1 = $3,000; Year 2 = $2,000; Year 3 = $2,000. Cost of capital = 10%. Should the project be accepted?</div>
+  <div class="exam-a">
+  NPV = −5,000 + 3,000/1.10 + 2,000/1.10² + 2,000/1.10³<br>
+  = −5,000 + 2,727.27 + 1,652.89 + 1,502.63<br>
+  = −5,000 + 5,882.79 = <strong>+$882.79</strong><br><br>
+  <strong>Accept the project</strong> — NPV &gt; 0, so the project is expected to add ~$883 of value to the firm. On your TI BA II Plus: CF0 = −5000; C01 = 3000; C02 = 2000; C03 = 2000; I = 10; CPT NPV.
+  </div>
+</div>
+
+<h3>Internal Rate of Return (IRR) <span class="tag tag-critical">Critical</span></h3>
+<p>IRR is the discount rate that makes NPV = 0. It represents the project's expected return as a percentage. Compare IRR to the hurdle rate (required rate of return / cost of capital).</p>
+
+<div class="formula">\[ 0 = \sum_{t=0}^{N} \frac{CF_t}{(1 + IRR)^t} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Comparison</th><th>Decision</th></tr></thead>
+  <tbody>
+    <tr><td>IRR &gt; hurdle rate</td><td><strong>Accept</strong> — project return exceeds cost of capital; NPV is positive</td></tr>
+    <tr><td>IRR = hurdle rate</td><td>Indifferent — NPV = 0</td></tr>
+    <tr><td>IRR &lt; hurdle rate</td><td><strong>Reject</strong> — project return is inadequate; NPV is negative</td></tr>
+  </tbody>
+</table></div>
+
+<h4>NPV vs. IRR: Which to Use?</h4>
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>NPV Advantages</h5>
+    <ul>
+      <li>Direct measure of value added in dollars</li>
+      <li>Assumes reinvestment at cost of capital (realistic)</li>
+      <li>Always gives a single answer — no ambiguity</li>
+      <li>Correct for mutually exclusive projects</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>IRR Advantages / Disadvantages</h5>
+    <ul>
+      <li>Intuitive — shows return as a %; gives margin of safety</li>
+      <li>❌ Assumes reinvestment at IRR (often unrealistic for high-IRR projects)</li>
+      <li>❌ Multiple IRRs possible when cash flows change sign more than once</li>
+      <li>❌ Can give wrong ranking for mutually exclusive projects</li>
+    </ul>
+  </div>
+</div>
+
+<div class="key-rule">When NPV and IRR give conflicting recommendations for <strong>mutually exclusive</strong> projects, <strong>always follow NPV</strong>. NPV directly measures value added; IRR is a rate that doesn't account for project scale. A project with a higher IRR but much smaller scale may add less total value.</div>
+
+<h3>Return on Invested Capital (ROIC) <span class="tag tag-formula">Formula</span></h3>
+<p>ROIC is a firm-level (not project-level) measure that compares after-tax operating profit to the book value of total capital deployed. It tells you whether the company as a whole is earning above or below its cost of capital.</p>
+
+<div class="formula">\[ ROIC = \frac{NOPAT}{\text{Average Invested Capital}} = \frac{\text{Net Operating Profit After Tax}}{\text{Long-term Debt + Equity}} \]</div>
+<div class="formula">\[ ROIC = \text{After-tax Operating Margin} \times \text{Capital Turnover} \]</div>
+
+<div class="intuition">If ROIC &gt; WACC, the company is creating value — it earns more on its capital than investors require. If ROIC &lt; WACC, the company is destroying value even if it's profitable in absolute terms. This comparison is fundamental to equity valuation.</div>
+
+<div class="key-rule">ROIC uses NOPAT (Net Operating Profit After Tax = Net Income + After-tax Interest Expense) because we want the return to ALL capital providers — both debt and equity holders. Never use net income alone in the ROIC numerator, as that would exclude returns to debtholders.</div>
+
+<h3>Principles of Capital Allocation <span class="tag tag-critical">Critical</span></h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Principle</th><th>What It Means</th><th>Common Mistake to Avoid</th></tr></thead>
+  <tbody>
+    <tr><td><strong>After-tax incremental cash flows only</strong></td><td>Use cash flows, not accounting income; only include cash that changes because of the project</td><td>Using EPS or ROE instead of cash flows; mixing up accruals with actual cash</td></tr>
+    <tr><td><strong>Ignore sunk costs</strong></td><td>Past expenditures that cannot be recovered are irrelevant to the go/no-go decision</td><td>Including previously paid consulting fees or R&amp;D in project cash flows</td></tr>
+    <tr><td><strong>Include opportunity costs</strong></td><td>Using a resource for this project has an implicit cost — its best alternative use</td><td>Treating "internally owned" land or equipment as free just because it's already owned</td></tr>
+    <tr><td><strong>Include spillover effects</strong></td><td>Positive externalities (new product boosts existing sales) and cannibalization (new product hurts existing sales)</td><td>Evaluating a new product in isolation without adjusting for its impact on existing product lines</td></tr>
+    <tr><td><strong>Time value of money matters</strong></td><td>Cash flows at different points in time are not equivalent — use NPV/IRR, not simple payback</td><td>Using the payback period as the primary decision tool</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A company paid $500,000 last year for market research on a potential new product. Now they are evaluating the NPV of introducing the product. Should the $500,000 be included?</div>
+  <div class="exam-a"><strong>No — it is a sunk cost.</strong> The $500,000 has already been spent and cannot be recovered whether or not the company introduces the product. Including it would make the NPV look worse than it truly is and might cause the company to reject a positive-NPV project. The key test: would this cash flow change if you don't do the project? If no → exclude it.</div>
+</div>
+
+<h3>Real Options <span class="tag tag-exam">Exam Focus</span></h3>
+<p>Real options are rights (but not obligations) that management has to modify a project in response to new information. They add value to NPV estimates by accounting for flexibility.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Description</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Timing option</strong></td><td>Right to delay a project until conditions improve</td><td>Wait to build a mine until commodity prices recover</td></tr>
+    <tr><td><strong>Abandonment option</strong></td><td>Right to shut down a project if its PV of future cash flows falls below exit value</td><td>Close a factory if the product market collapses</td></tr>
+    <tr><td><strong>Expansion option</strong></td><td>Right to invest more in a successful project</td><td>Build a modular plant that can be expanded if demand grows</td></tr>
+    <tr><td><strong>Flexibility option</strong></td><td>Rights to change operational aspects (inputs, outputs, production level)</td><td>A factory that can switch between producing two products depending on prices</td></tr>
+    <tr><td><strong>Fundamental option</strong></td><td>Projects whose payoffs depend on an underlying asset price</td><td>An oil lease — valuable only if oil prices rise above extraction costs</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Real options explain why projects with negative NPV are sometimes still worth pursuing — the option value (flexibility) can outweigh the negative base NPV. Similarly, abandonment options increase the value of projects by limiting downside: if things go badly, you can cut losses.</div>
+
+</section><hr>
+
+<!-- ════════════ R25 ════════════ -->
+<section id="r25">
+<div class="module-header">
+  <div class="lm-label">Reading 25</div>
+  <h2>Capital Structure</h2>
+  <div class="one-liner">How a company chooses to finance itself — and whether that choice actually matters.</div>
+</div>
+
+<div class="big-picture">
+<div class="bp-label">Why This Reading Matters</div>
+<p>Capital structure is one of the most debated topics in corporate finance. Does the mix of debt and equity matter for firm value? Modigliani and Miller famously said "no" (under perfect market assumptions), but real-world frictions — taxes, bankruptcy costs, information asymmetry, agency costs — change the answer. The exam tests both the theoretical framework (MM Propositions) and the practical application (what factors drive companies to use more or less debt).</p>
+</div>
+
+<h3>The Weighted-Average Cost of Capital (WACC) <span class="tag tag-critical">Critical</span></h3>
+<p>WACC is the minimum required return that a company must earn on its assets to satisfy all capital providers. It blends the after-tax cost of debt and the cost of equity, weighted by their proportions in the capital structure.</p>
+
+<div class="formula">\[ WACC = w_d \cdot r_d \cdot (1 - t) + w_e \cdot r_e \]</div>
+<p>Where: \(w_d\) = weight of debt, \(r_d\) = pretax cost of debt, \(t\) = corporate tax rate, \(w_e\) = weight of equity, \(r_e\) = cost of equity.</p>
+
+<div class="intuition">Debt is cheaper than equity for two reasons: (1) debtholders have priority claims (less risk → lower required return) and (2) interest is tax-deductible (the government subsidizes debt financing). The WACC "blends" these two costs, weighted by how much of each is used.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">Alpaca Inc. has 60% debt, pretax cost of debt = 6%, cost of equity = 12%, corporate tax rate = 15%. Calculate WACC.</div>
+  <div class="exam-a">
+  Weight of equity = 1 − 0.60 = 40%<br>
+  WACC = [0.60 × 0.06 × (1 − 0.15)] + [0.40 × 0.12]<br>
+  = [0.60 × 0.06 × 0.85] + [0.40 × 0.12]<br>
+  = 0.0306 + 0.0480 = <strong>7.86%</strong><br><br>
+  <strong>Common trap:</strong> Forgetting to apply (1 − t) to the cost of debt. Debt interest is tax-deductible, so the after-tax cost of debt is r_d × (1 − t), not just r_d.
+  </div>
+</div>
+
+<h3>Factors Affecting Capital Structure</h3>
+<p>Companies choose capital structures based on their ability to service debt. The key question is: can this company reliably generate cash to make interest and principal payments?</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Factor</th><th>More Debt Capacity</th><th>Less Debt Capacity</th></tr></thead>
+  <tbody>
+    <tr><td>Revenue stability</td><td>Stable, subscription-based, non-cyclical</td><td>Volatile, cyclical, project-based</td></tr>
+    <tr><td>Cash flow predictability</td><td>Recurring, growing cash flows</td><td>Erratic, declining, or negative cash flows</td></tr>
+    <tr><td>Asset type</td><td>Tangible, liquid assets (good collateral)</td><td>Intangible assets (patents, brand — poor collateral)</td></tr>
+    <tr><td>Operating leverage</td><td>Low fixed costs relative to variable</td><td>High fixed costs (airlines, manufacturers)</td></tr>
+    <tr><td>Business risk</td><td>Low uncertainty in revenues/costs</td><td>High uncertainty (startups, commodity producers)</td></tr>
+    <tr><td>Life cycle stage</td><td>Mature stage: stable, proven business</td><td>Start-up: negative cash flows, few assets</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Life Cycle and Debt Usage</h4>
+<div class="three-grid">
+  <div class="three-box">
+    <h5>Start-up Stage</h5>
+    Negative/uncertain cash flows; few tangible assets for collateral; high business risk → <strong>financed almost entirely by equity</strong>. Exception: convertible debt (lower-cost equity dilution hedge).
+  </div>
+  <div class="three-box">
+    <h5>Growth Stage</h5>
+    Rising revenues, decreasing uncertainty; beginning to generate cash flows. <strong>Conservative debt</strong> usage begins — often secured by fixed assets or receivables.
+  </div>
+  <div class="three-box">
+    <h5>Mature Stage</h5>
+    Stable, predictable cash flows; established asset base. <strong>Significantly more debt</strong> — including unsecured debt — available at relatively low cost.
+  </div>
+</div>
+
+<h3>Modigliani-Miller Propositions <span class="tag tag-critical">Critical</span></h3>
+<p>MM is tested conceptually — you need to understand <em>why</em> their propositions hold and what happens when assumptions are relaxed.</p>
+
+<h4>MM Proposition I (No Taxes): Capital Structure Irrelevance</h4>
+<p>Under perfect capital markets (no taxes, no bankruptcy costs, no transaction costs, symmetric information), a firm's value is independent of its capital structure.</p>
+
+<div class="analogy">MM I is the "pizza analogy": the total amount of pizza (firm value) is fixed. It doesn't matter how you slice it (proportion of debt vs. equity) — the total amount doesn't change. One holder owning all debt AND all equity would always be entitled to all the operating earnings — same as an all-equity firm with the same assets.</div>
+
+<h4>MM Proposition II (No Taxes): Cost of Equity and Leverage</h4>
+<p>As debt increases, the cost of equity rises proportionally — exactly offsetting the lower cost of debt, so WACC remains constant.</p>
+
+<div class="formula">\[ r_e = r_0 + \frac{D}{E}(r_0 - r_d) \]</div>
+<p>Where \(r_0\) = required return for all-equity firm (cost of unlevered equity), D/E = debt-to-equity ratio, \(r_d\) = cost of debt.</p>
+
+<div class="key-rule">MM II (no taxes): As leverage increases, cost of equity RISES linearly. WACC stays CONSTANT. Debt is cheaper, but equity gets riskier — the two effects exactly cancel. This means there is NO optimal capital structure under MM I and II (no taxes).</div>
+
+<h4>MM With Taxes: The Tax Shield Matters</h4>
+<p>Interest payments are tax-deductible. This creates a "debt tax shield" — a real benefit to using debt. Under MM with taxes:</p>
+<ul>
+  <li><strong>Firm value = Unlevered firm value + PV of tax shield</strong></li>
+  <li>PV of tax shield = \(t_c \times D\) (for permanent debt)</li>
+  <li>WACC decreases as debt increases (tax benefit makes debt even cheaper)</li>
+  <li>Implication: Optimal capital structure = 100% debt (clearly unrealistic!)</li>
+</ul>
+
+<div class="key-rule">MM with taxes says 100% debt maximizes firm value — but this is clearly wrong in practice. The model ignores bankruptcy costs and financial distress costs. That's exactly what static tradeoff theory fixes.</div>
+
+<h3>Static Tradeoff Theory <span class="tag tag-critical">Critical</span></h3>
+<p>Static tradeoff theory extends MM with taxes by adding the expected costs of financial distress. Firm value is maximized at the point where the marginal tax benefit of debt equals the marginal expected cost of financial distress.</p>
+
+<div class="formula">\[ V_L = V_U + PV(\text{Tax Shield}) - PV(\text{Financial Distress Costs}) \]</div>
+
+<div class="intuition">Think of debt as a drug with benefits and side effects. At low doses: tax savings dominate → take more. At high doses: bankruptcy risk rises sharply → costs outweigh benefits. The optimal "dosage" is the point where marginal benefit = marginal cost. That's the static tradeoff optimum.</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>As Debt Increases…</th><th>Tax Shield Effect</th><th>Financial Distress Effect</th><th>Net Impact on Firm Value</th></tr></thead>
+  <tbody>
+    <tr><td>Low debt levels</td><td>Tax savings are significant; distress cost is very low</td><td>Minimal — low probability of financial distress</td><td>Firm value increases</td></tr>
+    <tr><td>Moderate debt levels</td><td>Tax savings still positive</td><td>Distress costs starting to rise</td><td>Firm value still increasing but at slower rate</td></tr>
+    <tr><td>High debt levels</td><td>Tax savings marginal</td><td>Distress costs escalate rapidly</td><td>Firm value peaks then decreases</td></tr>
+    <tr><td><strong>Optimal point</strong></td><td colspan="2">Marginal tax benefit = marginal distress cost</td><td><strong>Maximum firm value / minimum WACC</strong></td></tr>
+  </tbody>
+</table></div>
+
+<h3>Pecking Order Theory and Free Cash Flow Hypothesis</h3>
+<p>These two theories explain <em>why</em> companies deviate from their theoretical optimal capital structure in practice.</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Pecking Order Theory</h5>
+    Based on information asymmetry: managers know more than investors. Financing choices send signals:<br><br>
+    <strong>Order of preference:</strong>
+    <ol>
+      <li>Internal funds (retained earnings) — most preferred, no signal sent</li>
+      <li>Debt — negative signal, but mild; signals confidence in cash flows</li>
+      <li>New equity — most avoided; signals stock is overvalued</li>
+    </ol>
+    Implication: Capital structure is a by-product of financing decisions, not an optimized target.
+  </div>
+  <div class="compare-box right">
+    <h5>Free Cash Flow Hypothesis</h5>
+    Based on agency costs. Free cash flow = cash available after all positive-NPV projects are funded.<br><br>
+    Problem: Managers may waste free cash flow on empire-building or perks.<br><br>
+    Solution: <strong>Debt disciplines managers</strong> — required interest payments reduce free cash flow available for waste. Higher leverage → lower agency costs of equity.<br><br>
+    Implication: Debt can create value beyond just the tax shield.
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A company's CFO says: "We prefer to fund new investments with retained earnings first, then debt if needed, and we would only issue equity as a last resort." This best reflects which theory?</div>
+  <div class="exam-a"><strong>Pecking order theory.</strong> The hierarchy — internal funds first, then debt, then external equity — is the defining feature. The rationale is information asymmetry: issuing equity signals management believes the stock is overvalued (a negative signal), so it's avoided. Debt sends a more positive signal (confidence in future cash flows to service it).</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">According to MM Proposition II with no taxes, if a company increases its debt-to-equity ratio, its WACC will most likely:</div>
+  <div class="exam-a"><strong>Remain unchanged.</strong> Under MM II (no taxes), as D/E increases: cost of equity rises proportionally (equity holders bear more risk), but WACC stays constant because the cheaper debt is exactly offset by more expensive equity. This changes under MM with taxes — then WACC decreases as leverage increases (tax shield benefit).</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════ R26 ════════════ -->
+<section id="r26">
+<div class="module-header">
+  <div class="lm-label">Reading 26</div>
+  <h2>Business Models</h2>
+  <div class="one-liner">How a company answers "who are my customers, what do I sell, how do I sell it, and at what price?" determines whether it has a sustainable competitive advantage.</div>
+</div>
+
+<div class="big-picture">
+<div class="bp-label">Why This Reading Matters</div>
+<p>Business models are the starting point of equity analysis. Before you can forecast cash flows or value a company, you need to understand how it creates value, for whom, and at what margins. The CFA exam tests your ability to classify pricing strategies and business model types — and to identify network effects, which are a key source of competitive moat for modern technology businesses.</p>
+</div>
+
+<h3>Key Elements of a Business Model</h3>
+<p>A business model answers five fundamental questions: <strong>Who, What, How, Where, and How Much</strong>.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Question</th><th>Element</th><th>What It Covers</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Who?</strong></td><td>Customer segments</td><td>Target customer groups (segmentation); customer acquisition cost; how satisfaction is monitored. B2B (sells to businesses) vs. B2C (sells to consumers).</td></tr>
+    <tr><td><strong>What?</strong></td><td>Product/service offering</td><td>What need does the product meet? How is it differentiated from competitors (price, quality, features)?</td></tr>
+    <tr><td><strong>How?</strong></td><td>Key assets and suppliers</td><td>What resources drive the business? (patents, software, employees, equipment) Who are critical suppliers?</td></tr>
+    <tr><td><strong>Where?</strong></td><td>Channel strategy</td><td>Direct sales vs. intermediaries (retailers, agents, franchisees); online vs. physical; omnichannel = both digital and physical channels</td></tr>
+    <tr><td><strong>How Much?</strong></td><td>Pricing strategy</td><td>Why will buyers pay this price? What's the competitive landscape?</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Value Proposition vs. Value Chain</h4>
+<ul>
+  <li><strong>Value proposition:</strong> How customers value the product/service given its price and competitive alternatives — the <em>promise</em> of value</li>
+  <li><strong>Value chain:</strong> How the firm executes its value proposition — the <em>delivery</em> of value (Porter's 5 activities: inbound logistics → operations → outbound logistics → marketing → sales &amp; service)</li>
+</ul>
+
+<h3>Pricing Strategies <span class="tag tag-exam">Exam Focus</span></h3>
+<p>The exam frequently tests whether you can identify the correct pricing model from a description. Know these precisely:</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Pricing Strategy</th><th>Description</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Price-taking (commodity)</strong></td><td>No pricing power; market sets the price</td><td>Oil producers, home loans, wheat farmers</td></tr>
+    <tr><td><strong>Pricing power</strong></td><td>Can set premium prices due to differentiation or limited competition</td><td>Patented pharmaceutical; luxury brand</td></tr>
+    <tr><td><strong>Tiered pricing</strong></td><td>Different prices for different volume levels</td><td>Bulk discounts; telecom data plans</td></tr>
+    <tr><td><strong>Dynamic pricing</strong></td><td>Prices change based on time, demand, or availability</td><td>Airline tickets; surge pricing (Uber); hotel rates</td></tr>
+    <tr><td><strong>Value-based pricing</strong></td><td>Price reflects perceived customer benefit</td><td>New drug priced relative to benefit vs. existing treatment</td></tr>
+    <tr><td><strong>Auction pricing</strong></td><td>Price set by competitive bidding</td><td>eBay; Google ad auctions; spectrum licenses</td></tr>
+    <tr><td><strong>Bundling</strong></td><td>Multiple complementary products sold together</td><td>Furnished apartment; Microsoft Office suite</td></tr>
+    <tr><td><strong>Razors-and-blades</strong></td><td>Sell core product cheap (low margin); profit on consumables</td><td>Printers (cheap) + ink cartridges (high margin); e-readers + e-books</td></tr>
+    <tr><td><strong>Add-on pricing</strong></td><td>Upsell high-margin extras after the purchase decision</td><td>Car options after agreeing to buy a base model; resort fees at hotels</td></tr>
+    <tr><td><strong>Penetration pricing</strong></td><td>Low/loss-leading price initially to build market share, then raise prices</td><td>Netflix early growth strategy; new SaaS platforms</td></tr>
+    <tr><td><strong>Freemium</strong></td><td>Basic product free; charge for premium features/functionality</td><td>Spotify free tier; LinkedIn free vs. Premium; video game upgrades</td></tr>
+    <tr><td><strong>Hidden revenue</strong></td><td>Product is "free" to users; revenue from third parties (advertisers, data buyers)</td><td>Google Search (free to users; revenue from advertisers)</td></tr>
+    <tr><td><strong>Subscription</strong></td><td>Recurring fee for access</td><td>Microsoft 365; Netflix; SaaS software</td></tr>
+    <tr><td><strong>Licensing/Franchising</strong></td><td>Fee for right to use IP, brand, or process</td><td>Biotech licensing a drug to a pharma company; McDonald's franchise</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A software company offers its application for free with basic features. Users pay $15/month to unlock collaboration tools and cloud storage. This pricing model is best described as:</div>
+  <div class="exam-a"><strong>Freemium pricing.</strong> The defining feature is: basic functionality FREE, premium features for a fee. Do not confuse with subscription (which charges from the start) or penetration pricing (which is a temporary low price for the full product to gain market share, not a permanent two-tier free/paid structure).</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">An internet search engine provides free search results to users and earns revenue by selling data about user behavior to advertisers. This is best described as:</div>
+  <div class="exam-a"><strong>Hidden revenue model.</strong> The user perceives the service as free, but the real "product" being sold is the user's attention/data to advertisers. This is distinct from freemium (where premium features are sold to the users themselves) or a subscription model.</div>
+</div>
+
+<h3>Business Model Types <span class="tag tag-exam">Exam Focus</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Model Type</th><th>Description</th><th>Key Characteristics</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Private label / Contract manufacturer</strong></td><td>Produces goods for another brand to sell under their own name</td><td>Costco's Kirkland brand; generic drug manufacturers</td></tr>
+    <tr><td><strong>Value-added reseller</strong></td><td>Resells products but adds installation, support, or customization</td><td>IT systems integrators; machinery distributors with maintenance contracts</td></tr>
+    <tr><td><strong>Licensing</strong></td><td>Brand or IP used by another company in exchange for fees</td><td>Marvel characters on lunch boxes; drug patents licensed to pharma companies</td></tr>
+    <tr><td><strong>Franchise</strong></td><td>Franchisee pays % of revenue to franchisor for right to use brand/system in a territory</td><td>McDonald's; Subway; real estate brokerages</td></tr>
+    <tr><td><strong>Network effects</strong></td><td>Value increases as more users join — creates competitive moat</td><td>WhatsApp; Facebook; eBay; payment networks</td></tr>
+    <tr><td><strong>Crowdsourcing</strong></td><td>Platform leverages user-generated content to create value</td><td>Wikipedia (knowledge); Waze (traffic); open-source software (code)</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Network Effects in Detail <span class="tag tag-critical">Critical</span></h4>
+<p>Network effects are one of the most powerful sources of competitive advantage in modern business. As the user base grows, the network becomes more valuable to all users — creating a virtuous cycle.</p>
+<ul>
+  <li><strong>One-sided networks:</strong> Value rises as more users of the same type join (WhatsApp — more contacts = more useful)</li>
+  <li><strong>Two-sided (multi-sided) networks:</strong> Two distinct user groups benefit from each other's growth (Airbnb: more hosts attract more guests; more guests attract more hosts; Uber: more drivers attract more riders)</li>
+</ul>
+
+<div class="intuition">Network effects naturally support penetration pricing strategy — the company sacrifices early profits to build its user base quickly. Once the network is large enough, it becomes very difficult for competitors to displace (switching costs + network value lock users in). This is why WhatsApp, Facebook, and eBay are so hard to dislodge despite new entrants.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Exam Question</div>
+  <div class="exam-q">A new ride-hailing app enters the market and prices rides at a loss to grow its user base quickly. The company hopes that once it reaches critical mass, the value of the platform will make it difficult for competitors to steal its users. Which combination of strategy and model does this best describe?</div>
+  <div class="exam-a"><strong>Penetration pricing + two-sided network effects.</strong> Penetration pricing = temporarily low (loss-making) prices to grow market share. The competitive advantage being built is a two-sided network: more riders attract more drivers (and vice versa). Once both sides of the network are large enough, no competitor can easily replicate the liquidity of the established platform.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════ FORMULA SHEET ════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Quick Reference</div>
+  <h2>Corporate Issuers Formula Sheet</h2>
+  <div class="one-liner">All key formulas in one place — with the reading number for quick look-up.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+  <thead><tr><th>Formula</th><th>Name / Description</th><th>Reading</th></tr></thead>
+  <tbody>
+    <tr><td>\(t_{eff} = t_c + t_p(1-t_c)\)</td><td>Effective tax rate on corporate profits (double taxation)</td><td>20</td></tr>
+    <tr><td>\(ROE = \frac{\text{Net Income}}{\text{Equity}}\)</td><td>Return on equity (leverage amplifies this)</td><td>21</td></tr>
+    <tr><td>\(r_e = r_0 + \frac{D}{E}(r_0 - r_d)\)</td><td>MM Proposition II: Cost of equity with leverage</td><td>25</td></tr>
+    <tr><td>\(CCC = DOH + DSO - DPO\)</td><td>Cash Conversion Cycle</td><td>23</td></tr>
+    <tr><td>\(EAR = \left(1 + \frac{d}{1-d}\right)^{365/(c-b)} - 1\)</td><td>Effective annual rate of trade credit (a/b net c terms; d = discount rate)</td><td>23</td></tr>
+    <tr><td>\(\text{Current Ratio} = \frac{CA}{CL}\)</td><td>Current ratio (least strict liquidity measure)</td><td>23</td></tr>
+    <tr><td>\(\text{Quick Ratio} = \frac{\text{Cash}+\text{Mkt Sec}+\text{Rec}}{CL}\)</td><td>Quick ratio (excludes inventory)</td><td>23</td></tr>
+    <tr><td>\(\text{Cash Ratio} = \frac{\text{Cash}+\text{Mkt Sec}}{CL}\)</td><td>Cash ratio (most strict)</td><td>23</td></tr>
+    <tr><td>\(NPV = \sum_{t=0}^{N} \frac{CF_t}{(1+r)^t}\)</td><td>Net Present Value</td><td>24</td></tr>
+    <tr><td>\(0 = \sum_{t=0}^{N} \frac{CF_t}{(1+IRR)^t}\)</td><td>IRR (discount rate making NPV = 0)</td><td>24</td></tr>
+    <tr><td>\(ROIC = \frac{NOPAT}{\text{Avg Invested Capital}}\)</td><td>Return on Invested Capital</td><td>24</td></tr>
+    <tr><td>\(ROIC = \text{After-tax Op. Margin} \times \text{Capital Turnover}\)</td><td>DuPont decomposition of ROIC</td><td>24</td></tr>
+    <tr><td>\(WACC = w_d r_d(1-t) + w_e r_e\)</td><td>Weighted-Average Cost of Capital</td><td>25</td></tr>
+    <tr><td>\(V_L = V_U + t_c D\)</td><td>MM with taxes: Levered firm value (PV of tax shield = \(t_c D\))</td><td>25</td></tr>
+    <tr><td>\(V_L = V_U + PV(\text{Tax Shield}) - PV(\text{Distress Costs})\)</td><td>Static Tradeoff Theory: Optimal capital structure</td><td>25</td></tr>
+    <tr><td>\(\text{Interest Coverage} = \frac{EBIT}{\text{Interest Expense}}\)</td><td>Coverage ratio for debt capacity analysis</td><td>25</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Common Exam Traps — Corporate Issuers</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Trap</th><th>Correct Understanding</th></tr></thead>
+  <tbody>
+    <tr><td>Adding corporate and personal tax rates for double taxation</td><td>Use formula: \(t_c + t_p(1-t_c)\) — personal tax only applies to after-corporate-tax profits</td></tr>
+    <tr><td>Treating a direct listing as raising new capital</td><td>Direct listing lists EXISTING shares — zero new capital raised; no underwriter used</td></tr>
+    <tr><td>Thinking a SPAC must identify its target at IPO</td><td>SPAC = "blank check company" — raises money first, finds acquisition target later</td></tr>
+    <tr><td>Higher leverage always helps equity holders</td><td>Only when ROA &gt; cost of debt; leverage amplifies losses too — harmful when ROA &lt; cost of debt</td></tr>
+    <tr><td>Trade credit is cheap ("only 2% discount")</td><td>Must annualize: 2% for 20 days annualizes to ~44.6% — almost always expensive vs. bank financing</td></tr>
+    <tr><td>Including sunk costs in NPV analysis</td><td>Sunk costs = already spent, can't be recovered — completely irrelevant to the accept/reject decision</td></tr>
+    <tr><td>NPV and IRR always agree</td><td>They agree on accept/reject for independent projects. For mutually exclusive projects, NPV can differ from IRR rankings — always use NPV for final decision</td></tr>
+    <tr><td>MM says debt is always better because of tax shields</td><td>MM WITH taxes says 100% debt maximizes value — unrealistic because it ignores bankruptcy/distress costs (static tradeoff fixes this)</td></tr>
+    <tr><td>MM II says WACC decreases as leverage increases</td><td>MM II with NO taxes: WACC is CONSTANT (rising cost of equity offsets cheaper debt). MM WITH taxes: WACC decreases as leverage increases (tax shield not offset by distress costs in the basic model)</td></tr>
+    <tr><td>Pecking order prefers debt over equity</td><td>Correct — but the #1 preference is internal funds (retained earnings), not debt</td></tr>
+    <tr><td>Classifying a shutdown plant as a governance issue</td><td>Stranded asset from new regulations = Environmental ESG factor, not governance</td></tr>
+    <tr><td>Assuming all current assets are equally liquid</td><td>Inventory is the LEAST liquid current asset — that's why quick ratio excludes it; cash ratio excludes both inventory and receivables</td></tr>
+  </tbody>
+</table></div>
+
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

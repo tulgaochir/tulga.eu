@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Portfolio Management: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 230px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 230px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 230px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Key Rule — "; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── FORMULA REFERENCE TABLE ── */
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ── COMPARE GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Portfolio Management · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Risk & Return I</div>
+  <a href="#r83">R83 — Risk & Return Part I</a>
+  <div class="nav-section">Risk & Return II</div>
+  <a href="#r84">R84 — Risk & Return Part II</a>
+  <div class="nav-section">PM Overview</div>
+  <a href="#r85">R85 — PM: An Overview</a>
+  <div class="nav-section">Planning & Construction</div>
+  <a href="#r86">R86 — Portfolio Planning</a>
+  <div class="nav-section">Behavioral Finance</div>
+  <a href="#r87">R87 — Behavioral Biases</a>
+  <div class="nav-section">Risk Management</div>
+  <a href="#r88">R88 — Intro to Risk Mgmt</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Formula Sheet</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Portfolio Management</h1>
+  <p class="subtitle">Intuition-First Study Guide · Readings 83–88</p>
+  <p class="meta">Every concept explained in plain English · Likely exam questions after every topic</p>
+</div>
+
+<!-- ════════════════ READING 83 ════════════════ -->
+<section id="r83">
+<div class="module-header">
+  <div class="lm-label">Reading 83</div>
+  <h2>Portfolio Risk and Return: Part I</h2>
+  <div class="one-liner">The mathematics of combining assets — why diversification is the only "free lunch" in finance.</div>
+</div>
+
+<h3>Risk Aversion and Utility</h3>
+<p>Most investors are <strong>risk-averse</strong> — given two investments with identical expected returns, they choose the one with lower risk. This doesn't mean they avoid risk entirely; they simply demand <em>compensation</em> (higher expected return) for bearing it.</p>
+
+<div class="intuition">Think of risk aversion like paying for insurance on your phone. You'd rather pay a small certain cost (the premium) than face the uncertain large cost (replacing the phone). In investing, the "premium" you demand is a higher expected return.</div>
+
+<p>A <strong>risk-seeking</strong> investor prefers more risk for the same return (rare in finance). A <strong>risk-neutral</strong> investor cares only about expected return, regardless of risk.</p>
+
+<h3>Indifference Curves</h3>
+<p>An indifference curve plots all risk-return combinations that give an investor <em>equal utility</em> (satisfaction). For risk-averse investors, these curves slope upward — to accept more risk, you need more return.</p>
+
+<div class="key-rule">More risk-averse investors have <strong>steeper</strong> indifference curves (they demand a lot more return for a small increase in risk). Less risk-averse investors have <strong>flatter</strong> curves.</div>
+
+<p>The <strong>optimal portfolio</strong> is found where the investor's indifference curve is tangent to the capital allocation line (CAL). A less risk-averse investor will hold more of the risky portfolio; a more risk-averse investor will hold more of the risk-free asset.</p>
+
+<h3>Variance, Covariance, and Correlation</h3>
+<p>Risk is measured by <strong>variance</strong> (or its square root, standard deviation). For a sample of T returns:</p>
+
+<div class="formula">\[ s^2 = \frac{\sum_{t=1}^{T}(R_t - \bar{R})^2}{T - 1} \]</div>
+
+<p><strong>Covariance</strong> measures how two assets move together. <strong>Correlation</strong> standardises covariance between –1 and +1:</p>
+
+<div class="formula">\[ \rho_{1,2} = \frac{Cov(R_1, R_2)}{\sigma_1 \times \sigma_2} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Correlation Value</th><th>Meaning</th><th>Diversification Benefit</th></tr></thead>
+  <tbody>
+    <tr><td>ρ = +1</td><td>Move perfectly together</td><td>None — risk is just a weighted average</td></tr>
+    <tr><td>ρ = 0</td><td>No linear relationship</td><td>Substantial risk reduction</td></tr>
+    <tr><td>ρ = –1</td><td>Move perfectly opposite</td><td>Maximum — risk can be eliminated entirely</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Two-Asset Portfolio Risk <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">\[ \sigma_P = \sqrt{w_1^2\sigma_1^2 + w_2^2\sigma_2^2 + 2w_1 w_2 \rho_{1,2} \sigma_1 \sigma_2} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Two assets have standard deviations of 25% and 18%, with equal weights (50/50). Calculate portfolio standard deviation when correlation is +1, 0.5, and 0.</div>
+  <div class="exam-a"><strong>ρ = +1:</strong> σ = 0.5(25%) + 0.5(18%) = <strong>21.5%</strong> (just a weighted average).<br>
+  <strong>ρ = 0.5:</strong> σ² = 0.25(0.0625) + 0.25(0.0324) + 2(0.5)(0.5)(0.5)(0.25)(0.18) = 0.034975 → σ = <strong>18.70%</strong>.<br>
+  <strong>ρ = 0:</strong> σ² = 0.25(0.0625) + 0.25(0.0324) = 0.023725 → σ = <strong>15.40%</strong>.<br>
+  Notice: Lower correlation → lower portfolio risk. This is the diversification benefit in action.</div>
+</div>
+
+<h3>The Efficient Frontier</h3>
+<p>The <strong>minimum-variance frontier</strong> is the set of portfolios with the lowest risk for each level of return. The <strong>global minimum-variance portfolio</strong> sits at the leftmost point. The <strong>efficient frontier</strong> is the upper portion — no rational investor chooses a portfolio below it.</p>
+
+<div class="analogy">The efficient frontier is like a speed-fuel efficiency curve for cars. You can get the most speed for any fuel consumption level, but once you're on the frontier, getting more speed always costs more fuel. Portfolios below the frontier are like badly-tuned engines — they waste fuel (risk) without getting proportional speed (return).</div>
+
+<h3>The Capital Allocation Line (CAL)</h3>
+<p>Combining a <strong>risk-free asset</strong> with a <strong>risky portfolio</strong> produces a straight line on a risk-return graph — the CAL. This works because the risk-free asset has zero standard deviation and zero correlation with everything.</p>
+
+<div class="formula">\[ \sigma_P = w_A \times \sigma_A \]</div>
+
+<p>If you invest 60% in the risky portfolio (σ = 20%) and 40% in the risk-free asset, your portfolio's risk is simply 0.60 × 20% = 12%.</p>
+
+<div class="key-rule">Two-fund separation theorem: Every investor's optimal portfolio is some mix of (1) the risk-free asset and (2) the same optimal risky portfolio. They differ only in how much they allocate to each.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor puts 60% in a risky asset with E(R) = 10% and σ = 8%, and 40% in a risk-free asset at 5%. What are the portfolio's expected return and standard deviation?</div>
+  <div class="exam-a"><strong>E(Rp) = 0.60(10%) + 0.40(5%) = 8.0%</strong><br><strong>σp = 0.60 × 8% = 4.8%</strong><br>The risk-free asset contributes zero risk, so portfolio risk is just the weight times the risky asset's risk.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ READING 84 ════════════════ -->
+<section id="r84">
+<div class="module-header">
+  <div class="lm-label">Reading 84</div>
+  <h2>Portfolio Risk and Return: Part II</h2>
+  <div class="one-liner">From the CML to CAPM — the models that define how markets should price risk.</div>
+</div>
+
+<h3>Capital Market Line (CML)</h3>
+<p>Under the assumption that all investors have <strong>homogeneous expectations</strong> (same forecasts for risk, return, correlations), there's one optimal risky portfolio everyone holds — the <strong>market portfolio</strong>. The CAL drawn from the risk-free rate through this market portfolio is the <strong>Capital Market Line</strong>.</p>
+
+<div class="formula">\[ E(R_P) = R_f + \frac{E(R_M) - R_f}{\sigma_M} \times \sigma_P \]</div>
+
+<p>The slope of the CML is the <strong>market price of risk</strong>: the extra return per unit of total risk. Only <strong>efficient portfolios</strong> (combinations of the risk-free asset and the market portfolio) plot on the CML.</p>
+
+<div class="key-rule">CML uses <strong>total risk</strong> (σ) on the x-axis. Only efficient portfolios lie on it. Individual securities and poorly diversified portfolios plot <em>below</em> it.</div>
+
+<h3>Systematic vs. Unsystematic Risk <span class="tag tag-critical">Critical</span></h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Systematic (Market) Risk</h5>
+    <p style="font-size:14px;line-height:1.6">Caused by macro factors (GDP, interest rates, inflation). Cannot be diversified away. <strong>Rewarded</strong> with higher expected return. Measured by <strong>beta</strong>.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Unsystematic (Firm-Specific) Risk</h5>
+    <p style="font-size:14px;line-height:1.6">Caused by company-specific factors (lawsuits, management changes). <strong>Can be diversified away</strong> for free. <strong>Not rewarded</strong> — the market doesn't pay you for risk you can eliminate.</p>
+  </div>
+</div>
+
+<div class="formula">\[ \text{Total Risk} = \text{Systematic Risk} + \text{Unsystematic Risk} \]</div>
+
+<div class="intuition">About 12–30 stocks can eliminate ~90% of unsystematic risk. Since diversification is essentially free, the market only compensates systematic risk. A biotech stock with huge total risk but low beta may have a lower required return than a boring industrial stock with higher beta.</div>
+
+<h3>Beta — The Measure of Systematic Risk <span class="tag tag-formula">Formula</span></h3>
+
+<div class="formula">\[ \beta_i = \frac{Cov(R_i, R_M)}{\sigma_M^2} = \frac{\rho_{i,M} \times \sigma_i}{\sigma_M} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Beta Value</th><th>Interpretation</th></tr></thead>
+  <tbody>
+    <tr><td>β = 1.0</td><td>Same systematic risk as the market</td></tr>
+    <tr><td>β > 1.0</td><td>More volatile than the market (aggressive)</td></tr>
+    <tr><td>β < 1.0</td><td>Less volatile than the market (defensive)</td></tr>
+    <tr><td>β = 0</td><td>Uncorrelated with the market (e.g., risk-free asset)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">The market's standard deviation is 20%. Stock A has σ = 30% and ρ with the market = 0.8. What is Stock A's beta?</div>
+  <div class="exam-a"><strong>β = (ρ × σ_A) / σ_M = (0.8 × 0.30) / 0.20 = 1.2</strong><br>Alternatively: if Cov(A,M) = 0.048, then β = 0.048 / 0.04 = 1.2. Know both methods.</div>
+</div>
+
+<h3>The CAPM and Security Market Line (SML) <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">\[ E(R_i) = R_f + \beta_i \times [E(R_M) - R_f] \]</div>
+
+<p>This is the <strong>Capital Asset Pricing Model</strong>. It says every security's required return equals the risk-free rate plus a beta-adjusted market risk premium. The SML plots this relationship with beta on the x-axis.</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>CML</h5>
+    <p style="font-size:14px;line-height:1.6">X-axis = <strong>Total risk (σ)</strong>. Only <strong>efficient portfolios</strong> plot on it. Shows combinations of the risk-free asset + market portfolio.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>SML</h5>
+    <p style="font-size:14px;line-height:1.6">X-axis = <strong>Systematic risk (β)</strong>. <strong>All securities and portfolios</strong> (efficient or not) plot on it in equilibrium.</p>
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Rf = 6%, E(Rm) = 15%, Stock X has β = 1.2 and is priced at $25. It will pay a $1 dividend and be worth $30 at year-end. Is it under- or overvalued?</div>
+  <div class="exam-a"><strong>Required return (CAPM):</strong> 6% + 1.2(15% – 6%) = 16.8%<br>
+  <strong>Expected return:</strong> (30 – 25 + 1)/25 = 24%<br>
+  Since 24% > 16.8%, the stock plots <strong>above the SML</strong> → it is <strong>undervalued</strong> → buy it. Positive alpha = expected return exceeds required return.</div>
+</div>
+
+<h3>Performance Measures</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Measure</th><th>Formula</th><th>Risk Type Used</th><th>When to Use</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Sharpe Ratio</strong></td><td>\(\frac{R_P - R_f}{\sigma_P}\)</td><td>Total risk (σ)</td><td>Single manager / total portfolio</td></tr>
+    <tr><td><strong>Treynor Measure</strong></td><td>\(\frac{R_P - R_f}{\beta_P}\)</td><td>Systematic risk (β)</td><td>Well-diversified portfolio / multi-manager</td></tr>
+    <tr><td><strong>Jensen's Alpha</strong></td><td>\(R_P - [R_f + \beta_P(R_M - R_f)]\)</td><td>Systematic risk (β)</td><td>Excess return above SML</td></tr>
+    <tr><td><strong>M-squared</strong></td><td>\(R_f + \frac{\sigma_M}{\sigma_P}(R_P - R_f)\)</td><td>Total risk (σ)</td><td>Leveraged comparison to market</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which return metric measures excess return per unit of systematic risk?</div>
+  <div class="exam-a"><strong>The Treynor measure.</strong> The Sharpe ratio uses total risk. Jensen's alpha measures the difference between actual return and SML-predicted return (not a ratio). M-squared adjusts for total risk.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ READING 85 ════════════════ -->
+<section id="r85">
+<div class="module-header">
+  <div class="lm-label">Reading 85</div>
+  <h2>Portfolio Management: An Overview</h2>
+  <div class="one-liner">The big picture — why portfolios exist, who manages them, and the three-step process.</div>
+</div>
+
+<h3>The Portfolio Perspective</h3>
+<p>The <strong>portfolio perspective</strong> means evaluating every investment by its contribution to the portfolio's risk and return — not in isolation. An investor who holds all wealth in one stock is not taking the portfolio perspective, because they bear unsystematic risk that is not compensated.</p>
+
+<div class="intuition">Owning 50 mediocre stocks is often better than owning 1 "great" stock. The portfolio of 50 stocks eliminates most firm-specific risk, so your return comes almost entirely from compensated market risk. The single stock might have incredible returns — or devastating losses.</div>
+
+<p>The <strong>diversification ratio</strong> = portfolio σ ÷ average individual σ. A ratio of 0.72 means the portfolio captures only 72% of the average stock's risk — a 28% risk reduction from diversification. A ratio of 1.0 means no diversification benefit.</p>
+
+<div class="key-rule">Diversification works best during <strong>normal</strong> markets. During crises (e.g., 2008), correlations spike toward 1.0, reducing diversification benefits precisely when you need them most.</div>
+
+<h3>The Three-Step Portfolio Management Process</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Step</th><th>Name</th><th>Key Activities</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1</strong></td><td>Planning</td><td>Analyse client objectives, constraints, risk tolerance → produce the <strong>Investment Policy Statement (IPS)</strong></td></tr>
+    <tr><td><strong>2</strong></td><td>Execution</td><td><strong>Top-down</strong> (macro → asset allocation) and <strong>bottom-up</strong> (security analysis → individual picks)</td></tr>
+    <tr><td><strong>3</strong></td><td>Feedback</td><td>Monitor, rebalance, measure performance vs. the IPS benchmark</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Types of Investors</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Investor Type</th><th>Risk Tolerance</th><th>Time Horizon</th><th>Liquidity Needs</th><th>Income Needs</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Individuals</strong></td><td>Varies</td><td>Varies</td><td>Varies</td><td>Varies</td></tr>
+    <tr><td><strong>Banks</strong></td><td>Low</td><td>Short</td><td>High</td><td>Pay interest</td></tr>
+    <tr><td><strong>Endowments</strong></td><td>High</td><td>Long</td><td>Low</td><td>Spending level</td></tr>
+    <tr><td><strong>Insurance (Life)</strong></td><td>Low</td><td>Long</td><td>High</td><td>Low</td></tr>
+    <tr><td><strong>Insurance (P&C)</strong></td><td>Low</td><td>Short</td><td>High</td><td>Low</td></tr>
+    <tr><td><strong>DB Pension</strong></td><td>High</td><td>Long</td><td>Low</td><td>Depends on age</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Defined Benefit vs. Defined Contribution</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Defined Benefit (DB)</h5>
+    <p style="font-size:14px;line-height:1.6"><strong>Employer</strong> promises a specific retirement income → <strong>employer bears investment risk</strong>. Must manage assets vs. liabilities.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Defined Contribution (DC)</h5>
+    <p style="font-size:14px;line-height:1.6"><strong>Employer</strong> contributes a set amount each period → <strong>employee bears investment risk</strong>. No promise about final value.</p>
+  </div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">In a defined contribution pension plan, who assumes the investment risk?</div>
+  <div class="exam-a"><strong>The employee.</strong> The employer only promises contributions, not outcomes. In a DB plan, the employer bears the risk because they've promised a specific benefit.</div>
+</div>
+
+<h3>Pooled Investments</h3>
+<p><strong>Open-end mutual funds</strong> issue/redeem shares at NAV. <strong>Closed-end funds</strong> trade on exchanges at market-determined prices (can trade at premium or discount to NAV). <strong>ETFs</strong> trade like stocks with low fees but incur brokerage costs. <strong>Hedge funds</strong> are for accredited investors, use leverage and derivatives, and typically charge "2 and 20" (2% management + 20% of profits).</p>
+
+</section><hr>
+
+<!-- ════════════════ READING 86 ════════════════ -->
+<section id="r86">
+<div class="module-header">
+  <div class="lm-label">Reading 86</div>
+  <h2>Basics of Portfolio Planning and Construction</h2>
+  <div class="one-liner">The IPS is the GPS for investing — without it, you're driving blind.</div>
+</div>
+
+<h3>The Investment Policy Statement (IPS)</h3>
+<p>The IPS is the <strong>starting point</strong> of portfolio management. It's a written plan documenting the investor's objectives and constraints, ensuring discipline and realistic expectations.</p>
+
+<div class="big-picture">
+  <div class="bp-label">🧠 The Big Picture</div>
+  <p>The IPS forces the conversation: "What do you want, what can you handle, and what are your limits?" Without this document, managers make assumptions, investors have unrealistic expectations, and nobody has a benchmark to measure success against.</p>
+</div>
+
+<h4>Major IPS Components</h4>
+<p>Description of client · Statement of purpose · Duties & responsibilities · Procedures for updates · <strong>Investment objectives</strong> (risk & return) · <strong>Investment constraints</strong> · Investment guidelines · Performance evaluation · Appendices (strategic asset allocation, rebalancing policy).</p>
+
+<h3>Risk and Return Objectives</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Absolute Example</th><th>Relative Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Risk</strong></td><td>"No loss greater than 10% in any year"</td><td>"Returns within 2% of FTSE return"</td></tr>
+    <tr><td><strong>Return</strong></td><td>"At least 6% per annum nominal"</td><td>"Exceed S&P 500 by 2% per year"</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Risk and return objectives must be <strong>compatible</strong>. A client who wants 15% returns with no chance of loss is setting contradictory goals — the adviser must reconcile this.</div>
+
+<h3>Willingness vs. Ability to Take Risk <span class="tag tag-exam">Exam Favorite</span></h3>
+
+<p><strong>Willingness</strong> = psychological (personality, beliefs, comfort). <strong>Ability</strong> = financial (wealth, time horizon, income stability, liabilities).</p>
+
+<div class="key-rule">When willingness and ability conflict, the <strong>lower of the two</strong> typically prevails. High willingness + low ability → low overall tolerance. High ability + low willingness → adviser may educate, but ultimately defers to lower willingness.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A client has above-average willingness to take risk but below-average ability. What is the overall risk tolerance?</div>
+  <div class="exam-a"><strong>Below average.</strong> The prudent approach is to use the lower of ability and willingness. You can't invest aggressively when the client's financial situation doesn't support it, regardless of their enthusiasm.</div>
+</div>
+
+<h3>The Five Investment Constraints — "TTLLU" <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Constraint</th><th>Description</th><th>Impact on Portfolio</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Time horizon</strong></td><td>Period until funds are needed</td><td>Longer → more risk/illiquidity tolerable</td></tr>
+    <tr><td><strong>Tax situation</strong></td><td>Tax rates, tax-deferred accounts</td><td>May prefer tax-free bonds, capital gains over income</td></tr>
+    <tr><td><strong>Liquidity</strong></td><td>Need for spendable cash</td><td>High needs → more bonds/cash, avoid illiquid assets</td></tr>
+    <tr><td><strong>Legal/Regulatory</strong></td><td>Trust laws, insider trading rules</td><td>May restrict certain asset types or concentrations</td></tr>
+    <tr><td><strong>Unique circumstances</strong></td><td>Ethical, religious, ESG preferences</td><td>May exclude sectors (tobacco, gambling) or countries</td></tr>
+  </tbody>
+</table></div>
+
+<div class="analogy">Think of constraints as guardrails on a highway. Your return objectives set the destination and speed, but the guardrails (liquidity, taxes, time, laws, preferences) keep you on a safe path. Without guardrails, you might reach the destination faster — or drive off a cliff.</div>
+
+<h3>Strategic vs. Tactical Asset Allocation</h3>
+<p><strong>Strategic asset allocation</strong> is the long-term baseline mix (e.g., 60% equity, 30% bonds, 10% alternatives) derived from the IPS objectives and asset class characteristics. <strong>Tactical asset allocation</strong> involves short-term deviations to exploit perceived opportunities.</p>
+
+<p>A <strong>core-satellite approach</strong> puts the majority (core) in passive index funds and a smaller portion (satellite) in active strategies. This reduces excessive trading, offsetting positions, and unintended tax consequences.</p>
+
+<h3>ESG Considerations</h3>
+<p>Approaches include <strong>negative screening</strong> (exclude certain companies), <strong>positive screening</strong> (invest in ESG leaders), <strong>thematic investing</strong>, <strong>impact investing</strong>, and <strong>active ownership</strong>. ESG constraints may decrease returns (smaller universe) but may also increase returns (avoiding ESG-related risks). Benchmark choice must reflect the constrained universe.</p>
+
+</section><hr>
+
+<!-- ════════════════ READING 87 ════════════════ -->
+<section id="r87">
+<div class="module-header">
+  <div class="lm-label">Reading 87</div>
+  <h2>The Behavioral Biases of Individuals</h2>
+  <div class="one-liner">Humans are not rational calculators — understanding your biases is the first step to managing them.</div>
+</div>
+
+<h3>Cognitive Errors vs. Emotional Biases</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Cognitive Errors</h5>
+    <p style="font-size:14px;line-height:1.6">From faulty reasoning or information processing. <strong>Can be corrected</strong> with better information, education, or training. Think of these as "bugs in the software."</p>
+  </div>
+  <div class="compare-box right">
+    <h5>Emotional Biases</h5>
+    <p style="font-size:14px;line-height:1.6">From feelings, impulses, or intuition. <strong>Difficult to correct</strong> — often must be accommodated rather than eliminated. Think of these as "features of the hardware."</p>
+  </div>
+</div>
+
+<div class="key-rule">When a bias has both cognitive and emotional elements, focus on <strong>correcting the cognitive component</strong> first — you'll have more success there.</div>
+
+<h3>Cognitive Errors: Belief Perseverance</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bias</th><th>What Happens</th><th>Example</th><th>Portfolio Impact</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Conservatism</strong></td><td>Fail to update views with new info</td><td>Ignoring a central bank tightening signal</td><td>Hold investments too long; miss opportunities</td></tr>
+    <tr><td><strong>Confirmation</strong></td><td>Seek info that confirms existing beliefs</td><td>Only reading bullish analyst reports on a stock you own</td><td>Over-concentration; under-diversification</td></tr>
+    <tr><td><strong>Representativeness</strong></td><td>Classify based on similarity to a stereotype</td><td>"This stock was a growth stock last year, so it must still be"</td><td>Buy/sell based on patterns, not fundamentals</td></tr>
+    <tr><td><strong>Illusion of control</strong></td><td>Believe you can influence uncontrollable outcomes</td><td>Over-trading in your employer's stock</td><td>Inadequate diversification</td></tr>
+    <tr><td><strong>Hindsight</strong></td><td>"I knew it all along" after the fact</td><td>Claiming you predicted a market crash — after it happened</td><td>Overconfidence in predictive ability</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Cognitive Errors: Information Processing</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bias</th><th>What Happens</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Anchoring</strong></td><td>Over-rely on an initial number</td><td>Estimating EPS based on last quarter's figure, adjusting insufficiently</td></tr>
+    <tr><td><strong>Mental accounting</strong></td><td>Treat money differently based on source/account</td><td>Gambling with "found money" (bonus) but being conservative with savings</td></tr>
+    <tr><td><strong>Framing</strong></td><td>Decision changes depending on how info is presented</td><td>Choosing risk when losses are framed, choosing certainty when gains are framed</td></tr>
+    <tr><td><strong>Availability</strong></td><td>Overweight easily recalled information</td><td>Buying stocks advertised heavily; ignoring historical data</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Emotional Biases <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Bias</th><th>What Happens</th><th>Portfolio Consequence</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Loss aversion</strong></td><td>Feel losses more than equivalent gains</td><td>Sell winners too early (lock in gains); hold losers too long (avoid realising losses). Take excessive risk after losses to "get back to even."</td></tr>
+    <tr><td><strong>Overconfidence</strong></td><td>Overestimate own ability</td><td>Under-diversify, trade too much, underestimate risk</td></tr>
+    <tr><td><strong>Self-control</strong></td><td>Favour short-term gratification</td><td>Insufficient savings; take too much risk to compensate</td></tr>
+    <tr><td><strong>Status quo</strong></td><td>Resist change; stick with current allocation</td><td>Hold inappropriate portfolios; miss better alternatives</td></tr>
+    <tr><td><strong>Endowment</strong></td><td>Value assets more because you own them</td><td>Refuse to sell inherited stocks; fail to diversify</td></tr>
+    <tr><td><strong>Regret aversion</strong></td><td>Fear of making wrong decision causes inaction</td><td>Excess conservatism; <strong>herding</strong> (follow the crowd to avoid blame)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A spouse holds on to the deceased partner's stock portfolio for sentimental reasons, despite it being inappropriate for their needs. Which bias?</div>
+  <div class="exam-a"><strong>Endowment bias</strong> (emotional) — valuing assets more simply because you own them. The test: "Would you buy this same portfolio with new money today?" If no, it's endowment bias. Note: this is emotional (hard to correct), not cognitive.</div>
+</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor is given $10 and chooses the certain $5 gain over a 50/50 gamble for $10. Given $20, they choose the 50/50 gamble to lose $0 or $10 over a certain $5 loss. Both scenarios have identical expected values of $15. What bias?</div>
+  <div class="exam-a"><strong>Loss aversion.</strong> People are risk-averse with gains (prefer certainty) but risk-seeking with losses (prefer the gamble to avoid a sure loss). This asymmetry is the hallmark of loss aversion, distinct from simple risk aversion.</div>
+</div>
+
+<h3>Behavioral Biases in Markets</h3>
+<p>The <strong>value/growth anomaly</strong> may partly reflect behavioral factors like the <strong>halo effect</strong> (a form of representativeness where good company characteristics are extended to "good stock" conclusions, overvaluing growth stocks). <strong>Home bias</strong> reflects investors over-weighting domestic stocks, possibly from familiarity or availability bias. <strong>Herding</strong> during bubbles amplifies overconfidence and regret aversion. Behavioral finance has not fully explained bubbles and crashes but identifies contributing biases.</p>
+
+</section><hr>
+
+<!-- ════════════════ READING 88 ════════════════ -->
+<section id="r88">
+<div class="module-header">
+  <div class="lm-label">Reading 88</div>
+  <h2>Introduction to Risk Management</h2>
+  <div class="one-liner">Risk management isn't about eliminating risk — it's about choosing the right risks to take.</div>
+</div>
+
+<h3>What Risk Management Actually Is</h3>
+<p>Risk management is the process of: (1) identifying the organisation's risk tolerance, (2) identifying and measuring its risks, and (3) modifying and monitoring those risks. The goal is <strong>not</strong> to minimise or eliminate all risks. The goal is to select the <strong>optimal bundle of risks</strong> that maximises expected returns given the organisation's tolerance.</p>
+
+<div class="intuition">An investor controls risk — not returns. You can't force the market to give you 15% returns, but you can choose to allocate 60% to equities vs. 40% to bonds. Risk management is about making that choice deliberately rather than accidentally.</div>
+
+<h3>Risk Management Framework</h3>
+<p>A comprehensive framework includes: identifying and measuring existing risks → determining overall risk tolerance → establishing risk governance processes → managing/mitigating risks to achieve the optimal bundle → monitoring exposures over time → communicating across the organisation → performing strategic risk analysis.</p>
+
+<h3>Risk Governance</h3>
+<p><strong>Risk governance</strong> is determined at the <strong>enterprise level</strong> by senior management. It sets risk tolerance, the optimal risk exposure strategy, and oversight of the risk management function. A risk management committee integrates risks across business units.</p>
+
+<div class="key-rule">Risk governance must be <strong>enterprise-wide</strong>, not siloed by department. A risk that looks manageable at the business unit level may be catastrophic when combined with risks from other units.</div>
+
+<h3>Risk Tolerance and Risk Budgeting</h3>
+<p><strong>Risk tolerance</strong> is the overall amount of risk the organisation will accept. <strong>Risk budgeting</strong> allocates that total risk across assets/investments based on their risk characteristics and how they combine. The budget can use metrics like portfolio beta, VaR, duration, or returns variance.</p>
+
+<div class="analogy">Risk budgeting is like a household budget. Your total monthly budget (risk tolerance) is $5,000. You allocate $1,500 to housing, $500 to food, $300 to entertainment, etc. Similarly, your total portfolio risk budget might be allocated across domestic equities, international equities, bonds, and alternatives.</div>
+
+<h3>Financial vs. Non-Financial Risks</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Category</th><th>Risk Type</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td rowspan="3"><strong>Financial</strong></td><td>Credit risk</td><td>Counterparty fails to honour obligations</td></tr>
+    <tr><td>Liquidity risk</td><td>Forced to sell at below fair value</td></tr>
+    <tr><td>Market risk</td><td>Adverse moves in prices, rates, currencies</td></tr>
+    <tr><td rowspan="5"><strong>Non-Financial</strong></td><td>Operational risk</td><td>Human error, systems failures, cyber risk</td></tr>
+    <tr><td>Solvency risk</td><td>Running out of cash to continue operating</td></tr>
+    <tr><td>Regulatory risk</td><td>Changes in regulations impose new costs</td></tr>
+    <tr><td>Legal risk</td><td>Exposure to lawsuits or contract disputes</td></tr>
+    <tr><td>Model / Tail risk</td><td>Models are wrong; extreme events more likely than assumed</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Risks interact — especially during crises. Market decline → counterparty can't pay (credit risk) → must sell to raise cash (liquidity risk) → selling in a down market amplifies losses → potential solvency risk. These cascading interactions are why enterprise-wide risk management matters.</div>
+
+<h3>Risk Measures</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Measure</th><th>What It Measures</th><th>Used For</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Standard deviation</strong></td><td>Volatility of returns</td><td>General asset risk (may miss tail risk)</td></tr>
+    <tr><td><strong>Beta</strong></td><td>Systematic risk relative to market</td><td>Equity portfolios</td></tr>
+    <tr><td><strong>Duration</strong></td><td>Sensitivity to interest rate changes</td><td>Bond portfolios</td></tr>
+    <tr><td><strong>Delta, Gamma, Vega, Rho</strong></td><td>Sensitivity to various factors</td><td>Derivatives positions</td></tr>
+    <tr><td><strong>VaR</strong></td><td>Maximum loss at a given confidence level</td><td>Tail risk estimation</td></tr>
+    <tr><td><strong>Conditional VaR</strong></td><td>Expected loss <em>beyond</em> the VaR threshold</td><td>Worst-case tail risk</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Methods of Risk Modification <span class="tag tag-exam">Exam Favorite</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Method</th><th>How It Works</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Avoid/Prevent</strong></td><td>Don't engage in the risky activity</td><td>Not investing in a politically unstable country</td></tr>
+    <tr><td><strong>Accept (Self-insure)</strong></td><td>Bear the risk; possibly set up reserves</td><td>Accepting currency risk on small foreign positions</td></tr>
+    <tr><td><strong>Transfer</strong></td><td>Pay someone else to bear the risk</td><td>Buying insurance, surety bonds, fidelity bonds</td></tr>
+    <tr><td><strong>Shift</strong></td><td>Change the distribution of outcomes with derivatives</td><td>Buying puts (floor), selling calls (give up upside), forwards, swaps</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A firm uses forward currency contracts to eliminate foreign exchange risk on its international bond holdings. This is best described as:</div>
+  <div class="exam-a"><strong>Risk shifting.</strong> Derivatives change the distribution of possible outcomes. Risk <em>transfer</em> is paying someone to bear the risk (insurance). Risk shifting uses derivatives to change the payoff profile. This is a commonly tested distinction.</div>
+</div>
+
+<h3>Individual Risk Management</h3>
+<p>Individuals face <strong>mortality risk</strong> (dying before providing for dependents — addressed with life insurance), <strong>longevity risk</strong> (outliving assets — addressed with lifetime annuities), and <strong>health expense risk</strong> (addressed with health insurance). The framework is the same: identify risks, determine tolerance, choose which to bear, transfer, or shift.</p>
+
+</section><hr>
+
+<!-- ════════════════ FORMULA SHEET ════════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Formula Sheet — All 6 Readings</h2>
+  <div class="one-liner">Every formula you need for Portfolio Management, in one place.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+  <thead><tr><th style="width:42%">Formula</th><th style="width:42%">Description</th><th>Reading</th></tr></thead>
+  <tbody>
+    <tr><td>\(s^2 = \frac{\sum(R_t - \bar{R})^2}{T-1}\)</td><td>Sample variance of returns</td><td>83</td></tr>
+    <tr><td>\(\rho_{1,2} = \frac{Cov(R_1,R_2)}{\sigma_1 \sigma_2}\)</td><td>Correlation from covariance</td><td>83</td></tr>
+    <tr><td>\(\sigma_P = \sqrt{w_1^2\sigma_1^2 + w_2^2\sigma_2^2 + 2w_1w_2\rho_{12}\sigma_1\sigma_2}\)</td><td>Two-asset portfolio std dev</td><td>83</td></tr>
+    <tr><td>\(\sigma_P = w_A \sigma_A\) (with risk-free)</td><td>Risk of portfolio with risk-free asset</td><td>83</td></tr>
+    <tr><td>\(E(R_P) = R_f + \frac{E(R_M)-R_f}{\sigma_M}\sigma_P\)</td><td>Capital Market Line (CML)</td><td>84</td></tr>
+    <tr><td>\(\beta_i = \frac{Cov(R_i,R_M)}{\sigma_M^2} = \frac{\rho_{i,M}\sigma_i}{\sigma_M}\)</td><td>Beta (systematic risk measure)</td><td>84</td></tr>
+    <tr><td>\(E(R_i) = R_f + \beta_i[E(R_M) - R_f]\)</td><td>CAPM / Security Market Line</td><td>84</td></tr>
+    <tr><td>\(\text{Sharpe} = \frac{R_P - R_f}{\sigma_P}\)</td><td>Excess return per unit of total risk</td><td>84</td></tr>
+    <tr><td>\(\text{Treynor} = \frac{R_P - R_f}{\beta_P}\)</td><td>Excess return per unit of systematic risk</td><td>84</td></tr>
+    <tr><td>\(\alpha_P = R_P - [R_f + \beta_P(R_M - R_f)]\)</td><td>Jensen's alpha</td><td>84</td></tr>
+    <tr><td>\(M^2 = R_f + \frac{\sigma_M}{\sigma_P}(R_P - R_f)\)</td><td>M-squared measure</td><td>84</td></tr>
+    <tr><td>\(\text{Diversification Ratio} = \frac{\sigma_\text{portfolio}}{\bar\sigma_\text{individual}}\)</td><td>Measure of diversification benefit</td><td>85</td></tr>
+  </tbody>
+</table></div>
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

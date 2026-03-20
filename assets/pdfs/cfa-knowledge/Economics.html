@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Economics: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 230px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 230px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 230px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Key Rule — "; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── FORMULA REFERENCE TABLE ── */
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+
+/* ── TRAP BOX ── */
+.trap {
+  background: #fff7ed;
+  border-left: 4px solid #f97316;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: #7c2d12;
+  font-size: 15.5px; line-height: 1.7;
+}
+.trap::before { content: "🪤 Exam Trap — "; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Economics · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Microeconomics</div>
+  <a href="#r12">R12 — Market Structures</a>
+  <div class="nav-section">Macro Cycles</div>
+  <a href="#r13">R13 — Business Cycles</a>
+  <div class="nav-section">Policy</div>
+  <a href="#r14">R14 — Fiscal Policy</a>
+  <a href="#r15">R15 — Monetary Policy</a>
+  <div class="nav-section">Global</div>
+  <a href="#r16">R16 — Geopolitics</a>
+  <a href="#r17">R17 — International Trade</a>
+  <a href="#r18">R18 — Capital Flows & FX</a>
+  <a href="#r19">R19 — Exchange Rate Calculations</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Formula Sheet</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Economics</h1>
+  <p class="subtitle">Intuition-First Study Guide · All 8 Readings</p>
+  <p class="meta">Every concept explained in plain English · Likely exam questions after every topic · Common traps flagged</p>
+</div>
+
+<!-- ════════════════ R12 ════════════════ -->
+<section id="r12">
+<div class="module-header">
+  <div class="lm-label">Reading 12</div>
+  <h2>Firms and Market Structures</h2>
+  <div class="one-liner">Why some industries have one price-setter and others have none — and everything in between.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>Market structure determines how much pricing power a firm has. Understanding this matters for equity analysis: a firm in a perfectly competitive market earns only a normal profit long-run, while a monopolist can sustain economic profit indefinitely. For the CFA exam, you must identify which structure applies and predict the long-run equilibrium outcome — including what happens to prices, output, and economic profit.</p>
+</div>
+
+<h3>The Four Market Structures at a Glance <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Perfect Competition</th><th>Monopolistic Competition</th><th>Oligopoly</th><th>Monopoly</th></tr></thead>
+  <tbody>
+    <tr><td>Number of firms</td><td>Many</td><td>Many</td><td>Few</td><td>One</td></tr>
+    <tr><td>Product differentiation</td><td>Identical (homogeneous)</td><td>Differentiated (slightly unique)</td><td>Homogeneous or differentiated</td><td>Unique (no close substitute)</td></tr>
+    <tr><td>Barriers to entry</td><td>None</td><td>None (or very low)</td><td>Significant</td><td>Very high</td></tr>
+    <tr><td>Pricing power</td><td>None — price taker</td><td>Some — within narrow range</td><td>Significant — interdependent</td><td>Full — price maker</td></tr>
+    <tr><td>Long-run economic profit</td><td>Zero</td><td>Zero</td><td>Positive possible</td><td>Positive possible</td></tr>
+    <tr><td>Demand curve faced</td><td>Horizontal (perfectly elastic)</td><td>Downward sloping (elastic)</td><td>Kinked demand (rigid prices)</td><td>Downward sloping (market demand)</td></tr>
+    <tr><td>Examples</td><td>Agriculture, FX markets</td><td>Restaurants, hairdressers</td><td>Airlines, major banks, oil</td><td>Utilities, local water supplier</td></tr>
+  </tbody>
+</table></div>
+
+<h3>The Universal Profit-Maximising Rule <span class="tag tag-critical">Critical</span></h3>
+
+<p>Every firm in every market structure maximises profit at the same point:</p>
+
+<div class="formula">\[ \text{Profit Max} \Leftrightarrow MR = MC \]</div>
+
+<div class="intuition">If MR > MC: producing one more unit adds more revenue than cost → produce more. If MR < MC: producing one more unit costs more than it earns → produce less. Equilibrium is exactly where MR = MC — and this is always the profit-maximising output for any firm in any market.</div>
+
+<div class="key-rule">MR = MC tells you the QUANTITY to produce. Then read up to the demand curve to find the PRICE. Never confuse these two steps — the price is NOT set where MR = MC; it's set where MR = MC tells you the output, and the demand curve gives you the price.</div>
+
+<h3>Perfect Competition — The Benchmark</h3>
+
+<p>In perfect competition: many identical sellers, identical products, free entry/exit, perfect information. Each firm is a price taker — it faces a horizontal demand curve at the market price.</p>
+
+<div class="formula">\[ P = MR = AR \quad \text{(only in perfect competition)} \]</div>
+
+<h4>Short-Run vs Long-Run in Perfect Competition</h4>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Scenario</th><th>Short-Run</th><th>Long-Run Adjustment</th><th>Long-Run Outcome</th></tr></thead>
+  <tbody>
+    <tr><td>Economic profit (P > ATC)</td><td>Firms earn profit</td><td>New firms enter → supply increases → price falls</td><td>P = ATC, economic profit = 0</td></tr>
+    <tr><td>Economic loss (P < ATC)</td><td>Firms lose money</td><td>Firms exit → supply falls → price rises</td><td>P = ATC, economic profit = 0</td></tr>
+    <tr><td>Normal profit (P = ATC)</td><td>Break even</td><td>No adjustment needed</td><td>Long-run equilibrium</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Long-run equilibrium in perfect competition: P = MR = MC = ATC. Price equals minimum average total cost. This is allocatively efficient (P = MC) and productively efficient (P = min ATC). No other structure achieves both simultaneously.</div>
+
+<h4>Short-Run Shutdown vs. Continue Operating</h4>
+
+<div class="formula">\[ \text{Operate if: } P \geq AVC \quad \text{(covers variable costs; fixed costs are sunk)} \]</div>
+<div class="formula">\[ \text{Shut down if: } P < AVC \quad \text{(can't even cover variable costs)} \]</div>
+
+<div class="analogy">You run a food truck. Your fixed cost (rent on the truck) is €500/month regardless. Variable costs are €200/day. If revenue is €300/day, you cover variable costs and contribute €100 toward fixed costs — operate. If revenue is €100/day, you'd lose less by staying home — shut down. The fixed cost is irrelevant to the short-run decision.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A firm has ATC = €18, AVC = €12, and market price = €14. What should the firm do in the short run and why?</div>
+  <div class="exam-a"><strong>Continue operating short-run.</strong> P (€14) > AVC (€12) → the firm covers all variable costs and €2 per unit toward fixed costs. It minimises losses by operating. It would shut down only if P < AVC. Long-run: since P < ATC, the firm is losing money and should exit if conditions don't improve.</div>
+</div>
+
+<h3>Monopolistic Competition</h3>
+
+<p>Like perfect competition but each firm's product is slightly differentiated — think restaurants, gyms, clothing brands. This differentiation gives each firm a small amount of pricing power (downward-sloping demand), but because entry is free, economic profit is competed away in the long run.</p>
+
+<h4>Long-Run Equilibrium in Monopolistic Competition</h4>
+
+<div class="formula">\[ \text{Long-run: } P = ATC \text{ (zero economic profit), but } P > MC \text{ (allocatively inefficient)} \]</div>
+
+<div class="intuition">A monopolistically competitive firm in long-run equilibrium is like a restaurant that's just covering its costs — it's not making extra profits, but it's also not charging at marginal cost. Consumers pay more than the cost of producing the last unit (P > MC). This is the "cost" of product variety.</div>
+
+<div class="trap">Don't confuse short-run monopolistic competition (where economic profit > 0 is possible) with long-run (where free entry drives economic profit to zero). Also: a monopolistically competitive firm's long-run tangency is on the DOWNWARD-SLOPING part of ATC, not the minimum — this means excess capacity.</div>
+
+<h3>Oligopoly <span class="tag tag-critical">Critical</span></h3>
+
+<p>Few dominant firms, high barriers to entry, mutual interdependence — each firm's decision affects all others. The key feature is strategic behaviour: firms must consider rivals' reactions.</p>
+
+<h4>Kinked Demand Curve Model</h4>
+<p>This model explains why oligopoly prices tend to be rigid (sticky). If one firm raises price: rivals don't follow → firm loses many customers (elastic response above kink). If one firm cuts price: rivals match it → firm gains few customers (inelastic response below kink).</p>
+
+<div class="key-rule">The kinked demand curve creates a discontinuity in the MR curve — a "gap" at the kink. MC can change within this gap without changing the profit-maximising price or quantity. This explains oligopoly price rigidity.</div>
+
+<h4>Game Theory: The Prisoner's Dilemma</h4>
+
+<div class="table-wrap"><table>
+  <thead><tr><th></th><th>Firm B Cooperates (High Price)</th><th>Firm B Defects (Low Price)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Firm A Cooperates (High Price)</strong></td><td>A: +€10M, B: +€10M (best joint outcome)</td><td>A: +€2M, B: +€15M (A gets hurt)</td></tr>
+    <tr><td><strong>Firm A Defects (Low Price)</strong></td><td>A: +€15M, B: +€2M (B gets hurt)</td><td>A: +€5M, B: +€5M (Nash equilibrium)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">The Nash equilibrium (both defect) is the dominant strategy for each firm even though both would be better off cooperating. This is why cartels are unstable — every member has an incentive to secretly cheat, even though it harms everyone collectively. The OPEC cartel periodically breaks down precisely because of this dynamic.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">In a duopoly, both firms face the choice to keep prices high or cut prices. The Nash equilibrium outcome is most likely to result in:</div>
+  <div class="exam-a"><strong>Both firms cutting prices</strong> — even though both would earn higher profits by keeping prices high. The Nash equilibrium is where neither firm can improve its outcome by unilaterally changing strategy. Each firm's dominant strategy is to cut prices (regardless of what the rival does), so both end up with the lower-profit outcome. This is the classic prisoner's dilemma.</div>
+</div>
+
+<h3>Monopoly</h3>
+
+<p>A single seller of a product with no close substitutes. The firm IS the market — it faces the downward-sloping market demand curve and has full price-setting power.</p>
+
+<h4>Monopoly Profit Maximisation</h4>
+
+<p>The monopolist sets MR = MC to find quantity, then charges the highest price the demand curve allows. Because MR < P for a monopolist (must lower price on all units to sell one more), the monopolist produces less and charges more than a competitive market would.</p>
+
+<div class="formula">\[ MR = P\left(1 + \frac{1}{\varepsilon_d}\right) \quad \text{where } \varepsilon_d \text{ is price elasticity of demand (negative)} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Comparison</th><th>Perfect Competition</th><th>Monopoly</th></tr></thead>
+  <tbody>
+    <tr><td>Price</td><td>P = MC (lower)</td><td>P > MC (higher)</td></tr>
+    <tr><td>Quantity</td><td>Higher</td><td>Lower (restricted output)</td></tr>
+    <tr><td>Economic profit (long-run)</td><td>Zero</td><td>Positive (sustained by barriers)</td></tr>
+    <tr><td>Allocative efficiency</td><td>Yes (P = MC)</td><td>No (P > MC) — deadweight loss</td></tr>
+    <tr><td>Productive efficiency</td><td>Yes (P = min ATC)</td><td>Not necessarily</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A monopolist faces demand P = 100 − 2Q and has constant MC = 20. What is the profit-maximising price and quantity?</div>
+  <div class="exam-a">
+    <strong>Step 1 — Find MR:</strong> TR = P × Q = (100 − 2Q)Q = 100Q − 2Q². MR = dTR/dQ = 100 − 4Q.<br>
+    <strong>Step 2 — Set MR = MC:</strong> 100 − 4Q = 20 → 4Q = 80 → Q* = <strong>20</strong>.<br>
+    <strong>Step 3 — Find price from demand curve:</strong> P = 100 − 2(20) = <strong>€60</strong>.<br>
+    Note: P (€60) > MC (€20) → deadweight loss. Competitive output would be where P = MC: 100 − 2Q = 20 → Q = 40 units.
+  </div>
+</div>
+
+<h3>Concentration Ratios and the Herfindahl-Hirschman Index (HHI) <span class="tag tag-formula">Formula</span></h3>
+
+<div class="formula">\[ \text{3-firm CR} = \text{Market share of top 3 firms combined} \]</div>
+<div class="formula">\[ HHI = \sum_{i=1}^{N} s_i^2 \quad \text{where } s_i = \text{market share of firm i (as \%)} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>HHI Value</th><th>Market Structure</th><th>Regulatory Action?</th></tr></thead>
+  <tbody>
+    <tr><td>< 1,000</td><td>Unconcentrated (competitive)</td><td>No concern</td></tr>
+    <tr><td>1,000 – 1,800</td><td>Moderately concentrated</td><td>May review mergers</td></tr>
+    <tr><td>> 1,800</td><td>Highly concentrated</td><td>Likely to block mergers</td></tr>
+    <tr><td>10,000</td><td>Pure monopoly (single firm 100%)</td><td>Maximum concentration</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An industry has four firms with market shares of 40%, 30%, 20%, and 10%. Calculate the HHI.</div>
+  <div class="exam-a"><strong>HHI = 40² + 30² + 20² + 10² = 1,600 + 900 + 400 + 100 = 3,000.</strong> This is highly concentrated (> 1,800). Regulators would likely scrutinise any proposed merger in this industry. Note: you use the raw percentage number (40, not 0.40) when squaring.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R13 ════════════════ -->
+<section id="r13">
+<div class="module-header">
+  <div class="lm-label">Reading 13</div>
+  <h2>Understanding Business Cycles</h2>
+  <div class="one-liner">The economy breathes in and out — learning to recognise which phase you're in is essential for investment decisions.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>Business cycles underpin asset allocation: equities outperform in expansion, bonds in contraction, commodities at peaks. The CFA exam tests your ability to identify leading/lagging indicators, recognise phase characteristics, and understand how unemployment and inflation behave differently across the cycle.</p>
+</div>
+
+<h3>The Four Phases of the Business Cycle <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Phase</th><th>GDP Growth</th><th>Unemployment</th><th>Inflation</th><th>Asset Class Favoured</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Recovery (Trough → Early Expansion)</strong></td><td>Turning positive from negative</td><td>High but starting to fall</td><td>Low, possibly deflation</td><td>Equities (cyclical), high-yield bonds</td></tr>
+    <tr><td><strong>Expansion (Mid-cycle)</strong></td><td>Above trend (positive, accelerating)</td><td>Falling toward natural rate</td><td>Rising moderately</td><td>Equities, commodities</td></tr>
+    <tr><td><strong>Peak (Late Expansion)</strong></td><td>Slowing — maximum output level</td><td>Very low (tight labour market)</td><td>High and rising</td><td>Commodities, inflation-linked bonds</td></tr>
+    <tr><td><strong>Contraction / Recession</strong></td><td>Negative (two consecutive quarters = recession)</td><td>Rising sharply</td><td>Falling</td><td>Government bonds, defensive equities</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Think of the economy as a car on a hilly road. Recovery is coming out of the valley, Expansion is climbing uphill, Peak is the top of the hill (still moving but about to slow), and Contraction is going downhill. Interest rates and fiscal policy are the driver's foot pedals — accelerator during recession, brake during inflationary peaks.</div>
+
+<h3>Types of Unemployment</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Definition</th><th>Cyclical?</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Frictional</strong></td><td>Between jobs voluntarily; searching for better match</td><td>No — always exists</td><td>Recent graduate searching for first job</td></tr>
+    <tr><td><strong>Structural</strong></td><td>Skills mismatch with available jobs; technological change</td><td>No — can persist</td><td>Coal miner after plant automation</td></tr>
+    <tr><td><strong>Cyclical</strong></td><td>Due to economic downturn; lack of demand for labour</td><td>Yes — rises in recession</td><td>Construction worker laid off in housing crash</td></tr>
+  </tbody>
+</table></div>
+
+<div class="formula">\[ \text{Unemployment Rate} = \frac{\text{Unemployed}}{\text{Labour Force}} \times 100\% \]</div>
+<div class="formula">\[ \text{Labour Force Participation Rate} = \frac{\text{Labour Force}}{\text{Working-Age Population}} \times 100\% \]</div>
+<div class="formula">\[ \text{Natural Unemployment Rate} = \text{Frictional} + \text{Structural (no cyclical)} \]</div>
+
+<div class="key-rule">The "full employment" level is NOT zero unemployment. Full employment exists at the natural rate (typically 4–6%), where only frictional and structural unemployment remain. When actual unemployment equals the natural rate, the economy is producing at potential GDP.</div>
+
+<div class="trap">A falling unemployment rate doesn't always mean the economy is improving — it can fall because discouraged workers leave the labour force entirely (denominator shrinks). Always look at the labour force participation rate alongside unemployment.</div>
+
+<h3>Inflation Measures</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Measure</th><th>What It Tracks</th><th>Bias/Issue</th></tr></thead>
+  <tbody>
+    <tr><td><strong>CPI (Consumer Price Index)</strong></td><td>Fixed basket of goods consumed by urban households</td><td>Substitution bias (ignores switching to cheaper items); upward biased</td></tr>
+    <tr><td><strong>PPI (Producer Price Index)</strong></td><td>Prices received by producers; measures upstream inflation</td><td>Leading indicator of CPI — producer costs eventually passed to consumers</td></tr>
+    <tr><td><strong>PCE Deflator</strong></td><td>Prices of all personal consumption (Fed's preferred measure)</td><td>More comprehensive; allows for substitution; generally lower than CPI</td></tr>
+    <tr><td><strong>GDP Deflator</strong></td><td>Price level of all goods produced in the economy</td><td>Broadest measure; includes exports, excludes imports</td></tr>
+    <tr><td><strong>Core Inflation</strong></td><td>CPI or PCE excluding food and energy</td><td>Less volatile; better signal of underlying trend</td></tr>
+  </tbody>
+</table></div>
+
+<div class="formula">\[ \text{Inflation Rate} = \frac{CPI_t - CPI_{t-1}}{CPI_{t-1}} \times 100\% \]</div>
+
+<h3>Economic Indicators: Leading, Lagging, Coincident <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Definition</th><th>Examples</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Leading</strong></td><td>Change BEFORE the economy changes — predict turning points</td><td>Yield curve slope, stock prices, building permits, new orders, money supply, consumer confidence, average weekly hours worked</td></tr>
+    <tr><td><strong>Coincident</strong></td><td>Change AT THE SAME TIME as the economy</td><td>GDP, industrial production, personal income, retail sales, employment</td></tr>
+    <tr><td><strong>Lagging</strong></td><td>Change AFTER the economy has already changed — confirm trends</td><td>Unemployment rate, CPI, bank lending rates, inventory-to-sales ratio, average duration of unemployment</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">The unemployment rate is a LAGGING indicator — firms are slow to hire or fire. Businesses wait to confirm the economic trend before making expensive hiring/firing decisions. This is why unemployment keeps rising for months after a recession has technically ended.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An analyst observes that the yield curve has inverted (short rates > long rates). This is best described as a:</div>
+  <div class="exam-a"><strong>Leading indicator of recession.</strong> An inverted yield curve has historically preceded recessions by 12–18 months. It signals the market's expectation that the central bank will need to cut rates (i.e., the economy will slow). It is a leading, not coincident or lagging, indicator. The unemployment rate (which has NOT yet risen) is the lagging indicator that confirms the recession later.</div>
+</div>
+
+<h3>Theories of the Business Cycle</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>School</th><th>Primary Driver of Cycles</th><th>Policy Prescription</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Neoclassical / RBC</strong></td><td>Real shocks (technology, productivity) — not demand shocks</td><td>No intervention — cycles are efficient responses to real shocks</td></tr>
+    <tr><td><strong>Keynesian</strong></td><td>Aggregate demand fluctuations; "animal spirits" (confidence)</td><td>Active fiscal stimulus — government spending fills output gap</td></tr>
+    <tr><td><strong>New Keynesian</strong></td><td>Demand shocks + price/wage stickiness amplifies them</td><td>Both fiscal and monetary policy; target inflation</td></tr>
+    <tr><td><strong>Monetarist</strong></td><td>Erratic money supply growth</td><td>Stable, predictable money supply growth (k% rule)</td></tr>
+    <tr><td><strong>Austrian</strong></td><td>Credit expansion → malinvestment → bust</td><td>No intervention; let the bust clear malinvestment</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Which school of economic thought would most likely support using government spending to close a recessionary gap?</div>
+  <div class="exam-a"><strong>Keynesian economics.</strong> Keynesians believe that recessions result from insufficient aggregate demand and that private markets won't self-correct quickly. The policy prescription is fiscal stimulus — government spending (or tax cuts) to boost aggregate demand. Monetarists would instead focus on money supply; Austrian economists would oppose intervention entirely.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R14 ════════════════ -->
+<section id="r14">
+<div class="module-header">
+  <div class="lm-label">Reading 14</div>
+  <h2>Fiscal Policy</h2>
+  <div class="one-liner">How governments use taxes and spending to influence the economy — and why it's slower and messier than it looks.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>Fiscal policy is the government's use of taxation and spending to achieve macroeconomic goals (full employment, price stability, growth). Unlike monetary policy, fiscal policy works through the budget — it directly affects aggregate demand. For investors, fiscal policy signals future tax rates, inflation, interest rates (via crowding out), and sovereign debt risk.</p>
+</div>
+
+<h3>Expansionary vs. Contractionary Fiscal Policy</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Expansionary (Stimulative)</h5>
+    <ul>
+      <li>Increase government spending (G ↑)</li>
+      <li>Decrease taxes (T ↓)</li>
+      <li>Result: Budget deficit increases</li>
+      <li>Used during: Recession, below-potential output</li>
+      <li>Outcome: AD shifts right → more GDP, employment</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Contractionary (Restrictive)</h5>
+    <ul>
+      <li>Decrease government spending (G ↓)</li>
+      <li>Increase taxes (T ↑)</li>
+      <li>Result: Budget surplus or reduced deficit</li>
+      <li>Used during: Inflation, above-potential output</li>
+      <li>Outcome: AD shifts left → lower inflation</li>
+    </ul>
+  </div>
+</div>
+
+<h3>The Fiscal Multiplier <span class="tag tag-formula">Formula</span></h3>
+
+<p>Government spending has a multiplied effect on GDP because each dollar spent becomes someone's income, which gets partially re-spent, and so on.</p>
+
+<div class="formula">\[ \text{Spending Multiplier} = \frac{1}{1 - MPC} = \frac{1}{MPS} \]</div>
+<div class="formula">\[ \text{Tax Multiplier} = \frac{-MPC}{1 - MPC} = \frac{-MPC}{MPS} \]</div>
+
+<p>Where MPC = Marginal Propensity to Consume, MPS = Marginal Propensity to Save = 1 − MPC.</p>
+
+<div class="intuition">If MPC = 0.8, MPS = 0.2. Spending multiplier = 1/0.2 = 5. So €100M of government spending eventually creates €500M of GDP. Each round: Government spends €100M → recipient spends 80% = €80M → next person spends 80% = €64M → ... → converges to €500M total. Tax cuts have a smaller multiplier (−MPC/MPS = −0.8/0.2 = −4) because the first-round injection is smaller (only MPC of the tax cut gets spent, not all of it).</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An economy has MPC = 0.75. The government increases spending by €200M. By how much does GDP ultimately increase, assuming no crowding out?</div>
+  <div class="exam-a"><strong>MPS = 1 − 0.75 = 0.25. Multiplier = 1/0.25 = 4. GDP increase = €200M × 4 = €800M.</strong><br>
+  Alternatively: If the government had instead cut taxes by €200M, the GDP increase = −(MPC/MPS) × (−200M) = (0.75/0.25) × 200M = 3 × €200M = €600M — less than the spending multiplier because the first round of tax cuts is only partially spent.</div>
+</div>
+
+<div class="trap">The tax multiplier is SMALLER than the spending multiplier. A €1 spending increase always has more stimulus than a €1 tax cut because all of the spending goes directly into GDP, while only MPC × tax cut gets spent. Exam questions often test this distinction.</div>
+
+<h3>Automatic Stabilisers vs. Discretionary Policy</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Definition</th><th>Examples</th><th>Advantage</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Automatic Stabilisers</strong></td><td>Built-in mechanisms that automatically increase spending or cut taxes in a downturn without deliberate government action</td><td>Progressive income taxes (revenue falls automatically), unemployment benefits (spending rises automatically)</td><td>No legislative lag; immediate; symmetric (stimulus in downturns, restraint in booms)</td></tr>
+    <tr><td><strong>Discretionary Fiscal Policy</strong></td><td>Deliberate changes to tax rates or spending programmes by the government</td><td>Infrastructure stimulus package; targeted tax rebates</td><td>Can be large-scale and targeted; but subject to political delays</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Problems with Fiscal Policy <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Problem</th><th>Explanation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Recognition lag</strong></td><td>Takes time to identify that the economy is in recession (data is delayed and revised)</td></tr>
+    <tr><td><strong>Action (legislative) lag</strong></td><td>Getting fiscal measures through the legislature takes months or years — especially controversial tax changes</td></tr>
+    <tr><td><strong>Impact lag</strong></td><td>Even after implementation, fiscal policy takes time to work through the economy (multiplier process)</td></tr>
+    <tr><td><strong>Crowding out</strong></td><td>Government borrowing (deficit financing) increases interest rates, reducing private investment — the stimulus is partly offset</td></tr>
+    <tr><td><strong>Ricardian equivalence</strong></td><td>If consumers are rational, they save tax cuts today to pay higher future taxes → tax cuts have no effect on consumption (controversial)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Crowding out is the most tested fiscal policy problem. When the government borrows heavily to finance a deficit, it competes with private borrowers for funds → interest rates rise → private capital investment falls. This offsets (partially or fully) the intended stimulus. Open economies with mobile capital have MORE crowding out because capital flows in from abroad, driving up the exchange rate and hurting exports.</div>
+
+<h3>Fiscal Balance and Government Debt</h3>
+
+<div class="formula">\[ \text{Fiscal Balance} = \text{Government Revenue} - \text{Government Expenditure} \]</div>
+<div class="formula">\[ \text{National Saving} = \text{Private Saving} + \text{Government Saving (Budget Surplus)} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Concept</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td>Structural deficit</td><td>Deficit that would exist even at full employment — reflects permanent policy stance, not the cycle</td></tr>
+    <tr><td>Cyclical deficit</td><td>Deficit caused by below-trend economic activity — disappears when economy recovers</td></tr>
+    <tr><td>Primary balance</td><td>Fiscal balance excluding interest payments on debt — measures current policy stance net of past debt burden</td></tr>
+    <tr><td>Fiscal sustainability</td><td>Debt-to-GDP is stable when nominal GDP growth ≥ nominal interest rate on debt (r < g condition)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A country has a large fiscal deficit during a recession. An analyst notes that the deficit is likely to disappear when the economy returns to trend growth. This portion of the deficit is best described as:</div>
+  <div class="exam-a"><strong>Cyclical deficit.</strong> A cyclical deficit results from below-trend economic activity — as the economy contracts, tax revenues fall and social spending rises automatically. It reverses when the economy recovers. A structural deficit is the portion that persists even at full employment and reflects permanent fiscal imbalances. The distinction matters: only structural deficits require active policy intervention.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R15 ════════════════ -->
+<section id="r15">
+<div class="module-header">
+  <div class="lm-label">Reading 15</div>
+  <h2>Monetary Policy</h2>
+  <div class="one-liner">How central banks control money, credit, and ultimately — inflation, growth, and financial stability.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>Monetary policy is the dominant tool for short-run economic management in most developed economies. It works faster than fiscal policy (no legislative approval needed) and its main channel is the short-term interest rate. For investors, every central bank meeting is a market event — understanding monetary policy transmission is core to fixed income, FX, and equity analysis.</p>
+</div>
+
+<h3>Central Bank Goals and Mandates</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Central Bank</th><th>Mandate</th><th>Primary Target</th></tr></thead>
+  <tbody>
+    <tr><td>European Central Bank (ECB)</td><td>Single mandate</td><td>Price stability (inflation ~2%)</td></tr>
+    <tr><td>Federal Reserve (US)</td><td>Dual mandate</td><td>Price stability + maximum employment</td></tr>
+    <tr><td>Bank of England</td><td>Inflation targeting with growth awareness</td><td>CPI ~2%</td></tr>
+    <tr><td>Bank of Japan</td><td>Price stability + financial system stability</td><td>CPI ~2%</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Monetary Policy Tools</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Tool</th><th>How It Works</th><th>Effect</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Policy rate (overnight rate)</strong></td><td>Central bank sets the rate at which commercial banks borrow from each other overnight (e.g., Fed Funds Rate, ECB deposit rate)</td><td>Cascades through the yield curve and credit markets; primary tool</td></tr>
+    <tr><td><strong>Open Market Operations (OMO)</strong></td><td>Central bank buys or sells government bonds to inject or drain reserves</td><td>Buy bonds → inject reserves → rates fall (expansionary). Sell bonds → drain reserves → rates rise (contractionary)</td></tr>
+    <tr><td><strong>Reserve requirements</strong></td><td>Minimum fraction of deposits banks must hold as reserves</td><td>Lower reserves → more lending capacity (expansionary). Used rarely now</td></tr>
+    <tr><td><strong>Quantitative Easing (QE)</strong></td><td>Large-scale asset purchases (long-term bonds, MBS) when policy rate hits zero lower bound</td><td>Pushes down long-term rates; "portfolio balance channel" boosts risky assets</td></tr>
+    <tr><td><strong>Forward guidance</strong></td><td>Central bank communicates its future intentions explicitly</td><td>Shapes expectations → affects long rates today even before policy changes</td></tr>
+  </tbody>
+</table></div>
+
+<div class="analogy">A central bank cutting rates is like reducing the cost of renting money. When renting money is cheap, businesses borrow to invest, consumers borrow to buy homes and cars, and the currency weakens (making exports cheaper). Everything flows from that one interest rate decision — cascading through the entire economy like a stone dropped in water.</div>
+
+<h3>Monetary Policy Transmission Mechanisms <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Channel</th><th>How Rate Cut Stimulates Economy</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Interest rate channel</strong></td><td>Lower rates → cheaper borrowing → more investment and consumption</td></tr>
+    <tr><td><strong>Asset price channel</strong></td><td>Lower rates → higher bond and equity prices → wealth effect → more spending</td></tr>
+    <tr><td><strong>Exchange rate channel</strong></td><td>Lower rates → capital outflows → currency weakens → exports cheaper → more exports (net exports ↑)</td></tr>
+    <tr><td><strong>Credit channel</strong></td><td>Lower rates → banks more willing to lend → credit availability expands → spending rises</td></tr>
+    <tr><td><strong>Expectations channel</strong></td><td>Credible commitment to low rates → firms and households confident → spend and invest now</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Expansionary vs. Contractionary Monetary Policy</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>Expansionary (Easy/Dovish)</h5>
+    <ul>
+      <li>Lower interest rates</li>
+      <li>Buy bonds (OMO)</li>
+      <li>Quantitative easing</li>
+      <li>Goal: Stimulate growth, fight unemployment</li>
+      <li>Risk: Inflation, asset bubbles</li>
+    </ul>
+  </div>
+  <div class="compare-box right">
+    <h5>Contractionary (Tight/Hawkish)</h5>
+    <ul>
+      <li>Raise interest rates</li>
+      <li>Sell bonds (OMO)</li>
+      <li>Quantitative tightening (QT)</li>
+      <li>Goal: Fight inflation, cool overheating</li>
+      <li>Risk: Recession, financial stress</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Quantity Theory of Money <span class="tag tag-formula">Formula</span></h3>
+
+<div class="formula">\[ MV = PQ \]</div>
+<div class="formula">\[ \text{Money Growth} + \text{Velocity Change} = \text{Inflation} + \text{Real GDP Growth} \]</div>
+
+<p>Where M = Money supply, V = Velocity of money (how fast money changes hands), P = Price level, Q = Real output (GDP). If V is constant (monetarist assumption): faster money growth → proportionally higher inflation.</p>
+
+<div class="intuition">If the economy is like a bathtub, money is the water, and real output is the size of the tub. If you pump in more water (M) but the tub stays the same size (Q), the water level (P = prices) simply rises. This is the monetarist view: inflation is always and everywhere a monetary phenomenon.</div>
+
+<h3>Neutral Interest Rate and the Taylor Rule</h3>
+
+<p>The neutral (or natural) rate of interest (r*) is the policy rate consistent with the economy at full employment and stable inflation — neither stimulating nor restrictive. The Taylor Rule provides a formula for how the central bank should set the policy rate:</p>
+
+<div class="formula">\[ \text{Policy Rate} = r^* + \pi^* + 0.5(\pi - \pi^*) + 0.5(Y - Y^*)/Y^* \]</div>
+
+<p>Where π = actual inflation, π* = target inflation (typically 2%), Y = actual GDP, Y* = potential GDP. The last term is the "output gap."</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Using the Taylor Rule, if the neutral rate is 2%, inflation target is 2%, actual inflation is 4%, and actual GDP = potential GDP, what should the policy rate be?</div>
+  <div class="exam-a"><strong>Policy Rate = 2% + 2% + 0.5(4% − 2%) + 0.5(0) = 4% + 1% = 5%.</strong><br>
+  Inflation is 2 percentage points above target → the rate should be raised by 0.5 × 2% = 1% above neutral. Output gap = 0 → no adjustment for growth. Policy rate = 5%. This is "restrictive" compared to neutral (2% + 2% = 4%), correctly reflecting the inflation overshoot.</div>
+</div>
+
+<h3>Monetary Policy Limitations</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Limitation</th><th>Explanation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Zero lower bound (ZLB)</strong></td><td>Policy rates can't go significantly below 0% (cash alternative); limits stimulus in deep recessions</td></tr>
+    <tr><td><strong>Liquidity trap</strong></td><td>At very low rates, further cuts don't stimulate — people hoard cash (Japan 1990s, post-GFC)</td></tr>
+    <tr><td><strong>Long and variable lags</strong></td><td>Monetary policy affects inflation with 12–18 month lag; easy to over- or under-steer</td></tr>
+    <tr><td><strong>Transmission breakdowns</strong></td><td>If banks are undercapitalised, they don't lend even when rates are low (broken credit channel)</td></tr>
+    <tr><td><strong>Credibility</strong></td><td>Monetary policy only works if people believe the central bank will follow through on its commitments (hence central bank independence)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A central bank has cut rates to zero and the economy is still in recession. Private sector borrowing has not responded. This situation is best described as:</div>
+  <div class="exam-a"><strong>A liquidity trap.</strong> When rates are at (or near) the zero lower bound and monetary stimulus fails to increase borrowing and spending, the economy is in a liquidity trap. Additional rate cuts have no effect because the marginal cost of holding cash is essentially zero. The Keynesian prescription is fiscal stimulus; QE (asset purchases) is an alternative non-conventional monetary tool.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R16 ════════════════ -->
+<section id="r16">
+<div class="module-header">
+  <div class="lm-label">Reading 16</div>
+  <h2>Introduction to Geopolitics</h2>
+  <div class="one-liner">How geographic, political, and international power dynamics shape economic and investment outcomes.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>Geopolitics is increasingly relevant to investment analysis — trade wars, sanctions, resource conflicts, and military tensions all affect asset prices, supply chains, and capital flows. The CFA curriculum focuses on understanding cooperation vs. fragmentation dynamics, how geopolitical risk is priced, and why geography itself shapes economic incentives.</p>
+</div>
+
+<h3>Geopolitics Defined</h3>
+
+<p>Geopolitics is the study of how geography, power, and politics interact to shape international relations and economic outcomes. Key insight: geography creates permanent strategic interests that transcend individual governments — a landlocked country always needs sea access, an island nation always values naval power, a resource-rich state always attracts foreign interest.</p>
+
+<h3>Cooperation vs. Hegemony</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>System Type</th><th>Characteristics</th><th>Investment Implications</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Globalised / Cooperative</strong></td><td>Countries pursue mutual gains through trade, investment, and multilateral institutions (WTO, IMF, UN)</td><td>Lower trade barriers → efficient global supply chains → lower inflation; higher EM growth</td></tr>
+    <tr><td><strong>Hegemonic</strong></td><td>Single dominant power sets and enforces global rules; provides public goods (reserve currency, sea lane protection)</td><td>Stable but dependent on hegemon's goodwill; US-led post-WWII order</td></tr>
+    <tr><td><strong>Multipolar / Fragmented</strong></td><td>Competing power blocs; trade fragmentation; "friend-shoring" and supply chain repatriation</td><td>Higher cost of goods; regional divergence; commodity supply disruption risk</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Geopolitical Risk Factors and Investment Impact</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Risk Type</th><th>Examples</th><th>Asset Class Impact</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Trade barriers / sanctions</strong></td><td>Tariffs, export controls, financial sanctions (e.g., Russia 2022)</td><td>Higher input costs; supply chain disruption; isolated asset repricing</td></tr>
+    <tr><td><strong>Resource nationalism</strong></td><td>Nationalisation of oil, mining, or critical mineral assets</td><td>Commodity price spikes; EM equity risk premium increase</td></tr>
+    <tr><td><strong>Armed conflict</strong></td><td>War, terrorism, civil unrest</td><td>Risk-off: flight to safe havens (USD, gold, US Treasuries)</td></tr>
+    <tr><td><strong>Deglobalisation</strong></td><td>Supply chain reshoring, bloc formation, technology decoupling</td><td>Inflationary; long-term hit to global efficiency; favours domestic producers</td></tr>
+    <tr><td><strong>Political instability</strong></td><td>Elections, regime change, populism</td><td>Currency volatility, sovereign spread widening; FDI outflows</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Tools Countries Use</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Tool</th><th>How Used</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Trade policy</strong></td><td>Tariffs, quotas, subsidies to influence trade flows and protect strategic industries</td></tr>
+    <tr><td><strong>Financial sanctions</strong></td><td>Restrict access to SWIFT, freeze reserves, prohibit transactions — powerful tool for reserve currency holder</td></tr>
+    <tr><td><strong>Technology controls</strong></td><td>Export controls on semiconductors, AI, etc. to limit rivals' military/economic capabilities</td></tr>
+    <tr><td><strong>Capital flow management</strong></td><td>Capital controls to stabilise exchange rates; FDI screening for national security</td></tr>
+    <tr><td><strong>Multilateral institutions</strong></td><td>WTO, IMF, World Bank — mechanisms for dispute resolution and coordinated policy</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A country imposes sweeping financial sanctions on a foreign state, including exclusion from the SWIFT system. The most direct investment implication for that foreign state is:</div>
+  <div class="exam-a"><strong>Severe disruption to cross-border payment flows and trade financing, likely causing currency collapse, sovereign default risk, and a sharp contraction in imports/exports.</strong> SWIFT exclusion prevents banks from sending international payment instructions, effectively cutting the country off from global financial markets. Investors should expect sharp currency depreciation, rising sovereign spreads, and capital flight. Historical examples: Iran (2012), Russia (2022).</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R17 ════════════════ -->
+<section id="r17">
+<div class="module-header">
+  <div class="lm-label">Reading 17</div>
+  <h2>International Trade and Capital Flows</h2>
+  <div class="one-liner">Why countries trade, who wins and who loses, and how trade restrictions affect prices and welfare.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>International trade theory explains the fundamental basis for economic exchange between countries. The CFA exam heavily tests comparative advantage (not absolute advantage), the effects of tariffs and quotas on welfare, and the balance of payments accounting framework. Understanding these is essential for macro top-down analysis.</p>
+</div>
+
+<h3>Absolute vs. Comparative Advantage <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Concept</th><th>Definition</th><th>Who Formulated</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Absolute Advantage</strong></td><td>Ability to produce more output per unit of input than another country</td><td>Adam Smith</td></tr>
+    <tr><td><strong>Comparative Advantage</strong></td><td>Ability to produce a good at a LOWER OPPORTUNITY COST than another country</td><td>David Ricardo</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Comparative advantage, not absolute advantage, determines trade patterns. Even if one country is better at producing everything, both countries gain from specialising in whatever they are relatively best at. Trade is mutually beneficial as long as opportunity costs differ.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">Country A can produce either 100 tonnes of wheat or 50 cars per worker. Country B can produce either 60 tonnes of wheat or 40 cars per worker. Which country has comparative advantage in cars?</div>
+  <div class="exam-a">
+    <strong>Compare opportunity costs:</strong><br>
+    Country A: 1 car costs 100/50 = <strong>2 tonnes of wheat</strong><br>
+    Country B: 1 car costs 60/40 = <strong>1.5 tonnes of wheat</strong><br>
+    <strong>Country B has comparative advantage in cars</strong> (lower opportunity cost: 1.5 < 2 wheat per car).<br>
+    Country A has comparative advantage in wheat (1 wheat costs 1/2 car in A vs. 1/1.5 = 0.67 car in B → A gives up less for wheat).<br>
+    Trade: A exports wheat, B exports cars → both gain.
+  </div>
+</div>
+
+<h3>Benefits of Trade and the Heckscher-Ohlin Model</h3>
+
+<p>The Heckscher-Ohlin model says countries export goods that intensively use their abundant factors. A labour-abundant country (like Vietnam) exports labour-intensive goods (clothing, electronics assembly). A capital-abundant country (like Germany) exports capital-intensive goods (machinery, chemicals).</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Trade Benefit</th><th>Explanation</th></tr></thead>
+  <tbody>
+    <tr><td>Lower prices for consumers</td><td>Access to cheaper foreign goods; domestic competition disciplined</td></tr>
+    <tr><td>Economies of scale</td><td>Larger market allows longer production runs and lower unit costs</td></tr>
+    <tr><td>Technology transfer</td><td>Exposure to foreign firms drives domestic productivity improvements</td></tr>
+    <tr><td>Diversification</td><td>Countries can consume goods they can't efficiently produce</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Trade Restrictions: Tariffs vs. Quotas <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Feature</th><th>Tariff</th><th>Quota</th></tr></thead>
+  <tbody>
+    <tr><td>Definition</td><td>Tax on imports</td><td>Quantitative limit on imports</td></tr>
+    <tr><td>Government revenue</td><td>Yes — collects tariff revenue</td><td>No — quota rents go to foreign exporters or licensed domestic importers</td></tr>
+    <tr><td>Domestic producer effect</td><td>Protected — higher domestic price</td><td>Protected — higher domestic price</td></tr>
+    <tr><td>Domestic consumer effect</td><td>Worse off — pays higher price</td><td>Worse off — pays higher price</td></tr>
+    <tr><td>Deadweight loss</td><td>Yes — allocative inefficiency</td><td>Yes — same deadweight loss but no revenue captured</td></tr>
+    <tr><td>Predictability of import quantity</td><td>Uncertain (depends on price elasticity)</td><td>Certain — import quantity is fixed</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Both tariffs and quotas create deadweight loss (welfare destruction). The key difference: tariffs generate government revenue (partially offsetting consumer harm), while quota rents typically accrue to the foreign exporter or holders of import licences. Tariffs are generally considered less harmful than quotas of equivalent trade restriction.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A government imposes a tariff on steel imports. Which of the following is most accurate regarding the effects? A) Domestic steel producers benefit. B) Domestic steel consumers benefit. C) The government loses revenue. D) The quota rent accrues to foreigners.</div>
+  <div class="exam-a"><strong>Answer: A — Domestic steel producers benefit.</strong> A tariff raises the domestic price of steel above the world price → domestic producers can sell at a higher price and expand output. Consumers are harmed (they pay more). The government earns tariff revenue. Quota rents going to foreigners is a feature of quotas, not tariffs — D is wrong and is a classic distractor.</div>
+</div>
+
+<h3>The Balance of Payments <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Account</th><th>What It Records</th><th>Key Components</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Current Account (CA)</strong></td><td>Flows of goods, services, income, and transfers</td><td>Trade balance (goods + services), net investment income, net transfers</td></tr>
+    <tr><td><strong>Capital Account (KA)</strong></td><td>Non-financial capital transfers (minor in most countries)</td><td>Debt forgiveness, migrant transfers of assets</td></tr>
+    <tr><td><strong>Financial Account (FA)</strong></td><td>Cross-border investment flows</td><td>FDI, portfolio investment (stocks/bonds), other investment, reserve changes</td></tr>
+  </tbody>
+</table></div>
+
+<div class="formula">\[ CA + KA + FA = 0 \quad \text{(in theory; statistical discrepancy in practice)} \]</div>
+
+<div class="intuition">The BOP always balances. If a country imports more than it exports (CA deficit), it must attract foreign capital to finance it (FA surplus). The US runs a large CA deficit because foreigners want to hold USD assets — the capital flows in as the counterpart. No country can run a persistent CA deficit without attracting capital inflows.</div>
+
+<div class="trap">Current Account deficit ≠ bad. A developing country importing capital goods to build infrastructure will run a CA deficit — this is healthy. The concern is when a CA deficit reflects excess consumption financed by unsustainable debt. Also: don't confuse Current Account with trade balance — CA is broader (includes services, income, transfers).</div>
+
+</section><hr>
+
+<!-- ════════════════ R18 ════════════════ -->
+<section id="r18">
+<div class="module-header">
+  <div class="lm-label">Reading 18</div>
+  <h2>Capital Flows and the FX Market</h2>
+  <div class="one-liner">What drives currency values, and why capital flows dominate trade flows in determining exchange rates.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>The foreign exchange market is the largest financial market in the world (~$7.5 trillion/day). Exchange rates affect trade competitiveness, inflation, portfolio returns, and corporate earnings. This reading focuses on what drives exchange rates (primarily capital flows and interest rate differentials) and how to apply parity conditions to analyse currency movements.</p>
+</div>
+
+<h3>Exchange Rate Quotation Conventions <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">\[ \text{Exchange Rate} = \frac{\text{Price Currency}}{\text{Base Currency}} = \frac{d/f}{\text{or}} = \frac{\text{domestic}}{\text{foreign}} \]</div>
+
+<p>Example: EUR/USD = 1.10 means 1 euro (base) = 1.10 US dollars (price currency). An increase in EUR/USD means the euro has appreciated (bought more USD).</p>
+
+<div class="key-rule">Always identify base vs. price currency first. The base currency is the one unit you're pricing. If EUR/USD = 1.10, you need 1.10 USD to buy 1 EUR. If EUR/USD rises to 1.20, the EUR has strengthened (each EUR now buys more USD).</div>
+
+<h3>Factors Driving Exchange Rates</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Factor</th><th>Direction of Effect on Domestic Currency</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Higher domestic interest rates</strong></td><td>Currency APPRECIATES — attracts capital inflows seeking higher yield</td></tr>
+    <tr><td><strong>Higher domestic inflation</strong></td><td>Currency DEPRECIATES — purchasing power falls; goods become less competitive</td></tr>
+    <tr><td><strong>Faster domestic GDP growth</strong></td><td>Currency APPRECIATES — attracts investment; imports rise but capital flows dominate</td></tr>
+    <tr><td><strong>Current account surplus</strong></td><td>Currency APPRECIATES — demand for domestic currency from foreign buyers of exports</td></tr>
+    <tr><td><strong>Government debt / fiscal deficit</strong></td><td>Currency DEPRECIATES — risk of monetisation; inflation expectations rise</td></tr>
+    <tr><td><strong>Political instability</strong></td><td>Currency DEPRECIATES — capital flight; risk premium rises</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Parity Conditions <span class="tag tag-critical">Critical</span></h3>
+
+<h4>1. Purchasing Power Parity (PPP)</h4>
+<p>The law of one price applied to all goods: exchange rates should adjust so that identical goods cost the same across countries. In the long run, high-inflation countries see their currencies depreciate.</p>
+
+<div class="formula">\[ \frac{S_1}{S_0} = \frac{1 + \pi_A}{1 + \pi_B} \approx 1 + (\pi_A - \pi_B) \]</div>
+
+<p>Where S = spot exchange rate (A/B), π = inflation rate. If country A has 5% inflation and country B has 2%, currency A is expected to depreciate by ~3% against currency B.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">The EUR/USD spot rate is 1.10. Eurozone inflation is 3%, US inflation is 1%. Using relative PPP, what is the expected EUR/USD rate in one year?</div>
+  <div class="exam-a">
+    <strong>PPP prediction:</strong> Euro has higher inflation → EUR should depreciate.<br>
+    Expected rate = 1.10 × (1 + 0.03)/(1 + 0.01) = 1.10 × 1.0198 = <strong>1.1218</strong><br>
+    Wait — this is EUR/USD (price = USD). If EUR depreciates, you need more USD per EUR... but that seems like appreciation.<br>
+    <strong>Careful with convention:</strong> EUR/USD rising means EUR appreciated. With higher EUR inflation, EUR should weaken → EUR/USD should FALL → 1.10 × (1.01/1.03) = 1.10 × 0.9806 ≈ <strong>1.0787</strong>.<br>
+    Formula: S₁ = S₀ × (1 + π_price)/(1 + π_base) = 1.10 × (1.01/1.03) ≈ 1.08.
+  </div>
+</div>
+
+<h4>2. Interest Rate Parity (IRP)</h4>
+
+<div class="formula">\[ F = S \times \frac{1 + r_A}{1 + r_B} \]</div>
+
+<p>Where F = forward exchange rate, S = spot rate, r_A and r_B are interest rates in the respective currencies. The currency with the higher interest rate trades at a forward discount — the expected depreciation offsets the interest advantage.</p>
+
+<div class="intuition">If US rates are 5% and Eurozone rates are 2%, you can't simply borrow cheap in EUR, invest at USD rates, and profit risk-free — the EUR/USD forward rate will compensate. The USD trades at a forward discount (relative to spot), wiping out the interest advantage. This is Covered Interest Rate Parity (CIRP) — a near-perfect arbitrage relationship in developed markets.</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Parity Condition</th><th>What It Predicts</th><th>Short Run vs Long Run</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Purchasing Power Parity (PPP)</strong></td><td>Inflation differentials drive exchange rate changes</td><td>Long run (years) — short run deviations common</td></tr>
+    <tr><td><strong>Interest Rate Parity (IRP)</strong></td><td>Interest differentials are reflected in forward rates; no arbitrage possible</td><td>Short run — holds tightly in developed markets</td></tr>
+    <tr><td><strong>International Fisher Effect</strong></td><td>Nominal interest differentials = expected inflation differentials (combining Fisher + PPP)</td><td>Long run</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Exchange Rate Regimes</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Regime</th><th>Description</th><th>Example</th><th>Trade-offs</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Free float</strong></td><td>Market-determined; central bank does not intervene</td><td>USD, EUR, GBP, JPY</td><td>Full monetary policy independence; exchange rate absorbs shocks</td></tr>
+    <tr><td><strong>Managed float (dirty float)</strong></td><td>Mainly market-driven but central bank intervenes to smooth volatility</td><td>Most EMs, China (loosely)</td><td>Partial monetary independence; reserves needed for intervention</td></tr>
+    <tr><td><strong>Fixed peg</strong></td><td>Currency fixed to another (usually USD); requires reserves to defend</td><td>Saudi Riyal, UAE Dirham</td><td>Eliminates FX risk; but loss of monetary independence (impossible trinity)</td></tr>
+    <tr><td><strong>Currency board</strong></td><td>Strict fixed rate; all domestic money backed 100% by foreign reserves</td><td>Hong Kong Dollar</td><td>Very credible; but no monetary flexibility whatsoever</td></tr>
+    <tr><td><strong>Dollarisation</strong></td><td>Adopts foreign currency as legal tender</td><td>Ecuador (USD), Panama</td><td>Zero FX risk; zero monetary policy; inflation linked to reserve currency</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">The Impossible Trinity (Trilemma): A country cannot simultaneously have (1) a fixed exchange rate, (2) free capital flows, and (3) independent monetary policy. It can have any two but must give up one. The Eurozone gave up independent monetary policy. China limits capital flows to maintain its managed exchange rate with partial monetary independence.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A country maintains a fixed exchange rate peg and allows free capital flows. What must it sacrifice according to the monetary trilemma?</div>
+  <div class="exam-a"><strong>Independent monetary policy.</strong> With a fixed exchange rate AND free capital flows, the central bank must continuously adjust domestic interest rates to defend the peg — matching the anchor country's rate. It cannot set rates based on domestic conditions. Any attempt to lower rates below the anchor country's rate will cause capital outflows, depleting reserves, and forcing devaluation. This is why currency board countries (like HK) follow US Fed policy almost exactly.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R19 ════════════════ -->
+<section id="r19">
+<div class="module-header">
+  <div class="lm-label">Reading 19</div>
+  <h2>Exchange Rate Calculations</h2>
+  <div class="one-liner">The arithmetic of currencies: cross rates, forward rates, and spotting covered interest arbitrage.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>This reading is the most calculation-heavy in Economics. The CFA exam consistently tests cross-rate calculations, bid-ask spread mechanics, forward rate premiums/discounts, and covered interest arbitrage. Master the formulas and the convention (base/price) — then the calculations are mechanical.</p>
+</div>
+
+<h3>Cross-Rate Calculations <span class="tag tag-critical">Critical</span></h3>
+
+<p>A cross rate is the exchange rate between two currencies derived from their common exchange rate against a third currency (usually USD).</p>
+
+<div class="formula">\[ \text{EUR/GBP} = \frac{\text{EUR/USD}}{\text{GBP/USD}} = \frac{\text{USD per EUR}}{\text{USD per GBP}} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Numerical)</div>
+  <div class="exam-q">EUR/USD = 1.1000 and GBP/USD = 1.2500. What is the EUR/GBP cross rate?</div>
+  <div class="exam-a">
+    <strong>EUR/GBP = EUR/USD ÷ GBP/USD = 1.1000 / 1.2500 = 0.8800.</strong><br>
+    This means 1 GBP (base) = 0.88 EUR. To get EUR/GBP, divide the USD price of EUR by the USD price of GBP. Intuition check: since GBP is more expensive than EUR (1 GBP > 1 EUR in USD terms), the EUR/GBP rate < 1 makes sense.
+  </div>
+</div>
+
+<h3>Bid-Ask Spreads <span class="tag tag-formula">Formula</span></h3>
+
+<p>Dealers quote two prices: the bid (price they buy the base currency) and the ask/offer (price they sell the base currency). Bid is always lower than ask. The spread is the dealer's profit.</p>
+
+<div class="formula">\[ \text{Spread} = \text{Ask} - \text{Bid} \]</div>
+<div class="formula">\[ \text{Percentage Spread} = \frac{\text{Ask} - \text{Bid}}{\text{Ask}} \times 100\% \]</div>
+
+<div class="key-rule">You always buy at the ASK (higher) and sell at the BID (lower). The dealer buys from you at the bid, sells to you at the ask — you always get the worse price. This "always lose on the spread" rule is what the exam tests with cross-rate bid-ask problems.</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Transaction</th><th>Which Rate to Use</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>You want to BUY base currency</td><td>Ask rate</td><td>Dealer sells to you at the higher price</td></tr>
+    <tr><td>You want to SELL base currency</td><td>Bid rate</td><td>Dealer buys from you at the lower price</td></tr>
+    <tr><td>You want to BUY price currency</td><td>Bid rate</td><td>Selling base = dealer buys base at bid</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">EUR/USD bid = 1.0950, ask = 1.0960. A client wants to buy €1,000,000. How much USD must they pay?</div>
+  <div class="exam-a"><strong>Client buys EUR (base) → uses the ASK rate.</strong> USD cost = €1,000,000 × 1.0960 = <strong>$1,096,000</strong>.<br>
+  If they were selling EUR instead, they'd use the BID: €1,000,000 × 1.0950 = $1,095,000. The $1,000 difference is the dealer's spread on this transaction.</div>
+</div>
+
+<h3>Forward Exchange Rates <span class="tag tag-critical">Critical</span></h3>
+
+<p>The forward rate is the agreed exchange rate for a transaction that settles in the future (e.g., 30, 90, or 180 days). It's determined by the spot rate and the interest rate differential via covered interest rate parity:</p>
+
+<div class="formula">\[ F = S \times \frac{1 + r_{\text{price currency}}}{1 + r_{\text{base currency}}} \]</div>
+
+<div class="formula">\[ \text{Forward Premium/Discount} = \frac{F - S}{S} \times \frac{360}{t} \times 100\% \]</div>
+
+<p>If F > S (in A/B terms): currency A is at a forward premium relative to B (or B is at a discount). The currency with the higher interest rate trades at a forward discount.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question (Calculation)</div>
+  <div class="exam-q">Spot EUR/USD = 1.1000. US 90-day rate = 5.0% (annualised). Eurozone 90-day rate = 2.0% (annualised). Calculate the 90-day forward EUR/USD rate.</div>
+  <div class="exam-a">
+    <strong>Adjust rates to 90-day periods:</strong> US rate = 5% × 90/360 = 1.25%. EUR rate = 2% × 90/360 = 0.50%.<br>
+    <strong>F = S × (1 + r_price) / (1 + r_base) = 1.1000 × (1 + 0.0125) / (1 + 0.0050)</strong><br>
+    F = 1.1000 × 1.0125 / 1.0050 = 1.1000 × 1.00747 = <strong>1.1082</strong><br>
+    EUR/USD rises → EUR is at a forward PREMIUM (USD at discount). This makes sense: US has higher interest rate, so USD investors are "compensated" in the forward market by receiving fewer USD per EUR forward (USD premium over EUR — wait, let's verify the direction).<br>
+    EUR/USD forward = 1.1082 > spot 1.1000 → EUR strengthened in forward → EUR is at forward premium. The high-interest-rate currency (USD) should be at a forward discount. EUR/USD going up means EUR is more expensive in USD → USD is cheaper per EUR → USD at forward discount. ✓ Consistent with IRP.
+  </div>
+</div>
+
+<h3>Covered Interest Rate Arbitrage <span class="tag tag-critical">Critical</span></h3>
+
+<p>If the forward rate doesn't equal what interest rate parity dictates, there is a riskless arbitrage opportunity. The process of exploiting it forces the forward rate back to parity.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Step</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Borrow in low-rate currency (e.g., EUR at 2%)</td></tr>
+    <tr><td>2</td><td>Convert to high-rate currency at spot (buy USD)</td></tr>
+    <tr><td>3</td><td>Invest at high interest rate (USD at 5%)</td></tr>
+    <tr><td>4</td><td>Enter forward contract to sell USD / buy EUR at today's forward rate (locks in the exchange)</td></tr>
+    <tr><td>5</td><td>At maturity: collect USD investment, convert at forward rate, repay EUR loan → riskless profit if F ≠ IRP value</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Covered interest arbitrage is the mechanism that ENFORCES interest rate parity. Any deviation from IRP creates an arbitrage opportunity; traders pile in, and their buying/selling pressure moves the forward rate back to parity. This is why IRP holds so tightly in developed FX markets — it's constantly enforced by arbitrageurs.</div>
+
+<h3>Currency Appreciation/Depreciation Effects on Economy</h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Currency Movement</th><th>Effect on Exports</th><th>Effect on Imports</th><th>Effect on Inflation</th><th>Net Effect on CA</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Domestic Currency Appreciates</strong></td><td>More expensive for foreigners → exports fall</td><td>Cheaper for residents → imports rise</td><td>Disinflationary (cheaper imports)</td><td>CA worsens (J-curve initially)</td></tr>
+    <tr><td><strong>Domestic Currency Depreciates</strong></td><td>Cheaper for foreigners → exports rise</td><td>More expensive for residents → imports fall</td><td>Inflationary (expensive imports)</td><td>CA improves (after J-curve lag)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">J-Curve Effect: When a currency depreciates, the trade balance INITIALLY worsens before improving. Why? Existing import/export contracts are priced in foreign currency — the quantity doesn't adjust immediately. The price effect (higher import prices in domestic currency) hits first; the volume effect (more exports, fewer imports) takes 6–18 months to materialise.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">The GBP depreciates 10% against major currencies. In the SHORT RUN, what is most likely to happen to the UK's current account balance?</div>
+  <div class="exam-a"><strong>The current account balance most likely worsens initially (J-curve effect).</strong> Although depreciation eventually improves the CA, the immediate effect is adverse: UK importers pay more GBP for the same goods (no volume reduction yet), while UK export volumes haven't yet risen (foreign buyers need time to respond). The Marshall-Lerner condition states that the CA improves long-run only if the sum of export and import price elasticities exceeds 1 in absolute value — which typically holds after volumes adjust.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ FORMULA SHEET ════════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Formula Sheet — All 8 Readings</h2>
+  <div class="one-liner">Every formula you need, in one place.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+  <thead><tr><th style="width:42%">Formula</th><th style="width:43%">Description</th><th>Reading</th></tr></thead>
+  <tbody>
+    <tr><td>\(MR = MC\)</td><td>Profit-maximising output for any firm in any market</td><td>12</td></tr>
+    <tr><td>\(P = MR = AR\)</td><td>Perfect competition — price equals MR (price taker)</td><td>12</td></tr>
+    <tr><td>\(MR = P(1 + 1/\varepsilon_d)\)</td><td>Monopoly MR relationship to price and elasticity</td><td>12</td></tr>
+    <tr><td>\(\text{HHI} = \sum s_i^2\)</td><td>Herfindahl-Hirschman Index (market concentration)</td><td>12</td></tr>
+    <tr><td>\(\text{Operate if } P \geq AVC\)</td><td>Short-run shutdown rule (sunk fixed costs)</td><td>12</td></tr>
+    <tr><td>\(U\% = \text{Unemployed} / \text{Labour Force}\)</td><td>Unemployment rate</td><td>13</td></tr>
+    <tr><td>\(\pi = \Delta CPI/CPI_{t-1}\)</td><td>Inflation rate from CPI</td><td>13</td></tr>
+    <tr><td>\(\text{Multiplier} = 1/(1 - MPC) = 1/MPS\)</td><td>Government spending multiplier</td><td>14</td></tr>
+    <tr><td>\(\text{Tax Multiplier} = -MPC/(1-MPC)\)</td><td>Tax cut multiplier (smaller than spending multiplier)</td><td>14</td></tr>
+    <tr><td>\(MV = PQ\)</td><td>Quantity Theory of Money</td><td>15</td></tr>
+    <tr><td>\(\text{Taylor Rule} = r^* + \pi^* + 0.5(\pi-\pi^*) + 0.5(\text{output gap})\)</td><td>Policy rate prescription</td><td>15</td></tr>
+    <tr><td>\(CA + KA + FA = 0\)</td><td>Balance of Payments identity</td><td>17</td></tr>
+    <tr><td>\(S_1/S_0 = (1+\pi_A)/(1+\pi_B)\)</td><td>Relative Purchasing Power Parity</td><td>18</td></tr>
+    <tr><td>\(F = S \times (1+r_A)/(1+r_B)\)</td><td>Interest Rate Parity — forward exchange rate</td><td>18/19</td></tr>
+    <tr><td>\(\text{EUR/GBP} = \text{EUR/USD} \div \text{GBP/USD}\)</td><td>Cross-rate calculation</td><td>19</td></tr>
+    <tr><td>\(\text{Forward Premium} = (F-S)/S \times 360/t\)</td><td>Annualised forward premium or discount</td><td>19</td></tr>
+  </tbody>
+</table></div>
+
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level 1 — Quantitative Methods: Intuition-First Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<style>
+:root {
+  --cream: #fdf8f2;
+  --navy: #0d1f38;
+  --navy2: #162d50;
+  --gold: #b8852a;
+  --gold-light: #fef3dc;
+  --gold-mid: #f5dfa0;
+  --green-dark: #14532d;
+  --green-light: #dcfce7;
+  --green-mid: #bbf7d0;
+  --purple-dark: #4c1d95;
+  --purple-light: #ede9fe;
+  --red-dark: #991b1b;
+  --red-light: #fee2e2;
+  --blue-dark: #1e3a5f;
+  --blue-light: #dbeafe;
+  --gray1: #f1f5f9;
+  --gray2: #e2e8f0;
+  --gray3: #94a3b8;
+  --text: #1e2d3d;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--cream);
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed; top: 0; left: 0;
+  width: 240px; height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--navy);
+  padding: 20px 0;
+  z-index: 100;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.15) transparent;
+}
+#sidebar .brand {
+  padding: 0 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 8px;
+}
+#sidebar .brand-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: #fff; letter-spacing: 0.3px;
+}
+#sidebar .brand-sub {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#sidebar .nav-section {
+  padding: 14px 18px 4px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.3);
+}
+#sidebar a {
+  display: block; padding: 6px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  transition: all .15s; line-height: 1.4;
+  border-left: 2px solid transparent;
+}
+#sidebar a:hover { color: #fff; background: rgba(255,255,255,.07); border-left-color: rgba(255,255,255,.3); }
+#sidebar a.active { color: #fff; background: rgba(184,133,42,.2); border-left-color: var(--gold); font-weight: 700; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 240px;
+  padding: 56px 72px 100px;
+  width: calc(100% - 240px);
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--navy);
+  margin-bottom: 64px;
+}
+.hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 38px; font-weight: 800;
+  color: var(--navy); margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  font-size: 19px; font-style: italic;
+  color: var(--gold); margin-bottom: 6px;
+}
+.hero .meta { font-size: 13px; color: var(--gray3); font-family: 'Plus Jakarta Sans', sans-serif; }
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-top: 80px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  border-radius: 14px;
+  padding: 28px 34px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.module-header::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 200px; height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(184,133,42,.1));
+}
+.module-header .lm-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--gold); margin-bottom: 6px;
+}
+.module-header h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 24px; font-weight: 800;
+  color: #fff; line-height: 1.25;
+}
+.module-header .one-liner {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* ── HEADINGS ── */
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy);
+  margin: 36px 0 12px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--blue-light);
+}
+h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--blue-dark);
+  margin: 24px 0 8px;
+}
+p { margin: 11px 0; }
+
+/* ── INTUITION BOX ── */
+.intuition {
+  background: var(--green-light);
+  border-left: 4px solid #22c55e;
+  border-radius: 0 10px 10px 0;
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: var(--green-dark);
+  font-size: 16px; line-height: 1.7;
+}
+.intuition::before { content: "💡 Intuition — "; font-weight: 700; font-style: normal; }
+
+/* ── EXAM QUESTION BOX ── */
+.exam {
+  background: var(--gold-light);
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 24px 0;
+}
+.exam-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--gold); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.exam-q {
+  font-size: 15.5px; line-height: 1.7;
+  color: #3d2a0a;
+  margin-bottom: 10px;
+}
+.exam-a {
+  font-size: 14.5px; line-height: 1.65;
+  color: #5c3d14;
+  padding-top: 8px;
+  border-top: 1px solid var(--gold-mid);
+}
+.exam-a strong { color: var(--navy); }
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--purple-light);
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 22px;
+  margin: 18px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* ── ANALOGY BOX ── */
+.analogy {
+  background: var(--blue-light);
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 20px;
+  margin: 18px 0;
+  color: var(--blue-dark);
+  font-size: 15.5px; line-height: 1.7;
+}
+.analogy::before { content: "🎯 Real-world analogy — "; font-weight: 700; }
+
+/* ── KEY RULE BOX ── */
+.key-rule {
+  background: var(--red-light);
+  border-left: 4px solid #ef4444;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 20px;
+  margin: 18px 0;
+  color: var(--red-dark);
+  font-size: 15.5px; font-weight: 600;
+}
+.key-rule::before { content: "⚠️ Exam Trap — "; }
+
+/* ── BIG PICTURE ── */
+.big-picture {
+  background: linear-gradient(135deg, #fef9ec, #fef3c7);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin: 44px 0 12px;
+}
+.bp-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: #b45309; margin-bottom: 8px;
+}
+.big-picture p { color: #78350f; font-size: 15px; margin: 0; line-height: 1.75; }
+
+/* ── TABLES ── */
+.table-wrap { overflow-x: auto; margin: 18px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.07); }
+table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; }
+thead tr { background: var(--navy); }
+thead th { color: #fff; padding: 11px 14px; text-align: left; font-weight: 600; font-size: 12.5px; }
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody tr:hover { background: var(--blue-light); }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--gray2); vertical-align: top; line-height: 1.5; }
+
+/* ── LISTS ── */
+ul, ol { padding-left: 26px; margin: 10px 0; }
+li { margin: 5px 0; line-height: 1.65; }
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  margin-left: 6px; vertical-align: middle;
+}
+.tag-critical { background: var(--red-light); color: var(--red-dark); }
+.tag-formula { background: var(--purple-light); color: var(--purple-dark); }
+.tag-exam { background: var(--gold-light); color: #92400e; }
+
+/* ── DIVIDER ── */
+hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
+
+/* ── FORMULA REFERENCE TABLE ── */
+.formula-table thead tr { background: #4c1d95; }
+.formula-table tbody tr:nth-child(even) { background: #faf5ff; }
+.formula-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-dark); }
+.formula-table td:last-child { text-align: center; font-weight: 700; color: var(--navy); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { margin-left: 0; padding: 28px 18px; }
+}
+@media print {
+  #sidebar { display: none; }
+  #main { margin-left: 0; }
+  .module-header { break-before: page; }
+}
+
+/* ── COMPARISON GRID ── */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin: 18px 0;
+}
+.compare-box {
+  border-radius: 10px; padding: 16px 18px;
+}
+.compare-box.left { background: var(--blue-light); }
+.compare-box.right { background: var(--green-light); }
+.compare-box h5 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.compare-box.left h5 { color: var(--blue-dark); }
+.compare-box.right h5 { color: var(--green-dark); }
+
+/* ── WORKED EXAMPLE ── */
+.worked {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 20px 0;
+  font-size: 15px;
+}
+.worked-header {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: #166534; margin-bottom: 10px;
+}
+.worked p { color: #14532d; margin: 6px 0; line-height: 1.6; }
+.worked code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: #4c1d95;
+  background: #ede9fe; padding: 1px 5px; border-radius: 3px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level 1</div>
+    <div class="brand-sub">Quantitative Methods · Intuition Guide</div>
+  </div>
+  <div class="nav-section">Returns & TVM</div>
+  <a href="#r1">R1 — Rates &amp; Returns</a>
+  <a href="#r2">R2 — Time Value of Money</a>
+  <div class="nav-section">Statistics</div>
+  <a href="#r3">R3 — Statistical Measures</a>
+  <a href="#r4">R4 — Probability Trees</a>
+  <a href="#r5">R5 — Portfolio Mathematics</a>
+  <div class="nav-section">Simulation</div>
+  <a href="#r6">R6 — Simulation Methods</a>
+  <div class="nav-section">Inference</div>
+  <a href="#r7">R7 — Estimation &amp; Inference</a>
+  <a href="#r8">R8 — Hypothesis Testing</a>
+  <a href="#r9">R9 — Tests of Independence</a>
+  <div class="nav-section">Regression</div>
+  <a href="#r10">R10 — Simple Regression</a>
+  <div class="nav-section">Big Data</div>
+  <a href="#r11">R11 — Big Data Techniques</a>
+  <div class="nav-section">Reference</div>
+  <a href="#formulas">Master Formula Sheet</a>
+</nav>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+<div class="hero">
+  <h1>CFA Level 1 — Quantitative Methods</h1>
+  <p class="subtitle">Intuition-First Study Guide · All 11 Readings</p>
+  <p class="meta">Every formula with worked examples · Exam traps called out explicitly · Logic explained before mechanics</p>
+</div>
+
+<!-- ════════════════ R1 ════════════════ -->
+<section id="r1">
+<div class="module-header">
+  <div class="lm-label">Reading 1</div>
+  <h2>Rates and Returns</h2>
+  <div class="one-liner">How we measure performance — and why the method you choose can dramatically change the number you get.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Before you can analyse any investment, you need to measure its return. This reading gives you a toolkit of return measures, each suited to a different question: "How did this one security do?" (HPR), "What did the average manager return over time?" (time-weighted), "How did my portfolio do given my specific cash flows?" (money-weighted), and "How should I compare apples to oranges across compounding frequencies?" (EAR/APR conversions). Each measure tells a different story — the exam loves testing whether you pick the right one.</p>
+</div>
+
+<h3>Holding Period Return (HPR) — The Foundation</h3>
+<p>The most basic return measure: what did you earn on one investment over one holding period? It captures both income (dividends/coupons) and price appreciation in a single number.</p>
+
+<div class="formula">\[ HPR = \frac{P_1 - P_0 + CF_1}{P_0} \]</div>
+<p>Where \(P_0\) = beginning price, \(P_1\) = ending price, \(CF_1\) = cash received (dividend, coupon).</p>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example</div>
+  <p>You buy a stock at <strong>€50</strong>. It pays a <strong>€2 dividend</strong> and rises to <strong>€56</strong> at year-end.</p>
+  <p>HPR = (56 − 50 + 2) / 50 = <strong>8/50 = 16%</strong></p>
+  <p>Without the dividend you might think: "I earned 12% on price appreciation." The HPR correctly shows you earned 16% total.</p>
+</div>
+
+<div class="key-rule">HPR can be calculated over ANY holding period — a day, a month, 3 years. It is NOT annualised by default. Be careful: a 20% HPR over 4 years is very different from 20% per year.</div>
+
+<h3>Three Types of Mean Returns <span class="tag tag-critical">Critical</span></h3>
+
+<h4>1. Arithmetic Mean Return</h4>
+<p>Simple average of periodic returns. Best use: estimate the <em>expected</em> return in a single future period, given a history of returns.</p>
+<div class="formula">\[ \bar{R}_A = \frac{1}{T} \sum_{t=1}^{T} R_t \]</div>
+
+<h4>2. Geometric Mean Return</h4>
+<p>The compound annual growth rate (CAGR). Best use: describe the <em>actual historical</em> growth rate of a portfolio that was left to compound. Always ≤ arithmetic mean (equal only when all returns are identical).</p>
+<div class="formula">\[ \bar{R}_G = \left[\prod_{t=1}^{T}(1+R_t)\right]^{1/T} - 1 \]</div>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — Why They Differ</div>
+  <p>Year 1: +50%. Year 2: −50%.</p>
+  <p><strong>Arithmetic mean</strong> = (50% + (−50%)) / 2 = <strong>0%</strong> — sounds fine.</p>
+  <p><strong>Geometric mean</strong> = √(1.50 × 0.50) − 1 = √0.75 − 1 = <strong>−13.4%</strong></p>
+  <p>You invested €100. After Year 1: €150. After Year 2: €75. You lost money! The geometric mean reflects reality; the arithmetic mean was dangerously misleading.</p>
+</div>
+
+<h4>3. Harmonic Mean Return</h4>
+<p>Used specifically for dollar-cost averaging — when you invest a fixed €amount each period (not a fixed number of shares). The average cost per share when investing equal amounts is the harmonic mean of prices.</p>
+<div class="formula">\[ \bar{R}_H = \frac{N}{\sum_{t=1}^{N}\frac{1}{R_t}} \]</div>
+<p>Relationship: Harmonic Mean ≤ Geometric Mean ≤ Arithmetic Mean (equality holds only if all values are identical).</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investor's portfolio returns +20%, −10%, and +15% over three years. What is the geometric mean annual return?</div>
+  <div class="exam-a"><strong>Answer:</strong> G = (1.20 × 0.90 × 1.15)^(1/3) − 1 = (1.2420)^(1/3) − 1 = 1.0752 − 1 = <strong>7.52%</strong>. The arithmetic mean would be (20 − 10 + 15)/3 = 8.33% — always higher than geometric. Use geometric to measure actual wealth accumulation.</div>
+</div>
+
+<h3>Money-Weighted vs. Time-Weighted Returns <span class="tag tag-critical">Critical</span></h3>
+
+<p>This is one of the most heavily tested concepts in the entire CFA curriculum. The key question: whose decision are we evaluating?</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>⏱ Time-Weighted Return (TWR)</h5>
+    <p><strong>Purpose:</strong> Evaluate the <em>portfolio manager's</em> skill — eliminates the impact of the investor's own cash flow timing decisions.</p>
+    <p><strong>Method:</strong> Divide the period at each external cash flow. Calculate HPR for each sub-period. Compound them.</p>
+    <p><strong>CFA standard for comparing managers.</strong></p>
+  </div>
+  <div class="compare-box right">
+    <h5>💰 Money-Weighted Return (MWR)</h5>
+    <p><strong>Purpose:</strong> Evaluate the <em>investor's</em> actual experience — includes timing of contributions and withdrawals.</p>
+    <p><strong>Method:</strong> It is the IRR of all cash flows (outflows = investments, inflows = withdrawals + ending value).</p>
+    <p><strong>Best for personal wealth tracking.</strong></p>
+  </div>
+</div>
+
+<div class="intuition">If an investor puts in more money right before a bad period and withdraws right before a good period, their MWR will be terrible even if the manager had great skill. TWR strips this out, making it the fair way to compare managers who had different client cash flow patterns.</div>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — TWR vs MWR</div>
+  <p><strong>Setup:</strong> Start of Year 1: Invest €100. Year 1 return = +50% → Portfolio = €150. End of Year 1: Invest additional €150 → Portfolio = €300. Year 2 return = −10% → Portfolio = €270.</p>
+  <p><strong>TWR:</strong> Sub-period 1 HPR = +50%. Sub-period 2 HPR = −10%.</p>
+  <p>TWR = (1.50 × 0.90)^(1/2) − 1 = (1.35)^0.5 − 1 = <strong>16.2% per year</strong></p>
+  <p><strong>MWR:</strong> Cash flows: t=0: −100, t=1: −150, t=2: +270. Solve for IRR.</p>
+  <p>−100 − 150/(1+r) + 270/(1+r)² = 0. Solving: r ≈ <strong>−4.1% per year</strong></p>
+  <p>The investor had poor timing (invested big just before the bad year). TWR says the manager was skilled (+16%); MWR says the investor's experience was poor (−4%).</p>
+</div>
+
+<h3>Interest Rate Conversions — EAR, APR, and Compounding</h3>
+
+<h4>Effective Annual Rate (EAR)</h4>
+<p>EAR is the true annual return after accounting for intra-year compounding. It's the standardised way to compare investments with different compounding frequencies.</p>
+<div class="formula">\[ EAR = \left(1 + \frac{r_{stated}}{m}\right)^m - 1 \]</div>
+<p>Where \(m\) = number of compounding periods per year.</p>
+
+<div class="formula">\[ EAR_{\text{continuous}} = e^{r_s} - 1 \]</div>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — EAR Comparison</div>
+  <p>Bank A offers 6% compounded monthly. Bank B offers 6.1% compounded annually. Which is better?</p>
+  <p><strong>Bank A EAR</strong> = (1 + 0.06/12)^12 − 1 = (1.005)^12 − 1 = <strong>6.168%</strong></p>
+  <p><strong>Bank B EAR</strong> = 6.1% (already annual)</p>
+  <p>Bank A is better despite a lower stated rate. Compounding frequency matters enormously.</p>
+</div>
+
+<div class="key-rule">The stated rate (APR) is what banks advertise. The EAR is what you actually earn. They are only equal when m = 1 (annual compounding). More frequent compounding → higher EAR for same APR. Continuous compounding gives the maximum possible EAR for a given stated rate.</div>
+
+<h3>Real vs. Nominal Returns</h3>
+<p>A nominal return includes inflation. A real return strips it out, showing purchasing power growth.</p>
+<div class="formula">\[ (1 + r_{real}) = \frac{1 + r_{nominal}}{1 + r_{inflation}} \quad \text{(Fisher equation — exact form)} \]</div>
+<div class="formula">\[ r_{real} \approx r_{nominal} - r_{inflation} \quad \text{(approximation, valid for small rates)} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An investment returns 8% nominally while inflation is 3%. What is the exact real return?</div>
+  <div class="exam-a"><strong>Answer:</strong> (1.08 / 1.03) − 1 = 1.0485 − 1 = <strong>4.85%</strong>. The approximation gives 8% − 3% = 5%. The exam will sometimes give you the approximate method as the wrong answer. Always use the exact Fisher equation unless told otherwise.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R2 ════════════════ -->
+<section id="r2">
+<div class="module-header">
+  <div class="lm-label">Reading 2</div>
+  <h2>The Time Value of Money in Finance</h2>
+  <div class="one-liner">A dollar today is worth more than a dollar tomorrow — this single principle underlies all of finance.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>TVM is the engine behind every valuation model in the CFA curriculum. Bond pricing, equity valuation (dividend discount model), capital budgeting (NPV), mortgage payments, pension funding — all reduce to one question: how do we move cash flows across time? Master the mechanics here and every subsequent topic becomes easier. This reading is also extremely high-yield: TVM calculator questions appear in almost every exam.</p>
+</div>
+
+<h3>The Core Principle</h3>
+<div class="analogy">You're given a choice: €1,000 today or €1,000 in 3 years. You'd take today, obviously. Why? You could invest it and have more than €1,000 in 3 years. This "opportunity cost of waiting" is the interest rate. TVM formalises this: every cash flow has a time-specific value, and we can only compare them after adjusting to the same point in time.</div>
+
+<h3>Future Value and Present Value <span class="tag tag-formula">Formula</span></h3>
+<div class="formula">\[ FV = PV \times (1 + r)^N \]</div>
+<div class="formula">\[ PV = \frac{FV}{(1 + r)^N} \]</div>
+<p>Where \(r\) = interest rate per period, \(N\) = number of periods.</p>
+
+<div class="key-rule">The interest rate \(r\) and the number of periods \(N\) must be in the same time unit. If you have a 6% annual rate and a 3-month problem, use r = 6%/4 = 1.5% and N = 1 (or r = 6% and N = 0.25 — not both!).</div>
+
+<h3>Annuities — Repeated Equal Cash Flows <span class="tag tag-critical">Critical</span></h3>
+<p>An annuity is a series of equal payments at equal intervals. Mortgages, lease payments, pension distributions — all are annuities.</p>
+
+<h4>Ordinary Annuity (payments at END of period — most common)</h4>
+<div class="formula">\[ PV_{\text{annuity}} = PMT \times \frac{1 - (1+r)^{-N}}{r} \]</div>
+<div class="formula">\[ FV_{\text{annuity}} = PMT \times \frac{(1+r)^N - 1}{r} \]</div>
+
+<h4>Annuity Due (payments at BEGINNING of period)</h4>
+<div class="formula">\[ PV_{\text{annuity due}} = PV_{\text{ordinary}} \times (1+r) \]</div>
+<p>Simply multiply the ordinary annuity by (1+r) — you receive each payment one period earlier, so each is worth more by one period of interest.</p>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — Mortgage Payment</div>
+  <p>A €200,000 mortgage at 5% annually, monthly payments, 30-year term. What is the monthly payment?</p>
+  <p>Monthly rate: r = 5%/12 = 0.4167%. Periods: N = 360.</p>
+  <p>200,000 = PMT × [1 − (1.004167)^{−360}] / 0.004167</p>
+  <p>200,000 = PMT × 186.28</p>
+  <p>PMT = 200,000 / 186.28 = <strong>€1,073.64/month</strong></p>
+  <p>Note: Over 30 years you pay 360 × €1,073.64 = €386,510 — nearly double the loan amount!</p>
+</div>
+
+<h3>Perpetuities — Payments Forever</h3>
+<p>A perpetuity pays the same amount forever. While no real instrument literally pays forever, this formula is used to value preferred stocks and is the basis for the Gordon Growth Model.</p>
+<div class="formula">\[ PV_{\text{perpetuity}} = \frac{PMT}{r} \]</div>
+<div class="formula">\[ PV_{\text{growing perpetuity}} = \frac{PMT_1}{r - g} \quad \text{(requires } r > g \text{)} \]</div>
+
+<div class="intuition">A perpetuity paying €100/year at a 5% discount rate is worth €100/0.05 = €2,000. Why? If you invested €2,000 at 5%, you'd earn exactly €100/year — same as the perpetuity. The formula just inverts this relationship.</div>
+
+<h3>Net Present Value (NPV) and Internal Rate of Return (IRR) <span class="tag tag-critical">Critical</span></h3>
+
+<div class="formula">\[ NPV = \sum_{t=0}^{N} \frac{CF_t}{(1+r)^t} = -CF_0 + \frac{CF_1}{(1+r)} + \frac{CF_2}{(1+r)^2} + \cdots \]</div>
+
+<p>NPV Decision Rule: Invest if NPV > 0 (project adds value). IRR is the discount rate that makes NPV = 0. IRR Decision Rule: Invest if IRR > required rate of return (hurdle rate).</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>NPV — Preferred Method</h5>
+    <p>Directly measures value added in currency (€/£/$). Assumes cash flows are reinvested at the discount rate. Always gives the correct decision for independent projects.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>IRR — Popular but Flawed</h5>
+    <p>Gives a percentage return — easy to communicate. Assumes reinvestment at the IRR (often unrealistic). Can give multiple values or misleading rankings for mutually exclusive projects.</p>
+  </div>
+</div>
+
+<div class="key-rule">When NPV and IRR conflict on mutually exclusive projects (e.g., NPV says choose A, IRR says choose B), always follow NPV. NPV directly measures value creation. IRR can be distorted by timing and scale differences. The CFA curriculum consistently reinforces: NPV is theoretically superior.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A project costs €10,000 today and generates €4,000 per year for 4 years. The required return is 10%. Should the project be accepted?</div>
+  <div class="exam-a"><strong>NPV</strong> = −10,000 + 4,000 × [1−(1.10)^{−4}/0.10] = −10,000 + 4,000 × 3.1699 = −10,000 + 12,679 = <strong>+€2,679</strong>. NPV > 0, so <strong>accept</strong>. The IRR would also be > 10% (approximately 21.9%), confirming the decision. Both methods agree when there is no conflict.</div>
+</div>
+
+<h3>Loan Amortisation</h3>
+<p>Each loan payment consists of an interest component and a principal repayment component. Over time, the proportion shifts: early payments are mostly interest; later payments are mostly principal. This is why you barely reduce your mortgage principal in the early years.</p>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — First Two Payments of a Loan</div>
+  <p>€10,000 loan, 8% annual, 5-year term, annual payments.</p>
+  <p>Annual PMT = 10,000 / [(1 − 1.08^{−5})/0.08] = 10,000 / 3.9927 = <strong>€2,504.56</strong></p>
+  <p><strong>Year 1:</strong> Interest = 10,000 × 8% = €800. Principal = 2,504.56 − 800 = €1,704.56. Remaining balance = €8,295.44.</p>
+  <p><strong>Year 2:</strong> Interest = 8,295.44 × 8% = €663.64. Principal = 2,504.56 − 663.64 = €1,840.92. Remaining balance = €6,454.52.</p>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R3 ════════════════ -->
+<section id="r3">
+<div class="module-header">
+  <div class="lm-label">Reading 3</div>
+  <h2>Statistical Measures of Asset Returns</h2>
+  <div class="one-liner">To describe a distribution of returns, you need its centre, its spread, its asymmetry, and the thickness of its tails.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Risk in finance is primarily measured through statistics. This reading gives you the vocabulary: mean (where returns tend to be), variance/standard deviation (how spread out they are), skewness (are losses worse than gains?), and kurtosis (how often do extreme events occur?). These measures directly connect to risk management — a portfolio with negative skew and high kurtosis (fat tails) is far more dangerous than its standard deviation alone suggests.</p>
+</div>
+
+<h3>Measures of Central Tendency</h3>
+
+<h4>Arithmetic Mean</h4>
+<div class="formula">\[ \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n} \]</div>
+
+<h4>Geometric Mean (for returns — covered in R1)</h4>
+<p>Use geometric mean for compounding problems; arithmetic mean for expected value of a single future period.</p>
+
+<h4>Weighted Mean</h4>
+<div class="formula">\[ \bar{x}_w = \sum_{i=1}^{n} w_i x_i \quad \text{where } \sum w_i = 1 \]</div>
+<p>Used for portfolio returns: weight each asset's return by its portfolio weight.</p>
+
+<h4>Median and Mode</h4>
+<p>Median = middle value when sorted (50th percentile). Mode = most frequently occurring value. For skewed distributions, the median is a better measure of "typical" because it's less affected by outliers.</p>
+
+<div class="intuition">If a portfolio of 10 stocks has 9 returning +5% and one returning −100% (went bankrupt), the mean return is −4.5%. But the median is +5%. The mean is distorted by the one catastrophic loss. This is exactly why return distributions in practice are negatively skewed — the few catastrophic outcomes drag the mean below the median.</div>
+
+<h3>Measures of Dispersion</h3>
+
+<h4>Variance and Standard Deviation <span class="tag tag-formula">Formula</span></h4>
+<div class="formula">\[ \sigma^2 = \frac{\sum_{i=1}^{N}(x_i - \mu)^2}{N} \quad \text{(population variance)} \]</div>
+<div class="formula">\[ s^2 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1} \quad \text{(sample variance — uses n−1)} \]</div>
+
+<div class="key-rule">Why n−1 (not n) for sample variance? Because the sample mean is calculated from the same data, which uses up one "degree of freedom." Dividing by n−1 makes the sample variance an unbiased estimator of the true population variance. This is called Bessel's correction. The CFA exam will test whether you use the correct denominator.</div>
+
+<h4>Coefficient of Variation (CV) — Relative Risk <span class="tag tag-exam">Exam Favourite</span></h4>
+<div class="formula">\[ CV = \frac{s}{\bar{x}} = \frac{\text{Standard Deviation}}{\text{Mean Return}} \]</div>
+<p>CV answers: "How much risk am I taking per unit of return?" Lower CV = better risk-adjusted performance (all else equal). Unlike standard deviation, CV allows comparison across investments with different return scales.</p>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — CV Comparison</div>
+  <p>Fund A: Mean return 10%, Std Dev 8% → CV = 8/10 = <strong>0.80</strong></p>
+  <p>Fund B: Mean return 20%, Std Dev 14% → CV = 14/20 = <strong>0.70</strong></p>
+  <p>Fund B has higher absolute risk, but less risk <em>per unit of return</em>. An investor focused on risk-adjusted returns would prefer Fund B.</p>
+</div>
+
+<h4>Sharpe Ratio — Risk-Adjusted Performance</h4>
+<div class="formula">\[ Sharpe\ Ratio = \frac{\bar{R}_p - R_f}{\sigma_p} = \frac{\text{Excess Return}}{\text{Total Risk}} \]</div>
+<p>The Sharpe ratio measures excess return (above the risk-free rate) per unit of total risk. Unlike CV, it uses excess return, making it the standard for comparing risky portfolios.</p>
+
+<div class="key-rule">CV vs. Sharpe Ratio: CV uses total return in the numerator; Sharpe uses excess return (above Rf). If the risk-free rate is 0%, they give the same ranking. In practice, Sharpe is preferred for portfolio evaluation because it correctly benchmarks against the opportunity cost of capital (the risk-free rate).</div>
+
+<h3>Skewness — Asymmetry of the Distribution <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Skewness</th><th>Shape</th><th>Mean vs. Median vs. Mode</th><th>Implication for Finance</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Positive (right skew)</strong></td><td>Long right tail</td><td>Mode &lt; Median &lt; Mean</td><td>Rare large gains; most returns are below the mean. Think: lottery tickets, venture capital.</td></tr>
+    <tr><td><strong>Zero (symmetric)</strong></td><td>Normal distribution</td><td>Mode = Median = Mean</td><td>The ideal assumption. Reality rarely looks like this.</td></tr>
+    <tr><td><strong>Negative (left skew)</strong></td><td>Long left tail</td><td>Mean &lt; Median &lt; Mode</td><td>Rare large losses; most returns are above the mean. Think: most equity portfolios, credit strategies, short volatility.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Equity markets tend to exhibit negative skew — they drift up most of the time (which is good), but occasionally crash severely (which is catastrophic). A strategy that looks good on mean and standard deviation alone can still be dangerous if it has significant negative skew. This is why kurtosis and skewness matter beyond just variance.</div>
+
+<h3>Kurtosis — Fat Tails <span class="tag tag-critical">Critical</span></h3>
+<p>Kurtosis measures the "tailedness" of a distribution — how much weight is in the extreme outcomes compared to a normal distribution.</p>
+
+<div class="formula">\[ \text{Excess Kurtosis} = \text{Kurtosis} - 3 \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Type</th><th>Excess Kurtosis</th><th>Tails vs. Normal</th><th>Finance Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Leptokurtic</strong></td><td>&gt; 0</td><td>Fatter tails (more extreme events)</td><td>Most financial return series — market crashes happen more often than the normal distribution predicts</td></tr>
+    <tr><td><strong>Mesokurtic</strong></td><td>= 0</td><td>Normal distribution tails</td><td>The theoretical benchmark</td></tr>
+    <tr><td><strong>Platykurtic</strong></td><td>&lt; 0</td><td>Thinner tails (fewer extremes)</td><td>Rare in finance</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Most real financial return series are leptokurtic (fat tails) with negative skewness. This means the normal distribution UNDERESTIMATES the probability of extreme losses. This is the central insight behind why standard Value-at-Risk (VaR) models failed in the 2008 crisis — they assumed normality when the true distribution had much fatter left tails.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A return series has excess kurtosis of +2.5 and negative skewness. Compared to a normal distribution, this series is best described as having:</div>
+  <div class="exam-a"><strong>Answer:</strong> Fatter tails (leptokurtic) with more extreme negative outcomes. Excess kurtosis > 0 means leptokurtic (fatter tails). Negative skewness means the left tail (losses) is longer than the right. Together: more frequent extreme losses than a normal distribution would predict. This is the typical financial return profile.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R4 ════════════════ -->
+<section id="r4">
+<div class="module-header">
+  <div class="lm-label">Reading 4</div>
+  <h2>Probability Trees and Conditional Expectations</h2>
+  <div class="one-liner">How to reason about uncertainty — from basic probability rules to Bayes' theorem and expected value calculations.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Probability is the mathematical language of uncertainty. Every investment decision involves uncertain outcomes, and this reading gives you the formal tools to reason about them. The practical payoff: probability trees help you model scenarios (recession/expansion, default/no default); expected value helps you price risky assets; Bayes' theorem lets you update beliefs rationally as new information arrives — which is exactly what good analysts do.</p>
+</div>
+
+<h3>Core Probability Rules</h3>
+
+<div class="formula">\[ P(A \cup B) = P(A) + P(B) - P(A \cap B) \quad \text{(Addition Rule)} \]</div>
+<div class="formula">\[ P(A \cap B) = P(A|B) \cdot P(B) \quad \text{(Multiplication Rule)} \]</div>
+<div class="formula">\[ P(A \cap B) = P(A) \cdot P(B) \quad \text{(if A and B are independent)} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Concept</th><th>Definition</th><th>Key Property</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Mutually exclusive</strong></td><td>Cannot both occur: P(A∩B) = 0</td><td>P(A∪B) = P(A) + P(B) (no subtraction needed)</td></tr>
+    <tr><td><strong>Exhaustive</strong></td><td>Cover all possibilities: P(A) + P(B) + … = 1</td><td>Forms a complete probability space</td></tr>
+    <tr><td><strong>Independent</strong></td><td>P(A|B) = P(A) — knowing B tells you nothing about A</td><td>P(A∩B) = P(A) × P(B)</td></tr>
+    <tr><td><strong>Dependent</strong></td><td>Knowing B changes the probability of A</td><td>Must use conditional probability</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Conditional Probability</h3>
+<div class="formula">\[ P(A|B) = \frac{P(A \cap B)}{P(B)} \quad \text{(requires } P(B) > 0\text{)} \]</div>
+<p>"The probability of A <em>given</em> B has occurred" — we've restricted our probability space to only the scenarios where B is true.</p>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — Credit Analysis</div>
+  <p>60% of companies in a sector are investment grade (IG). Of IG companies, 5% default within 5 years. Of non-IG companies, 40% default within 5 years.</p>
+  <p>P(Default | IG) = 5%; P(Default | Not IG) = 40%; P(IG) = 0.60; P(Not IG) = 0.40.</p>
+  <p>P(Default) = P(D|IG)×P(IG) + P(D|Not IG)×P(Not IG) = 0.05×0.60 + 0.40×0.40 = 0.03 + 0.16 = <strong>19%</strong></p>
+  <p>This is the Total Probability Rule — a fundamental tool for building scenario models.</p>
+</div>
+
+<h3>Bayes' Theorem — Updating Beliefs <span class="tag tag-exam">Exam Favourite</span></h3>
+<p>Bayes' theorem answers: "Given that an event occurred, what is the revised probability of its cause?" It's how rational people update beliefs when new information arrives.</p>
+<div class="formula">\[ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} \]</div>
+
+<div class="analogy">Imagine a medical test. 1% of people have a disease (prior). The test is 90% accurate. You test positive. What's the probability you actually have the disease? Bayes gives you the answer — and it's far lower than 90%, because the disease is rare. Analysts use the same logic: "Given that earnings were strong (the test result), what's the revised probability the company is a strong long-term performer (the disease)?</div>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — Bayes' Theorem in Finance</div>
+  <p>Prior probability of a recession: P(Rec) = 30%. During recessions, a yield curve inverts 80% of the time: P(Invert|Rec) = 80%. During expansions, inversions still occur 20% of the time: P(Invert|Exp) = 20%. The yield curve has just inverted. What is the revised probability of recession?</p>
+  <p>P(Invert) = P(Invert|Rec)×P(Rec) + P(Invert|Exp)×P(Exp) = 0.80×0.30 + 0.20×0.70 = 0.24 + 0.14 = 0.38</p>
+  <p>P(Rec|Invert) = P(Invert|Rec) × P(Rec) / P(Invert) = (0.80 × 0.30) / 0.38 = 0.24 / 0.38 = <strong>63.2%</strong></p>
+  <p>Prior: 30% recession. After observing inversion: 63.2% recession. Bayes updated our belief rationally.</p>
+</div>
+
+<h3>Expected Value and Variance of a Random Variable</h3>
+<div class="formula">\[ E(X) = \sum_i x_i \cdot P(x_i) \]</div>
+<div class="formula">\[ Var(X) = E[(X - \mu)^2] = \sum_i (x_i - \mu)^2 \cdot P(x_i) = E(X^2) - [E(X)]^2 \]</div>
+
+<h4>Properties of Expected Value</h4>
+<ul>
+  <li>\(E(aX + b) = a \cdot E(X) + b\)</li>
+  <li>\(E(X + Y) = E(X) + E(Y)\) (always, regardless of dependence)</li>
+  <li>\(Var(aX + b) = a^2 \cdot Var(X)\) (adding a constant doesn't change variance)</li>
+  <li>\(Var(X + Y) = Var(X) + Var(Y) + 2 \cdot Cov(X,Y)\) (the portfolio variance formula!)</li>
+</ul>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A stock returns +30% with probability 0.4, +5% with probability 0.35, and −20% with probability 0.25. What is the expected return and variance?</div>
+  <div class="exam-a"><strong>E(R)</strong> = 0.4×30 + 0.35×5 + 0.25×(−20) = 12 + 1.75 − 5 = <strong>8.75%</strong><br>
+  <strong>Var(R)</strong> = 0.4×(30−8.75)² + 0.35×(5−8.75)² + 0.25×(−20−8.75)² = 0.4×451.56 + 0.35×14.06 + 0.25×826.56 = 180.63 + 4.92 + 206.64 = <strong>392.19</strong> (so σ = 19.8%)</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R5 ════════════════ -->
+<section id="r5">
+<div class="module-header">
+  <div class="lm-label">Reading 5</div>
+  <h2>Portfolio Mathematics</h2>
+  <div class="one-liner">How diversification works mathematically — and why combining two risky assets can produce a less risky portfolio.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>This is the mathematical core of Modern Portfolio Theory. The key insight: portfolio risk is NOT the weighted average of individual risks. Because assets don't move in perfect lockstep (they're not perfectly correlated), combining them reduces total risk. The lower the correlation, the more risk reduction diversification provides. This is why diversification is sometimes called "the only free lunch in finance."</p>
+</div>
+
+<h3>Portfolio Expected Return</h3>
+<div class="formula">\[ E(R_p) = \sum_{i=1}^{n} w_i \cdot E(R_i) = w_1 E(R_1) + w_2 E(R_2) + \cdots \]</div>
+<p>Portfolio expected return IS the weighted average of individual expected returns — simple and linear.</p>
+
+<h3>Portfolio Variance — The Non-Trivial Part <span class="tag tag-critical">Critical</span></h3>
+<h4>Two-Asset Portfolio</h4>
+<div class="formula">\[ \sigma_p^2 = w_1^2\sigma_1^2 + w_2^2\sigma_2^2 + 2w_1w_2\text{Cov}(R_1, R_2) \]</div>
+<div class="formula">\[ \text{Cov}(R_1, R_2) = \rho_{12} \cdot \sigma_1 \cdot \sigma_2 \]</div>
+<p>So the formula can also be written:</p>
+<div class="formula">\[ \sigma_p^2 = w_1^2\sigma_1^2 + w_2^2\sigma_2^2 + 2w_1w_2\rho_{12}\sigma_1\sigma_2 \]</div>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — Diversification Benefit</div>
+  <p>Asset A: E(R) = 10%, σ = 20%. Asset B: E(R) = 8%, σ = 15%. Correlation ρ = 0.3. Portfolio: 50/50 split.</p>
+  <p><strong>Portfolio Expected Return</strong> = 0.5×10% + 0.5×8% = <strong>9%</strong></p>
+  <p><strong>Portfolio Variance</strong> = (0.5)²(0.20)² + (0.5)²(0.15)² + 2(0.5)(0.5)(0.3)(0.20)(0.15)</p>
+  <p>= 0.25×0.04 + 0.25×0.0225 + 2×0.25×0.3×0.03 = 0.01 + 0.005625 + 0.0045 = <strong>0.020125</strong></p>
+  <p><strong>Portfolio Std Dev</strong> = √0.020125 = <strong>14.19%</strong></p>
+  <p>Simple average of standard deviations = 0.5×20% + 0.5×15% = 17.5%. Portfolio std dev = 14.19% — <strong>lower than the weighted average!</strong> That's the diversification benefit from ρ = 0.3 < 1.</p>
+</div>
+
+<h3>The Role of Correlation in Diversification <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Correlation (ρ)</th><th>Diversification Benefit</th><th>Can Portfolio Risk = 0?</th></tr></thead>
+  <tbody>
+    <tr><td>ρ = +1 (perfect positive)</td><td>None — portfolio risk = weighted average of individual risks</td><td>No — this is the maximum risk scenario</td></tr>
+    <tr><td>0 &lt; ρ &lt; 1</td><td>Partial — risk is below weighted average</td><td>No — but significantly reduced</td></tr>
+    <tr><td>ρ = 0 (uncorrelated)</td><td>Maximum for long positions without shorting</td><td>No (unless infinite assets)</td></tr>
+    <tr><td>−1 &lt; ρ &lt; 0</td><td>Greater than zero-correlation case</td><td>No — but substantial reduction</td></tr>
+    <tr><td>ρ = −1 (perfect negative)</td><td>Maximum possible</td><td><strong>Yes</strong> — perfect hedge exists</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">When ρ = +1, both assets move identically — combining them is like putting all eggs in one basket (no benefit). When ρ = −1, when one goes up, the other goes down — you can construct a portfolio that never fluctuates. Real assets have correlations between these extremes, so real diversification is always beneficial but never perfect.</div>
+
+<h3>Covariance Matrix <span class="tag tag-formula">Formula</span></h3>
+<p>For a portfolio with n assets, variance requires n variances and n(n−1)/2 unique covariances. With 100 assets, you need 100 variances + 4,950 covariances = 5,050 pieces of information. This is why covariance estimation is the hardest part of portfolio construction in practice.</p>
+
+<div class="formula">\[ \sigma_p^2 = \sum_i \sum_j w_i w_j \text{Cov}(R_i, R_j) \]</div>
+<p>Note: when i = j, Cov(R_i, R_i) = Var(R_i) = σ_i² — so the variance terms are just special cases of the covariance matrix diagonal.</p>
+
+<h3>Minimum Variance Portfolio (Two Assets)</h3>
+<p>The weight in Asset 1 that minimises portfolio variance:</p>
+<div class="formula">\[ w_1^* = \frac{\sigma_2^2 - \text{Cov}(R_1, R_2)}{\sigma_1^2 + \sigma_2^2 - 2\text{Cov}(R_1, R_2)} \]</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">Asset X has σ = 25%, Asset Y has σ = 15%. Their correlation is +0.4. What is the portfolio variance if you invest 60% in X and 40% in Y?</div>
+  <div class="exam-a">Cov(X,Y) = 0.4 × 0.25 × 0.15 = 0.015.<br>
+  σ²_p = (0.6)²(0.25)² + (0.4)²(0.15)² + 2(0.6)(0.4)(0.015)<br>
+  = 0.36×0.0625 + 0.16×0.0225 + 0.48×0.015<br>
+  = 0.0225 + 0.0036 + 0.0072 = <strong>0.0333 → σ_p = 18.25%</strong><br>
+  Weighted average = 0.6×25%+0.4×15% = 21%. Diversification saved you 2.75 percentage points of risk.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R6 ════════════════ -->
+<section id="r6">
+<div class="module-header">
+  <div class="lm-label">Reading 6</div>
+  <h2>Simulation Methods</h2>
+  <div class="one-liner">When closed-form mathematics breaks down, simulation lets you generate the answer empirically.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Many financial problems — option pricing with complex payoffs, portfolio risk under non-normal distributions, retirement planning under uncertainty — cannot be solved analytically. Simulation methods attack these problems by generating thousands of possible scenarios and observing the resulting distribution of outcomes. The three methods (historical simulation, Monte Carlo, and bootstrap) differ in how they generate those scenarios, and each has strengths and weaknesses the exam tests directly.</p>
+</div>
+
+<h3>Historical Simulation</h3>
+<p>Use actual past data (historical returns, historical factor moves) directly — resample from the empirical distribution, preserving the real-world distribution including skewness, kurtosis, and any correlations present in the data.</p>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>✅ Strengths</h5>
+    <p>No distributional assumptions needed. Automatically captures fat tails, skewness, and real correlations. Includes actual historical crises (2008, 2000, 1987).</p>
+  </div>
+  <div class="compare-box right">
+    <h5>❌ Weaknesses</h5>
+    <p>Constrained by history — if a scenario has never occurred, it has zero probability. Can't simulate scenarios more extreme than the historical worst case. Sample size is limited.</p>
+  </div>
+</div>
+
+<h3>Monte Carlo Simulation <span class="tag tag-critical">Critical</span></h3>
+<p>Specify a probability model (e.g., normal distribution with given mean and variance, or a correlated multivariate distribution), then use a computer to draw thousands of random samples from that model and simulate outcomes.</p>
+
+<div class="worked">
+  <div class="worked-header">✏️ How Monte Carlo Works — Retirement Planning</div>
+  <p>Assume stock returns are normally distributed: μ = 7%, σ = 15%. Simulate 10,000 possible 30-year return paths. For each path, calculate whether the investor's portfolio lasts through retirement. Count the percentage of paths that succeed. Result: "There's a 73% probability your portfolio lasts 30 years at your current spending rate."</p>
+</div>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>✅ Strengths</h5>
+    <p>Can simulate ANY scenario — including ones that have never occurred. Can incorporate complex dependencies, option payoffs, path-dependent features. Highly flexible.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>❌ Weaknesses</h5>
+    <p>"Garbage in, garbage out" — wrong distributional assumptions produce wrong results. Computationally intensive. The normal distribution assumption is particularly dangerous for tail risk.</p>
+  </div>
+</div>
+
+<h3>Bootstrap Simulation</h3>
+<p>A hybrid approach: resample WITH REPLACEMENT from the actual historical data. Unlike historical simulation which uses each observation once, bootstrap can draw the same observation multiple times, creating new synthetic histories.</p>
+
+<div class="intuition">Imagine the historical data is a bag of 250 coloured balls (one per trading day). Historical simulation draws all 250 once. Bootstrap draws 250 times WITH replacement — you might draw "October 19, 1987" three times in your simulated year. This allows you to explore scenarios beyond what literally happened in sequence, while still being grounded in real data.</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Method</th><th>Source of Randomness</th><th>Key Advantage</th><th>Key Limitation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Historical</strong></td><td>Actual past returns, used sequentially</td><td>No assumptions; captures real crises</td><td>Limited to what happened; can't exceed historical extremes</td></tr>
+    <tr><td><strong>Monte Carlo</strong></td><td>Specified probability distribution</td><td>Flexible; can model any scenario</td><td>Results depend entirely on assumed distribution</td></tr>
+    <tr><td><strong>Bootstrap</strong></td><td>Past data, resampled with replacement</td><td>Grounded in data; more scenarios than history</td><td>Can't generate truly new tail events</td></tr>
+  </tbody>
+</table></div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An analyst wants to estimate the distribution of a portfolio's Value-at-Risk but is concerned the returns are non-normally distributed with fat tails. Which simulation method is most appropriate?</div>
+  <div class="exam-a"><strong>Answer: Historical simulation or Bootstrap.</strong> Both avoid imposing a specific distribution on the data, so they naturally capture any non-normality, fat tails, or skewness present in the historical data. Monte Carlo is inappropriate here because it requires specifying a distribution — if you choose normal, you've assumed away the very problem you're trying to capture.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R7 ════════════════ -->
+<section id="r7">
+<div class="module-header">
+  <div class="lm-label">Reading 7</div>
+  <h2>Estimation and Inference</h2>
+  <div class="one-liner">We never know the true population parameters — we only have samples. Statistics tells us how confident to be in our estimates.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Every financial analysis is built on estimates — the expected return, the beta, the mean earnings. But estimates from samples are imperfect. This reading teaches you to quantify that imperfection: how large is the sampling error? How confident can we be that the true parameter lies within a given range? These concepts (standard error, confidence intervals, the Central Limit Theorem) underpin all of hypothesis testing and regression analysis.</p>
+</div>
+
+<h3>Sampling and the Central Limit Theorem</h3>
+
+<h4>Point Estimates</h4>
+<p>A single number used to estimate a population parameter. The sample mean \(\bar{x}\) estimates population mean \(\mu\). The sample variance \(s^2\) estimates population variance \(\sigma^2\).</p>
+
+<h4>Standard Error of the Mean <span class="tag tag-formula">Formula</span></h4>
+<p>The standard deviation of the sampling distribution of the mean — how much would \(\bar{x}\) vary across different random samples?</p>
+<div class="formula">\[ SE_{\bar{x}} = \frac{\sigma}{\sqrt{n}} \quad \text{(when population σ is known)} \]</div>
+<div class="formula">\[ SE_{\bar{x}} = \frac{s}{\sqrt{n}} \quad \text{(when using sample standard deviation)} \]</div>
+
+<div class="intuition">Standard error shrinks as sample size grows (by the square root of n). Doubling your sample size cuts the standard error by √2 ≈ 29%. To halve the standard error, you need to quadruple the sample size. This is why large samples give much more reliable estimates — but with diminishing returns.</div>
+
+<h4>Central Limit Theorem (CLT) <span class="tag tag-critical">Critical</span></h4>
+<p>Regardless of the shape of the underlying population distribution, the sampling distribution of the sample mean approaches a normal distribution as n increases (roughly n ≥ 30). This is the foundational justification for using normal distribution tools in hypothesis testing.</p>
+
+<div class="key-rule">The CLT does NOT say the data is normally distributed. It says the MEAN of a large sample will be approximately normally distributed, regardless of how the individual observations are distributed. This distinction is critical: you can apply normal-distribution-based hypothesis tests to stock returns (which are not normally distributed) as long as your sample is large enough.</div>
+
+<h3>Confidence Intervals <span class="tag tag-critical">Critical</span></h3>
+<p>A confidence interval gives a range of values that is expected to contain the true population parameter with a specified probability (confidence level).</p>
+
+<div class="formula">\[ CI = \bar{x} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \quad \text{(use z when σ known and/or n is large)} \]</div>
+<div class="formula">\[ CI = \bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}} \quad \text{(use t when σ unknown — the most common case)} \]</div>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Confidence Level</th><th>α</th><th>z-critical value (two-tailed)</th></tr></thead>
+  <tbody>
+    <tr><td>90%</td><td>0.10</td><td>±1.645</td></tr>
+    <tr><td>95%</td><td>0.05</td><td>±1.960</td></tr>
+    <tr><td>99%</td><td>0.01</td><td>±2.576</td></tr>
+  </tbody>
+</table></div>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example — Confidence Interval</div>
+  <p>A fund's monthly returns over 36 months have a mean of 1.2% and a sample standard deviation of 3.6%. Construct a 95% CI for the true mean monthly return.</p>
+  <p>SE = 3.6% / √36 = 3.6% / 6 = 0.6%</p>
+  <p>Since n = 36 (large), use z: 95% CI = 1.2% ± 1.96 × 0.6% = 1.2% ± 1.176% = <strong>(0.024%, 2.376%)</strong></p>
+  <p>Interpretation: We are 95% confident the true mean monthly return lies between 0.024% and 2.376%. Since the entire interval is above zero, we have evidence the manager generates positive returns.</p>
+</div>
+
+<div class="key-rule">Correct interpretation of a 95% CI: "If we repeated this sampling process many times, 95% of the intervals constructed this way would contain the true parameter." It does NOT mean "there is a 95% chance the true mean is in this interval" — the true mean is fixed; it's either in the interval or not. This subtle distinction is a favourite exam trap.</div>
+
+<h3>When to Use z vs. t Distribution <span class="tag tag-exam">Exam Favourite</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Scenario</th><th>Distribution</th><th>Reasoning</th></tr></thead>
+  <tbody>
+    <tr><td>Population σ known, normally distributed population</td><td><strong>z</strong></td><td>Exact z-test applies</td></tr>
+    <tr><td>Population σ unknown, n ≥ 30</td><td><strong>z or t</strong></td><td>CLT makes z approximately valid; t is technically more correct but difference is small</td></tr>
+    <tr><td>Population σ unknown, n &lt; 30, normally distributed</td><td><strong>t</strong> (with n−1 df)</td><td>t distribution has fatter tails to account for extra uncertainty from estimating σ</td></tr>
+    <tr><td>Population σ unknown, n &lt; 30, non-normal</td><td>Neither — use non-parametric</td><td>Both z and t assume approximate normality</td></tr>
+  </tbody>
+</table></div>
+
+</section><hr>
+
+<!-- ════════════════ R8 ════════════════ -->
+<section id="r8">
+<div class="module-header">
+  <div class="lm-label">Reading 8</div>
+  <h2>Hypothesis Testing</h2>
+  <div class="one-liner">The formal framework for asking: "Is this result real, or just noise?"</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Hypothesis testing is the engine behind quantitative research. Every claim in finance — "this manager beats the benchmark," "momentum is a real factor," "this economic variable predicts returns" — must survive a hypothesis test. The framework is always the same: state a null hypothesis (the boring baseline), compute how unlikely your sample result would be if the null were true, and decide whether to reject the null. This reading is one of the most conceptually dense in the curriculum — and one of the most heavily tested.</p>
+</div>
+
+<h3>The Hypothesis Testing Framework</h3>
+
+<h4>Step 1: State the Hypotheses</h4>
+<p>H₀ (null hypothesis): The baseline claim to be tested. Usually the "no effect" or "no difference" statement. Always includes equality (=, ≤, ≥).</p>
+<p>Hₐ (alternative hypothesis): What we're trying to find evidence for. Sets the direction of the test.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Test Type</th><th>H₀</th><th>Hₐ</th><th>Rejection Region</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Two-tailed</strong></td><td>θ = θ₀</td><td>θ ≠ θ₀</td><td>Both tails (split α/2 each side)</td></tr>
+    <tr><td><strong>One-tailed (right)</strong></td><td>θ ≤ θ₀</td><td>θ &gt; θ₀</td><td>Right tail only (full α)</td></tr>
+    <tr><td><strong>One-tailed (left)</strong></td><td>θ ≥ θ₀</td><td>θ &lt; θ₀</td><td>Left tail only (full α)</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Step 2: Choose Significance Level (α)</h4>
+<p>α = the maximum probability of making a Type I error (rejecting a true H₀) you're willing to accept. Common choices: 1%, 5%, 10%.</p>
+
+<h4>Step 3: Compute the Test Statistic</h4>
+<div class="formula">\[ \text{Test Statistic} = \frac{\text{Sample estimate} - \text{Hypothesised value}}{\text{Standard error of the estimate}} \]</div>
+
+<div class="formula">\[ t = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \quad \text{(t-test for population mean)} \]</div>
+
+<h4>Step 4: Compare to Critical Value and Make Decision</h4>
+<p>If |test statistic| > critical value (or equivalently, p-value < α): <strong>Reject H₀</strong>. Otherwise: <strong>Fail to reject H₀</strong>.</p>
+
+<div class="key-rule">Never say "accept H₀." You either reject H₀ or fail to reject H₀. Failing to reject doesn't mean H₀ is true — it only means you don't have sufficient evidence to reject it. This is an extremely common source of exam errors.</div>
+
+<h3>Type I and Type II Errors <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th></th><th>H₀ is TRUE</th><th>H₀ is FALSE</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Reject H₀</strong></td><td>Type I Error (α) — False Positive</td><td>Correct Decision (Power = 1−β)</td></tr>
+    <tr><td><strong>Fail to reject H₀</strong></td><td>Correct Decision (1−α)</td><td>Type II Error (β) — False Negative</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Type I error = False alarm. The drug doesn't work, but your test says it does. You paid for a useless treatment. Type II error = Miss. The drug works, but your test didn't detect it. You missed a beneficial treatment. In finance: Type I = you think the manager has skill when they don't (you hire them and waste fees). Type II = you think the manager has no skill when they actually do (you pass on a great manager).</div>
+
+<p><strong>The key trade-off:</strong> Lowering α (being more strict) reduces Type I errors but increases Type II errors. You can only reduce BOTH by increasing sample size (n).</p>
+
+<h3>p-Value — The Modern Standard <span class="tag tag-exam">Exam Favourite</span></h3>
+<p>The p-value is the probability of obtaining a test statistic as extreme or more extreme than the one observed, assuming H₀ is true.</p>
+
+<div class="intuition">The p-value answers: "If the null hypothesis is true, how surprising is this data?" A p-value of 0.02 means: if H₀ were true, there's only a 2% chance of seeing results this extreme by random chance. That's suspicious enough to reject H₀ at the 5% level.</div>
+
+<div class="key-rule">Decision rule using p-value: If p-value &lt; α, reject H₀. If p-value ≥ α, fail to reject H₀. The p-value does NOT give the probability that H₀ is true. It gives the probability of the data given H₀ is true — not the probability of H₀ given the data. This distinction is subtle but important for the exam.</div>
+
+<h3>Tests Beyond the Mean</h3>
+
+<h4>Chi-Square Test (χ²) — Testing Variance</h4>
+<div class="formula">\[ \chi^2 = \frac{(n-1)s^2}{\sigma_0^2} \quad \text{with } (n-1) \text{ degrees of freedom} \]</div>
+<p>Tests whether a population variance equals a hypothesised value. The chi-square distribution is always positive and right-skewed, so critical values are asymmetric for one-tailed tests.</p>
+
+<h4>F-Test — Comparing Two Variances</h4>
+<div class="formula">\[ F = \frac{s_1^2}{s_2^2} \quad \text{with } (n_1-1, n_2-1) \text{ degrees of freedom} \]</div>
+<p>Tests whether two population variances are equal. Convention: put the larger variance in the numerator (F ≥ 1). Used heavily in regression to test overall model fit.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A researcher tests whether a fund's mean monthly return is greater than 0%. The sample mean is 0.8%, sample std dev is 2.4%, and n = 36. The test statistic is ___. At α = 5%, the critical value for a one-tailed test is 1.645. Conclusion?</div>
+  <div class="exam-a">t = (0.8 − 0) / (2.4/√36) = 0.8 / 0.4 = <strong>2.0</strong>. Since 2.0 > 1.645 (critical value), <strong>reject H₀</strong>. There is sufficient evidence at the 5% significance level that the fund's mean monthly return is greater than zero. p-value ≈ 0.023 &lt; 0.05.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R9 ════════════════ -->
+<section id="r9">
+<div class="module-header">
+  <div class="lm-label">Reading 9</div>
+  <h2>Parametric and Non-Parametric Tests of Independence</h2>
+  <div class="one-liner">Are two variables related — and how do we test that rigorously?</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Much of investment research tests for relationships: "Does past performance predict future returns?" "Is this factor correlated with stock returns?" "Do earnings revisions lead price movements?" This reading covers the statistical tools for answering such questions: parametric tests (which assume distributions) and non-parametric alternatives (which make no distributional assumptions). Knowing when to use which is a key exam skill.</p>
+</div>
+
+<h3>Parametric Tests — When Distribution Assumptions Hold</h3>
+
+<h4>t-Test for Correlation <span class="tag tag-formula">Formula</span></h4>
+<p>Tests whether the population correlation coefficient ρ is significantly different from zero (i.e., whether two variables are actually linearly related).</p>
+<div class="formula">\[ t = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}} \quad \text{with } (n-2) \text{ degrees of freedom} \]</div>
+<p>Where \(r\) = sample correlation coefficient, \(n\) = number of observations.</p>
+
+<div class="worked">
+  <div class="worked-header">✏️ Worked Example</div>
+  <p>A researcher calculates r = 0.45 between GDP growth and stock returns using n = 30 observations. Is this significant at α = 5% (two-tailed)?</p>
+  <p>t = 0.45 × √(30−2) / √(1−0.45²) = 0.45 × √28 / √(0.7975) = 0.45 × 5.292 / 0.893 = <strong>2.67</strong></p>
+  <p>Critical value: t₀.₀₂₅, 28 ≈ 2.048. Since 2.67 > 2.048, <strong>reject H₀ (ρ = 0)</strong>. The correlation is statistically significant.</p>
+</div>
+
+<h4>Paired Comparison t-Test</h4>
+<p>Used when observations come in natural pairs (e.g., the same company before and after a policy change, or matched pairs of funds). You test whether the mean difference is zero.</p>
+<div class="formula">\[ t = \frac{\bar{d} - \mu_{d_0}}{s_d / \sqrt{n}} \quad \text{with } (n-1) \text{ degrees of freedom} \]</div>
+<p>Where \(\bar{d}\) = mean of paired differences, \(s_d\) = std dev of differences, \(\mu_{d_0}\) = hypothesised mean difference (usually 0).</p>
+
+<h3>Non-Parametric Tests — When Assumptions Break Down</h3>
+
+<div class="intuition">Non-parametric tests work with ranks rather than actual values. Since ranking doesn't assume any distribution, these tests are robust to outliers, non-normality, and small samples. The trade-off: when distributional assumptions ARE met, parametric tests are more powerful (better at detecting true effects).</div>
+
+<h4>Spearman Rank Correlation <span class="tag tag-exam">Exam Favourite</span></h4>
+<p>The non-parametric analogue of Pearson correlation. Rank both variables, then apply the standard Pearson correlation formula to the ranks.</p>
+<div class="formula">\[ r_S = 1 - \frac{6\sum d_i^2}{n(n^2 - 1)} \]</div>
+<p>Where \(d_i\) = difference in ranks for the i-th pair. This formula assumes no tied ranks.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Condition</th><th>Use Parametric (Pearson t-test)</th><th>Use Non-Parametric (Spearman)</th></tr></thead>
+  <tbody>
+    <tr><td>Distribution</td><td>Approximately normal</td><td>Non-normal, unknown, or heavily skewed</td></tr>
+    <tr><td>Sample size</td><td>Any (CLT helps for large n)</td><td>Small samples especially</td></tr>
+    <tr><td>Data type</td><td>Continuous ratio/interval data</td><td>Ordinal data, or ranked data</td></tr>
+    <tr><td>Outliers</td><td>Sensitive to outliers</td><td>Robust to outliers (uses ranks)</td></tr>
+    <tr><td>Power</td><td>Higher (when assumptions met)</td><td>Lower (loses information by ranking)</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Runs Test — Testing for Independence/Randomness</h4>
+<p>Tests whether a sequence of observations is random (independent). Counts "runs" — consecutive sequences of the same sign (e.g., consecutive positive or negative returns).</p>
+<p>Too few runs: positive serial correlation (trending). Too many runs: negative serial correlation (mean-reverting). Exact random walk: number of runs consistent with random probability.</p>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An analyst tests whether analyst rankings correlate with future excess returns. The ranking data is ordinal and the sample is small (n = 15). Which test is most appropriate?</div>
+  <div class="exam-a"><strong>Answer: Spearman rank correlation.</strong> Two reasons: (1) the data is ordinal (analyst rankings) — Pearson correlation requires continuous data; (2) the small sample (n = 15) means CLT doesn't apply and the normality assumption required for a parametric test is harder to justify. Spearman makes no distributional assumptions and is designed for ranked data.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R10 ════════════════ -->
+<section id="r10">
+<div class="module-header">
+  <div class="lm-label">Reading 10</div>
+  <h2>Simple Linear Regression</h2>
+  <div class="one-liner">Quantifying how one variable is linearly related to another — and testing whether that relationship is statistically real.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>Regression is the workhorse of quantitative finance. Factor models (CAPM, Fama-French), earnings forecasting, economic prediction — all rely on regression. Simple linear regression (one dependent variable, one independent variable) gives you the conceptual foundation. Understand the mechanics here and multiple regression (not in Level 1) follows naturally. The exam tests both the mechanics AND interpretation of outputs.</p>
+</div>
+
+<h3>The Regression Model</h3>
+<div class="formula">\[ Y_i = b_0 + b_1 X_i + \varepsilon_i \]</div>
+<p>Where \(Y_i\) = dependent variable (what we're predicting), \(X_i\) = independent variable (the predictor), \(b_0\) = intercept, \(b_1\) = slope coefficient, \(\varepsilon_i\) = error term (residual).</p>
+
+<div class="analogy">CAPM is a regression model: R_i − Rf = α + β(Rm − Rf) + ε. The dependent variable is the stock's excess return. The independent variable is the market excess return. β (beta) is the slope coefficient. α (Jensen's alpha) is the intercept. The regression quantifies how much of the stock's return is explained by market movements.</div>
+
+<h3>Ordinary Least Squares (OLS) Estimation <span class="tag tag-formula">Formula</span></h3>
+<p>OLS minimises the sum of squared residuals (SSE). This gives the "best fit" line through the data.</p>
+<div class="formula">\[ b_1 = \frac{\text{Cov}(X,Y)}{\text{Var}(X)} = \frac{\sum_{i}(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i}(X_i - \bar{X})^2} \]</div>
+<div class="formula">\[ b_0 = \bar{Y} - b_1 \bar{X} \]</div>
+
+<div class="intuition">The slope b₁ tells you: for a one-unit increase in X, Y is expected to change by b₁ units. The intercept b₀ tells you the expected value of Y when X = 0. In CAPM: if β = 1.2, for every 1% the market moves, this stock is expected to move 1.2%.</div>
+
+<h3>Measuring Fit: R², SEE, and ANOVA <span class="tag tag-critical">Critical</span></h3>
+
+<p>The total variation in Y (SST) can be decomposed into explained variation (SSR) and unexplained variation (SSE):</p>
+<div class="formula">\[ SST = SSR + SSE \]</div>
+<div class="formula">\[ R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST} \]</div>
+<p>R² = the proportion of variation in Y explained by X. R² = 1 means perfect fit; R² = 0 means X explains nothing about Y.</p>
+
+<div class="formula">\[ SEE = \sqrt{\frac{SSE}{n-2}} \quad \text{(Standard Error of Estimate)} \]</div>
+<p>SEE = the typical size of a prediction error. Lower SEE = better model fit.</p>
+
+<div class="worked">
+  <div class="worked-header">✏️ Interpreting Regression Output</div>
+  <p>Regression of excess stock returns (Y) on market excess returns (X):</p>
+  <p>ŷ = 0.5% + 1.3X, with R² = 0.65, SEE = 4.2%</p>
+  <p>• <strong>Intercept (0.5%)</strong>: The stock earns 0.5% per period even when the market return equals zero (Jensen's α)</p>
+  <p>• <strong>Slope (1.3)</strong>: For every 1% move in the market, this stock is expected to move 1.3% (β > 1, aggressive stock)</p>
+  <p>• <strong>R² = 0.65</strong>: 65% of the variation in the stock's return is explained by market movements; 35% is idiosyncratic</p>
+  <p>• <strong>SEE = 4.2%</strong>: Typical prediction error is ±4.2%</p>
+</div>
+
+<h3>Testing the Slope Coefficient <span class="tag tag-critical">Critical</span></h3>
+<p>H₀: b₁ = 0 (the independent variable has no linear relationship with Y). The t-test:</p>
+<div class="formula">\[ t = \frac{\hat{b}_1 - b_{1,0}}{s_{\hat{b}_1}} \quad \text{with } (n-2) \text{ degrees of freedom} \]</div>
+<p>Where \(s_{\hat{b}_1}\) = standard error of the slope estimate.</p>
+
+<h4>F-Test — Overall Regression Significance</h4>
+<div class="formula">\[ F = \frac{MSR}{MSE} = \frac{SSR/k}{SSE/(n-k-1)} \quad \text{(k = 1 for simple regression)} \]</div>
+<p>In simple regression, the F-test and the t-test for the slope coefficient test the same hypothesis. F = t². Always one-tailed (reject if F > critical value).</p>
+
+<h3>Assumptions of OLS Regression</h3>
+<div class="table-wrap"><table>
+  <thead><tr><th>Assumption</th><th>What It Means</th><th>If Violated…</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Linearity</strong></td><td>The true relationship is linear</td><td>Model is misspecified; residuals show patterns</td></tr>
+    <tr><td><strong>No heteroskedasticity</strong></td><td>Var(ε) is constant across all X values</td><td>Standard errors are wrong; t-tests and F-tests invalid</td></tr>
+    <tr><td><strong>No autocorrelation</strong></td><td>Residuals are not correlated with each other over time</td><td>Standard errors understated; t-statistics inflated</td></tr>
+    <tr><td><strong>No multicollinearity</strong></td><td>Predictors are not highly correlated (multiple regression)</td><td>Coefficients unstable, large standard errors</td></tr>
+    <tr><td><strong>Normal residuals</strong></td><td>ε ~ N(0, σ²)</td><td>t and F tests may be unreliable in small samples</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Heteroskedasticity and autocorrelation are the two most frequently tested regression problems. Both cause OLS standard errors to be incorrect (usually too small), making test statistics look more significant than they really are. Detection: heteroskedasticity via a Breusch-Pagan test or plotting residuals vs. fitted values; autocorrelation via the Durbin-Watson test or plotting residuals over time.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">A regression of stock returns on earnings surprise has b₁ = 0.42 with a standard error of 0.15, and n = 42 observations. Is the slope significant at the 5% level (two-tailed)?</div>
+  <div class="exam-a">t = (0.42 − 0) / 0.15 = <strong>2.80</strong>. Degrees of freedom = 42 − 2 = 40. t-critical (40 df, α=0.025 each tail) ≈ 2.021. Since 2.80 > 2.021, <strong>reject H₀</strong>. The positive relationship between earnings surprises and stock returns is statistically significant at the 5% level. The coefficient of 0.42 means a 1-unit earnings surprise is associated with a 0.42% higher stock return on average.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ R11 ════════════════ -->
+<section id="r11">
+<div class="module-header">
+  <div class="lm-label">Reading 11</div>
+  <h2>Introduction to Big Data Techniques</h2>
+  <div class="one-liner">How machine learning, natural language processing, and alternative data are reshaping investment analysis.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">🗺 Big Picture</div>
+  <p>The investment industry is being transformed by big data. Hedge funds analyse satellite imagery of parking lots to forecast retail earnings. Algorithms mine earnings call transcripts for sentiment signals before human analysts can read them. Machine learning models identify non-linear patterns that classical regression misses. This reading introduces the vocabulary and core concepts — you won't be asked to code, but you must understand how these methods work, their strengths and limitations, and the critical problem of overfitting.</p>
+</div>
+
+<h3>Types of Data</h3>
+
+<div class="compare-grid">
+  <div class="compare-box left">
+    <h5>📊 Structured Data</h5>
+    <p>Organised in rows and columns; easily queried. Examples: financial statements, price/volume data, economic indicators.</p>
+    <p>Traditional statistical methods designed for this.</p>
+  </div>
+  <div class="compare-box right">
+    <h5>📝 Unstructured Data</h5>
+    <p>Does not fit neatly into tables. Examples: earnings call transcripts, news articles, social media, satellite images, web traffic.</p>
+    <p>Requires ML/NLP to extract information.</p>
+  </div>
+</div>
+
+<div class="analogy">Structured data is like a spreadsheet. Unstructured data is everything else — all the messy information humans generate constantly that doesn't fit in a table. 80%+ of data generated in the world is unstructured. Machine learning unlocks this data for investment analysis.</div>
+
+<h3>Machine Learning Categories <span class="tag tag-critical">Critical</span></h3>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Category</th><th>What It Does</th><th>Investment Application</th><th>Example Algorithms</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Supervised Learning</strong></td><td>Learns from labelled training data (input → known output). Predicts outputs for new inputs.</td><td>Credit scoring, stock return prediction, fraud detection</td><td>Linear regression, logistic regression, decision trees, random forests, neural networks</td></tr>
+    <tr><td><strong>Unsupervised Learning</strong></td><td>Finds patterns in data without labelled outputs. Groups similar observations.</td><td>Portfolio clustering, market regime detection, factor discovery</td><td>k-means clustering, principal component analysis (PCA), hierarchical clustering</td></tr>
+    <tr><td><strong>Deep Learning</strong></td><td>Multi-layer neural networks; learns complex non-linear patterns automatically.</td><td>Image recognition (satellite), speech recognition, NLP</td><td>Convolutional networks (CNN), recurrent networks (RNN), transformer models</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Overfitting — The Most Dangerous Problem <span class="tag tag-critical">Critical</span></h3>
+<p>Overfitting occurs when a model learns the training data too well — including the noise — and fails to generalise to new data. In investment research, an overfit model shows spectacular backtested returns but performs poorly (or disastrously) in live trading.</p>
+
+<div class="intuition">Imagine fitting a polynomial curve to 10 data points. A 9th-degree polynomial can pass through all 10 points perfectly (R² = 100%), but it will wiggle wildly between points and predict terrible values for new inputs. A simpler line might not fit the training data as well, but it generalises far better. This is the bias-variance tradeoff.</div>
+
+<h4>Bias-Variance Tradeoff</h4>
+<div class="table-wrap"><table>
+  <thead><tr><th></th><th>High Bias (Underfitting)</th><th>High Variance (Overfitting)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Training error</strong></td><td>High (doesn't fit training data)</td><td>Low (fits training data perfectly)</td></tr>
+    <tr><td><strong>Test error</strong></td><td>High (poor predictions)</td><td>High (fails on new data)</td></tr>
+    <tr><td><strong>Problem</strong></td><td>Model too simple; misses real patterns</td><td>Model too complex; memorises noise</td></tr>
+    <tr><td><strong>Solution</strong></td><td>Increase model complexity</td><td>Regularisation, more data, cross-validation</td></tr>
+  </tbody>
+</table></div>
+
+<h3>Preventing Overfitting: Regularisation and Cross-Validation</h3>
+
+<h4>Regularisation — Penalise Complexity</h4>
+<p>Add a penalty to the loss function that discourages large coefficients. Two main types:</p>
+<ul>
+  <li><strong>LASSO (L1 regularisation):</strong> Penalty = λ × Σ|βᵢ|. Drives some coefficients exactly to zero — performs automatic variable selection. Use when you want a sparse model.</li>
+  <li><strong>Ridge (L2 regularisation):</strong> Penalty = λ × Σβᵢ². Shrinks all coefficients toward zero but rarely to exactly zero. Use when you believe all variables are relevant.</li>
+</ul>
+<p>Higher λ = stronger regularisation = simpler model. The optimal λ is chosen by cross-validation.</p>
+
+<h4>k-Fold Cross-Validation</h4>
+<p>Divide the training data into k equal "folds." Train on k−1 folds, test on the remaining fold. Repeat k times, rotating the test fold. Average the test errors. This gives an unbiased estimate of out-of-sample performance — the true test of a model's value.</p>
+
+<h3>Natural Language Processing (NLP)</h3>
+<p>NLP converts unstructured text into structured, analysable data. Applications in investment analysis:</p>
+<ul>
+  <li><strong>Sentiment analysis:</strong> Classify text as positive/negative/neutral. Mine earnings call transcripts, analyst reports, news articles for market-moving tone shifts.</li>
+  <li><strong>Named entity recognition:</strong> Automatically identify companies, people, dates, and amounts in text.</li>
+  <li><strong>Word embeddings (Word2Vec, BERT):</strong> Represent words as numeric vectors that capture semantic meaning — "excellent" and "outstanding" will have similar vectors.</li>
+</ul>
+
+<h3>Neural Networks</h3>
+<p>Inspired by the human brain: layers of interconnected nodes (neurons). Each connection has a weight; the network learns by adjusting weights to minimise prediction error (backpropagation).</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>Layer Type</th><th>Role</th></tr></thead>
+  <tbody>
+    <tr><td>Input layer</td><td>Receives raw features (prices, fundamentals, text embeddings)</td></tr>
+    <tr><td>Hidden layers</td><td>Extract increasingly abstract patterns; more layers = "deeper" network = more complex representations</td></tr>
+    <tr><td>Output layer</td><td>Produces final prediction (buy/sell signal, return forecast, default probability)</td></tr>
+  </tbody>
+</table></div>
+
+<div class="key-rule">Deep learning (many hidden layers) is extremely powerful for complex pattern recognition (images, speech, text) but requires enormous amounts of data and is a "black box" — it's very hard to explain why it makes a particular prediction. In regulated industries where explainability is required (e.g., credit decisions), simpler interpretable models are often preferred despite lower accuracy.</div>
+
+<div class="exam">
+  <div class="exam-header">🎯 Likely Exam Question</div>
+  <div class="exam-q">An analyst builds a machine learning model to predict stock returns. The model has an extremely high R² in training (0.95) but a much lower R² out of sample (0.12). This is most consistent with:</div>
+  <div class="exam-a"><strong>Answer: Overfitting.</strong> A model that fits training data extremely well but fails to generalise to new data has memorised the training data's noise rather than learning true patterns. Solutions include regularisation (LASSO/Ridge), cross-validation to select model complexity, reducing the number of features, or using more training data. The high in-sample R² is actually a warning sign here, not a positive signal.</div>
+</div>
+
+</section><hr>
+
+<!-- ════════════════ FORMULA SHEET ════════════════ -->
+<section id="formulas">
+<div class="module-header">
+  <div class="lm-label">Reference</div>
+  <h2>Master Formula Sheet — All 11 Readings</h2>
+  <div class="one-liner">Every key formula, organised for last-minute revision.</div>
+</div>
+
+<div class="table-wrap"><table class="formula-table">
+  <thead><tr><th style="width:42%">Formula</th><th style="width:43%">Description</th><th>Reading</th></tr></thead>
+  <tbody>
+    <tr><td>\(HPR = \frac{P_1 - P_0 + CF_1}{P_0}\)</td><td>Holding period return</td><td>1</td></tr>
+    <tr><td>\(\bar{R}_G = \left[\prod(1+R_t)\right]^{1/T} - 1\)</td><td>Geometric mean return</td><td>1</td></tr>
+    <tr><td>\(\bar{R}_H = \frac{N}{\sum 1/R_t}\)</td><td>Harmonic mean return (dollar-cost averaging)</td><td>1</td></tr>
+    <tr><td>\((1+r_{real}) = \frac{1+r_{nom}}{1+r_{inf}}\)</td><td>Fisher equation — exact real return</td><td>1</td></tr>
+    <tr><td>\(EAR = (1 + r_s/m)^m - 1\)</td><td>Effective annual rate</td><td>1</td></tr>
+    <tr><td>\(EAR = e^{r_s} - 1\)</td><td>EAR with continuous compounding</td><td>1</td></tr>
+    <tr><td>\(FV = PV(1+r)^N\)</td><td>Future value</td><td>2</td></tr>
+    <tr><td>\(PV = FV/(1+r)^N\)</td><td>Present value</td><td>2</td></tr>
+    <tr><td>\(PV_{annuity} = PMT \cdot \frac{1-(1+r)^{-N}}{r}\)</td><td>Present value of ordinary annuity</td><td>2</td></tr>
+    <tr><td>\(FV_{annuity} = PMT \cdot \frac{(1+r)^N-1}{r}\)</td><td>Future value of ordinary annuity</td><td>2</td></tr>
+    <tr><td>\(PV_{perp} = PMT/r\)</td><td>Present value of perpetuity</td><td>2</td></tr>
+    <tr><td>\(PV_{grow.perp} = PMT_1/(r-g)\)</td><td>Growing perpetuity (r &gt; g required)</td><td>2</td></tr>
+    <tr><td>\(NPV = \sum CF_t / (1+r)^t\)</td><td>Net present value</td><td>2</td></tr>
+    <tr><td>\(s^2 = \sum(x_i-\bar{x})^2/(n-1)\)</td><td>Sample variance (n−1 denominator)</td><td>3</td></tr>
+    <tr><td>\(CV = s/\bar{x}\)</td><td>Coefficient of variation</td><td>3</td></tr>
+    <tr><td>\(Sharpe = (\bar{R}_p - R_f)/\sigma_p\)</td><td>Sharpe ratio</td><td>3</td></tr>
+    <tr><td>\(P(A|B) = P(A \cap B)/P(B)\)</td><td>Conditional probability</td><td>4</td></tr>
+    <tr><td>\(P(A|B) = P(B|A)P(A)/P(B)\)</td><td>Bayes' theorem</td><td>4</td></tr>
+    <tr><td>\(E(X) = \sum x_i P(x_i)\)</td><td>Expected value of a random variable</td><td>4</td></tr>
+    <tr><td>\(Var(X) = E(X^2) - [E(X)]^2\)</td><td>Variance of a random variable</td><td>4</td></tr>
+    <tr><td>\(E(R_p) = \sum w_i E(R_i)\)</td><td>Portfolio expected return</td><td>5</td></tr>
+    <tr><td>\(\sigma_p^2 = w_1^2\sigma_1^2 + w_2^2\sigma_2^2 + 2w_1w_2\rho_{12}\sigma_1\sigma_2\)</td><td>Two-asset portfolio variance</td><td>5</td></tr>
+    <tr><td>\(Cov(R_1,R_2) = \rho_{12}\sigma_1\sigma_2\)</td><td>Covariance from correlation</td><td>5</td></tr>
+    <tr><td>\(SE = \sigma/\sqrt{n}\)</td><td>Standard error of the mean</td><td>7</td></tr>
+    <tr><td>\(CI = \bar{x} \pm t_{\alpha/2} \cdot s/\sqrt{n}\)</td><td>Confidence interval (σ unknown)</td><td>7</td></tr>
+    <tr><td>\(t = (\bar{x} - \mu_0)/(s/\sqrt{n})\)</td><td>t-test statistic for mean</td><td>8</td></tr>
+    <tr><td>\(\chi^2 = (n-1)s^2/\sigma_0^2\)</td><td>Chi-square test for variance</td><td>8</td></tr>
+    <tr><td>\(F = s_1^2/s_2^2\)</td><td>F-test for equality of variances</td><td>8</td></tr>
+    <tr><td>\(t = r\sqrt{n-2}/\sqrt{1-r^2}\)</td><td>t-test for correlation coefficient</td><td>9</td></tr>
+    <tr><td>\(r_S = 1 - 6\sum d_i^2/[n(n^2-1)]\)</td><td>Spearman rank correlation</td><td>9</td></tr>
+    <tr><td>\(b_1 = Cov(X,Y)/Var(X)\)</td><td>OLS slope coefficient</td><td>10</td></tr>
+    <tr><td>\(b_0 = \bar{Y} - b_1\bar{X}\)</td><td>OLS intercept</td><td>10</td></tr>
+    <tr><td>\(R^2 = SSR/SST = 1-SSE/SST\)</td><td>Coefficient of determination</td><td>10</td></tr>
+    <tr><td>\(SEE = \sqrt{SSE/(n-2)}\)</td><td>Standard error of estimate</td><td>10</td></tr>
+    <tr><td>\(F = MSR/MSE\)</td><td>F-test for regression significance</td><td>10</td></tr>
+    <tr><td>\(t = \hat{b}_1/s_{\hat{b}_1}\)</td><td>t-test for slope coefficient</td><td>10</td></tr>
+    <tr><td>\(SST = SSR + SSE\)</td><td>Total = Explained + Unexplained variation</td><td>10</td></tr>
+  </tbody>
+</table></div>
+
+<div style="margin-top: 48px; padding: 24px; background: var(--navy); border-radius: 14px; color: rgba(255,255,255,0.7); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; line-height: 1.8;">
+  <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px;">📋 Top 5 Exam Traps — Quick Reference</div>
+  <ol style="padding-left: 20px; color: rgba(255,255,255,0.75);">
+    <li style="margin: 8px 0;"><strong style="color:#fff;">TWR vs. MWR:</strong> Use TWR to evaluate manager skill; MWR for investor's personal experience. TWR is the CFA GIPS standard for comparing managers.</li>
+    <li style="margin: 8px 0;"><strong style="color:#fff;">Geometric ≤ Arithmetic mean:</strong> Always use geometric for historical compounding; arithmetic for expected future single-period returns.</li>
+    <li style="margin: 8px 0;"><strong style="color:#fff;">Sample variance uses n−1:</strong> Not n. The extra division ensures the estimator is unbiased. Population variance uses N.</li>
+    <li style="margin: 8px 0;"><strong style="color:#fff;">"Fail to reject" ≠ "Accept H₀":</strong> Lack of evidence against H₀ ≠ proof of H₀. Always say "fail to reject."</li>
+    <li style="margin: 8px 0;"><strong style="color:#fff;">Portfolio variance ≠ weighted average:</strong> The covariance/correlation term makes portfolio variance lower than the weighted average of individual variances (for ρ &lt; 1). This IS the diversification benefit.</li>
+  </ol>
+</div>
+
+</section>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`#sidebar a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '-10% 0px -80% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
