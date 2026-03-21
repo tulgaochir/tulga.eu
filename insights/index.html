@@ -3,307 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Insights - Research series and investment insights covering valuation methods, CFA knowledge, econometrics, and portfolio management by Tulga-Ochir Sugar">
-    <meta name="keywords" content="investment insights, valuation, CFA knowledge, econometrics, portfolio management, financial analysis">
+    <meta name="description" content="Knowledge Hub - Essential resources covering key topics from the CFA curriculum by Tulga-Ochir Sugar">
     <meta name="author" content="Tulga-Ochir Sugar">
-    <title>Insights | Tulga-Ochir Sugar</title>
-    
-    <!-- Preload critical resources -->
+    <title>Knowledge Hub | Tulga-Ochir Sugar</title>
+
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
     <link rel="preload" href="../assets/css/main.css" as="style">
-    
-    <!-- Stylesheets -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
-    
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Insights",
-        "description": "Research series and investment insights covering valuation methods, CFA knowledge, econometrics, and portfolio management",
-        "url": "https://example.com/insights/index.html",
-        "isPartOf": {
-            "@type": "WebSite",
-            "name": "Tulga-Ochir Sugar",
-            "url": "https://example.com"
-        },
-        "provider": {
-            "@type": "Organization",
-            "name": "Tulga-Ochir Sugar"
-        }
-    }
-    </script>
-    
-    <style>
-        /* Custom styles for the Insights page */
-        .insights-hero {
-            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
-            color: white;
-            padding: 5rem 0;
-            margin-bottom: 3rem;
-        }
-        
-        .series-selector {
-            background-color: #f8f9fa;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid #dee2e6;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .series-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        
-        .series-tab {
-            background-color: transparent;
-            border: 1px solid #dee2e6;
-            color: #495057;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .series-tab:hover {
-            background-color: #e9ecef;
-            color: #212529;
-        }
-        
-        .series-tab.active {
-            background-color: #1a365d;
-            color: white;
-            border-color: #1a365d;
-        }
-        
-        .series-content-section {
-            padding: 3rem 0;
-            display: none; /* Hide all sections by default */
-        }
-        
-        .series-content-section.active {
-            display: block; /* Show the active section */
-        }
-        
-        .article-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .article-image {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .article-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .article-card:hover .article-image img {
-            transform: scale(1.05);
-        }
-        
-        .article-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,0.7) 100%);
-            display: flex;
-            align-items: flex-end;
-            padding: 1rem;
-        }
-        
-        .article-series {
-            background-color: rgba(26, 54, 93, 0.8);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .article-content {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .article-content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: #212529;
-        }
-        
-        .article-content p {
-            color: #6c757d;
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
-        
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            color: #6c757d;
-        }
-        
-        .btn-read-more {
-            background-color: #1a365d;
-            color: white;
-            border: none;
-            padding: 0.5rem 1.25rem;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-            align-self: flex-start;
-        }
-        
-        .btn-read-more:hover {
-            background-color: #2a4365;
-            color: white;
-        }
 
-        /* Special card for CFA Knowledge Hub */
-        .cfa-hub-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
+    <style>
+        .pdf-list {
+            list-style: none;
+            padding: 0;
         }
-        .cfa-hub-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        .pdf-list li {
+            margin-bottom: 1rem;
         }
-        .cfa-hub-card .card-body {
-            padding: 3rem;
+        .pdf-list a {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #212529;
+            transition: all 0.3s ease;
         }
-        .cfa-hub-card i {
-            font-size: 4rem;
+        .pdf-list a:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            color: #212529;
+        }
+        .pdf-list i {
+            font-size: 1.75rem;
             color: #1a365d;
-            margin-bottom: 1.5rem;
+            margin-right: 1.25rem;
         }
-        .cfa-hub-card h2 {
-            font-size: 2rem;
+        .pdf-list .pdf-info {
+            flex-grow: 1;
+        }
+        .pdf-list .pdf-title {
             font-weight: 600;
-            margin-bottom: 1rem;
-            color: #212529;
-        }
-        .cfa-hub-card p {
             font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        .pdf-list .pdf-description {
+            font-size: 0.9rem;
             color: #6c757d;
-            margin-bottom: 2rem;
+            margin: 0;
         }
-        .cfa-hub-card .btn-explore {
-            background-color: #1a365d;
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
+        .pdf-list .pdf-size {
+            font-size: 0.8rem;
+            color: #adb5bd;
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+        .navbar {
+            background-color: #ffffff;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-nav .nav-link {
+            color: #333333 !important;
             font-weight: 500;
-            font-size: 1.1rem;
-            transition: background-color 0.3s ease;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
         }
-        .cfa-hub-card .btn-explore:hover {
-            background-color: #2a4365;
-            color: white;
-        }
-        
-        /* Special card for Valuation Series */
-        .valuation-hub-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-        }
-        .valuation-hub-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .valuation-hub-card .card-body {
-            padding: 3rem;
-        }
-        .valuation-hub-card i {
-            font-size: 4rem;
-            color: #0f4c75;
-            margin-bottom: 1.5rem;
-        }
-        .valuation-hub-card h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #212529;
-        }
-        .valuation-hub-card p {
-            font-size: 1.1rem;
-            color: #6c757d;
-            margin-bottom: 2rem;
-        }
-        .valuation-hub-card .btn-explore {
-            background-color: #0f4c75;
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: background-color 0.3s ease;
-        }
-        .valuation-hub-card .btn-explore:hover {
-            background-color: #3282b8;
-            color: white;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .series-tabs {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 0.5rem;
-            }
-            
-            .series-tab {
-                white-space: nowrap;
-            }
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: #0066cc !important;
         }
     </style>
 </head>
 <body>
-    <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
-    
-    <!-- Navigation (right-aligned like home page) -->
+
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -311,177 +90,128 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">INSIGHTS</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">KNOWLEDGE HUB</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Insights Hero Section -->
-    <section class="insights-hero" aria-labelledby="insights-title">
+    <section class="page-header" aria-labelledby="page-title">
         <div class="container text-center">
-            <h1 id="insights-title" class="display-4">Insights</h1>
-            <p class="lead">Research series and investment insights covering valuation methods, CFA knowledge, econometrics, and portfolio management.</p>
+            <h1 id="page-title" class="display-4 mt-3">Knowledge Hub</h1>
+            <p class="lead">A curated collection of essential resources covering key topics from the CFA curriculum.</p>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main id="main-content" role="main">
-        <!-- Series Selector -->
-        <section class="series-selector" aria-label="Filter insights by series">
-            <div class="container">
-                <div class="series-tabs">
-                    <button class="series-tab active" onclick="showSeries('valuation')">Valuation Series</button>
-                    <button class="series-tab" onclick="showSeries('cfa')">CFA Knowledge</button>
-                    <button class="series-tab" onclick="showSeries('econometrics')">Econometrics</button>
-                    <button class="series-tab" onclick="showSeries('portfolio')">Portfolio Management</button>
-                </div>
+    <main id="main-content" class="container py-5" role="main">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <ul class="pdf-list">
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Ethics.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Ethical and Professional Standards</div>
+                                <p class="pdf-description">The foundational principles of professional conduct and ethical behavior in the investment industry.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Quant.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Quantitative Methods</div>
+                                <p class="pdf-description">Essential statistical concepts, time-series analysis, and probability for financial modeling.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Economics.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Economics</div>
+                                <p class="pdf-description">Microeconomic and macroeconomic principles that drive market behavior and valuation.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/FSA.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Financial Statement Analysis (FSA)</div>
+                                <p class="pdf-description">In-depth analysis of financial statements, ratios, and accounting standards to assess company performance.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Corporate_Issuers.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Corporate Issuers</div>
+                                <p class="pdf-description">Insights into corporate governance, capital structure, and business decisions.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Equity.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Equity Investments</div>
+                                <p class="pdf-description">Methods for valuing equities, analyzing industry trends, and constructing stock portfolios.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Fixed_Income.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Fixed Income</div>
+                                <p class="pdf-description">Comprehensive guide to bonds, yield curves, credit analysis, and fixed income portfolio management.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Derivative.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Derivatives</div>
+                                <p class="pdf-description">Fundamentals of options, futures, forwards, and swaps for hedging and speculation.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Alternative_Investment.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Alternative Investments</div>
+                                <p class="pdf-description">Exploring non-traditional assets like real estate, private equity, hedge funds, and commodities.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../assets/pdfs/cfa-knowledge/Portfolio_Management.html">
+                            <i class="far fa-file-alt"></i>
+                            <div class="pdf-info">
+                                <div class="pdf-title">Portfolio Management</div>
+                                <p class="pdf-description">The art and science of constructing and managing investment portfolios to meet client objectives.</p>
+                            </div>
+                            <span class="pdf-size">READ</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </section>
-
-        <!-- Series Content Container -->
-        <div id="series-content-container">
-            
-        <!-- Valuation Series Content -->
-            <section id="valuation-content" class="series-content-section active" aria-labelledby="valuation-title">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="valuation-hub-card">
-                                <div class="card-body">
-                                    <i class="fas fa-calculator"></i>
-                                    <h2 id="valuation-title">Valuation Series</h2>
-                                    <p>A comprehensive guide to valuation methods, from basic concepts to advanced techniques. Master DCF analysis, relative valuation, cost of capital, and sector-specific approaches with practical examples and case studies.</p>
-                                    <a href="valuation.html" class="btn btn-explore">Explore Valuation Methods</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- CFA Knowledge Content -->
-            <section id="cfa-content" class="series-content-section" aria-labelledby="cfa-title">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="cfa-hub-card">
-                                <div class="card-body">
-                                    <i class="fas fa-book-open"></i>
-                                    <h2 id="cfa-title">CFA Knowledge Hub</h2>
-                                    <p>A comprehensive collection of essential resources covering key topics from the CFA curriculum. Access PDFs on ethics, quantitative methods, financial reporting, and more.</p>
-                                    <a href="cfa-knowledge.html" class="btn btn-explore">Explore All CFA Resources</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Econometrics Content -->
-            <section id="econometrics-content" class="series-content-section" aria-labelledby="econometrics-title">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="cfa-hub-card">
-                                <div class="card-body">
-                                    <i class="fas fa-chart-bar"></i>
-                                    <h2 id="econometrics-title">Econometrics Hub</h2>
-                                    <p>Advanced econometric techniques for forecasting financial markets, including time series analysis, ARIMA models, and vector autoregression.</p>
-                                    <a href="econometrics.html" class="btn btn-explore">Explore All Econometrics Resources</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-                                        
-            <!-- Portfolio Management Content -->
-            <section id="portfolio-content" class="series-content-section" aria-labelledby="portfolio-title">
-                <div class="container">
-                    <h2 id="portfolio-title" class="text-center mb-4">Portfolio Management</h2>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="article-card">
-                                <div class="article-image">
-                                    <img src="https://picsum.photos/seed/portfolio-management/800/500.jpg" alt="Portfolio Management Strategies">
-                                    <div class="article-overlay">
-                                        <span class="article-series">Portfolio</span>
-                                    </div>
-                                </div>
-                                <div class="article-content">
-                                    <h3>Portfolio Management Strategies</h3>
-                                    <p>Modern portfolio theory, asset allocation, and risk management techniques for constructing optimal investment portfolios.</p>
-                                    <div class="article-meta">
-                                        <span class="article-date">September 28, 2025</span>
-                                        <span class="article-read-time">8 min read</span>
-                                    </div>
-                                    <a href="#" class="btn btn-read-more">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="article-card">
-                                <div class="article-image">
-                                    <img src="https://picsum.photos/seed/asset-allocation/800/500.jpg" alt="Asset Allocation Models">
-                                    <div class="article-overlay">
-                                        <span class="article-series">Portfolio</span>
-                                    </div>
-                                </div>
-                                <div class="article-content">
-                                    <h3>Asset Allocation Models</h3>
-                                    <p>Strategic and tactical asset allocation approaches, including mean-variance optimization, Black-Litterman model, and factor-based allocation.</p>
-                                    <div class="article-meta">
-                                        <span class="article-date">August 20, 2025</span>
-                                        <span class="article-read-time">12 min read</span>
-                                    </div>
-                                    <a href="#" class="btn btn-read-more">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
         </div>
     </main>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <div class="social-icons mb-4">
-                <a href="https://www.linkedin.com/in/tulga-ochir-s/"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:mail@tulga.eu"><i class="fas fa-envelope"></i></a>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Tulga-Ochir Sugar. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script>
-        function showSeries(seriesName) {
-            // Hide all content sections
-            const allSections = document.querySelectorAll('.series-content-section');
-            allSections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Show the selected content section
-            const activeSection = document.getElementById(seriesName + '-content');
-            if (activeSection) {
-                activeSection.classList.add('active');
-            }
-
-            // Update active tab
-            const allTabs = document.querySelectorAll('.series-tab');
-            allTabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-    </script>
 </body>
 </html>
