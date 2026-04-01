@@ -217,13 +217,14 @@
 
   /* ── TABLES ───────────────────────────────── */
   table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif;
-          font-size: 13px; margin: 12px 0; border-radius: var(--radius);
-          overflow: hidden; box-shadow: var(--shadow); }
-  th { background: #f1f5f9; text-align: left; padding: 8px 12px;
-       font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
-       color: var(--subtle); border-bottom: 2px solid var(--border); }
-  td { padding: 8px 12px; border-bottom: 1px solid #f0f4f8; vertical-align: top; }
-  tr:nth-child(even) td { background: #f8fafd; }
+          font-size: 13px; margin: 12px 0; border: 1px solid var(--border);
+          border-radius: var(--radius); overflow: hidden; }
+  th { background: #fff; text-align: left; padding: 9px 14px;
+       font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px;
+       color: var(--subtle); border-bottom: 1px solid var(--border); }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border);
+       vertical-align: top; color: var(--text); }
+  tr:nth-child(even) td { background: none; }
   tr:last-child td { border-bottom: none; }
 
   /* ── PROSE ────────────────────────────────── */
