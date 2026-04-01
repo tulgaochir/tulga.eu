@@ -1,0 +1,3562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFA Level I — Expanded Revision Guide 2024</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --quant:  #1a5276; --econ:  #1a7a3a; --corp:  #7d3c98;
+    --fsa:    #b7770d; --equity:#c0392b; --fi:    #1f618d;
+    --deriv:  #117a65; --alt:   #784212; --pm:    #2e4057; --eth:#1a1a2e;
+
+    --cream:       #fdf9f4;
+    --navy:        #0d1f38;
+    --navy2:       #162d50;
+    --gold:        #b8852a;
+    --gold-light:  #fef3dc;
+    --purple-mid:  #7c3aed;
+    --green-dark:  #14532d;
+    --green-light: #f0fdf4;
+    --red-dark:    #991b1b;
+    --red-light:   #fff5f5;
+    --blue-dark:   #1e3a5f;
+    --blue-light:  #eff6ff;
+    --gray1: #f1f5f9; --gray2: #e2e8f0; --gray3: #94a3b8;
+    --text:   #1e2433;
+    --subtle: #64748b;
+    --border: #dde3ea;
+    --sidebar-w: 244px;
+    --radius: 10px;
+    --shadow: 0 1px 4px rgba(30,36,51,.06), 0 4px 16px rgba(30,36,51,.04);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.8;
+    background: var(--cream);
+    color: var(--text);
+  }
+
+  /* ── SIDEBAR ─────────────────────────────── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--navy);
+    padding: 0 0 40px;
+    z-index: 100;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,.12) transparent;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 2px; }
+
+  .brand {
+    padding: 20px 18px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 6px;
+  }
+  .brand-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px; font-weight: 800;
+    color: #fff; letter-spacing: .2px;
+  }
+  .brand-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    color: rgba(255,255,255,.35);
+    margin-top: 2px;
+  }
+
+  .nav-section {
+    padding: 14px 18px 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 1.4px;
+    color: rgba(255,255,255,.32);
+    border-left: 2px solid transparent;
+  }
+
+  #sidebar a {
+    display: block;
+    padding: 5px 18px 5px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px; font-weight: 400;
+    color: rgba(255,255,255,.58);
+    text-decoration: none;
+    line-height: 1.45;
+    border-left: 2px solid transparent;
+    transition: all .12s ease;
+  }
+  #sidebar a:hover {
+    color: #fff;
+    background: rgba(255,255,255,.06);
+    border-left-color: rgba(255,255,255,.25);
+  }
+  #sidebar a.active {
+    color: #fff;
+    font-weight: 600;
+    background: rgba(184,133,42,.18);
+    border-left-color: var(--gold);
+  }
+
+  /* ── MAIN CONTENT ────────────────────────── */
+  #main {
+    margin-left: var(--sidebar-w);
+    padding: 48px 64px 100px;
+    max-width: calc(var(--sidebar-w) + 860px);
+  }
+
+  /* Remove old TOC */
+  .toc { display: none; }
+
+  /* ── MODULE ───────────────────────────────── */
+  .module { margin: 0 0 40px; }
+  .module-header {
+    padding: 22px 28px;
+    display: flex; align-items: center; gap: 12px;
+    border-radius: var(--radius);
+    margin-bottom: 10px;
+    position: relative; overflow: hidden;
+  }
+  .module-header::after {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 160px; height: 100%;
+    background: linear-gradient(to left, rgba(255,255,255,.06), transparent);
+    pointer-events: none;
+  }
+  .module-header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 20px; font-weight: 800;
+    color: #fff; letter-spacing: -.2px;
+  }
+
+  .module-content { padding: 0 4px; }
+
+  /* ── SECTION ─────────────────────────────── */
+  .section { margin: 32px 0 8px; scroll-margin-top: 28px; }
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 1.4px;
+    padding: 6px 0 5px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .subsection { margin: 16px 0; }
+  .sub-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px; font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  /* ── FORMULA CARD ────────────────────────── */
+  .formula {
+    border-left: 4px solid var(--purple-mid);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 16px 24px 14px;
+    margin: 14px 0;
+    text-align: center;
+    overflow-x: auto;
+    box-shadow: var(--shadow);
+  }
+  #quant  .formula { border-left-color: var(--quant);  background: #eaf0f8; }
+  #econ   .formula { border-left-color: var(--econ);   background: #eaf5ee; }
+  #corp   .formula { border-left-color: var(--corp);   background: #f6eefa; }
+  #fsa    .formula { border-left-color: var(--fsa);    background: #fef8ee; }
+  #equity .formula { border-left-color: var(--equity); background: #fdf0ee; }
+  #fi     .formula { border-left-color: var(--fi);     background: #e8f1f8; }
+  #deriv  .formula { border-left-color: var(--deriv);  background: #e8f5f1; }
+  #alt    .formula { border-left-color: var(--alt);    background: #f7f0e8; }
+  #pm     .formula { border-left-color: var(--pm);     background: #e8ecf1; }
+  #eth    .formula { border-left-color: var(--eth);    background: #ebebf1; }
+
+  .formula .f-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .8px;
+    color: var(--subtle);
+    margin-bottom: 4px;
+    text-align: left;
+  }
+  .formula .f-note {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--subtle);
+    margin-top: 6px;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  /* ── CALLOUTS ─────────────────────────────── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 11px 15px;
+    margin: 12px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px; line-height: 1.65;
+  }
+  .callout.tip  { background: var(--green-light); border-left: 4px solid #22c55e; color: var(--green-dark); }
+  .callout.warn { background: var(--red-light);   border-left: 4px solid #ef4444; color: var(--red-dark); }
+  .callout.note { background: var(--gold-light);  border-left: 4px solid var(--gold); color: #78350f; }
+  .callout.exam { background: var(--blue-light);  border-left: 4px solid #3b82f6; color: var(--blue-dark); }
+  .callout strong { font-size: 9.5px; text-transform: uppercase; letter-spacing: .5px; margin-right: 4px; }
+
+  /* ── TABLES ───────────────────────────────── */
+  table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif;
+          font-size: 12px; margin: 12px 0; border-radius: var(--radius);
+          overflow: hidden; box-shadow: var(--shadow); }
+  th { background: #f1f5f9; text-align: left; padding: 7px 11px;
+       font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+       color: var(--subtle); border-bottom: 2px solid var(--border); }
+  td { padding: 7px 11px; border-bottom: 1px solid #f0f4f8; vertical-align: top; }
+  tr:nth-child(even) td { background: #f8fafd; }
+  tr:last-child td { border-bottom: none; }
+
+  /* ── PROSE ────────────────────────────────── */
+  ul, ol { padding-left: 20px; font-family: 'Inter', sans-serif; font-size: 13px; }
+  li { margin: 3px 0; }
+  p  { font-family: 'Inter', sans-serif; font-size: 13px; margin: 7px 0; line-height: 1.65; }
+
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 20px;
+           font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 800;
+           text-transform: uppercase; letter-spacing: .4px;
+           background: #ef4444; color: #fff; margin-left: 5px; vertical-align: middle; }
+  .badge.green { background: #22c55e; }
+  .badge.blue  { background: #3b82f6; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+  /* Kill old grid layout */
+  .two-col { display: block; }
+
+  /* ── MODULE COLOUR ────────────────────────── */
+  #quant  .module-header { background: var(--quant); }
+  #quant  .section-title { color: var(--quant); border-color: var(--quant); }
+  #econ   .module-header { background: var(--econ); }
+  #econ   .section-title { color: var(--econ); border-color: var(--econ); }
+  #corp   .module-header { background: var(--corp); }
+  #corp   .section-title { color: var(--corp); border-color: var(--corp); }
+  #fsa    .module-header { background: var(--fsa); }
+  #fsa    .section-title { color: var(--fsa); border-color: var(--fsa); }
+  #equity .module-header { background: var(--equity); }
+  #equity .section-title { color: var(--equity); border-color: var(--equity); }
+  #fi     .module-header { background: var(--fi); }
+  #fi     .section-title { color: var(--fi); border-color: var(--fi); }
+  #deriv  .module-header { background: var(--deriv); }
+  #deriv  .section-title { color: var(--deriv); border-color: var(--deriv); }
+  #alt    .module-header { background: var(--alt); }
+  #alt    .section-title { color: var(--alt); border-color: var(--alt); }
+  #pm     .module-header { background: var(--pm); }
+  #pm     .section-title { color: var(--pm); border-color: var(--pm); }
+  #eth    .module-header { background: var(--eth); }
+  #eth    .section-title { color: var(--eth); border-color: var(--eth); }
+
+  /* ── MOBILE ───────────────────────────────── */
+  @media (max-width: 900px) {
+    #sidebar { display: none; }
+    #main { margin-left: 0; padding: 28px 20px 60px; max-width: 100%; }
+  }
+</style>
+
+
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    displayMath: [['\\[','\\]']],
+    packages: {'[+]': ['ams']},
+    tags: 'none'
+  },
+  options: {
+    skipHtmlTags: ['script','noscript','style','textarea','pre']
+  },
+  startup: {
+    typeset: true
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async id="MathJax-script"></script>
+</head>
+<body>
+<nav id="sidebar">
+  <div class="brand">
+    <div class="brand-title">CFA Level I</div>
+    <div class="brand-sub">Revision Guide</div>
+  </div>
+  <div class="nav-section" style="--mod-color:#1a5276">📐 Quantitative Methods</div>
+  <a href="#quant-s1">Rates &amp; Returns</a>
+  <a href="#quant-s2">Time Value of Money</a>
+  <a href="#quant-s3">Statistical Measures of Asset Returns</a>
+  <a href="#quant-s4">Probability Trees &amp; Portfolio Mathematics</a>
+  <a href="#quant-s5">Simulation Methods</a>
+  <a href="#quant-s6">Estimation &amp; Inference</a>
+  <a href="#quant-s7">Hypothesis Testing</a>
+  <a href="#quant-s8">Simple Linear Regression</a>
+  <a href="#quant-s9">Big Data &amp; Machine Learning</a>
+  <div class="nav-section" style="--mod-color:#1a7a3a">🌍 Economics</div>
+  <a href="#econ-s1">Firms &amp; Market Structures</a>
+  <a href="#econ-s2">Understanding Business Cycles</a>
+  <a href="#econ-s3">Fiscal Policy</a>
+  <a href="#econ-s4">Monetary Policy</a>
+  <a href="#econ-s5">Introduction to Geopolitics</a>
+  <a href="#econ-s6">International Trade &amp; Capital Flows</a>
+  <a href="#econ-s7">Capital Flows &amp; Exchange Rate Calculations</a>
+  <div class="nav-section" style="--mod-color:#7d3c98">🏢 Corporate Issuers</div>
+  <a href="#corp-s1">Organisational Forms &amp; Ownership</a>
+  <a href="#corp-s2">Investors &amp; Other Stakeholders</a>
+  <a href="#corp-s3">Corporate Governance: Conflicts, Mechanisms, Risks &amp; Benefits</a>
+  <a href="#corp-s4">Working Capital &amp; Liquidity</a>
+  <a href="#corp-s5">Capital Investments &amp; Capital Allocation</a>
+  <a href="#corp-s6">Capital Structure</a>
+  <a href="#corp-s7">Business Models</a>
+  <div class="nav-section" style="--mod-color:#b7770d">📊 Financial Statements</div>
+  <a href="#fsa-s1">Introduction to Financial Statement Analysis</a>
+  <a href="#fsa-s2">Analysing Income Statements</a>
+  <a href="#fsa-s3">Analysing Balance Sheets</a>
+  <a href="#fsa-s4">Analysing Statements of Cash Flows</a>
+  <a href="#fsa-s5">Analysis of Inventories</a>
+  <a href="#fsa-s6">Analysis of Long-Term Assets</a>
+  <a href="#fsa-s7">Analysis of Income Taxes</a>
+  <a href="#fsa-s8">Financial Analysis Techniques &amp; Ratios</a>
+  <div class="nav-section" style="--mod-color:#c0392b">📈 Equity</div>
+  <a href="#equity-s1">Market Organisation &amp; Structure</a>
+  <a href="#equity-s2">Security Market Indexes</a>
+  <a href="#equity-s3">Market Efficiency</a>
+  <a href="#equity-s4">Overview of Equity Securities</a>
+  <a href="#equity-s5">Company Analysis: Past, Present &amp; Forecasting</a>
+  <a href="#equity-s6">Equity Valuation: Concepts &amp; Basic Tools</a>
+  <div class="nav-section" style="--mod-color:#1f618d">💳 Fixed Income</div>
+  <a href="#fi-s1">Fixed-Income Features, Cash Flows &amp; Issuance</a>
+  <a href="#fi-s2">Fixed-Income Markets</a>
+  <a href="#fi-s3">Bond Valuation: Prices, Yields &amp; Term Structure</a>
+  <a href="#fi-s4">Fixed-Income Risk &amp; Returns: Duration &amp; Convexity</a>
+  <a href="#fi-s5">Fixed-Income: Credit Risk &amp; Analysis</a>
+  <a href="#fi-s6">Fixed-Income Securitisation: ABS &amp; MBS</a>
+  <div class="nav-section" style="--mod-color:#117a65">⚙️ Derivatives</div>
+  <a href="#deriv-s1">Derivative Instrument &amp; Market Features</a>
+  <a href="#deriv-s2">Arbitrage, Replication &amp; Cost of Carry</a>
+  <a href="#deriv-s3">Pricing &amp; Valuation of Forward and Futures Contracts</a>
+  <a href="#deriv-s4">Pricing &amp; Valuation of Interest Rate Swaps</a>
+  <a href="#deriv-s5">Pricing &amp; Valuation of Options</a>
+  <a href="#deriv-s6">Put-Call Parity &amp; Binomial Model</a>
+  <div class="nav-section" style="--mod-color:#784212">🏗️ Alternatives</div>
+  <a href="#alt-s1">Alternative Investment Features, Methods &amp; Structures</a>
+  <a href="#alt-s2">Alternative Investment Performance &amp; Returns</a>
+  <a href="#alt-s3">Investments in Private Capital: Equity &amp; Debt</a>
+  <a href="#alt-s4">Real Estate, Infrastructure &amp; Natural Resources</a>
+  <a href="#alt-s5">Hedge Funds &amp; Digital Assets</a>
+  <div class="nav-section" style="--mod-color:#2e4057">🎯 Portfolio Management</div>
+  <a href="#pm-s1">Portfolio Risk &amp; Return: Part I</a>
+  <a href="#pm-s2">Portfolio Risk &amp; Return: Part II — CAPM</a>
+  <a href="#pm-s3">Portfolio Management: An Overview &amp; Planning</a>
+  <a href="#pm-s4">Behavioural Biases of Individuals</a>
+  <a href="#pm-s5">Introduction to Risk Management</a>
+  <div class="nav-section" style="--mod-color:#1a1a2e">⚖️ Ethics</div>
+  <a href="#eth-s1">Foundation: Code of Ethics &amp; Standards Overview</a>
+  <a href="#eth-s2">Standard I — Professionalism</a>
+  <a href="#eth-s3">Standard II — Integrity of Capital Markets</a>
+  <a href="#eth-s4">Standard III — Duties to Clients</a>
+  <a href="#eth-s5">Standard IV — Duties to Employers</a>
+  <a href="#eth-s6">Standard V — Investment Analysis, Recommendations &amp; Actions</a>
+  <a href="#eth-s7">Standard VI — Conflicts of Interest</a>
+  <a href="#eth-s8">Standard VII — Responsibilities as CFA Member/Candidate</a>
+  <a href="#eth-s9">Global Investment Performance Standards (GIPS)</a>
+  <a href="#eth-s10">BA II Plus Calculator Reference</a>
+</nav>
+
+<main id="main">
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 1. QUANTITATIVE METHODS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="quant">
+<div class="module-header"><h2>QUANTITATIVE METHODS</h2></div>
+<div class="module-content">
+
+<!-- RATES & RETURNS -->
+<div class="section" id="quant-s1">
+<div class="section-title">Rates &amp; Returns</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Required Rate of Return (Build-Up)</div>
+<div class="formula"><span class="f-label">Required Rate of Return</span>\[ r = r_{rf} + \text{Inflation Premium} + \text{Default Premium} + \text{Liquidity Premium} + \text{Maturity Premium} \]</div>
+
+<div class="formula"><span class="f-label">Approximation</span>\[ r_{\text{nominal}} \approx r_{\text{real}} + r_{\text{inflation}} \]</div>
+<div class="formula"><span class="f-label">Exact (Fisher)</span>\[ (1 + r_{\text{nominal}}) = (1 + r_{\text{real}})(1 + r_{\text{inflation}}) \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Holding Period Return (HPR)</div>
+<div class="formula"><span class="f-label">Holding Period Return</span>\[ HPR = \frac{P_1 - P_0 + CF_1}{P_0} \]</div>
+<div class="formula"><span class="f-label">Multi-period</span>\[ R = \prod_{t=1}^{n}(1 + R_t) - 1 \]</div>
+<p>HPR is NOT annualised by default.</p>
+
+<div class="callout tip"><strong>Key:</strong> HPR is not annualised by default. A 20% HPR over 4 years ≠ 20% per year.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Three Mean Returns — When to Use Each <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Arithmetic Mean — expected return over 1 future period</span>\[ \bar{R}_A = \frac{1}{T}\sum_{t=1}^{T} R_t \]</div>
+<div class="formula"><span class="f-label">Geometric Mean — actual historical compound growth rate</span>\[ \bar{R}_G = \left[\prod_{t=1}^{T}(1+R_t)\right]^{1/T} - 1 \]</div>
+<div class="formula"><span class="f-label">Harmonic Mean — dollar-cost averaging (equal \(\$ \) per period)</span>\[ \bar{R}_H = \frac{N}{\displaystyle\sum_{i=1}^{N}\frac{1}{R_i}} \]</div>
+<div class="callout warn"><strong>⚠ Trap:</strong> With volatile returns: Arithmetic ≥ Geometric ≥ Harmonic. Equality only when all values are identical. Also: Arithmetic × Harmonic = (Geometric)².</div>
+
+<div class="callout warn"><strong>Trap:</strong> If returns are volatile, Arithmetic ≥ Geometric ≥ Harmonic (equality only when all values identical). Also: Arithmetic × Harmonic = (Geometric)²</div>
+<table>
+<tr><th>Scenario</th><th>Use</th></tr>
+<tr><td>Year 1: +50%, Year 2: −50%</td><td>Arithmetic = 0% (misleading!), Geometric = −13.4% (reality)</td></tr>
+<tr><td>Buy $500 of stock each month</td><td>Harmonic mean of prices gives average cost per share</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Money-Weighted vs Time-Weighted Return <span class="badge">Critical</span></div>
+<table>
+<tr><th></th><th>MWR (IRR)</th><th>TWR</th></tr>
+<tr><td>Method</td><td>IRR of all cash flows</td><td>Geometric mean of sub-period HPRs</td></tr>
+<tr><td>Affected by investor CF timing?</td><td>Yes</td><td>No</td></tr>
+<tr><td>Manager controls CFs?</td><td>Use MWR</td><td>Use TWR</td></tr>
+<tr><td>CFA benchmark standard</td><td>No</td><td>Yes</td></tr>
+</table>
+<div class="callout exam"><strong>Classic Exam Trap:</strong> If investor adds money before a bad period → MWR &lt; TWR. If adds before good period → MWR &gt; TWR. TWR eliminates this timing effect.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">EAR / APR Conversions</div>
+<div class="formula"><span class="f-label">Effective Annual Rate (discrete compounding)</span>\[ EAR = \left(1 + \frac{r_{\text{stated}}}{m}\right)^{m} - 1 \]</div>
+<div class="formula"><span class="f-label">EAR (continuous compounding)</span>\[ EAR_{\text{cont}} = e^{r_s} - 1 \]</div>
+<p>m = number of compounding periods per year.</p>
+
+<div class="callout tip"><strong>Key:</strong> More frequent compounding → higher EAR for same APR. APR and EAR are equal only when m = 1.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Real vs Nominal Returns (Fisher Equation)</div>
+<div class="formula"><span class="f-label">Fisher Equation (exact)</span>\[ 1 + r_{\text{real}} = \frac{1 + r_{\text{nominal}}}{1 + r_{\text{inflation}}} \]</div>
+<div class="formula"><span class="f-label">Approximation (valid for small rates)</span>\[ r_{\text{real}} \approx r_{\text{nominal}} - r_{\text{inflation}} \]</div>
+
+
+<div class="sub-title">Leveraged Return</div>
+<div class="formula"><span class="f-label">Leveraged Return</span>\[ R_L = R_P + \frac{V_B}{V_E}(R_P - r_D) \]</div>
+<p>\(V_B\) = borrowed capital, \(V_E\) = equity capital, \(r_D\) = cost of debt.</p>
+
+<div class="callout tip">If R_P &gt; r_D: leverage amplifies gains. If R_P &lt; r_D: leverage amplifies losses.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TIME VALUE OF MONEY -->
+<div class="section" id="quant-s2">
+<div class="section-title">Time Value of Money</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">FV / PV Core Formulas</div>
+<div class="formula"><span class="f-label">Future / Present Value</span>\[ FV_N = PV \cdot (1 + r)^{N} \qquad PV = \frac{FV_N}{(1+r)^{N}} \]</div>
+<div class="formula"><span class="f-label">Periodic compounding (m periods/year)</span>\[ FV_N = PV \left(1 + \frac{r_s}{m}\right)^{mN} \]</div>
+<div class="formula"><span class="f-label">Continuous compounding</span>\[ FV_N = PV \cdot e^{r_s \cdot N} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Annuities</div>
+<div class="formula"><span class="f-label">Ordinary Annuity PV</span>\[ PV = PMT \times \frac{1 - (1+r)^{-N}}{r} \]</div>
+<div class="formula"><span class="f-label">Ordinary Annuity FV</span>\[ FV = PMT \times \frac{(1+r)^{N} - 1}{r} \]</div>
+<div class="formula"><span class="f-label">Annuity Due PV</span>\[ PV_{\text{due}} = PV_{\text{ordinary}} \times (1 + r) \]</div>
+<p>Use BGN mode on BA II Plus for annuity due.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Fixed-Income Instruments</div>
+<div class="formula"><span class="f-label">Coupon Bond PV</span>\[ PV = \sum_{t=1}^{N}\frac{PMT}{(1+r)^{t}} + \frac{FV}{(1+r)^{N}} \]</div>
+<div class="formula"><span class="f-label">Zero-Coupon Bond</span>\[ PV = \frac{FV}{(1+r)^{N}} \]</div>
+<div class="formula"><span class="f-label">Implied YTM from price</span>\[ r = \left(\frac{FV}{PV}\right)^{1/N} - 1 \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Equity Instruments &amp; TVM</div>
+<div class="formula"><span class="f-label">Perpetuity (constant dividend)</span>\[ PV = \frac{D}{r} \]</div>
+<div class="formula"><span class="f-label">Gordon Growth Model</span>\[ PV = \frac{D_1}{r - g} = \frac{D_0(1+g)}{r - g} \]</div>
+<div class="formula"><span class="f-label">Implied required return</span>\[ r = \frac{D_1}{PV} + g \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">NPV and IRR</div>
+<div class="formula"><span class="f-label">Net Present Value</span>\[ NPV = \sum_{t=0}^{N}\frac{CF_t}{(1+r)^{t}} \]</div>
+<p>Accept if NPV > 0. IRR is the rate r where NPV = 0; accept if IRR > hurdle rate.</p>
+
+<div class="callout warn"><strong>When NPV and IRR conflict on mutually exclusive projects: ALWAYS follow NPV.</strong> NPV directly measures value creation. IRR can give misleading rankings due to scale and timing differences.</div>
+</div>
+
+<div class="callout exam"><strong>Calculator tip (BA II Plus):</strong> Always CLR TVM before new calculation. For bonds: PMT and FV same sign (positive), PV opposite sign (negative). BGN mode for annuity due.</div>
+</div>
+</div>
+</div>
+
+<!-- STATISTICS -->
+<div class="section" id="quant-s3">
+<div class="section-title">Statistical Measures of Asset Returns</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Central Tendency</div>
+<div class="formula"><span class="f-label">Sample Mean</span>\[ \bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i \]</div>
+<div class="formula"><span class="f-label">Weighted Mean</span>\[ \bar{X}_w = \sum_{i=1}^{n} w_i X_i \quad \text{where } \textstyle\sum w_i = 1 \]</div>
+
+<div class="callout tip"><strong>Skewed distributions:</strong> Mean is pulled toward the tail. For negatively skewed (long left tail): Mean &lt; Median &lt; Mode. Most equity portfolios are negatively skewed.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Measures of Dispersion</div>
+<div class="formula"><span class="f-label">Mean Absolute Deviation</span>\[ MAD = \frac{1}{n}\sum_{i=1}^{n}\bigl|X_i - \bar{X}\bigr| \]</div>
+<div class="formula"><span class="f-label">Sample Variance</span>\[ s^2 = \frac{\sum_{i=1}^{n}(X_i - \bar{X})^2}{n-1} \]</div>
+<p>Denominator n−1 is Bessel's correction for unbiased estimation.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Measures of Location (Percentiles)</div>
+<div class="formula"><span class="f-label">Location of y-th Percentile</span>\[ L_y = (n+1)\times\frac{y}{100} \]</div>
+<div class="formula"><span class="f-label">Interquartile Range</span>\[ IQR = Q_3 - Q_1 \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Skewness &amp; Kurtosis <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Skewness</span>\[ SK \approx \frac{1}{n}\sum_{i=1}^{n}\frac{(X_i - \bar{X})^3}{s^3} \]</div>
+<div class="formula"><span class="f-label">Kurtosis</span>\[ KU \approx \frac{1}{n}\sum_{i=1}^{n}\frac{(X_i - \bar{X})^4}{s^4} \]</div>
+<div class="formula"><span class="f-label">Excess Kurtosis</span>\[ \text{Excess Kurtosis} = KU - 3 \]</div>
+
+<table>
+<tr><th>Type</th><th>Excess Kurtosis</th><th>Tails vs Normal</th><th>Finance Implication</th></tr>
+<tr><td>Leptokurtic</td><td>&gt; 0</td><td>Fatter tails</td><td>More extreme events (crashes) than normal predicts</td></tr>
+<tr><td>Mesokurtic</td><td>= 0</td><td>Normal</td><td>Theoretical benchmark</td></tr>
+<tr><td>Platykurtic</td><td>&lt; 0</td><td>Thinner tails</td><td>Rare in finance</td></tr>
+</table>
+<div class="callout warn"><strong>Most financial return series are leptokurtic (fat tails) and negatively skewed. Standard deviation ALONE understates tail risk.</strong></div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Covariance &amp; Correlation</div>
+<div class="formula"><span class="f-label">Sample Covariance</span>\[ s_{XY} = \frac{\sum_{i=1}^{n}(X_i-\bar{X})(Y_i-\bar{Y})}{n-1} \]</div>
+<div class="formula"><span class="f-label">Correlation Coefficient</span>\[ r_{XY} = \frac{s_{XY}}{s_X \cdot s_Y} \qquad -1 \leq r \leq +1 \]</div>
+
+<div class="callout tip"><strong>Correlation ≠ Causation.</strong> r = +1: perfect positive co-movement. r = 0: no linear relationship. r = −1: perfect opposite movement (max diversification benefit).</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PROBABILITY & PORTFOLIO MATH -->
+<div class="section" id="quant-s4">
+<div class="section-title">Probability Trees &amp; Portfolio Mathematics</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Expected Value &amp; Variance</div>
+<div class="formula"><span class="f-label">Expected Value</span>\[ E(X) = \sum_i P(X_i)\,X_i \]</div>
+<div class="formula"><span class="f-label">Variance</span>\[ \sigma^2(X) = \sum_i P(X_i)\bigl[X_i - E(X)\bigr]^2 \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Portfolio Expected Return &amp; Variance</div>
+<div class="formula"><span class="f-label">Portfolio Expected Return</span>\[ E(R_p) = \sum_i w_i E(R_i) \]</div>
+<div class="formula"><span class="f-label">2-Asset Portfolio Variance</span>\[ \sigma^2(R_p) = w_A^2\sigma_A^2 + w_B^2\sigma_B^2 + 2\,w_A w_B\,\rho_{AB}\,\sigma_A\sigma_B \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Roy's Safety-First Ratio</div>
+<div class="formula"><span class="f-label">Roy's Safety-First Ratio</span>\[ SFR = \frac{E(R_p) - R_L}{\sigma_p} \]</div>
+<div class="formula"><span class="f-label">Probability of shortfall</span>\[ P(R_p < R_L) = N(-SFR) \]</div>
+<div class="callout tip"><strong>✓ Use when:</strong> Maximise SFR to minimise the probability of falling below threshold return \(R_L\).</div>
+
+<div class="callout tip"><strong>Maximise SFRatio to minimise probability of falling below the threshold.</strong> The formula is identical to Sharpe ratio with Rₗ replacing Rᶠ.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Diversification Insight</div>
+<div class="callout exam"><strong>Correlation effect on portfolio risk:</strong>
+ρ = +1.0: σₚ = weighted average (no diversification)
+ρ = 0.5: σₚ &lt; weighted average (some benefit)
+ρ = 0.0: substantial risk reduction
+ρ = −1.0: risk can be eliminated entirely
+
+Only SYSTEMATIC risk is rewarded. Unsystematic risk can be diversified away at no cost — the market does not compensate it.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SIMULATION / LOGNORMAL -->
+<div class="section" id="quant-s5">
+<div class="section-title">Simulation Methods</div>
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Lognormal Distribution</div>
+<div class="formula"><span class="f-label">Lognormal Distribution</span>\[ \text{If } Y \sim \text{Lognormal, then } \ln Y \sim \text{Normal} \]</div>
+<p>Used to model asset prices (bounded at zero). Returns can be negative; prices cannot.</p>
+
+<div class="callout tip"><strong>Why lognormal for prices?</strong> Prices can't be negative. The lognormal distribution is right-skewed and bounded at zero — perfect for modelling asset prices. Returns (not prices) can be normal.</div>
+</div>
+</div>
+<div>
+<div class="subsection">
+<div class="sub-title">Monte Carlo vs Historical Simulation</div>
+<table>
+<tr><th></th><th>Monte Carlo</th><th>Historical Simulation</th></tr>
+<tr><td>Data source</td><td>Generated from assumed distribution</td><td>Actual historical data</td></tr>
+<tr><td>Captures fat tails?</td><td>Only if model includes them</td><td>Yes — reflects actual past crises</td></tr>
+<tr><td>Limitation</td><td>Model risk: garbage-in, garbage-out</td><td>Past may not repeat</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ESTIMATION & INFERENCE -->
+<div class="section" id="quant-s6">
+<div class="section-title">Estimation &amp; Inference</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Sampling Methods</div>
+<table>
+<tr><th>Method</th><th>How</th></tr>
+<tr><td>Simple random</td><td>Every element equally likely</td></tr>
+<tr><td>Systematic</td><td>Every kth observation</td></tr>
+<tr><td>Stratified</td><td>Random samples from each sub-group</td></tr>
+<tr><td>Cluster</td><td>Mini-representations of population</td></tr>
+<tr><td>Convenience</td><td>Based on accessibility</td></tr>
+<tr><td>Judgmental</td><td>Researcher expertise</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Central Limit Theorem (CLT)</div>
+<div class="formula"><span class="f-label">Central Limit Theorem</span>\[ \bar{X} \sim N\!\left(\mu,\; \frac{\sigma^2}{n}\right) \quad \text{for } n \geq 30 \]</div>
+<div class="formula"><span class="f-label">Standard Error of the Mean</span>\[ SE = \frac{\sigma}{\sqrt{n}} \approx \frac{s}{\sqrt{n}} \]</div>
+
+<div class="callout warn"><strong>CLT does NOT require the population to be normal.</strong> It only says the SAMPLING DISTRIBUTION of the mean approaches normal as n grows. With n &lt; 30, use the t-distribution unless the population is known to be normal.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Bootstrap &amp; Jackknife</div>
+<p>Bootstrap: Resample WITH replacement; repeat many times → builds empirical sampling distribution without distributional assumptions.</p>
+<p>Jackknife: Leave out one observation at a time (without replacement).</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Sampling Biases — Critical for Finance</div>
+<table>
+<tr><th>Bias</th><th>Mechanism</th><th>Effect</th></tr>
+<tr><td>Survivorship</td><td>Only surviving funds in database</td><td>Overstates average returns</td></tr>
+<tr><td>Look-ahead</td><td>Uses data not available at the time</td><td>Overstates strategy returns</td></tr>
+<tr><td>Time-period</td><td>Results depend on specific period studied</td><td>Non-generalisable conclusions</td></tr>
+<tr><td>Data mining</td><td>Testing too many variables until something works</td><td>Spurious correlations</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- HYPOTHESIS TESTING -->
+<div class="section" id="quant-s7">
+<div class="section-title">Hypothesis Testing</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Decision Framework</div>
+<table>
+<tr><th>Type</th><th>H₀</th><th>Hₐ</th><th>Reject H₀ if</th></tr>
+<tr><td>One-tailed (upper)</td><td>μ ≤ μ₀</td><td>μ &gt; μ₀</td><td>t &gt; +critical</td></tr>
+<tr><td>One-tailed (lower)</td><td>μ ≥ μ₀</td><td>μ &lt; μ₀</td><td>t &lt; −critical</td></tr>
+<tr><td>Two-tailed</td><td>μ = μ₀</td><td>μ ≠ μ₀</td><td>|t| &gt; critical</td></tr>
+</table>
+<p>Type I error (α): Reject H₀ when H₀ is TRUE — false positive.</p>
+<p>Type II error (β): Fail to reject H₀ when H₀ is FALSE — false negative.</p>
+<div class="formula"><span class="f-label">Statistical Power</span>\[ \text{Power} = 1 - \beta \]</div>
+<p>p-value = smallest α at which H₀ is rejected.</p>
+
+<div class="callout warn"><strong>When Type I and Type II errors trade off:</strong> Reducing α (less likely to falsely reject) increases β (more likely to miss a true effect). The only way to reduce both simultaneously is to increase sample size.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Test for Single Mean (t-test)</div>
+<div class="formula"><span class="f-label">One-Sample t-Test</span>\[ t = \frac{\bar{X} - \mu_0}{s/\sqrt{n}}, \quad df = n-1 \]</div>
+<div class="callout tip"><strong>✓ Use when:</strong> Use when population variance is unknown (almost always in practice).</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Tests for Differences Between Means</div>
+<div class="formula"><span class="f-label">Independent Samples t-Test (pooled variance)</span>\[ t = \frac{(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)}{\sqrt{s_p^2/n_1 + s_p^2/n_2}} \]</div>
+<div class="formula"><span class="f-label">Pooled Variance</span>\[ s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2}, \quad df = n_1+n_2-2 \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Test for Variance (Chi-Square)</div>
+<div class="formula"><span class="f-label">Chi-Square Test (single variance)</span>\[ \chi^2 = \frac{(n-1)s^2}{\sigma_0^2}, \quad df = n-1 \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Test for Equality of Two Variances (F-test)</div>
+<div class="formula"><span class="f-label">F-Test (equality of variances)</span>\[ F = \frac{s_1^2}{s_2^2}, \quad df_1 = n_1-1,\; df_2 = n_2-1 \]</div>
+<div class="callout warn"><strong>⚠ Trap:</strong> By convention, place the larger variance in the numerator → always right-tailed test.</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Parametric vs Nonparametric Tests</div>
+<table>
+<tr><th>Parametric</th><th>Nonparametric Alternative</th></tr>
+<tr><td>t-test for mean</td><td>Wilcoxon signed-rank test</td></tr>
+<tr><td>t-test for diff in means</td><td>Mann-Whitney U test</td></tr>
+<tr><td>Pearson correlation (r)</td><td>Spearman rank correlation (rₛ)</td></tr>
+</table>
+<div class="callout tip"><strong>Use nonparametric when:</strong> Distribution assumptions violated, data has outliers, data are ranked (ordinal), or hypothesis doesn't concern a parameter.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Tests for Correlation</div>
+<div class="formula"><span class="f-label">Pearson Correlation t-Test</span>\[ t = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}, \quad df = n-2 \]</div>
+<div class="formula"><span class="f-label">Spearman Rank Correlation</span>\[ r_s = 1 - \frac{6\sum d_i^2}{n(n^2-1)} \]</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- REGRESSION -->
+<div class="section" id="quant-s8">
+<div class="section-title">Simple Linear Regression</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Model Specification &amp; OLS Estimates</div>
+<div class="formula"><span class="f-label">OLS Regression Line</span>\[ \hat{Y} = \hat{b}_0 + \hat{b}_1 X \]</div>
+<div class="formula"><span class="f-label">Slope Estimate</span>\[ \hat{b}_1 = \frac{\text{Cov}(Y,X)}{\text{Var}(X)} = \frac{\sum(Y_i-\bar{Y})(X_i-\bar{X})}{\sum(X_i-\bar{X})^2} \]</div>
+<div class="formula"><span class="f-label">Intercept</span>\[ \hat{b}_0 = \bar{Y} - \hat{b}_1\bar{X} \]</div>
+
+<div class="callout note"><strong>OLS Assumptions:</strong> Linear relationship; homoscedasticity (constant residual variance); independence of X and Y; normality of residuals. Violations → biased/inefficient estimates.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">ANOVA Decomposition</div>
+<div class="formula"><span class="f-label">Total Sum of Squares</span>\[ SST = SSR + SSE \]</div>
+<div class="formula"><span class="f-label">Coefficient of Determination</span>\[ R^2 = \frac{SSR}{SST} \]</div>
+<div class="formula"><span class="f-label">F-Statistic</span>\[ F = \frac{MSR}{MSE} = \frac{SSR/k}{SSE/(n-k-1)} \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Hypothesis Tests on Coefficients</div>
+<div class="formula"><span class="f-label">t-Test for Slope</span>\[ t = \frac{\hat{b}_1 - b_1}{s_{\hat{b}_1}}, \quad s_{\hat{b}_1} = \frac{s_e}{\sqrt{\sum(X_i-\bar{X})^2}} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Prediction</div>
+<div class="formula"><span class="f-label">Variance of Forecast Error</span>\[ s_f^2 = s_e^2\left[1 + \frac{1}{n} + \frac{(X-\bar{X})^2}{(n-1)s_X^2}\right] \]</div>
+<p>Prediction interval is wider than confidence interval for the conditional mean.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Functional Forms</div>
+<table>
+<tr><th>Model</th><th>Form</th><th>Slope Interpretation</th></tr>
+<tr><td>Lin-Lin (standard)</td><td>Y = b₀ + b₁X</td><td>ΔY per unit ΔX</td></tr>
+<tr><td>Log-Lin</td><td>ln(Y) = b₀ + b₁X</td><td>% ΔY per unit ΔX</td></tr>
+<tr><td>Lin-Log</td><td>Y = b₀ + b₁ln(X)</td><td>ΔY per % ΔX</td></tr>
+<tr><td>Log-Log</td><td>ln(Y) = b₀ + b₁ln(X)</td><td>% ΔY per % ΔX (elasticity)</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Tests of Independence (Contingency Tables)</div>
+<div class="formula"><span class="f-label">Chi-Square Test of Independence</span>\[ \chi^2 = \sum_{i,j}\frac{(O_{ij} - E_{ij})^2}{E_{ij}} \]</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- BIG DATA -->
+<div class="section" id="quant-s9">
+<div class="section-title">Big Data &amp; Machine Learning</div>
+<div class="two-col">
+<div>
+<p>Big Data: Volume, Velocity, Variety. Alternative data sources include social media, satellite, credit card transactions, IoT sensors.</p>
+
+</div>
+<div>
+<table>
+<tr><th>ML Type</th><th>What It Does</th><th>Examples</th></tr>
+<tr><td>Supervised learning</td><td>Learns from labelled data to predict outcomes</td><td>Regression, classification (spam filter)</td></tr>
+<tr><td>Unsupervised learning</td><td>Finds patterns in unlabelled data</td><td>Clustering, dimensionality reduction (PCA)</td></tr>
+<tr><td>Deep learning</td><td>Neural networks with many layers; learns features automatically</td><td>Image recognition, NLP (text analysis)</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+</div><!-- /quant module-content -->
+</div><!-- /quant module -->
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 2. ECONOMICS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="econ">
+<div class="module-header"><h2>ECONOMICS</h2></div>
+<div class="module-content">
+
+<!-- FIRMS & MARKET STRUCTURES -->
+<div class="section" id="econ-s1">
+<div class="section-title">Firms &amp; Market Structures</div>
+
+<div class="subsection">
+<div class="sub-title">Universal Profit-Maximisation Rule</div>
+<div class="formula"><span class="f-label">Profit Maximisation (all market structures)</span>\[ MR = MC \]</div>
+<p>Step 1: find Q* where MR = MC. Step 2: read P* from demand curve at Q*.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Four Market Structures Compared <span class="badge">Critical</span></div>
+<table>
+<tr><th>Feature</th><th>Perfect Competition</th><th>Monopolistic Competition</th><th>Oligopoly</th><th>Monopoly</th></tr>
+<tr><td>Firms</td><td>Many</td><td>Many</td><td>Few</td><td>One</td></tr>
+<tr><td>Product</td><td>Homogeneous</td><td>Differentiated</td><td>Homogeneous or differentiated</td><td>Unique</td></tr>
+<tr><td>Entry barriers</td><td>None</td><td>Low</td><td>High</td><td>Very high</td></tr>
+<tr><td>Pricing power</td><td>None (price taker)</td><td>Some (narrow range)</td><td>Significant (interdependent)</td><td>Considerable (price maker)</td></tr>
+<tr><td>Long-run economic profit</td><td>Zero</td><td>Zero (entry erodes)</td><td>Positive possible</td><td>Positive possible</td></tr>
+<tr><td>Demand curve</td><td>Horizontal (perfectly elastic)</td><td>Downward sloping (elastic)</td><td>Kinked demand</td><td>Market demand (inelastic)</td></tr>
+</table>
+</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Shutdown Decision</div>
+<table>
+<tr><th>Condition</th><th>Short-Term</th><th>Long-Term</th></tr>
+<tr><td>TR ≥ TC</td><td>Stay</td><td>Stay</td></tr>
+<tr><td>TVC &lt; TR &lt; TC</td><td>Stay (covers variable costs)</td><td>Exit market</td></tr>
+<tr><td>TR &lt; TVC</td><td>Shut down</td><td>Exit market</td></tr>
+</table>
+<div class="callout tip"><strong>Logic:</strong> In the short run, fixed costs are sunk — operate if TR covers at least the variable costs. In the long run, all costs must be covered.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Oligopoly Specifics</div>
+<p>Kinked demand (oligopoly): price increase → elastic response (rivals don't match) → large volume loss. Price decrease → inelastic response (rivals match) → small volume gain.</p>
+
+<div class="callout note"><strong>Price collusion more likely when:</strong> Few firms, similar products, similar cost structures, frequent small orders, credible retaliation threats.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Market Power Measures</div>
+<div class="formula"><span class="f-label">Herfindahl-Hirschman Index</span>\[ HHI = \sum_{i=1}^{n} s_i^2 \quad \text{(sum of squared market shares)} \]</div>
+<p>N-firm concentration ratio = sum of market shares of N largest firms.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Economies of Scale</div>
+<div class="callout exam">Each expansion stage has its own short-run ATC curve. The long-run ATC is the envelope of all short-run ATC curves. <strong>Minimum efficient scale (MES)</strong> = lowest point on the long-run ATC — the scale at which average costs are minimised. Firms must reach MES to be competitive.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- BUSINESS CYCLES -->
+<div class="section" id="econ-s2">
+<div class="section-title">Understanding Business Cycles</div>
+
+<div class="subsection">
+<div class="sub-title">Four Cycle Phases <span class="badge">Critical</span></div>
+<table>
+<tr><th>Phase</th><th>Economy</th><th>Employment</th><th>Inflation</th><th>Capital Spending</th></tr>
+<tr><td><strong>Recovery</strong></td><td>Going through trough; output below potential but increasing</td><td>Layoffs slow; firms extend overtime before rehiring full-time</td><td>Moderate</td><td>Low but rising; efficiency over capacity</td></tr>
+<tr><td><strong>Expansion</strong></td><td>Above-average growth rates; output above potential</td><td>Full-time rehiring; overtime increases</td><td>Moderate but rising</td><td>Focused on capacity expansion</td></tr>
+<tr><td><strong>Slowdown</strong></td><td>Going through peak; growth decelerates</td><td>Hiring slows</td><td>Accelerating</td><td>Strong but inventory building as sales slow</td></tr>
+<tr><td><strong>Contraction</strong></td><td>Weakening; may enter recession</td><td>Hiring freeze, then layoffs</td><td>Decelerating (with a lag)</td><td>New orders halted; maintenance scaled back</td></tr>
+</table>
+
+<div class="subsection">
+<div class="sub-title">Economic Indicators</div>
+<p>Leading indicators turn BEFORE the economy: stock indexes, building permits, money supply, yield curve slope.</p>
+<p>Coincident: real income, industrial production, employment. Lagging: average duration of unemployment, inflation, bank prime rate.</p>
+
+<div class="callout tip"><strong>Key exam point:</strong> The unemployment rate is a lagging indicator — employers wait before hiring/firing. Stock prices are a leading indicator — markets anticipate future conditions.</div>
+</div>
+</div>
+</div>
+
+<!-- FISCAL POLICY -->
+<div class="section" id="econ-s3">
+<div class="section-title">Fiscal Policy</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Fiscal Tools</div>
+<p>Fiscal tools: transfer payments, current spending, capital investment, taxation.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Fiscal Multiplier</div>
+<div class="formula"><span class="f-label">Fiscal Multiplier</span>\[ \text{Multiplier} = \frac{1}{1 - MPC(1-t)} \]</div>
+<p>MPC = marginal propensity to consume; t = tax rate.</p>
+
+<div class="callout tip">A €1 increase in government spending increases aggregate demand by €2.5 (multiplier effect). Higher MPC or lower taxes → larger multiplier.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Execution Lags</div>
+<table>
+<tr><th>Lag Type</th><th>Description</th></tr>
+<tr><td>Recognition lag</td><td>Time for government to recognise the economic problem</td></tr>
+<tr><td>Action lag</td><td>Time to formulate, debate, and pass policy</td></tr>
+<tr><td>Impact lag</td><td>Time for policy to actually affect the economy</td></tr>
+</table>
+<div class="callout warn"><strong>Fiscal policy is slower than monetary policy</strong> due to legislative requirements. By the time fiscal measures take effect, the cycle may have already shifted. This is why automatic stabilisers (unemployment benefits) are preferred — they act immediately without legislative action.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Ricardian Equivalence (Counter-argument)</div>
+<div class="callout note">If households anticipate future tax increases to repay deficit spending, they save the extra income today → fiscal multiplier = 0. In practice, the multiplier is positive but smaller than simple models suggest.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- MONETARY POLICY -->
+<div class="section" id="econ-s4">
+<div class="section-title">Monetary Policy</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Roles of Central Banks</div>
+<ul>
+<li>Supplier of currency</li>
+<li>Banker to government and bankers' bank</li>
+<li>Lender of last resort (LOLR)</li>
+<li>Regulator of payments system</li>
+<li>Conductor of monetary policy</li>
+<li>Supervisor of banking system</li>
+<li>Maintain foreign currency and gold reserves</li>
+</ul>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Policy Tools — Expansionary vs Contractionary</div>
+<table>
+<tr><th>Tool</th><th>Expansionary Action</th><th>Contractionary Action</th></tr>
+<tr><td>Open market operations</td><td>Buy bonds from commercial banks (↑ money supply)</td><td>Sell bonds (↓ money supply)</td></tr>
+<tr><td>Policy rate</td><td>Set below neutral rate</td><td>Set above neutral rate</td></tr>
+<tr><td>Reserve requirement</td><td>Reduce required reserves</td><td>Increase required reserves</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Neutral Interest Rate &amp; Policy Stance</div>
+<div class="formula"><span class="f-label">Neutral Policy Rate</span>\[ r^* = r_{\text{real neutral}} + \pi^e \approx \text{Long-run GDP growth} + \text{Inflation target} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Quantitative Easing (QE)</div>
+<div class="callout note"><strong>Non-conventional monetary policy</strong> used when policy rate hits the zero lower bound. Central bank purchases longer-term assets (government bonds, MBS) to lower long-term yields and stimulate lending/investment. Increases bank reserves. Tapering = reducing asset purchases.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Interaction: Fiscal vs Monetary Policy</div>
+<table>
+<tr><th>Fiscal</th><th>Monetary</th><th>Effect</th></tr>
+<tr><td>Expansionary</td><td>Expansionary</td><td>Strongest stimulus (rarely simultaneous)</td></tr>
+<tr><td>Expansionary</td><td>Contractionary</td><td>Fiscal boosts demand; monetary limits inflation → mixed</td></tr>
+<tr><td>Contractionary</td><td>Expansionary</td><td>Monetary stimulates; fiscal brakes → mixed</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- GEOPOLITICS -->
+<div class="section" id="econ-s5">
+<div class="section-title">Introduction to Geopolitics</div>
+<div class="two-col">
+<div>
+<p>State actors: possess authority to deploy national security resources (governments). Non-state actors: IMF, multinationals, NGOs, terrorist organisations.</p>
+
+</div>
+<div>
+<div class="subsection">
+<div class="sub-title">Assessing Geopolitical Threats</div>
+<table>
+<tr><th>Dimension</th><th>Questions to Ask</th></tr>
+<tr><td>Likelihood</td><td>How probable is the event?</td></tr>
+<tr><td>Velocity</td><td>How quickly will it impact markets?</td></tr>
+<tr><td>Size/Nature of impact</td><td>How large and widespread is the effect?</td></tr>
+</table>
+<div class="callout exam">Event risks with high velocity demand immediate portfolio hedging. Thematic risks develop slowly — allowing gradual repositioning. The exam may ask you to categorise a geopolitical risk and recommend an appropriate investor response.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- INTERNATIONAL TRADE -->
+<div class="section" id="econ-s6">
+<div class="section-title">International Trade &amp; Capital Flows</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Trade Restrictions &amp; Their Effects</div>
+<table>
+<tr><th>Restriction</th><th>Mechanism</th></tr>
+<tr><td>Tariff</td><td>Tax on imported goods</td></tr>
+<tr><td>Quota</td><td>Quantity limit on imports</td></tr>
+<tr><td>Export subsidy</td><td>Government payment to exporters</td></tr>
+<tr><td>Min domestic content</td><td>Require % of product made domestically</td></tr>
+<tr><td>Voluntary export restraint</td><td>Exporting country self-limits</td></tr>
+</table>
+<div class="formula"><span class="f-label">Tariff Welfare Analysis (price rises from P* to P_t)</span>\[ \Delta\text{Consumer surplus} = -(A+B+C+D) \]</div>
+<div class="formula">\[ \Delta\text{Producer surplus} = +A \qquad \text{Government revenue} = +C \]</div>
+<div class="formula"><span class="f-label">Net welfare loss</span>\[ \text{DWL} = -(B+D) \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Regional Trading Blocs</div>
+<table>
+<tr><th>Type</th><th>What Members Have</th></tr>
+<tr><td>FTA (Free Trade Area)</td><td>Free trade among members only</td></tr>
+<tr><td>Customs Union (CU)</td><td>FTA + common external trade policy</td></tr>
+<tr><td>Common Market (CM)</td><td>CU + free movement of factors of production</td></tr>
+<tr><td>Economic Union (EU)</td><td>CM + common economic institutions and policies</td></tr>
+<tr><td>Monetary Union (MU)</td><td>EU + common currency</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Trade Balance Identity</div>
+<div class="formula"><span class="f-label">Current Account Identity</span>\[ X - M = (S - I) + (T - G) \]</div>
+<p>X−M = trade surplus/deficit. A trade deficit requires net capital imports.</p>
+
+<div class="callout exam"><strong>Classic exam question:</strong> If a country has a persistent current account deficit, what must be true? Either private investment exceeds savings, OR the government has a fiscal deficit (or both). You can't have a current account deficit without a corresponding capital account surplus.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Benefits &amp; Costs of International Trade</div>
+<p>Gains from trade: comparative advantage, economies of scale, diffusion of technology. Costs: structural unemployment, income inequality.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- FX RATES -->
+<div class="section" id="econ-s7">
+<div class="section-title">Capital Flows &amp; Exchange Rate Calculations</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">FX Notation &amp; Real Exchange Rate</div>
+<div class="formula"><span class="f-label">Quote Convention "A/B"</span>\[ \text{Units of } A \text{ per 1 unit of } B \]</div>
+<div class="formula"><span class="f-label">Real Exchange Rate</span>\[ q_{A/B} = S_{A/B} \times \frac{CPI_B}{CPI_A} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Forward Rate (Interest Rate Parity)</div>
+<div class="formula"><span class="f-label">Interest Rate Parity (Covered)</span>\[ \frac{F_{A/B}}{S_{A/B}} = \frac{1 + i_A}{1 + i_B} \]</div>
+<div class="formula"><span class="f-label">Forward Rate</span>\[ F_{A/B} = S_{A/B}\times\frac{1 + i_A}{1 + i_B} \]</div>
+<div class="callout warn"><strong>⚠ Trap:</strong> If \(i_A > i_B\): currency A is at a forward discount (depreciates forward).</div>
+
+<div class="callout warn"><strong>Interest rate parity prevents arbitrage.</strong> High-interest-rate currencies must trade at a forward discount. If they didn't, you could borrow in the low-rate currency, invest in the high-rate currency, and hedge the FX risk — earning a riskless profit.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Exchange Rate Regimes</div>
+<table>
+<tr><th>Regime</th><th>Description</th></tr>
+<tr><td>Dollarisation</td><td>Adopt another country's currency (most fixed)</td></tr>
+<tr><td>Monetary union</td><td>Adopt a common currency (euro)</td></tr>
+<tr><td>Currency board</td><td>Fixed rate; central bank must hold FX reserves to cover all domestic currency</td></tr>
+<tr><td>Fixed peg</td><td>Pegged within ±1% margin</td></tr>
+<tr><td>Target zone</td><td>Fixed peg with wider bands</td></tr>
+<tr><td>Crawling peg</td><td>Peg adjusted periodically (rate of crawl announced)</td></tr>
+<tr><td>Crawling bands</td><td>Margin widens over time</td></tr>
+<tr><td>Managed floating</td><td>No official target; central bank intervenes discretionally</td></tr>
+<tr><td>Independently floating</td><td>Market-determined (most flexible)</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Ideal Currency Regime — The Impossible Trinity</div>
+<div class="callout exam">You CANNOT simultaneously have all three:
+(1) Fixed exchange rate
+(2) Free capital flows
+(3) Independent monetary policy
+
+Any two out of three is feasible. The Eurozone chose 1 and 2 (sacrificing 3). The US chose 2 and 3 (floating rate).</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- /econ module-content -->
+</div><!-- /econ module -->
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 3. CORPORATE ISSUERS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="corp">
+<div class="module-header"><h2>CORPORATE ISSUERS</h2></div>
+<div class="module-content">
+
+<!-- ORG FORMS -->
+<div class="section" id="corp-s1">
+<div class="section-title">Organisational Forms &amp; Ownership</div>
+<table>
+<tr><th>Feature</th><th>Sole Proprietorship</th><th>General Partnership</th><th>Limited Partnership</th><th>Corporation</th></tr>
+<tr><td>Separate legal entity?</td><td>No</td><td>No</td><td>No</td><td><strong>Yes</strong></td></tr>
+<tr><td>Owner–operator separation</td><td>No</td><td>No</td><td>Partial (LPs passive)</td><td>Yes (board hires mgmt)</td></tr>
+<tr><td>Liability</td><td>Unlimited</td><td>Unlimited (all partners)</td><td>GPs: unlimited; LPs: limited</td><td><strong>Limited</strong> (shareholders)</td></tr>
+<tr><td>Tax treatment</td><td>Personal income</td><td>Personal income</td><td>Personal income (pass-through)</td><td>Potential double taxation</td></tr>
+<tr><td>Capital access</td><td>Very limited</td><td>Limited</td><td>Better (LP capital)</td><td><strong>Best</strong> (equity + debt markets)</td></tr>
+</table>
+<div class="callout warn"><strong>Corporation is the ONLY form with a separate legal identity from owners.</strong> This enables limited liability, perpetual existence, and easy share transferability — which is why it dominates capital markets.</div>
+
+<div class="two-col">
+<div>
+<div class="sub-title" style="margin-top:10px">Private vs Public Companies</div>
+<table>
+<tr><th></th><th>Private Limited</th><th>Public Limited</th></tr>
+<tr><td>Taxation</td><td>Personal income level</td><td>Double taxation (corporate + personal dividend)</td></tr>
+<tr><td>Owner count</td><td>Restricted</td><td>Unlimited</td></tr>
+<tr><td>Transfer of ownership</td><td>Requires votes</td><td>Transferable anytime</td></tr>
+</table>
+</div>
+<div>
+<div class="sub-title" style="margin-top:10px">Going Public / Going Private</div>
+<p>Go public: IPO, Direct Listing, SPAC, Acquisition. Go private: LBO. Raise capital privately via Private Placement Memorandum (PPM).</p>
+
+</div>
+</div>
+</div>
+
+<!-- INVESTORS & STAKEHOLDERS -->
+<div class="section" id="corp-s2">
+<div class="section-title">Investors &amp; Other Stakeholders</div>
+<div class="two-col">
+<div>
+<table>
+<tr><th></th><th>Equity (Shareholders)</th><th>Debt (Creditors)</th></tr>
+<tr><td>Upside potential</td><td>Unlimited</td><td>Limited to promised payments</td></tr>
+<tr><td>Maximum loss</td><td>Cannot exceed investment value</td><td>Cannot exceed investment value</td></tr>
+<tr><td>Investment risk</td><td>Higher</td><td>Lower</td></tr>
+<tr><td>Investment interest</td><td>Maximise company value</td><td>Timely repayment of principal + interest</td></tr>
+<tr><td>Priority in liquidation</td><td>Last (residual claim)</td><td>First (secured); before equity</td></tr>
+</table>
+</div>
+<div>
+<div class="callout exam"><strong>Key tensions:</strong>
+• Equity owners prefer growth and higher risk tolerance (upside is unlimited)
+• Creditors prefer stability and limited downside risk
+• This conflict shapes debt covenants — creditors add restrictions on dividend payments, additional debt issuance, and asset sales to protect themselves</div>
+</div>
+</div>
+</div>
+
+<!-- CORPORATE GOVERNANCE -->
+<div class="section" id="corp-s3">
+<div class="section-title">Corporate Governance: Conflicts, Mechanisms, Risks &amp; Benefits</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Principal–Agent Conflicts</div>
+<table>
+<tr><th>Conflict</th><th>Nature</th></tr>
+<tr><td>Shareholder vs Manager</td><td><strong>Entrenchment</strong> (avoid risky projects to protect job), <strong>Empire building</strong> (make unjustified acquisitions for size/pay), <strong>Excessive risk taking</strong> (gamble to boost stock-based comp)</td></tr>
+<tr><td>Controlling vs Minority shareholder</td><td>Concentrated ownership may extract private benefits; multiple-class shares give disproportionate voting power</td></tr>
+<tr><td>Shareholder vs Creditor</td><td>Shareholders want growth/risk; creditors want stability — debt covenants manage this</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Board Committees</div>
+<ul>
+<li><strong>Audit committee</strong> — Financial reporting oversight</li>
+<li><strong>Governance committee</strong> — Board practices and structure</li>
+<li><strong>Remuneration/Compensation committee</strong> — Executive pay</li>
+<li><strong>Nomination committee</strong> — Board candidate selection</li>
+<li><strong>Risk committee</strong> — Enterprise risk oversight</li>
+<li><strong>Investment committee</strong> — Capital allocation decisions</li>
+</ul>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Shareholder Mechanisms</div>
+<ul>
+<li>Corporate reporting and transparency</li>
+<li>Shareholder meetings (cumulative voting, proxy voting)</li>
+<li>Shareholder activism and engagement</li>
+<li>Derivative lawsuits (shareholders sue on behalf of company)</li>
+<li>Corporate takeovers (proxy contests, tender offers, hostile takeovers)</li>
+</ul>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Governance Risks &amp; Benefits</div>
+<table>
+<tr><th>Poor Governance Risk</th><th>Good Governance Benefit</th></tr>
+<tr><td>Weak control systems</td><td>Lower cost of capital</td></tr>
+<tr><td>Ineffective decision-making</td><td>Better operating performance</td></tr>
+<tr><td>Higher default/bankruptcy risk</td><td>Lower bankruptcy risk</td></tr>
+<tr><td>Higher borrowing costs</td><td>Better equity returns long-term</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- WORKING CAPITAL & LIQUIDITY -->
+<div class="section" id="corp-s4">
+<div class="section-title">Working Capital &amp; Liquidity</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Cash Conversion Cycle (CCC)</div>
+<div class="formula"><span class="f-label">Cash Conversion Cycle</span>\[ CCC = DOH + DSO - DPO \]</div>
+<div class="formula"><span class="f-label">Days of Inventory on Hand</span>\[ DOH = \frac{365}{\text{Inventory Turnover}} \]</div>
+<div class="formula"><span class="f-label">Days Sales Outstanding</span>\[ DSO = \frac{365}{\text{Receivables Turnover}} \]</div>
+<div class="formula"><span class="f-label">Days Payable Outstanding</span>\[ DPO = \frac{365}{\text{Payables Turnover}} \]</div>
+
+<div class="callout tip"><strong>Shorter CCC = better efficiency.</strong> Collect faster (lower DSO), sell inventory quickly (lower DOH), pay suppliers slowly (higher DPO).</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Trade Credit EAR</div>
+<div class="formula"><span class="f-label">Cost of Trade Credit (EAR)</span>\[ EAR = \left(1 + \frac{d}{1-d}\right)^{\!\frac{365}{\text{Pay period} - \text{Discount period}}} - 1 \]</div>
+<p>Example: 2/10 net 30 → 2% discount if paid within 10 days, otherwise due in 30.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Liquidity Ratios</div>
+<div class="formula"><span class="f-label">Current Ratio</span>\[ \text{Current Ratio} = \frac{CA}{CL} \]</div>
+<div class="formula"><span class="f-label">Quick Ratio</span>\[ \text{Quick Ratio} = \frac{\text{Cash} + \text{Mkt Sec} + \text{Receivables}}{CL} \]</div>
+<div class="formula"><span class="f-label">Cash Ratio</span>\[ \text{Cash Ratio} = \frac{\text{Cash} + \text{Mkt Sec}}{CL} \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Sources of Liquidity</div>
+<p>Primary: free cash flows, bank balances. Secondary: committed credit lines. Tertiary (dragonfly): asset sales, debt restructuring.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Working Capital Strategy Trade-Off</div>
+<table>
+<tr><th></th><th>Conservative</th><th>Aggressive</th></tr>
+<tr><td>Funding approach</td><td>Long-term financing; excess cash held</td><td>Short-term financing; minimal cash buffer</td></tr>
+<tr><td>Rollover risk</td><td>Low</td><td>High</td></tr>
+<tr><td>Financing cost</td><td>Higher</td><td>Lower (under upward yield curve)</td></tr>
+<tr><td>Flexibility</td><td>Lower (covenants, lead times)</td><td>Higher (borrow as needed)</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CAPITAL INVESTMENTS -->
+<div class="section" id="corp-s5">
+<div class="section-title">Capital Investments &amp; Capital Allocation</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">NPV &amp; IRR Decisions</div>
+<div class="formula"><span class="f-label">NPV Rule</span>\[ NPV = \sum_{t=0}^{N}\frac{CF_t}{(1+r)^t} > 0 \implies \text{Accept} \]</div>
+<p>When NPV and IRR conflict on mutually exclusive projects, prefer NPV (assumes reinvestment at cost of capital, which is more realistic).</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Return on Invested Capital (ROIC)</div>
+<div class="formula"><span class="f-label">Return on Invested Capital</span>\[ ROIC = \frac{(1-t)\times\text{Operating Profit}}{\text{Avg Invested Capital}} \]</div>
+<div class="callout tip"><strong>✓ Use when:</strong> If ROIC > WACC, the company is creating economic value.</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Real Options</div>
+<table>
+<tr><th>Type</th><th>What It Is</th></tr>
+<tr><td>Timing option</td><td>Delay investment until conditions improve</td></tr>
+<tr><td>Sizing option</td><td>Expand, grow, or abandon based on outcomes</td></tr>
+<tr><td>Flexibility option</td><td>Alter operations (prices, inputs, production)</td></tr>
+<tr><td>Fundamental option</td><td>Future decision depends on event (e.g., drill based on oil price)</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Capital Allocation Pitfalls</div>
+<ul>
+<li>Internal forecasting errors (overoptimistic projections)</li>
+<li>Ignoring opportunity cost of internal financing</li>
+<li>Inconsistent treatment of inflation (mix real and nominal)</li>
+<li>Inertia (continuing bad projects to avoid sunk cost recognition)</li>
+<li>Basing decisions on earnings metrics rather than cash flows</li>
+<li><strong>Pet projects</strong> (manager bias toward personally favoured ideas)</li>
+<li>Failing to consider alternatives</li>
+</ul>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Investment Types</div>
+<p>Real option types: Timing (delay investment), Sizing (expand or contract), Flexibility (switch inputs/outputs), Fundamental (abandon project).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- CAPITAL STRUCTURE -->
+<div class="section" id="corp-s6">
+<div class="section-title">Capital Structure</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Weighted Average Cost of Capital (WACC)</div>
+<div class="formula"><span class="f-label">Weighted Average Cost of Capital</span>\[ WACC = w_d\,r_d(1-t) + w_p\,r_p + w_e\,r_e \]</div>
+<p>Weights should be market-value based. Use target capital structure if available.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Modigliani &amp; Miller (MM) Propositions</div>
+<div class="formula"><span class="f-label">Modigliani-Miller Proposition I (no taxes)</span>\[ V_L = V_U \quad \text{(capital structure irrelevant)} \]</div>
+<div class="formula"><span class="f-label">MM I (with corporate taxes)</span>\[ V_L = V_U + t \cdot D \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Static Trade-Off Theory</div>
+<div class="formula"><span class="f-label">Static Trade-Off Theory</span>\[ V_L = V_U + t\cdot D - PV(\text{financial distress costs}) \]</div>
+<p>Optimal structure: increase debt until marginal distress cost = marginal tax shield.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Pecking Order Theory</div>
+<div class="callout note"><strong>Managers prefer capital sources that reveal the least information:</strong>
+<ol>
+<li>Internally generated earnings (BEST — no information revealed)</li>
+<li>New debt issuance</li>
+<li>New equity issuance (WORST — signals manager thinks stock is overpriced)</li>
+</ol>
+Implication: No fixed target capital structure; structure follows financing needs over time.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Estimating Target Capital Structure</div>
+<ul>
+<li>Assume company maintains its CURRENT capital structure</li>
+<li>Infer target weights from recent trend (direction of movement)</li>
+<li>Use the industry average as a proxy</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<!-- BUSINESS MODELS -->
+<div class="section" id="corp-s7">
+<div class="section-title">Business Models</div>
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Pricing Strategy Types</div>
+<p>Pricing strategies: tiered, dynamic, value-based, auction, bundling, razors-and-blades, freemium, penetration pricing.</p>
+
+</div>
+</div>
+<div>
+<div class="subsection">
+<div class="sub-title">Value Chain vs Supply Chain</div>
+<p>Value chain: systems within the firm that create customer value. Supply chain: external steps to prepare a product for sale. Unit economics: revenue and cost per unit.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- /corp module-content -->
+</div><!-- /corp module -->
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 4. FINANCIAL STATEMENT ANALYSIS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="fsa">
+<div class="module-header"><h2>FINANCIAL STATEMENT ANALYSIS</h2></div>
+<div class="module-content">
+
+<!-- INTRO FSA -->
+<div class="section" id="fsa-s1">
+<div class="section-title">Introduction to Financial Statement Analysis</div>
+<div class="two-col">
+<div>
+<table>
+<tr><th>Step</th><th>Activity</th></tr>
+<tr><td>1. State objective</td><td>Define the question (creditworthiness? equity valuation? M&amp;A?)</td></tr>
+<tr><td>2. Gather data</td><td>Financial statements, footnotes, MD&amp;A, industry data</td></tr>
+<tr><td>3. Process data</td><td>Calculate ratios, common-size statements, adjustments</td></tr>
+<tr><td>4. Analyse &amp; interpret</td><td>Draw conclusions — the "so what?"</td></tr>
+<tr><td>5. Report</td><td>Communicate findings, comply with Code &amp; Standards</td></tr>
+<tr><td>6. Update</td><td>Revise periodically as company changes</td></tr>
+</table>
+</div>
+<div>
+<p>IOSCO: global securities regulation standard-setter. SEC: US capital markets regulator (GAAP). IASB: sets IFRS. FASB: sets US GAAP.</p>
+
+<div class="callout warn"><strong>MD&amp;A is NOT audited.</strong> It's management's perspective — treat with more scepticism than audited footnotes. Footnotes are audited and often reveal the most important information.</div>
+</div>
+</div>
+</div>
+
+<!-- INCOME STATEMENT -->
+<div class="section" id="fsa-s2">
+<div class="section-title">Analysing Income Statements</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Income Statement Structure</div>
+<div class="formula"><span class="f-label">Income Statement Structure</span>\[ \text{Revenue} - COGS = \text{Gross Profit} \]</div>
+<div class="formula">\[ \text{Gross Profit} - \text{Operating Expenses} = EBIT \]</div>
+<div class="formula">\[ EBIT - \text{Interest} - \text{Taxes} = \text{Net Income} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Revenue Recognition (IFRS 15 / ASC 606 — 5-Step Model)</div>
+<p>5-step model: (1) Identify contract, (2) Identify performance obligations, (3) Determine transaction price, (4) Allocate price to obligations, (5) Recognise revenue when/as each obligation is satisfied.</p>
+
+<div class="callout note">Revenue NOT recognised unless: risks of ownership transferred, amount reliably measurable, collection likely, and transaction unlikely to be reversed.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Capitalising vs Expensing</div>
+<table>
+<tr><th>Treatment</th><th>Effect on Balance Sheet</th><th>Effect on P&amp;L (Near-term)</th></tr>
+<tr><td>Capitalise</td><td>Increases assets; investing outflow</td><td>Higher NI (cost spread over time)</td></tr>
+<tr><td>Expense</td><td>No asset; operating outflow</td><td>Lower NI (cost recognised immediately)</td></tr>
+</table>
+<div class="callout warn"><strong>Capitalising inflates near-term earnings and assets.</strong> Compare capitalising vs expensing decisions across competitors — a key quality-of-earnings flag.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Basic EPS</div>
+<div class="formula"><span class="f-label">Basic EPS</span>\[ EPS_{\text{basic}} = \frac{NI - \text{Preferred Dividends}}{WA \text{ Shares Outstanding}} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Diluted EPS <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Diluted EPS</span>\[ EPS_{\text{diluted}} = \frac{NI - \text{Pref Div} + \text{Conv Pref Div} + \text{Conv Debt Interest}(1-t)}{WA\text{ Shares} + \text{Shares from conversions}} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Separately Reported Items</div>
+<table>
+<tr><th>Item</th><th>IFRS</th><th>US GAAP</th></tr>
+<tr><td>Unusual/infrequent items</td><td>Reported within continuing operations; footnote disclosure</td><td>Reported separately within continuing operations</td></tr>
+<tr><td>Discontinued operations</td><td>Reported separately, net of tax</td><td>Same — reported separately, net of tax</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- BALANCE SHEET -->
+<div class="section" id="fsa-s3">
+<div class="section-title">Analysing Balance Sheets</div>
+<div class="two-col">
+<div>
+<div class="sub-title">Key Non-Current Assets</div>
+<ul>
+<li><strong>Intangible assets:</strong> Patents, trademarks, customer lists (have finite or indefinite life)</li>
+<li><strong>Goodwill:</strong> Premium paid in acquisition over fair value of net identifiable assets; not amortised (IFRS and US GAAP); tested for impairment annually</li>
+<li><strong>Financial instruments:</strong> Measured at fair value or amortised cost depending on classification</li>
+</ul>
+</div>
+<div>
+<div class="sub-title">Key Non-Current Liabilities</div>
+<ul>
+<li><strong>Long-term financial liabilities:</strong> Bonds payable, long-term loans, finance lease obligations</li>
+<li><strong>Deferred tax liabilities:</strong> Taxes owed in the future (timing differences between book and tax income)</li>
+</ul>
+<div class="callout exam"><strong>Goodwill impairment:</strong> Under IFRS and US GAAP, goodwill is impaired when carrying amount exceeds recoverable amount (IFRS) or fair value (US GAAP). US GAAP: a two-step test. IFRS: single-step. Impairment is a non-cash charge that reduces earnings and book value.</div>
+</div>
+</div>
+</div>
+
+<!-- CASH FLOW STATEMENT -->
+<div class="section" id="fsa-s4">
+<div class="section-title">Analysing Statements of Cash Flows</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">CFO — Indirect Method (Most Common)</div>
+<div class="formula"><span class="f-label">CFO (Indirect Method)</span>\[ CFO = NI + \text{Non-cash charges} - \Delta WC \]</div>
+<p>Add: depreciation, amortisation, impairments. Subtract: gains on asset sales. Adjust for changes in working capital.</p>
+
+<div class="callout note"><strong>Memory trick:</strong> Source of cash: ↑ liabilities, ↓ assets. Use of cash: ↓ liabilities, ↑ assets. Depreciation is added back because it reduced NI but involved no cash payment.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Free Cash Flow Formulas</div>
+<div class="formula"><span class="f-label">Free Cash Flow to Firm</span>\[ FCFF = NI + NCC + I(1-t) - FCI - WCI \]</div>
+<div class="formula"><span class="f-label">FCFF from CFO</span>\[ FCFF = CFO + I(1-t) - FCI \]</div>
+<div class="formula"><span class="f-label">Free Cash Flow to Equity</span>\[ FCFE = CFO - FCI + \text{Net Borrowing} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Cash Flow Linkages</div>
+<div class="formula"><span class="f-label">Cash Collected from Customers</span>\[ \text{Cash} = \text{Beginning AR} + \text{Revenue} - \text{Ending AR} \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">IFRS vs US GAAP — Cash Flow Classification</div>
+<table>
+<tr><th>Item</th><th>IFRS</th><th>US GAAP</th></tr>
+<tr><td>Interest received</td><td>Operating OR Investing</td><td>Operating</td></tr>
+<tr><td>Interest paid</td><td>Operating OR Financing</td><td>Operating</td></tr>
+<tr><td>Dividends received</td><td>Operating OR Investing</td><td>Operating</td></tr>
+<tr><td>Dividends paid</td><td>Operating OR Financing</td><td>Financing</td></tr>
+<tr><td>Bank overdrafts</td><td>Part of cash &amp; equivalents</td><td>Financing</td></tr>
+</table>
+<div class="callout warn"><strong>IFRS gives more flexibility; US GAAP is more prescriptive.</strong> Interest paid and dividends paid are the most commonly tested differences. Under IFRS, a company can classify interest paid as either operating or financing.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Quality Signals from Cash Flows</div>
+<table>
+<tr><th>Signal</th><th>Implication</th></tr>
+<tr><td>CFO ≫ NI consistently</td><td>Good quality: earnings converting to cash</td></tr>
+<tr><td>NI ≫ CFO persistently</td><td>Warning: accruals building; earnings quality low</td></tr>
+<tr><td>CFO turns negative while NI positive</td><td>Red flag: business consuming cash despite reported profit</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- INVENTORIES -->
+<div class="section" id="fsa-s5">
+<div class="section-title">Analysis of Inventories</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Inventory Methods</div>
+<table>
+<tr><th>Method</th><th>US GAAP</th><th>IFRS</th></tr>
+<tr><td>FIFO</td><td>Allowed</td><td>Allowed</td></tr>
+<tr><td>LIFO</td><td><strong>Allowed</strong></td><td>Prohibited</td></tr>
+<tr><td>Weighted Average</td><td>Allowed</td><td>Allowed</td></tr>
+<tr><td>Specific Identification</td><td>Allowed</td><td>Allowed</td></tr>
+</table>
+<div class="callout warn"><strong>LIFO is unique to US GAAP — not permitted under IFRS.</strong> The "LIFO reserve" = FIFO inventory value − LIFO inventory value. Adding the LIFO reserve back to LIFO inventory restates it to FIFO equivalent.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Inventory Valuation</div>
+<p>IFRS: Inventory at lower of cost or NRV. Reversal of write-downs allowed. US GAAP: lower of cost or market (= replacement cost); LIFO allowed; no write-down reversals.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">FIFO vs LIFO Impact (Rising Prices) <span class="badge">Critical</span></div>
+<table>
+<tr><th>If prices rising</th><th>FIFO</th><th>LIFO</th></tr>
+<tr><td>Ending Inventory</td><td>Higher</td><td>Lower</td></tr>
+<tr><td>COGS</td><td>Lower</td><td>Higher</td></tr>
+<tr><td>Net Income</td><td>Higher</td><td>Lower</td></tr>
+<tr><td>Income Tax Expense</td><td>Higher</td><td>Lower</td></tr>
+<tr><td>Operating Cash Flow</td><td>Lower</td><td>Higher (tax savings)</td></tr>
+</table>
+<div class="callout exam"><strong>Intuition:</strong> Under FIFO, older (cheaper) costs go to COGS; newer (expensive) costs stay in inventory. Under LIFO, newer (expensive) costs go to COGS; older (cheap) costs stay in inventory. In rising price environments, LIFO gives more realistic COGS but understated inventory.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- LONG-TERM ASSETS -->
+<div class="section" id="fsa-s6">
+<div class="section-title">Analysis of Long-Term Assets</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Depreciation Methods</div>
+<div class="formula"><span class="f-label">Straight-Line Depreciation</span>\[ Dep = \frac{\text{Cost} - \text{Salvage}}{\text{Useful Life}} \]</div>
+<div class="formula"><span class="f-label">Double-Declining Balance</span>\[ Dep_t = \frac{BV_t}{\text{Useful Life}} \times 2 \]</div>
+<div class="formula"><span class="f-label">Units of Production</span>\[ Dep_t = \frac{\text{Cost} - \text{Salvage}}{\text{Total Output}} \times \text{Output}_t \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">PP&amp;E Impairment</div>
+<table>
+<tr><th></th><th>IFRS</th><th>US GAAP</th></tr>
+<tr><td>Model permitted</td><td>Cost AND Revaluation</td><td>Cost ONLY</td></tr>
+<tr><td>Impairment test</td><td>Annual; if indicators exist</td><td>Only if impairment likely</td></tr>
+<tr><td>Impairment loss</td><td>Carrying − Recoverable amount</td><td>Carrying − Fair value</td></tr>
+<tr><td>Recoverable amount</td><td>Greater of (Fair Value − Costs to sell) and Value-in-use (PV of future CFs)</td><td>Fair value</td></tr>
+<tr><td>Loss reversals</td><td><strong>Allowed</strong> (up to original carrying value)</td><td>NOT allowed</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Lease Classification &amp; Lessee Accounting <span class="badge">Critical</span></div>
+<p>Finance lease indicators (any one): ownership transfers; purchase option likely to be exercised; lease term = major part of asset life; PV of payments ≈ fair value; specialised asset.</p>
+
+<table>
+<tr><th></th><th>Finance Lease (US GAAP)</th><th>Operating Lease (US GAAP)</th><th>IFRS (all leases)</th></tr>
+<tr><td>Balance sheet</td><td>Right-of-use asset + lease liability</td><td>Right-of-use asset + lease liability</td><td>Right-of-use asset + lease liability</td></tr>
+<tr><td>Income statement</td><td>Depreciation + interest (front-loaded)</td><td>Single lease expense (straight-line)</td><td>Depreciation + interest</td></tr>
+<tr><td>CFO impact</td><td>Higher (only interest portion in CFO)</td><td>Lower (all payments in CFO)</td><td>Higher (interest component in CFO)</td></tr>
+</table>
+<div class="callout warn"><strong>IFRS treats ALL leases as finance leases.</strong> US GAAP still distinguishes operating vs finance. This can create comparability issues when comparing IFRS and US GAAP companies' leverage ratios.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- INCOME TAXES -->
+<div class="section" id="fsa-s7">
+<div class="section-title">Analysis of Income Taxes</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Deferred Tax Assets &amp; Liabilities <span class="badge">Critical</span></div>
+<p>DTL: taxable income < accounting income → will pay MORE tax in future. DTA: taxable income > accounting income → will pay LESS tax in future.</p>
+
+<table>
+<tr><th>Comparison</th><th>Result</th></tr>
+<tr><td>Asset carrying amount &gt; Tax base</td><td>DTL (paid more for book, less for tax)</td></tr>
+<tr><td>Asset carrying amount &lt; Tax base</td><td>DTA</td></tr>
+<tr><td>Liability carrying amount &gt; Tax base</td><td>DTA</td></tr>
+<tr><td>Liability carrying amount &lt; Tax base</td><td>DTL</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Tax Rate Changes</div>
+<p>Tax rate increase → both DTA and DTL increase. Tax rate decrease → both decrease. Valuation allowance (US GAAP): reduces DTA if benefits unlikely to be realised.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Three Tax Rates</div>
+<table>
+<tr><th>Rate</th><th>Definition</th></tr>
+<tr><td>Statutory rate</td><td>The legal corporate income tax rate in the jurisdiction</td></tr>
+<tr><td>Effective tax rate</td><td>Income tax expense / EBT (as reported on P&amp;L)</td></tr>
+<tr><td>Cash tax rate</td><td>Taxes actually paid / EBT (real cash out the door)</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- FINANCIAL ANALYSIS TECHNIQUES -->
+<div class="section" id="fsa-s8">
+<div class="section-title">Financial Analysis Techniques &amp; Ratios</div>
+
+<div class="subsection">
+<div class="sub-title">Activity Ratios</div>
+<div class="two-col">
+<div>
+<div class="formula"><span class="f-label">Total Asset Turnover</span>\[ = \frac{\text{Revenue}}{\text{Avg Total Assets}} \]</div>
+<div class="formula"><span class="f-label">Fixed Asset Turnover</span>\[ = \frac{\text{Revenue}}{\text{Avg Net Fixed Assets}} \]</div>
+<div class="formula"><span class="f-label">Working Capital Turnover</span>\[ = \frac{\text{Revenue}}{\text{Avg Working Capital}} \]</div>
+
+</div>
+<div>
+<div class="formula"><span class="f-label">Inventory Turnover</span>\[ = \frac{COGS}{\text{Avg Inventory}} \]</div>
+<div class="formula"><span class="f-label">Receivables Turnover</span>\[ = \frac{\text{Revenue}}{\text{Avg Receivables}} \]</div>
+
+</div>
+<div>
+<div class="formula"><span class="f-label">Payables Turnover</span>\[ = \frac{\text{Purchases}}{\text{Avg Trade Payables}} \]</div>
+<div class="formula"><span class="f-label">Cash Conversion Cycle</span>\[ CCC = DSO + DOH - DPO \]</div>
+
+</div>
+</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Solvency Ratios</div>
+<div class="two-col">
+<div>
+<div class="formula"><span class="f-label">Debt-to-Equity</span>\[ = \frac{\text{Total Debt}}{\text{Total Equity}} \]</div>
+<div class="formula"><span class="f-label">Debt-to-Capital</span>\[ = \frac{\text{Total Debt}}{\text{Total Debt} + \text{Equity}} \]</div>
+<div class="formula"><span class="f-label">Debt-to-Assets</span>\[ = \frac{\text{Total Debt}}{\text{Total Assets}} \]</div>
+
+</div>
+<div>
+<div class="formula"><span class="f-label">Financial Leverage</span>\[ = \frac{\text{Avg Total Assets}}{\text{Avg Total Equity}} \]</div>
+<div class="formula"><span class="f-label">Debt-to-EBITDA</span>\[ = \frac{\text{Total Debt}}{EBITDA} \]</div>
+
+</div>
+<div>
+<div class="formula"><span class="f-label">Interest Coverage</span>\[ = \frac{EBIT}{\text{Interest Payments}} \]</div>
+<div class="formula"><span class="f-label">Fixed Charge Coverage</span>\[ = \frac{EBIT + \text{Lease Pmts}}{\text{Interest} + \text{Lease Pmts}} \]</div>
+
+</div>
+</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Profitability Ratios</div>
+<div class="two-col">
+<div>
+<div class="formula"><span class="f-label">Gross Profit Margin</span>\[ = \frac{\text{Gross Profit}}{\text{Revenue}} \]</div>
+<div class="formula"><span class="f-label">Operating Profit Margin</span>\[ = \frac{EBIT}{\text{Revenue}} \]</div>
+<div class="formula"><span class="f-label">Net Profit Margin</span>\[ = \frac{NI}{\text{Revenue}} \]</div>
+
+</div>
+<div>
+<div class="formula"><span class="f-label">Return on Assets</span>\[ ROA = \frac{NI}{\text{Avg Total Assets}} \]</div>
+<div class="formula"><span class="f-label">Return on Equity</span>\[ ROE = \frac{NI}{\text{Avg Total Equity}} \]</div>
+
+</div>
+<div>
+<div class="formula"><span class="f-label">Defensive Interval Ratio</span>\[ = \frac{\text{Cash} + \text{Mkt Sec} + \text{Receivables}}{\text{Avg Daily Expenditures}} \]</div>
+
+</div>
+</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">DuPont Analysis <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">3-Factor DuPont</span>\[ ROE = \underbrace{\frac{NI}{\text{Rev}}}_{\text{NPM}} \times \underbrace{\frac{\text{Rev}}{\text{Assets}}}_{\text{Asset TO}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Leverage}} \]</div>
+<div class="formula"><span class="f-label">5-Factor DuPont</span>\[ ROE = \frac{NI}{\text{EBT}}\times\frac{\text{EBT}}{EBIT}\times\frac{EBIT}{\text{Rev}}\times\frac{\text{Rev}}{\text{Assets}}\times\frac{\text{Assets}}{\text{Equity}} \]</div>
+
+<div class="callout warn"><strong>High ROE driven by leverage is dangerous.</strong> Always decompose: is ROE high because of good margins, efficient asset use, or excessive debt? A 25% ROE driven by 5× leverage is very different from 25% ROE driven by strong margins.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Depreciation Methods for FSA</div>
+<div class="formula"><span class="f-label">Straight-Line</span>\[ Dep = \frac{\text{Cost} - \text{Salvage}}{\text{Useful Life}} \]</div>
+<div class="formula"><span class="f-label">DDB</span>\[ Dep_t = \frac{2 \cdot BV_t}{\text{Useful Life}} \]</div>
+<div class="formula"><span class="f-label">Units of Production</span>\[ Dep_t = \frac{\text{Cost} - \text{Salvage}}{\text{Total Output}}\times\text{Output}_t \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Behavioural Finance Biases in Forecasting</div>
+<div class="callout note">Common analyst forecasting biases: Overconfidence, Illusion of control, Conservatism (fail to update with new info), Representativeness (pattern-match too quickly), Confirmation (seek confirming evidence). Porter's Five Forces: Threat of substitutes, Rivalry, Bargaining power of suppliers/customers, Threat of new entrants.</div>
+</div>
+
+</div><!-- section -->
+
+</div><!-- /fsa module-content -->
+</div><!-- /fsa module -->
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 5. EQUITY -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="equity">
+<div class="module-header"><h2>EQUITY</h2></div>
+<div class="module-content">
+
+<!-- MARKET ORGANIZATION -->
+<div class="section" id="equity-s1">
+<div class="section-title">Market Organisation &amp; Structure</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Market Functions</div>
+<ul>
+<li><strong>Saving</strong> — move wealth to the future</li>
+<li><strong>Borrowing</strong> — move future income to present</li>
+<li><strong>Raising Equity Capital</strong> — companies sell ownership stakes</li>
+<li><strong>Managing Risk</strong> — transfer risk to those willing to bear it</li>
+<li><strong>Price Discovery</strong> — markets aggregate information into prices</li>
+<li><strong>Liquidity Provision</strong> — assets can be converted to cash</li>
+</ul>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Leveraged Positions &amp; Margin Calls</div>
+<div class="formula"><span class="f-label">Leverage Ratio</span>\[ \text{Leverage} = \frac{\text{Position Value}}{\text{Equity}} \]</div>
+<div class="formula"><span class="f-label">Max Initial Leverage</span>\[ = \frac{1}{\text{Initial Margin }\%} \]</div>
+<p>Margin call triggered when equity falls below maintenance margin.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Order Types</div>
+<table>
+<tr><th>Type</th><th>Description</th><th>Price Certainty</th></tr>
+<tr><td>Market order</td><td>Fill immediately at market price</td><td>None</td></tr>
+<tr><td>Limit order</td><td>Buy ≤ limit or sell ≥ limit</td><td>Certain</td></tr>
+<tr><td>All-or-nothing</td><td>Cancel if not fully filled</td><td>N/A</td></tr>
+<tr><td>Hidden</td><td>Visible to brokers, not traders</td><td>N/A</td></tr>
+<tr><td>Iceberg</td><td>Only fraction of size visible</td><td>N/A</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Market Structures</div>
+<table>
+<tr><th>Structure</th><th>How Trades Execute</th><th>Examples</th></tr>
+<tr><td>Quote-driven (dealer)</td><td>Dealers post bid/ask; trade with own inventory</td><td>OTC bond markets, FX</td></tr>
+<tr><td>Order-driven</td><td>Exchange matches buyer and seller orders</td><td>NYSE, NASDAQ, CME</td></tr>
+<tr><td>Brokered</td><td>Broker finds counterparty</td><td>Real estate, illiquid securities</td></tr>
+<tr><td>Call market</td><td>Periodic single-price auctions; illiquid between calls</td><td>Open/close auctions</td></tr>
+</table>
+<div class="callout exam"><strong>Broker vs Dealer:</strong> A broker acts as AGENT (charges commission, takes no position). A dealer acts as PRINCIPAL (takes position, profits from spread). Confusing these is a classic trap.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Trade Pricing Rules</div>
+<ul>
+<li><strong>Uniform pricing:</strong> Call markets — all trades at price that maximises quantity traded</li>
+<li><strong>Discriminatory pricing:</strong> Continuous markets — most aggressive orders filled first, at their own prices</li>
+<li><strong>Derivative pricing:</strong> Crossing networks — trade at midpoint of external market quotes</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SECURITY MARKET INDEXES -->
+<div class="section" id="equity-s2">
+<div class="section-title">Security Market Indexes</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Return Calculations</div>
+<div class="formula"><span class="f-label">Single-Period Price Return</span>\[ PR_i = \frac{P_{i,1} - P_{i,0}}{P_{i,0}} \]</div>
+<div class="formula"><span class="f-label">Total Return</span>\[ TR_i = \frac{P_{i,1} - P_{i,0} + \text{Inc}_i}{P_{i,0}} \]</div>
+<div class="formula"><span class="f-label">Index Return (weighted)</span>\[ PR_I = \sum_i w_i \cdot PR_i \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Index Weighting Methods</div>
+<table>
+<tr><th>Method</th><th>Weight</th><th>Advantage</th><th>Disadvantage</th></tr>
+<tr><td>Price-weighted</td><td>w_i = P_i / ΣP_j</td><td>Simple</td><td>Arbitrary (split-affected); bias toward high-price stocks</td></tr>
+<tr><td>Equal-weighted</td><td>w_i = 1/N</td><td>Simple; emphasises small caps</td><td>Frequent rebalancing; underweights large caps</td></tr>
+<tr><td>Cap-weighted (float-adj)</td><td>w_i = Q_iP_i / ΣQ_jP_j</td><td>Reflects market reality</td><td>Overweights possibly overvalued large caps</td></tr>
+<tr><td>Fundamentally-weighted</td><td>Fundamental metric (sales, book value)</td><td>Value tilt; contrarian rebalancing</td><td>More complex; active bets</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="callout exam"><strong>Price-weighted index adjustment for stock splits:</strong> If one stock splits 2-for-1, its price is halved — but its economic weight should be unchanged. The divisor is DECREASED to keep the index value constant. This is the mechanical process behind index maintenance.</div>
+<div class="callout note"><strong>Float-adjustment:</strong> Removes shares held by insiders and governments from the weight calculation — only shares available for public trading are used. More realistic representation of investable universe.</div>
+</div>
+</div>
+</div>
+
+<!-- MARKET EFFICIENCY -->
+<div class="section" id="equity-s3">
+<div class="section-title">Market Efficiency</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Forms of the EMH <span class="badge">Critical</span></div>
+<table>
+<tr><th>Form</th><th>Past Market Data Reflected?</th><th>All Public Info?</th><th>Private Info?</th></tr>
+<tr><td>Weak</td><td>✓ Yes</td><td>No</td><td>No</td></tr>
+<tr><td>Semi-strong</td><td>✓ Yes</td><td>✓ Yes</td><td>No</td></tr>
+<tr><td>Strong</td><td>✓ Yes</td><td>✓ Yes</td><td>✓ Yes</td></tr>
+</table>
+<p>Weak EMH: past prices are fully reflected → technical analysis cannot earn abnormal profits.</p>
+<p>Semi-strong EMH: all public information is reflected → fundamental analysis cannot earn abnormal profits.</p>
+<p>Strong EMH: all information (including private) is reflected → no one can earn abnormal profits.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Market Anomalies &amp; Behavioral Biases</div>
+<table>
+<tr><th>Anomaly</th><th>Description</th><th>Explanation</th></tr>
+<tr><td>Momentum (3–12m)</td><td>Recent winners keep winning</td><td>Behavioral: underreaction/overconfidence</td></tr>
+<tr><td>Value (long-run)</td><td>Low P/E, P/B outperform</td><td>Risk-based or mispricing</td></tr>
+<tr><td>Small-cap effect</td><td>Small caps outperform historically</td><td>Liquidity risk premium; possible data mining</td></tr>
+<tr><td>Post-earnings drift</td><td>Prices drift after earnings surprises for weeks</td><td>Strong challenge to semi-strong efficiency</td></tr>
+<tr><td>Long-run reversal</td><td>Extreme losers outperform over 3–5 years</td><td>Behavioral: overreaction</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Behavioral Biases Affecting Market Prices</div>
+<table>
+<tr><th>Bias</th><th>Mechanism</th><th>Market Effect</th></tr>
+<tr><td>Loss aversion</td><td>Losses hurt ~2× as much as gains feel good</td><td>Disposition effect: hold losers, sell winners</td></tr>
+<tr><td>Overconfidence</td><td>Overestimate own ability/precision</td><td>Excessive trading, momentum</td></tr>
+<tr><td>Representativeness</td><td>Extrapolate recent patterns as permanent</td><td>Overreaction, bubbles, then reversal</td></tr>
+<tr><td>Conservatism</td><td>Fail to update beliefs with new information</td><td>Underreaction to earnings news (post-earnings drift)</td></tr>
+<tr><td>Herding</td><td>Follow the crowd against private information</td><td>Amplifies bubbles and crashes</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- EQUITY SECURITIES -->
+<div class="section" id="equity-s4">
+<div class="section-title">Overview of Equity Securities</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Common Share Voting Methods</div>
+<p>Statutory voting: 1 vote per share per director seat. Cumulative voting: total votes = shares × seats, concentratable on one candidate — favours minority shareholders.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Preference Shares — Key Types <span class="badge">Critical</span></div>
+<table>
+<tr><th>Type</th><th>Key Feature</th><th>Favours</th></tr>
+<tr><td>Cumulative</td><td>Missed dividends accumulate; common can't be paid until preference is current</td><td>Investor</td></tr>
+<tr><td>Non-cumulative</td><td>Missed dividends are lost permanently</td><td>Issuer</td></tr>
+<tr><td>Participating</td><td>Fixed dividend PLUS share in residual earnings above a threshold</td><td>Investor</td></tr>
+<tr><td>Convertible</td><td>Can convert into common shares at conversion ratio</td><td>Investor</td></tr>
+<tr><td>Callable</td><td>Issuer can redeem at preset price</td><td>Issuer</td></tr>
+<tr><td>Putable</td><td>Investor can force redemption at preset price</td><td>Investor</td></tr>
+</table>
+<div class="callout warn"><strong>Preference shares are EQUITY — dividends are NOT deductible.</strong> Common confusion: preference dividends look like interest but are paid from after-tax income. This is why WACC uses after-tax cost of debt but pre-tax cost of preferred stock (since preferred dividends are not tax-deductible).</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Equity Return Components</div>
+<div class="formula"><span class="f-label">Total Return Decomposition</span>\[ TR = \underbrace{\frac{D_1}{P_0}}_{\text{Dividend Yield}} + \underbrace{\frac{P_1-P_0}{P_0}}_{\text{Capital Gain}} \]</div>
+<div class="formula"><span class="f-label">Book Value per Share</span>\[ BVPS = \frac{\text{Total Equity} - \text{Preference Equity}}{\text{Shares Outstanding}} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Depository Receipts</div>
+<table>
+<tr><th>Type</th><th>Description</th><th>Key Feature</th></tr>
+<tr><td>Sponsored ADR</td><td>Foreign company participates; SEC disclosure required</td><td>Investor has same voting rights as local shareholders</td></tr>
+<tr><td>Unsponsored ADR</td><td>Depository bank creates it without company involvement</td><td>Bank retains voting rights</td></tr>
+<tr><td>GDR (Global)</td><td>Listed on multiple global exchanges; often USD-denominated</td><td>Cannot list on US exchanges; US investors via private placement</td></tr>
+<tr><td>Global Registered Share (GRS)</td><td>Trades on multiple exchanges including domestic; multi-currency</td><td>Actual ownership interest (unlike DRs which are receipts)</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- COMPANY ANALYSIS -->
+<div class="section" id="equity-s5">
+<div class="section-title">Company Analysis: Past, Present &amp; Forecasting</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Operating Leverage &amp; Financial Leverage</div>
+<div class="formula"><span class="f-label">Operating Income</span>\[ \text{EBIT} = Q(P - VC) - FC \]</div>
+<div class="formula"><span class="f-label">Degree of Operating Leverage</span>\[ DOL = \frac{\%\Delta\,\text{EBIT}}{\%\Delta\,\text{Sales}} = \frac{Q(P-VC)}{Q(P-VC)-FC} \]</div>
+<div class="formula"><span class="f-label">Degree of Financial Leverage</span>\[ DFL = \frac{\%\Delta\,EPS}{\%\Delta\,EBIT} \]</div>
+<div class="formula"><span class="f-label">Degree of Total Leverage</span>\[ DTL = DOL \times DFL \]</div>
+
+<div class="callout tip"><strong>High fixed costs → high operating leverage → profits amplified when revenues rise; amplified losses when revenues fall.</strong> Debt magnifies this further via DFL. Companies with both high DOL and DFL are extremely sensitive to economic cycles.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">DuPont ROE Decomposition (see FSA section)</div>
+<div class="callout exam"><strong>ROE exam diagnostic:</strong> When comparing two companies with similar ROE, always decompose. Company A: thin margins but high turnover (Walmart model). Company B: high margins but low turnover (luxury brand model). Both can achieve 15% ROE through very different strategies.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Porter's Five Forces (Industry Analysis)</div>
+<table>
+<tr><th>Force</th><th>High Force Means</th><th>Key Drivers</th></tr>
+<tr><td>Rivalry among competitors</td><td>Price/margin pressure</td><td># competitors, differentiation, exit barriers</td></tr>
+<tr><td>Threat of new entrants</td><td>Competitive pressure on margins</td><td>Capital requirements, brand loyalty, regulation</td></tr>
+<tr><td>Threat of substitutes</td><td>Price ceiling on the industry</td><td>Relative price-performance, switching costs</td></tr>
+<tr><td>Buyer bargaining power</td><td>Margin compression</td><td>Buyer concentration, volume, switching costs</td></tr>
+<tr><td>Supplier bargaining power</td><td>Input cost increases</td><td>Supplier concentration, input uniqueness</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Industry Life Cycle Stages</div>
+<table>
+<tr><th>Stage</th><th>Growth Rate</th><th>Profitability</th><th>Competition</th></tr>
+<tr><td>Embryonic</td><td>Slow</td><td>Low/Negative</td><td>Few early movers</td></tr>
+<tr><td>Growth</td><td>Rapid</td><td>Rising</td><td>Increasing</td></tr>
+<tr><td>Shakeout</td><td>Slowing</td><td>Declining (price wars)</td><td>Intense; weak players exit</td></tr>
+<tr><td>Mature</td><td>GDP-like</td><td>Stable</td><td>Moderate (oligopoly)</td></tr>
+<tr><td>Decline</td><td>Negative</td><td>Low</td><td>Reducing; players exit</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- EQUITY VALUATION -->
+<div class="section" id="equity-s6">
+<div class="section-title">Equity Valuation: Concepts &amp; Basic Tools</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Dividend Discount Models (DDM)</div>
+<div class="formula"><span class="f-label">General DDM</span>\[ V_0 = \sum_{t=1}^{\infty}\frac{D_t}{(1+r)^t} \]</div>
+<div class="formula"><span class="f-label">Multi-period with Terminal Value</span>\[ V_0 = \sum_{t=1}^{n}\frac{D_t}{(1+r)^t} + \frac{P_n}{(1+r)^n} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Multistage DDM</div>
+<div class="formula"><span class="f-label">Terminal Value (Gordon Growth)</span>\[ P_n = \frac{D_{n+1}}{r - g_L} \]</div>
+<div class="callout tip"><strong>✓ Use when:</strong> Use when firm transitions from high growth to stable long-run growth \(g_L\).</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Price Multiples</div>
+<div class="formula"><span class="f-label">Forward P/E Justified by DDM</span>\[ \frac{P_0}{E_1} = \frac{\text{Payout Ratio}}{r - g} \]</div>
+<p>P/B = Price per share / Book value per share. P/CF = Price / Cash flow per share. P/S = Price / Sales per share.</p>
+
+<div class="callout exam"><strong>P/E interpretation:</strong> High P/E implies high expected growth, low risk, or both. P/E relative to growth = PEG ratio. A stock with P/E = 20 and growth = 10% has PEG = 2. Lower PEG can suggest better value.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Enterprise Value (EV)</div>
+<div class="formula"><span class="f-label">Enterprise Value</span>\[ EV = MV_E + MV_{PS} + MV_D - \text{Cash} - \text{ST Investments} \]</div>
+<p>EV/EBITDA is popular for comparing firms across capital structures.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- /equity module-content -->
+</div><!-- /equity module -->
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 6. FIXED INCOME -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="fi">
+<div class="module-header"><h2>FIXED INCOME</h2></div>
+<div class="module-content">
+
+<!-- FEATURES & CASH FLOWS -->
+<div class="section" id="fi-s1">
+<div class="section-title">Fixed-Income Features, Cash Flows &amp; Issuance</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Cash Flow Structures</div>
+<table>
+<tr><th>Structure</th><th>Description</th></tr>
+<tr><td>Bullet bond</td><td>Fixed coupons; 100% principal at maturity (most common)</td></tr>
+<tr><td>Zero-coupon bond</td><td>No coupons; issued at discount; Duration = Maturity (most rate-sensitive)</td></tr>
+<tr><td>Fully amortised</td><td>Equal annuity payments (interest + principal mixed); like a mortgage</td></tr>
+<tr><td>Partially amortised</td><td>Some principal repaid periodically; lump sum ("balloon") at maturity</td></tr>
+<tr><td>Sinking fund</td><td>Fixed % of principal retired each year</td></tr>
+<tr><td>Floating-rate note (FRN)</td><td>Coupon = Reference rate (MRR) + Quoted Margin; resets periodically</td></tr>
+<tr><td>Step-up bond</td><td>Coupon rate increases on a preset schedule</td></tr>
+<tr><td>Inflation-linked bond</td><td>Principal indexed to CPI; coupon applied to adjusted principal</td></tr>
+<tr><td>Deferred coupon bond</td><td>No coupons in early years; higher coupons in later years</td></tr>
+<tr><td>PIK (Payment-in-Kind)</td><td>Coupons paid in additional bonds rather than cash</td></tr>
+</table>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Embedded Options <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Callable Bond Price</span>\[ V_{\text{callable}} = V_{\text{bullet}} - V_{\text{call option}} \]</div>
+<div class="formula"><span class="f-label">Putable Bond Price</span>\[ V_{\text{putable}} = V_{\text{bullet}} + V_{\text{put option}} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Seniority Ranking (Waterfall)</div>
+<table>
+<tr><th>Priority</th><th>Claim Type</th></tr>
+<tr><td>1st</td><td>First Lien — Senior Secured (highest recovery)</td></tr>
+<tr><td>2nd</td><td>Second Lien — Secured</td></tr>
+<tr><td>3rd</td><td>Senior Unsecured</td></tr>
+<tr><td>4th</td><td>Senior Subordinated</td></tr>
+<tr><td>5th</td><td>Subordinated</td></tr>
+<tr><td>6th</td><td>Junior Subordinated</td></tr>
+<tr><td>Last</td><td>Equity (residual claim; typically 0% recovery in default)</td></tr>
+</table>
+<div class="callout tip"><strong>Pari passu:</strong> Claims of equal seniority rank equally regardless of maturity. All senior unsecured bonds share recovery pro-rata.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- FIXED INCOME MARKETS -->
+<div class="section" id="fi-s2">
+<div class="section-title">Fixed-Income Markets</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Repurchase (Repo) Agreements <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Repo Terminal Price</span>\[ P_{\text{terminal}} = P_{\text{purchase}}\times\left(1 + r_{\text{repo}}\times\frac{\text{Days}}{360}\right) \]</div>
+<div class="formula"><span class="f-label">Haircut</span>\[ \text{Haircut} = \frac{\text{Security Price} - \text{Purchase Price}}{\text{Security Price}} \]</div>
+
+<div class="callout tip"><strong>Factors that INCREASE repo rate:</strong> Lower-quality collateral, longer term, more unique/illiquid collateral, physical (rather than electronic) delivery.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Commercial Paper</div>
+<div class="callout note"><strong>Key risk: Rollover risk.</strong> CP is short-term (≤270 days). If market freezes (like 2008), company can't issue new CP to repay maturing CP → forced default. Mitigation: maintain committed backup revolving credit lines.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Sovereign vs Non-Sovereign Debt</div>
+<table>
+<tr><th>Type</th><th>Issuer</th><th>Key Feature</th></tr>
+<tr><td>On-the-run sovereign</td><td>National governments</td><td>Most recent issue; most liquid; benchmark rate</td></tr>
+<tr><td>Off-the-run sovereign</td><td>National governments</td><td>Less liquid than on-the-run</td></tr>
+<tr><td>Municipal (GO)</td><td>Sub-national; backed by taxing power</td><td>Often tax-exempt interest; generally safer</td></tr>
+<tr><td>Municipal (Revenue)</td><td>Sub-national; backed by project revenue</td><td>Risk depends on project success</td></tr>
+<tr><td>Quasi-government/Agency</td><td>Government-backed agencies</td><td>Implicit or explicit government guarantee</td></tr>
+<tr><td>Supranational</td><td>IMF, World Bank, ECB</td><td>Multi-government backing</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- BOND VALUATION -->
+<div class="section" id="fi-s3">
+<div class="section-title">Bond Valuation: Prices, Yields &amp; Term Structure</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Bond Pricing with Market Discount Rate</div>
+<div class="formula"><span class="f-label">Bond Price (general)</span>\[ PV = \sum_{t=1}^{N}\frac{PMT}{(1+r)^t} + \frac{FV}{(1+r)^N} \]</div>
+<p>PMT = r → PV = FV (par). PMT < r → PV < FV (discount). PMT > r → PV > FV (premium). Pull-to-par as maturity approaches.</p>
+
+<div class="callout warn"><strong>The #1 Fixed Income Rule: Bond prices and yields move in OPPOSITE directions. ALWAYS.</strong> This is non-negotiable. A rise in market yield → price falls. A fall in yield → price rises.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Full Price, Flat Price &amp; Accrued Interest</div>
+<div class="formula"><span class="f-label">Full Price (Dirty)</span>\[ P_{\text{full}} = P_{\text{flat}} + AI \]</div>
+<div class="formula"><span class="f-label">Full Price Between Coupon Dates</span>\[ P_{\text{full}} = PV \times (1+r)^{t/T} \]</div>
+<div class="formula"><span class="f-label">Accrued Interest</span>\[ AI = \frac{t}{T}\times PMT \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Bond Price Properties (Key Relationships)</div>
+<table>
+<tr><th>Effect</th><th>Description</th></tr>
+<tr><td>Inverse effect</td><td>Price moves opposite to yield — always</td></tr>
+<tr><td>Convexity effect</td><td>Yield decrease has LARGER price impact than equivalent increase (positive convexity)</td></tr>
+<tr><td>Coupon effect</td><td>Lower-coupon bonds are more sensitive to yield changes</td></tr>
+<tr><td>Maturity effect</td><td>Longer-maturity bonds are more sensitive to yield changes</td></tr>
+<tr><td>Pull to par</td><td>As maturity approaches, price converges to 100 regardless of starting price</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Yield Measures <span class="badge">Critical</span></div>
+<table>
+<tr><th>Measure</th><th>Definition</th><th>Key Limitation</th></tr>
+<tr><td>Current yield</td><td>Annual coupon / Flat price</td><td>Ignores capital gains and time value</td></tr>
+<tr><td>YTM</td><td>IRR: discount rate making PV of CFs = price</td><td>Assumes hold-to-maturity AND reinvest at YTM</td></tr>
+<tr><td>Yield-to-call (YTC)</td><td>YTM using call date as maturity</td><td>Only relevant if called</td></tr>
+<tr><td>Yield-to-worst (YTW)</td><td>min(YTM, YTC1, YTC2, …)</td><td>Most conservative; always use for callables</td></tr>
+</table>
+<div class="formula"><span class="f-label">Effective Annual Yield (from semi-annual)</span>\[ EAY = \left(1 + \frac{YTM_{\text{semi}}}{2}\right)^2 - 1 \]</div>
+<div class="formula"><span class="f-label">Simple Yield</span>\[ = \frac{\text{Annual Coupon} + \text{Amortised Gain/Loss}}{\text{Flat Price}} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Yield Spread Measures</div>
+<div class="formula"><span class="f-label">G-Spread</span>\[ G\text{-spread} = YTM - \text{Government Bond Yield} \]</div>
+<div class="formula"><span class="f-label">I-Spread</span>\[ I\text{-spread} = YTM - \text{Swap Rate} \]</div>
+<p>Z-spread: constant spread added to ALL spot rates so bond PV = price. OAS = Z-spread − option value (removes embedded option cost).</p>
+
+<table>
+<tr><th>Bond Type</th><th>OAS vs Z-spread</th><th>Reason</th></tr>
+<tr><td>Callable</td><td>OAS &lt; Z-spread</td><td>Issuer's call option removes value from investor</td></tr>
+<tr><td>Putable</td><td>OAS &gt; Z-spread</td><td>Investor's put option adds value — investor "pays" via lower yield</td></tr>
+<tr><td>Straight (option-free)</td><td>OAS = Z-spread</td><td>No option to adjust for</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">FRN Pricing (Quoted Margin vs Discount Margin)</div>
+<div class="formula"><span class="f-label">FRN Coupon</span>\[ C = MRR + QM \]</div>
+<div class="formula"><span class="f-label">FRN PV (using Discount Margin)</span>\[ PV = \sum_{t=1}^{N}\frac{MRR + QM}{(1+\frac{MRR+DM}{m})^t} + \frac{FV}{(1+\frac{MRR+DM}{m})^N} \]</div>
+<p>QM is fixed at issuance. DM is the market's required spread over MRR.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Money Market Instruments</div>
+<div class="formula"><span class="f-label">Discount Rate (DR) Basis — T-Bills</span>\[ PV = FV\left(1 - \frac{\text{Days}}{360}\times DR\right) \]</div>
+<div class="formula"><span class="f-label">Add-On Rate (AOR) Basis — CDs, LIBOR</span>\[ PV = \frac{FV}{1 + \frac{\text{Days}}{360}\times AOR} \]</div>
+<div class="formula"><span class="f-label">Bond Equivalent Yield (BEY) from DR</span>\[ BEY = \frac{365\times DR}{360 - DR\times\text{Days}} \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Spot Rates, Forward Rates &amp; Yield Curves</div>
+<div class="formula"><span class="f-label">Bond Pricing with Spot Rates</span>\[ PV = \frac{PMT}{(1+z_1)} + \frac{PMT}{(1+z_2)^2} + \cdots + \frac{PMT+FV}{(1+z_N)^N} \]</div>
+<div class="formula"><span class="f-label">Forward Rate from Spot Rates</span>\[ IFR_{A,\,B-A} = \left[\frac{(1+z_B)^B}{(1+z_A)^A}\right]^{1/(B-A)} - 1 \]</div>
+
+<table>
+<tr><th>Yield Curve Shape</th><th>Spot vs Par Curve</th><th>Forward Curve</th></tr>
+<tr><td>Upward sloping (normal)</td><td>Par curve BELOW spot</td><td>Forward curve ABOVE spot</td></tr>
+<tr><td>Flat</td><td>All three equal</td><td>All three equal</td></tr>
+<tr><td>Inverted</td><td>Par curve ABOVE spot</td><td>Forward curve BELOW spot</td></tr>
+</table>
+</div>
+
+</div><!-- section -->
+
+<!-- DURATION & CONVEXITY -->
+<div class="section" id="fi-s4">
+<div class="section-title">Fixed-Income Risk &amp; Returns: Duration &amp; Convexity</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Macaulay Duration</div>
+<div class="formula"><span class="f-label">Macaulay Duration (approximate)</span>\[ D_{\text{Mac}} = \frac{\sum_{t=1}^N t \cdot \dfrac{CF_t}{(1+r)^t}}{PV_{\text{full}}} \]</div>
+<p>Exact closed-form: accounts for coupon rate, YTM, maturity, and time since last coupon.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Modified Duration &amp; Price Sensitivity</div>
+<div class="formula"><span class="f-label">Modified Duration</span>\[ D_{\text{mod}} = \frac{D_{\text{Mac}}}{1 + r} \]</div>
+<div class="formula"><span class="f-label">Price Change Approximation</span>\[ \%\Delta PV \approx -D_{\text{mod}}\times\Delta YTM \]</div>
+<div class="formula"><span class="f-label">Approximate Modified Duration</span>\[ D_{\text{mod}} \approx \frac{PV_- - PV_+}{2\times\Delta y\times PV_0} \]</div>
+<div class="formula"><span class="f-label">Money Duration (PVBP)</span>\[ PVBP = D_{\text{mod}}\times PV\times 0.0001 \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Convexity Adjustment</div>
+<div class="formula"><span class="f-label">Full Price Change with Convexity</span>\[ \%\Delta PV \approx -D_{\text{mod}}\cdot\Delta y + \tfrac{1}{2}\cdot C\cdot(\Delta y)^2 \]</div>
+<div class="formula"><span class="f-label">Approximate Convexity</span>\[ C \approx \frac{PV_- + PV_+ - 2\,PV_0}{(\Delta y)^2\cdot PV_0} \]</div>
+<div class="callout warn"><strong>⚠ Trap:</strong> Convexity is always positive for straight bonds → price rises more than duration predicts when yields fall, and falls less when yields rise.</div>
+
+<div class="callout tip"><strong>Positive convexity (straight bonds):</strong> When yields fall, price rises MORE than duration predicts. When yields rise, price falls LESS. Convexity is always beneficial — more is better. Callable bonds exhibit negative convexity at low yields.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Duration Properties Summary</div>
+<table>
+<tr><th>Factor</th><th>Effect on Duration</th></tr>
+<tr><td>Longer maturity</td><td>Higher duration</td></tr>
+<tr><td>Lower coupon rate</td><td>Higher duration</td></tr>
+<tr><td>Lower YTM</td><td>Higher duration</td></tr>
+<tr><td>Zero-coupon bond</td><td>Duration = Maturity (maximum)</td></tr>
+<tr><td>Callable bond</td><td>Lower duration than equivalent straight bond</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Effective Duration &amp; Convexity (Bonds with Options)</div>
+<div class="formula"><span class="f-label">Effective Duration</span>\[ D_{\text{eff}} = \frac{PV_- - PV_+}{2\times\Delta\text{Curve}\times PV_0} \]</div>
+<div class="formula"><span class="f-label">Effective Convexity</span>\[ C_{\text{eff}} = \frac{PV_- + PV_+ - 2\,PV_0}{(\Delta\text{Curve})^2\times PV_0} \]</div>
+<p>Use effective measures (not analytical) for bonds with embedded options.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- CREDIT RISK -->
+<div class="section" id="fi-s5">
+<div class="section-title">Fixed-Income: Credit Risk &amp; Analysis</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">5 Cs of Credit Analysis</div>
+<p>5 Cs of credit: Capacity (ability to repay), Capital (reserves), Collateral (security), Covenants (terms), Character (management integrity).</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Credit Risk Measurement</div>
+<div class="formula"><span class="f-label">Expected Credit Loss</span>\[ E[\text{Loss}] = PD\times LGD = PD\times(1-\text{Recovery Rate})\times\text{Exposure} \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">High-Yield vs Investment-Grade Analysis</div>
+<table>
+<tr><th>Aspect</th><th>Investment Grade</th><th>High Yield</th></tr>
+<tr><td>Primary risk</td><td>Interest rate risk</td><td>Default risk (credit risk)</td></tr>
+<tr><td>Correlation with equities</td><td>Lower</td><td>Higher (behave more like equities)</td></tr>
+<tr><td>Spreads</td><td>Narrow (basis points)</td><td>Wide (hundreds of bps)</td></tr>
+<tr><td>Key ratios</td><td>Interest coverage, D/E</td><td>Liquidity, covenant analysis, recovery assumptions</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SECURITISATION -->
+<div class="section" id="fi-s6">
+<div class="section-title">Fixed-Income Securitisation: ABS &amp; MBS</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Securitisation Structure</div>
+<p>ABS structure: Originator sells loans to bankruptcy-remote SPV. SPV issues tranched securities. Senior tranches have priority; subordinate tranches absorb first losses (credit enhancement).</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Non-Mortgage ABS &amp; CDOs</div>
+<table>
+<tr><th>Type</th><th>Collateral</th><th>Structure</th></tr>
+<tr><td>Auto loan ABS</td><td>Auto loans</td><td>Amortising — principal paid down over time</td></tr>
+<tr><td>Credit card ABS</td><td>Credit card receivables</td><td>Non-amortising — revolving; reinvestment period</td></tr>
+<tr><td>CDO</td><td>Corporate bonds, leveraged loans, CDS</td><td>Tranched by seniority</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">RMBS &amp; CMOs</div>
+<p>Pass-through MBS: investors receive pro-rata share of principal and interest including prepayments. CMO tranches redirect prepayment risk. PAC tranches have stable cash flows; companion tranches absorb variability.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">CMBS (Commercial MBS)</div>
+<div class="formula"><span class="f-label">Debt Service Coverage Ratio</span>\[ DSC = \frac{NOI}{\text{Debt Service}} \]</div>
+<div class="formula"><span class="f-label">Loan-to-Value Ratio</span>\[ LTV = \frac{\text{Loan Amount}}{\text{Appraised Value}} \]</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- /fi module-content -->
+</div><!-- /fi module -->
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 7. DERIVATIVES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="deriv">
+<div class="module-header"><h2>DERIVATIVES</h2></div>
+<div class="module-content">
+
+<!-- FEATURES & MARKETS -->
+<div class="section" id="deriv-s1">
+<div class="section-title">Derivative Instrument &amp; Market Features</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">OTC vs Exchange-Traded (ETD)</div>
+<table>
+<tr><th></th><th>OTC Market</th><th>Exchange-Traded (ETD)</th></tr>
+<tr><td>Liquidity</td><td>Lower</td><td>Higher</td></tr>
+<tr><td>Trading costs</td><td>Higher</td><td>Lower</td></tr>
+<tr><td>Transparency</td><td>Less</td><td>Greater</td></tr>
+<tr><td>Standardisation</td><td>Lower (customisable)</td><td>Higher (standardised)</td></tr>
+<tr><td>Flexibility</td><td>Higher</td><td>Lower</td></tr>
+<tr><td>Counterparty credit risk</td><td>Higher (bilateral)</td><td>Lower (CCP guarantees)</td></tr>
+</table>
+<div class="callout exam"><strong>Zero-sum game:</strong> Every gain by the long is exactly offset by a loss to the short. Derivatives redistribute wealth between parties; they do not create it in aggregate.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Derivative Underlyings</div>
+<ul>
+<li>Equities (individual stocks, indices)</li>
+<li>Fixed-income instruments and interest rates</li>
+<li>Currencies (FX forwards, FX futures)</li>
+<li>Commodities (oil, gold, agricultural)</li>
+<li>Credit (CDS, CDOs)</li>
+<li>Other (weather, crypto, longevity risk)</li>
+</ul>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Forward Commitments vs Contingent Claims <span class="badge">Critical</span></div>
+<table>
+<tr><th>Forward Commitments</th><th>Contingent Claims</th></tr>
+<tr><td>Obligation — MUST trade at expiry</td><td>Right but NOT obligation to trade</td></tr>
+<tr><td>Forward contracts, Futures, Swaps</td><td>Options (calls, puts), Credit derivatives</td></tr>
+<tr><td>No premium paid at initiation</td><td>Premium paid upfront by buyer</td></tr>
+<tr><td>Symmetric payoff profile</td><td>Asymmetric payoff profile</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Derivative Benefits &amp; Risks</div>
+<p>Benefits: risk transfer/hedging, price discovery, market completeness, lower transaction costs. Risks: leverage amplifies losses, counterparty risk (OTC), complexity, systemic risk.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- FORWARD PRICING -->
+<div class="section" id="deriv-s2">
+<div class="section-title">Arbitrage, Replication &amp; Cost of Carry</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">No-Arbitrage Forward Price <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Forward Price (no income, discrete)</span>\[ F_0(T) = S_0\,(1+r_f)^T \]</div>
+<div class="formula"><span class="f-label">Forward Price (continuous)</span>\[ F_0(T) = S_0\,e^{r_f T} \]</div>
+<div class="formula"><span class="f-label">With income/costs</span>\[ F_0(T) = (S_0 - I + C)\,(1+r_f)^T \]</div>
+<div class="formula"><span class="f-label">With convenience yield (commodities)</span>\[ F_0(T) = S_0\,e^{(r_f + c - y)T} \]</div>
+
+<div class="callout tip"><strong>Cost of Carry framework:</strong> Forward price = Spot price + Financing cost + Storage cost − Income received (dividends, coupons, convenience yield). High storage costs (commodities) → F > S (contango). High convenience yield → F &lt; S (backwardation).</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Forward Price vs Futures Price</div>
+<table>
+<tr><th>Correlation (Futures Price vs Interest Rates)</th><th>Relationship</th></tr>
+<tr><td>None</td><td>Futures price = Forward price</td></tr>
+<tr><td>Positive</td><td>Futures price &gt; Forward price</td></tr>
+<tr><td>Negative</td><td>Futures price &lt; Forward price</td></tr>
+</table>
+<div class="callout note">The correlation effect is because daily mark-to-market on futures means gains are invested immediately at current rates; losses are funded at current rates. When futures prices are positively correlated with interest rates, gains compound at higher rates → futures worth more.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- FORWARD & FUTURES VALUATION -->
+<div class="section" id="deriv-s3">
+<div class="section-title">Pricing &amp; Valuation of Forward and Futures Contracts</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Forward Contract Valuation</div>
+<div class="formula"><span class="f-label">Forward Value at Initiation</span>\[ V_0 = 0 \]</div>
+<div class="formula"><span class="f-label">Forward Value During Life (long)</span>\[ V_t = S_t - \frac{F_0(T)}{(1+r)^{T-t}} \]</div>
+<div class="formula"><span class="f-label">Forward Value at Maturity (long)</span>\[ V_T = S_T - F_0(T) \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Interest Rate Forward (FRA)</div>
+<div class="formula"><span class="f-label">FRA Settlement (received by long at settlement)</span>\[ \text{Settlement} = \frac{(MRR - FRA\text{ rate})\times NP\times\frac{D}{360}}{1 + MRR\times\frac{D}{360}} \]</div>
+
+<table>
+<tr><th>Position</th><th>Benefits from Rising MRR</th><th>Benefits from Falling MRR</th></tr>
+<tr><td>Long FRA (buy, fixed-rate payer)</td><td>Yes</td><td>No</td></tr>
+<tr><td>Short FRA (sell, floating-rate payer)</td><td>No</td><td>Yes</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Futures Contract Pricing</div>
+<div class="formula"><span class="f-label">Eurodollar / SOFR Futures Price</span>\[ f = 100 - (100\times MRR) \]</div>
+<div class="formula"><span class="f-label">Futures BPV (Dollar Duration)</span>\[ BPV_f = D_{\text{mod}}\times P_f\times 0.0001 \]</div>
+<div class="formula"><span class="f-label">Hedge Ratio</span>\[ N^* = \frac{(D_T - D_P)\times P}{D_f\times P_f} \]</div>
+
+<table>
+<tr><th>Position</th><th>Benefits from Rising MRR</th><th>Benefits from Falling MRR</th></tr>
+<tr><td>Short interest rate futures</td><td>Yes (price falls, short profits)</td><td>No</td></tr>
+<tr><td>Long interest rate futures</td><td>No</td><td>Yes (price rises, long profits)</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SWAPS -->
+<div class="section" id="deriv-s4">
+<div class="section-title">Pricing &amp; Valuation of Interest Rate Swaps</div>
+
+<div class="two-col">
+<div>
+<div class="formula"><span class="f-label">Swap Periodic Settlement (floating-rate payer)</span>\[ \text{Settlement} = (MRR - r_{\text{swap}})\times NP\times\frac{D}{360} \]</div>
+<p>Interest rate swap = series of FRAs. Fixed-rate payer benefits when rates rise.</p>
+
+</div>
+<div>
+<div class="callout exam"><strong>Swap equivalence:</strong> A plain-vanilla interest rate swap (pay fixed, receive floating) is economically equivalent to: Issuing a fixed-rate bond + buying a floating-rate bond. The notional principal is NEVER exchanged in interest rate swaps (only cash flow differences). Currency swaps DO exchange principal at initiation and maturity.</div>
+</div>
+</div>
+</div>
+
+<!-- OPTIONS -->
+<div class="section" id="deriv-s5">
+<div class="section-title">Pricing &amp; Valuation of Options</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Option Moneyness &amp; Values</div>
+<table>
+<tr><th>Moneyness</th><th>Call Condition</th><th>Put Condition</th></tr>
+<tr><td>In-the-money (ITM)</td><td>S_t &gt; X</td><td>S_t &lt; X</td></tr>
+<tr><td>At-the-money (ATM)</td><td>S_t = X</td><td>S_t = X</td></tr>
+<tr><td>Out-of-the-money (OTM)</td><td>S_t &lt; X</td><td>S_t &gt; X</td></tr>
+</table>
+<div class="formula"><span class="f-label">Call Value at Expiry</span>\[ c_T = \max(0,\; S_T - X) \]</div>
+<div class="formula"><span class="f-label">Put Value at Expiry</span>\[ p_T = \max(0,\; X - S_T) \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Arbitrage Bounds</div>
+<div class="formula"><span class="f-label">Call Lower / Upper Bounds</span>\[ \max\!\left(0,\; S_t - \frac{X}{(1+r)^{T-t}}\right) \leq c_t \leq S_t \]</div>
+<div class="formula"><span class="f-label">Put Lower / Upper Bounds</span>\[ \max\!\left(0,\; \frac{X}{(1+r)^{T-t}} - S_t\right) \leq p_t \leq \frac{X}{(1+r)^{T-t}} \]</div>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Factors Affecting Option Values</div>
+<table>
+<tr><th>Factor Increases</th><th>Call</th><th>Put</th></tr>
+<tr><td>Value of underlying (S)</td><td>↑</td><td>↓</td></tr>
+<tr><td>Exercise price (X)</td><td>↓</td><td>↑</td></tr>
+<tr><td>Time to expiration</td><td>↑</td><td>↑ (except deep ITM puts)</td></tr>
+<tr><td>Risk-free rate (r)</td><td>↑</td><td>↓</td></tr>
+<tr><td>Volatility of underlying (σ)</td><td>↑</td><td>↑</td></tr>
+<tr><td>Income/Dividends on underlying</td><td>↓</td><td>↑</td></tr>
+<tr><td>Cost of carry</td><td>↑</td><td>↓</td></tr>
+</table>
+<div class="callout warn"><strong>Volatility ALWAYS increases option value</strong> — both calls and puts. Higher volatility = more chance of large moves in either direction = more potential for the option to expire deep in the money.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PUT-CALL PARITY -->
+<div class="section" id="deriv-s6">
+<div class="section-title">Put-Call Parity &amp; Binomial Model</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Put-Call Parity</div>
+<div class="formula"><span class="f-label">Put-Call Parity</span>\[ c_0 + \frac{X}{(1+r)^T} = S_0 + p_0 \]</div>
+<div class="formula"><span class="f-label">Put-Call-Forward Parity</span>\[ c_0 + \frac{X}{(1+r)^T} = \frac{F_0(T)}{(1+r)^T} + p_0 \]</div>
+
+<div class="callout exam"><strong>Parity allows you to create synthetic positions:</strong>
+Synthetic call = Stock + Put − PV(X)
+Synthetic put = Call − Stock + PV(X)
+Synthetic stock = Call − Put + PV(X)
+Synthetic bond = Stock + Put − Call</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">One-Period Binomial Model</div>
+<div class="formula"><span class="f-label">Hedge Ratio (Delta)</span>\[ h = \frac{c_u - c_d}{S_u - S_d} \]</div>
+<div class="formula"><span class="f-label">Risk-Neutral Up-Probability</span>\[ \pi_u = \frac{(1+r_f) - d}{u - d} \]</div>
+<div class="formula"><span class="f-label">Option Value (risk-neutral)</span>\[ c_0 = \frac{\pi_u c_u + (1-\pi_u) c_d}{1+r_f} \]</div>
+
+<div class="callout tip"><strong>Risk-neutral pricing insight:</strong> We don't need to know actual probabilities. Risk-neutral probabilities make the expected return equal to the risk-free rate. This is the foundation of all option pricing models.</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- /deriv module-content -->
+</div><!-- /deriv module -->
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 8. ALTERNATIVE INVESTMENTS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="alt">
+<div class="module-header"><h2>ALTERNATIVE INVESTMENTS</h2></div>
+<div class="module-content">
+
+<!-- FEATURES & STRUCTURES -->
+<div class="section" id="alt-s1">
+<div class="section-title">Alternative Investment Features, Methods &amp; Structures</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Categories of Alternatives</div>
+<table>
+<tr><th>Category</th><th>Sub-types</th></tr>
+<tr><td>Private Capital</td><td>Private equity (LBO, VC), Private debt (direct lending, mezzanine, distressed, venture debt)</td></tr>
+<tr><td>Real Assets</td><td>Real estate, Infrastructure, Commodities, Farmland &amp; Timberland, Digital assets</td></tr>
+<tr><td>Hedge Funds</td><td>Equity hedge, Event-driven, Relative value, Opportunistic (global macro)</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Defining Features</div>
+<ul>
+<li>Narrow manager specialisation</li>
+<li>Low correlation with traditional investments (diversification benefit)</li>
+<li>Large capital outlays; long investment horizons</li>
+<li>Illiquidity — requires patience and long-term commitment</li>
+<li>Incentive-based compensation (carried interest)</li>
+<li>Harder to appraise performance</li>
+</ul>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Access Methods</div>
+<table>
+<tr><th>Method</th><th>Description</th><th>Best For</th></tr>
+<tr><td>Fund investing</td><td>Indirect; pool capital with manager</td><td>No in-house expertise; want diversification</td></tr>
+<tr><td>Co-investing</td><td>Hybrid; invest in fund PLUS directly in deals alongside manager</td><td>Building skills; reducing fees</td></tr>
+<tr><td>Direct investing</td><td>Buy assets yourself; no manager</td><td>Large institutions with specialist team</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Limited Partnership Structure</div>
+<table>
+<tr><th>Party</th><th>Role</th><th>Liability</th></tr>
+<tr><td>GP (General Partner)</td><td>Fund manager; makes all investment decisions</td><td>Unlimited</td></tr>
+<tr><td>LP (Limited Partner)</td><td>Investor; provides capital; no management role</td><td>Limited to investment amount</td></tr>
+</table>
+<p>Committed Capital = total amount LPs agree to invest (called over time). Dry Powder = committed but not yet deployed capital.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- PERFORMANCE -->
+<div class="section" id="alt-s2">
+<div class="section-title">Alternative Investment Performance &amp; Returns</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Fee Structures <span class="badge">Critical</span></div>
+<p>Soft hurdle: performance fee applies to ENTIRE return once hurdle is cleared. Hard hurdle: fee only on returns ABOVE the hurdle.</p>
+<div class="formula"><span class="f-label">Catch-Up Clause</span>\[ \text{GP share} = \text{Carry }\%\times(\text{All profits once hurdle cleared}) \]</div>
+
+<div class="callout warn"><strong>Hard hurdle favours LPs; soft hurdle favours GPs.</strong> A catch-up clause is functionally similar to a soft hurdle — once hurdle is cleared, GP receives 100% of remaining gains until it "catches up" to its target carry percentage.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">High-Water Mark &amp; Clawback</div>
+<p>High-Water Mark (HWM): highest NAV previously used to calculate performance fee. No performance fee until HWM is exceeded → prevents double-charging.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">MOIC &amp; IRR</div>
+<div class="formula"><span class="f-label">Multiple of Invested Capital</span>\[ MOIC = \frac{\text{Realised} + \text{Unrealised Value}}{\text{Total Invested Capital}} \]</div>
+<div class="callout warn"><strong>⚠ Trap:</strong> MOIC ignores timing of cash flows. A 2× MOIC in 2 years >> 2× MOIC in 10 years. Use IRR for time-adjusted performance.</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Leveraged Return</div>
+<div class="formula"><span class="f-label">Leveraged Return (Alternative)</span>\[ R_L = R_P + \frac{V_B}{V_E}(R_P - r_B) \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Performance Biases</div>
+<table>
+<tr><th>Bias</th><th>Effect on Reported Returns</th></tr>
+<tr><td>Survivorship bias</td><td>Overstates returns (failed funds excluded)</td></tr>
+<tr><td>Backfill bias</td><td>Overstates returns (only winners add historical data)</td></tr>
+<tr><td>Stale pricing (Level 3)</td><td>Understates volatility; overstates Sharpe ratio</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PRIVATE CAPITAL -->
+<div class="section" id="alt-s3">
+<div class="section-title">Investments in Private Capital: Equity &amp; Debt</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Private Equity — Two Key Strategies <span class="badge">Critical</span></div>
+<table>
+<tr><th></th><th>Leveraged Buyout (LBO)</th><th>Venture Capital (VC)</th></tr>
+<tr><td>Target company</td><td>Mature, cash-generative</td><td>Early-stage, high growth potential</td></tr>
+<tr><td>Debt usage</td><td>60–80% debt; heavy leverage</td><td>Primarily equity</td></tr>
+<tr><td>Value creation</td><td>Operational improvement + deleveraging</td><td>Revenue growth; scaling the business</td></tr>
+<tr><td>Exit timeline</td><td>3–7 years (IPO or trade sale)</td><td>5–10 years (IPO is common exit)</td></tr>
+<tr><td>Return profile</td><td>Lower risk (cash flows known)</td><td>Binary — most fail, few generate huge returns</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">VC Financing Stages</div>
+<p>VC stages: Formative (angel/seed/early-stage: pre-revenue), Later-stage (post-production, pre-IPO). PE buyout strategies: LBO, growth equity, turnaround.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Private Equity Exit Strategies</div>
+<ul>
+<li>Trade sale — sell to strategic buyer (most common by number)</li>
+<li>IPO / Direct listing / SPAC (best price but complex and takes time)</li>
+<li>Secondary sale — sell to another PE firm</li>
+<li>Recapitalisation — take on more debt, pay special dividend to PE sponsor</li>
+<li>Liquidation — sell assets; last resort</li>
+</ul>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Private Debt Types</div>
+<table>
+<tr><th>Type</th><th>Description</th><th>Risk Level</th></tr>
+<tr><td>Direct lending</td><td>Senior secured loans to mid-market companies</td><td>Lower</td></tr>
+<tr><td>Venture debt</td><td>Complements VC equity; early-stage companies</td><td>Medium-High</td></tr>
+<tr><td>Mezzanine debt</td><td>Subordinated to senior; often with equity kickers</td><td>High</td></tr>
+<tr><td>Distressed debt</td><td>Debt of companies in financial trouble; deep discount</td><td>Very high</td></tr>
+<tr><td>Unitranche</td><td>Single combined loan blending senior and subordinated</td><td>Medium</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- REAL ESTATE & INFRASTRUCTURE -->
+<div class="section" id="alt-s4">
+<div class="section-title">Real Estate, Infrastructure &amp; Natural Resources</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Real Estate Investment Structures</div>
+<table>
+<tr><th></th><th>Debt</th><th>Equity</th></tr>
+<tr><td>Private</td><td>Mortgages, Construction lending</td><td>Direct ownership, RE funds, Private REITs</td></tr>
+<tr><td>Public</td><td>MBS, CMOs, Mortgage REITs</td><td>Shares in RE corps., Public REITs</td></tr>
+</table>
+<p>Open-end infinite-life funds: core/core-plus (stabilised assets, lower risk). Closed-end finite-life funds: value-add/opportunistic (higher risk, active improvement).</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Commodity Investment Forms</div>
+<div class="formula"><span class="f-label">Commodity Futures Price</span>\[ F_0(T) = S_0\,e^{(r+c-y)T} \]</div>
+<p>c = storage costs, y = convenience yield. Contango: F > S (storage-dominated). Backwardation: F < S (convenience yield > cost of carry).</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Infrastructure Investment Features</div>
+<ul>
+<li>Greenfield (new assets built from scratch) vs Brownfield (existing assets acquired)</li>
+<li>Economic infrastructure: Roads, airports, ports, utilities</li>
+<li>Social infrastructure: Hospitals, schools, prisons</li>
+<li>Access: Direct ownership or indirect (MLP, ETF, listed infrastructure)</li>
+<li>Long-term, stable, often regulated cash flows</li>
+<li>Inflation hedging: Revenue often indexed to inflation</li>
+</ul>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Timberland &amp; Farmland</div>
+<p>Returns from timberland/farmland: biological growth + commodity prices + land appreciation. Low correlation with equities and bonds.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- HEDGE FUNDS -->
+<div class="section" id="alt-s5">
+<div class="section-title">Hedge Funds &amp; Digital Assets</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Hedge Fund Strategies</div>
+<table>
+<tr><th>Strategy</th><th>Description</th><th>Approach</th></tr>
+<tr><td>Equity Hedge</td><td>Long/short equity and equity derivatives</td><td>Bottom-up stock selection</td></tr>
+<tr><td>Event-Driven</td><td>Profit from specific corporate events (M&amp;A, restructuring)</td><td>Bottom-up; catalyst-focused</td></tr>
+<tr><td>Relative Value</td><td>Exploit pricing discrepancies between related securities</td><td>Market-neutral; pair trades</td></tr>
+<tr><td>Opportunistic (Global Macro)</td><td>Top-down economic and geopolitical trends; major asset classes</td><td>Top-down; high leverage</td></tr>
+<tr><td>Managed Futures (CTA)</td><td>Trend-following using futures across asset classes</td><td>Quantitative, systematic</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Hedge Fund Features</div>
+<ul>
+<li>Low legal and regulatory restrictions (private funds)</li>
+<li>Large investment universe (long, short, derivatives)</li>
+<li>Heavy use of leverage and derivatives</li>
+<li>Aggressive strategies with concentrated positions</li>
+<li>Limits on liquidity (lockups, gates, notice periods)</li>
+<li>High fees (typically "2 and 20" but declining)</li>
+</ul>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Digital Assets</div>
+<p>DLT/Blockchain: distributed, immutable, consensus-based record-keeping. Tokenisation = representing ownership rights on a ledger. NFTs are non-fungible; security tokens represent financial claims.</p>
+
+<table>
+<tr><th>Direct Access</th><th>Indirect Access</th></tr>
+<tr><td>Centralised exchanges (Coinbase)</td><td>Cryptocurrency coin trusts</td></tr>
+<tr><td>Decentralised exchanges (DEX)</td><td>Cryptocurrency futures contracts</td></tr>
+<tr><td></td><td>Crypto ETFs</td></tr>
+<tr><td></td><td>Cryptocurrency stocks</td></tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- /alt module-content -->
+</div><!-- /alt module -->
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 9. PORTFOLIO MANAGEMENT -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="pm">
+<div class="module-header"><h2>PORTFOLIO MANAGEMENT</h2></div>
+<div class="module-content">
+
+<!-- RISK & RETURN PART I -->
+<div class="section" id="pm-s1">
+<div class="section-title">Portfolio Risk &amp; Return: Part I</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Risk Aversion &amp; Utility</div>
+<div class="formula"><span class="f-label">Investor Utility Function</span>\[ U = E(r) - \tfrac{1}{2}\,A\,\sigma^2 \]</div>
+<p>A > 0: risk-averse (requires compensation). A = 0: risk-neutral. A < 0: risk-seeking.</p>
+
+<div class="callout tip"><strong>Indifference curves:</strong> Risk-averse investors have upward-sloping indifference curves. More risk-averse = steeper slope (need more return to accept more risk). The optimal portfolio is where the investor's indifference curve is tangent to the CAL.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Two-Asset Portfolio Risk <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Two-Asset Portfolio Return</span>\[ E(R_p) = w_A E(R_A) + w_B E(R_B) \]</div>
+<div class="formula"><span class="f-label">Two-Asset Portfolio Variance</span>\[ \sigma_p^2 = w_A^2\sigma_A^2 + w_B^2\sigma_B^2 + 2\,w_A w_B\,\rho_{AB}\,\sigma_A\sigma_B \]</div>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Capital Allocation Line (CAL)</div>
+<div class="formula"><span class="f-label">Capital Allocation Line</span>\[ E(R_p) = R_f + \frac{E(R_i)-R_f}{\sigma_i}\,\sigma_p \]</div>
+<p>Slope of the CAL = Sharpe ratio of the risky portfolio.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Efficient Frontier</div>
+<div class="callout exam"><strong>Key points:</strong>
+<ul>
+<li>Minimum-variance frontier: all portfolios with lowest risk for given return</li>
+<li>Global minimum-variance portfolio: leftmost point of the frontier</li>
+<li>Efficient frontier: UPPER portion of MVF (rational investors only choose these)</li>
+<li>Portfolios below the efficient frontier are suboptimal (same risk, lower return)</li>
+</ul></div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Roy's Safety-First Ratio</div>
+<div class="formula"><span class="f-label">Roy's Safety-First Ratio</span>\[ SFR = \frac{E(R_p) - R_L}{\sigma_p} \]</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- RISK & RETURN PART II -->
+<div class="section" id="pm-s2">
+<div class="section-title">Portfolio Risk &amp; Return: Part II — CAPM</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Systematic vs Unsystematic Risk <span class="badge">Critical</span></div>
+<p>Total Risk = Systematic + Unsystematic. Unsystematic risk is diversified away in a large portfolio. Only systematic (market) risk is compensated.</p>
+
+<div class="callout warn"><strong>~12–30 stocks eliminates ~90% of unsystematic risk.</strong> Since diversification is free, the market only compensates the systematic component. A biotech stock with 80% total risk but β = 0.3 has a LOWER required return than a stable stock with β = 1.2.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Beta</div>
+<div class="formula"><span class="f-label">Beta</span>\[ \beta_i = \frac{\text{Cov}(R_i, R_M)}{\sigma_M^2} = \rho_{i,M}\frac{\sigma_i}{\sigma_M} \]</div>
+<p>β = 1: same risk as market. β > 1: more volatile. β < 1: less volatile. β < 0: moves inversely to market.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">CAPM &amp; Security Market Line (SML) <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Capital Asset Pricing Model</span>\[ E(R_i) = R_f + \beta_i\bigl[E(R_M) - R_f\bigr] \]</div>
+<p>Securities above the SML → expected return > CAPM required → undervalued → buy. Below SML → overvalued → sell.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">Performance Measures</div>
+<table>
+<tr><th>Measure</th><th>Formula</th><th>Risk Used</th><th>Best Used For</th></tr>
+<tr><td>Sharpe ratio</td><td>(Rₚ−Rᶠ)/σₚ</td><td>Total (σ)</td><td>Total portfolio evaluation</td></tr>
+<tr><td>Treynor ratio</td><td>(Rₚ−Rᶠ)/βₚ</td><td>Systematic (β)</td><td>Well-diversified portfolios</td></tr>
+<tr><td>Jensen's alpha</td><td>Rₚ − [Rᶠ + βₚ(R_M−Rᶠ)]</td><td>Systematic (β)</td><td>Absolute excess return vs SML</td></tr>
+<tr><td>M-squared (M²)</td><td>(Rₚ−Rᶠ)(σ_M/σₚ) + Rᶠ</td><td>Total (σ)</td><td>Comparison to market with leverage</td></tr>
+</table>
+<div class="callout tip"><strong>Stocks above the SML are undervalued</strong> (positive alpha = actual return exceeds CAPM required return). Stocks below the SML are overvalued (negative alpha).</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PORTFOLIO MANAGEMENT OVERVIEW -->
+<div class="section" id="pm-s3">
+<div class="section-title">Portfolio Management: An Overview &amp; Planning</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Three-Step Portfolio Management Process</div>
+<table>
+<tr><th>Step</th><th>Name</th><th>Key Activities</th></tr>
+<tr><td>1</td><td>Planning</td><td>Analyse objectives &amp; constraints → produce IPS</td></tr>
+<tr><td>2</td><td>Execution</td><td>Asset allocation + security analysis + portfolio construction</td></tr>
+<tr><td>3</td><td>Feedback</td><td>Monitor + rebalance + performance measurement &amp; reporting</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Investment Policy Statement (IPS) Constraints — TTLLU</div>
+<table>
+<tr><th>Constraint</th><th>Key Consideration</th></tr>
+<tr><td><strong>T</strong>ime horizon</td><td>Longer → more risk/illiquidity tolerable</td></tr>
+<tr><td><strong>T</strong>ax situation</td><td>May prefer tax-advantaged instruments</td></tr>
+<tr><td><strong>L</strong>iquidity</td><td>High needs → more bonds/cash; avoid illiquid</td></tr>
+<tr><td><strong>L</strong>egal/Regulatory</td><td>Trust laws, insider trading restrictions</td></tr>
+<tr><td><strong>U</strong>nique circumstances</td><td>ESG, religious, ethical preferences</td></tr>
+</table>
+<div class="callout warn"><strong>Willingness vs Ability to take risk:</strong> When they conflict, the LOWER of the two prevails. You can't invest aggressively for a client whose financial situation doesn't support it, regardless of their enthusiasm.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Institutional Investor Characteristics</div>
+<table>
+<tr><th>Investor</th><th>Risk Tolerance</th><th>Time Horizon</th><th>Liquidity Needs</th></tr>
+<tr><td>DB Pension (younger beneficiaries)</td><td>Higher</td><td>Long</td><td>Lower</td></tr>
+<tr><td>Endowments/Foundations</td><td>High</td><td>Very long (perpetual)</td><td>Low (spending rate)</td></tr>
+<tr><td>Banks</td><td>Very low</td><td>Short</td><td>High</td></tr>
+<tr><td>Life insurance</td><td>Low</td><td>Long</td><td>High</td></tr>
+<tr><td>P&amp;C insurance</td><td>Low</td><td>Short</td><td>High</td></tr>
+<tr><td>Investment companies (mutual funds)</td><td>Varies by mandate</td><td>Varies</td><td>High (redemptions)</td></tr>
+</table>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Strategic vs Tactical Asset Allocation</div>
+<p>Strategic Asset Allocation (SAA): long-term policy weights from IPS, based on capital market expectations. Tactical Asset Allocation (TAA): short-term deviations from SAA to exploit market opportunities.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- BEHAVIORAL BIASES -->
+<div class="section" id="pm-s4">
+<div class="section-title">Behavioural Biases of Individuals</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Cognitive Errors (can be corrected)</div>
+<table>
+<tr><th>Bias</th><th>What Happens</th><th>Portfolio Impact</th></tr>
+<tr><td>Conservatism</td><td>Fail to update views with new information</td><td>Hold investments too long; miss turning points</td></tr>
+<tr><td>Confirmation</td><td>Seek only information that confirms existing beliefs</td><td>Over-concentration; under-diversification</td></tr>
+<tr><td>Representativeness</td><td>Classify by similarity to stereotypes; extrapolate patterns</td><td>Buy/sell based on patterns, not fundamentals</td></tr>
+<tr><td>Illusion of control</td><td>Overestimate ability to influence uncontrollable outcomes</td><td>Excessive trading; under-diversification</td></tr>
+<tr><td>Hindsight</td><td>"I knew it all along" after the fact</td><td>Overconfidence in future predictions</td></tr>
+<tr><td>Anchoring &amp; adjustment</td><td>Over-weight initial reference point</td><td>Slow to update valuations; anchored to purchase price</td></tr>
+<tr><td>Mental accounting</td><td>Keep separate mental buckets for different money</td><td>Not considering total portfolio risk</td></tr>
+<tr><td>Framing</td><td>Same question answered differently based on presentation</td><td>Risk perception changes with framing</td></tr>
+<tr><td>Availability</td><td>Over-weight recent or memorable events</td><td>Overweight recently salient assets/risks</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Emotional Biases (must be accommodated)</div>
+<table>
+<tr><th>Bias</th><th>What Happens</th><th>Portfolio Impact</th></tr>
+<tr><td>Loss aversion</td><td>Losses hurt ~2× more than equivalent gains</td><td>Hold losing positions too long (disposition effect)</td></tr>
+<tr><td>Overconfidence</td><td>Overestimate own ability and precision</td><td>Excessive trading; underestimate risk</td></tr>
+<tr><td>Self-control</td><td>Lack discipline for long-term goals</td><td>Insufficient savings; spend future money now</td></tr>
+<tr><td>Status quo</td><td>Prefer doing nothing over making changes</td><td>Inertia; failure to rebalance</td></tr>
+<tr><td>Endowment</td><td>Value assets more when you own them</td><td>Over-hold concentrated positions; resist selling</td></tr>
+<tr><td>Regret aversion</td><td>Avoid decisions that could turn out badly</td><td>Herding; excessive conservatism</td></tr>
+</table>
+<div class="callout exam"><strong>Cognitive errors are caused by faulty reasoning → correct with better information and education. Emotional biases are from feelings → must be accommodated rather than eliminated. Always address cognitive component first.</strong></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- RISK MANAGEMENT -->
+<div class="section" id="pm-s5">
+<div class="section-title">Introduction to Risk Management</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Risk Management Framework</div>
+<ul>
+<li>Risk governance — tone at the top; board oversight</li>
+<li>Risk identification and measurement</li>
+<li>Risk infrastructure — systems, data, processes</li>
+<li>Defined policies and processes — documented procedures</li>
+<li>Risk monitoring, mitigation, and management</li>
+<li>Communications — internal and external transparency</li>
+<li>Strategic analysis and integration</li>
+</ul>
+<p>IPS constraints: TTLLU — Time horizon, Tax concerns, Liquidity needs, Legal/regulatory constraints, Unique circumstances.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Risk Categories &amp; Measures</div>
+<table>
+<tr><th>Category</th><th>Types</th></tr>
+<tr><td>Financial risks</td><td>Market risk, credit risk, liquidity risk</td></tr>
+<tr><td>Non-financial risks</td><td>Operational, legal, regulatory, political, model, settlement, tail risk</td></tr>
+</table>
+<p>Risk measures: Standard deviation (total risk), Beta (systematic risk), VaR (max loss at confidence level), CVaR/Expected Shortfall (tail risk beyond VaR).</p>
+<div class="formula"><span class="f-label">Sharpe Ratio</span>\[ SR = \frac{E(R_p) - R_f}{\sigma_p} \]</div>
+<div class="formula"><span class="f-label">Treynor Ratio</span>\[ TR = \frac{E(R_p) - R_f}{\beta_p} \]</div>
+<div class="formula"><span class="f-label">Jensen's Alpha</span>\[ \alpha = R_p - \bigl[R_f + \beta_p(R_M - R_f)\bigr] \]</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- /pm module-content -->
+</div><!-- /pm module -->
+
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 10. ETHICS & PROFESSIONAL STANDARDS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="module" id="eth">
+<div class="module-header"><h2>ETHICS &amp; PROFESSIONAL STANDARDS</h2></div>
+<div class="module-content">
+
+<!-- FOUNDATION -->
+<div class="section" id="eth-s1">
+<div class="section-title">Foundation: Code of Ethics &amp; Standards Overview</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Three Layers of Obligation</div>
+<table>
+<tr><th>Layer</th><th>Standard</th><th>Enforced By</th></tr>
+<tr><td>Legal / Regulatory</td><td>Minimum required by law</td><td>Government, regulators (SEC, FCA)</td></tr>
+<tr><td>Firm / Compliance</td><td>May exceed law</td><td>Employer, CCO</td></tr>
+<tr><td>CFA Ethics</td><td>Often exceeds both law and firm policy</td><td>Professional judgment; CFA Institute</td></tr>
+</table>
+<div class="callout warn"><strong>The CFA Standards set a FLOOR, not a ceiling.</strong> Always follow the STRICTER of local law or CFA Standards. Legal compliance is necessary but never sufficient to ensure ethical behaviour.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Map of the Seven Standards</div>
+<table>
+<tr><th>Standard</th><th>Theme</th></tr>
+<tr><td>I — Professionalism</td><td>Knowledge of Law, Independence &amp; Objectivity, Misrepresentation, Misconduct</td></tr>
+<tr><td>II — Market Integrity</td><td>Material Nonpublic Information, Market Manipulation</td></tr>
+<tr><td>III — Duties to Clients</td><td>Loyalty, Prudence &amp; Care; Fair Dealing; Suitability; Performance; Confidentiality</td></tr>
+<tr><td>IV — Duties to Employers</td><td>Loyalty; Additional Compensation; Supervisory Responsibilities</td></tr>
+<tr><td>V — Investment Analysis</td><td>Diligence &amp; Reasonable Basis; Communication with Clients; Record Retention</td></tr>
+<tr><td>VI — Conflicts of Interest</td><td>Disclosure; Priority of Transactions; Referral Fees</td></tr>
+<tr><td>VII — CFA Membership</td><td>Conduct as Participant/Candidate; Reference to Designation</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">Why Ethics Failures Happen</div>
+<ul>
+<li><strong>Overconfidence in own ethics:</strong> "I would never do that" → blinds to gradual drift</li>
+<li><strong>Situational influences:</strong> Pressure from supervisors, bonus incentives, organisational culture</li>
+<li><strong>Cognitive biases:</strong> Framing, confirmation bias, in-group loyalty distort judgment</li>
+</ul>
+<div class="callout exam"><strong>Ethical Decision-Making Framework:</strong> (1) Identify facts, (2) Identify ethical issues, (3) Identify relevant principles/standards, (4) Identify conflicts, (5) Consider alternatives, (6) Choose and act. When an action is legal but unethical, the CFA answer is typically the more ethical choice.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- STANDARD I -->
+<div class="section" id="eth-s2">
+<div class="section-title">Standard I — Professionalism</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">I(A) Knowledge of the Law</div>
+<p>Follow the STRICTER of: local law OR CFA Standards. If CFA Standards stricter → follow CFA Standards. If local law stricter → follow local law.</p>
+
+<div class="callout warn"><strong>Classic exam trap:</strong> CFA Standards do NOT require reporting violations to regulators. They require DISASSOCIATION. Reporting may be required by local law, but that's a separate obligation from CFA Standards.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">I(B) Independence &amp; Objectivity</div>
+<p>Gift guidelines: modest gifts from clients are generally OK. Gifts from third parties (e.g., brokers, investment bankers) that could reasonably impair objectivity are NOT acceptable without employer disclosure.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">I(C) Misrepresentation</div>
+<p>Three forms of misrepresentation: (1) False statements, (2) Misleading omissions (technically true but creates false impression), (3) Plagiarism.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">I(D) Misconduct</div>
+<div class="callout note">Does NOT apply to personal behaviour UNLESS it reflects adversely on professional reputation, integrity, or competence. Examples that DO violate I(D): fraud in personal business dealings, DUI (reflects on judgment/character), dishonesty outside of work.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- STANDARD II -->
+<div class="section" id="eth-s3">
+<div class="section-title">Standard II — Integrity of Capital Markets</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">II(A) Material Nonpublic Information (MNPI)</div>
+<p>Material: information a reasonable investor would consider important OR that would likely affect price. Nonpublic: not yet disseminated through appropriate channels. Mosaic theory: compiling public non-material information is permitted.</p>
+
+<div class="callout exam"><strong>Classic exam trap — Mosaic Theory:</strong> An analyst who researches public filings, conducts channel checks, and speaks to customers is performing legitimate fundamental analysis. This is permitted even if the conclusion is powerful. The test is whether any SINGLE piece of information is material AND nonpublic.</div>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">II(B) Market Manipulation</div>
+<p>Prohibited: information-based manipulation (spreading false info) and transaction-based manipulation (trades designed to distort prices or create false impressions of activity).</p>
+
+<div class="callout tip"><strong>Key distinction:</strong> A fund manager who executes a large block trade that moves the market has NOT violated II(B) — that's a legitimate trade. A manager who executes trades WITH THE INTENT to distort prices has violated II(B).</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- STANDARD III -->
+<div class="section" id="eth-s4">
+<div class="section-title">Standard III — Duties to Clients</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">III(A) Loyalty, Prudence &amp; Care</div>
+<p>Loyalty to clients: place client interests above own and employer's. Client = actual beneficiaries (e.g., pension trustee's client = pension beneficiaries, not employer).</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">III(B) Fair Dealing</div>
+<p>Fair dealing: all clients in same mandate receive same recommendation simultaneously. IPO allocations must be distributed fairly — cannot favour high-fee clients.</p>
+
+<div class="callout warn"><strong>"Fairly" ≠ "equally".</strong> Clients paying for more personalised service can receive more customised service. But investment recommendations and changes must go to ALL clients in a mandate simultaneously, not the most profitable first.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">III(C) Suitability</div>
+<p>Suitability: determine risk tolerance (willingness AND ability), time horizon, return objective, and constraints before making recommendations.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">III(D) Performance Presentation</div>
+<p>Performance presentation: must be fair, accurate, and complete. Cannot cherry-pick periods or promise returns on risky assets.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">III(E) Preservation of Confidentiality</div>
+<p>Confidentiality: keep all client info confidential UNLESS client is engaged in illegal activity against others, OR legal/regulatory disclosure is required.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- STANDARD IV -->
+<div class="section" id="eth-s5">
+<div class="section-title">Standard IV — Duties to Employers</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">IV(A) Loyalty to Employer</div>
+<p>Loyalty to employer: must obtain permission before outside work that competes with employer or uses employer's clients, information, or resources.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">IV(B) Additional Compensation</div>
+<p>Additional compensation: obtain WRITTEN permission from ALL parties before accepting compensation/benefits beyond normal salary for work performed.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">IV(C) Responsibilities of Supervisors</div>
+<p>Supervisory responsibility: adequate training, monitoring, and prompt remediation when violations are detected.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- STANDARD V -->
+<div class="section" id="eth-s6">
+<div class="section-title">Standard V — Investment Analysis, Recommendations &amp; Actions</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">V(A) Diligence &amp; Reasonable Basis</div>
+<p>Diligence: support all recommendations with thorough research. When relying on third-party research, investigate quality and independence.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">V(B) Communication with Clients</div>
+<p>Communications: distinguish facts from opinions clearly. Disclose investment process and methodology. Keep clients informed of material changes.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">V(C) Record Retention</div>
+<p>Record retention: maintain records supporting all investment recommendations and actions. Recommended minimum = 7 years.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- STANDARD VI -->
+<div class="section" id="eth-s7">
+<div class="section-title">Standard VI — Conflicts of Interest</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">VI(A) Disclosure of Conflicts</div>
+<p>Disclosure of conflicts: disclose all material conflicts prominently and in plain language. Includes personal ownership, compensation arrangements, relationships with issuers.</p>
+
+</div>
+
+<div class="subsection">
+<div class="sub-title">VI(B) Priority of Transactions</div>
+<p>Priority of transactions: client accounts first, employer accounts second, personal accounts last. Front-running (trading ahead of client orders) is prohibited.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">VI(C) Referral Fees</div>
+<p>Referral fees: must disclose any fees received for directing client business to third parties and any fees paid to receive client referrals.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- STANDARD VII -->
+<div class="section" id="eth-s8">
+<div class="section-title">Standard VII — Responsibilities as CFA Member/Candidate</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">VII(A) Conduct as Participant in CFA Program</div>
+<p>Conduct in exam: do not share exam questions or answers. Do not misrepresent the content of the exam.</p>
+
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">VII(B) Reference to CFA Institute / Designation</div>
+<p>CFA designation: do not misrepresent membership (must be current, dues paid) or charter status (must have passed all 3 levels + 4,000 hours work experience).</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<!-- GIPS -->
+<div class="section" id="eth-s9">
+<div class="section-title">Global Investment Performance Standards (GIPS)</div>
+
+<div class="two-col">
+<div>
+<p>GIPS: voluntary standards for fair, comparable performance presentation. Firms must present 5-year (building to 10-year) compliant records. Must use composites of similar portfolios.</p>
+
+</div>
+<div>
+<div class="callout note"><strong>GIPS error correction:</strong> If a GIPS-compliant firm discovers a significant error in historical performance, it must restate the affected period and re-present to all existing and prospective clients who received the erroneous data. Materiality of the error determines if prior client communication is needed.</div>
+<div class="callout exam"><strong>Key GIPS facts for exam:</strong>
+<ul>
+<li>GIPS is VOLUNTARY for investment management firms</li>
+<li>Compliance is claimed on FIRM-WIDE basis, not strategy-by-strategy</li>
+<li>Composites must include ALL fee-paying, discretionary accounts in that strategy</li>
+<li>Performance must be presented gross AND net of fees</li>
+<li>"Our composite performance was calculated in accordance with GIPS" — specific wording matters</li>
+</ul></div>
+</div>
+</div>
+</div>
+
+<!-- BA II PLUS TIPS -->
+<div class="section" id="eth-s10">
+<div class="section-title">BA II Plus Calculator Reference</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">TVM Worksheet</div>
+<p>BA II Plus TVM keys: N (periods), I/Y (rate per period as %), PV (negative = outflow), PMT, FV. Use CPT to compute. Always clear TVM (2nd → CLR TVM) before each problem.</p>
+
+</div>
+</div>
+<div>
+<div class="subsection">
+<div class="sub-title">Cash Flow Worksheet (NPV/IRR)</div>
+<p>CF worksheet: CF0 = initial cash flow; C01, C02… = subsequent distinct cash flows. F01 = frequency of C01. Press NPV then I and CPT for net present value; IRR then CPT for IRR.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- /eth module-content -->
+</div><!-- /eth module -->
+
+<!-- FOOTER -->
+<div style="background:#1a1a2e; color:#8899aa; padding:16px 28px; font-size:11.5px; margin-top:20px;">
+  CFA Level I — Expanded Revision Guide 2024 | Based on Salt Solutions Formula Sheet &amp; CFA Curriculum
+  | For personal study use only
+</div>
+
+</main>
+
+<script>
+const sidebarSections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector('#sidebar a[href="#' + e.target.id + '"]');
+      if (a) {
+        a.classList.add('active');
+        // Scroll sidebar to keep active link visible
+        const sb = document.getElementById('sidebar');
+        const aTop = a.offsetTop;
+        const sbH = sb.clientHeight;
+        if (aTop < sb.scrollTop + 60 || aTop > sb.scrollTop + sbH - 80) {
+          sb.scrollTo({ top: aTop - sbH / 2, behavior: 'smooth' });
+        }
+      }
+    }
+  });
+}, { threshold: 0.08, rootMargin: '-8% 0px -82% 0px' });
+sidebarSections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
