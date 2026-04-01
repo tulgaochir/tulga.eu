@@ -7,77 +7,228 @@
     <meta name="author" content="Tulga-Ochir Sugar">
     <title>Knowledge Hub | Tulga-Ochir Sugar</title>
 
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="../assets/css/main.css" as="style">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/main.css">
 
     <style>
-        .pdf-list {
-            list-style: none;
-            padding: 0;
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f7f8fc;
+            color: #1a1f36;
         }
-        .pdf-list li {
-            margin-bottom: 1rem;
-        }
-        .pdf-list a {
-            display: flex;
-            align-items: center;
-            padding: 1.25rem 1.5rem;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #212529;
-            transition: all 0.3s ease;
-        }
-        .pdf-list a:hover {
-            background-color: #e9ecef;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            color: #212529;
-        }
-        .pdf-list i {
-            font-size: 1.75rem;
-            color: #1a365d;
-            margin-right: 1.25rem;
-        }
-        .pdf-list .pdf-info {
-            flex-grow: 1;
-        }
-        .pdf-list .pdf-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-        .pdf-list .pdf-description {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin: 0;
-        }
-        .pdf-list .pdf-size {
-            font-size: 0.8rem;
-            color: #adb5bd;
-            white-space: nowrap;
-            margin-left: 1rem;
-        }
+
+        /* ── NAVBAR ── */
         .navbar {
-            background-color: #ffffff;
-            padding: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: #fff;
+            border-bottom: 1px solid #e8eaf0;
+            padding: 0.85rem 0;
         }
         .navbar-nav .nav-link {
-            color: #333333 !important;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s ease;
+            color: #555 !important;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.2s;
         }
         .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
-            color: #0066cc !important;
+        .navbar-nav .nav-link.active { color: #1a1f36 !important; }
+
+        /* ── HERO ── */
+        .hero {
+            background: #0f1923;
+            padding: 72px 0 64px;
+            position: relative;
+            overflow: hidden;
         }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; left: -60px;
+            width: 320px; height: 320px;
+            background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #6366f1;
+            margin-bottom: 14px;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+        }
+        .hero h1 span {
+            background: linear-gradient(90deg, #6366f1, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.55);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── FEATURED CARD (Revision) ── */
+        .featured-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            border-radius: 16px;
+            padding: 28px 32px;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-card::after {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 180px; height: 180px;
+            background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+        }
+        .featured-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(99,102,241,0.35);
+            color: #fff;
+        }
+        .featured-icon {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+        }
+        .featured-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 4px;
+        }
+        .featured-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        .featured-desc {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+        .featured-arrow {
+            margin-left: auto;
+            font-size: 1.4rem;
+            opacity: 0.5;
+            flex-shrink: 0;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .featured-card:hover .featured-arrow {
+            transform: translateX(4px);
+            opacity: 1;
+        }
+
+        /* ── SECTION LABEL ── */
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 16px;
+        }
+
+        /* ── TOPIC CARDS GRID ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 640px) {
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+
+        .topic-card {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            text-decoration: none;
+            color: #1a1f36;
+            border: 1px solid #e8eaf0;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 14px 14px 0 0;
+        }
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.09);
+            border-color: transparent;
+            color: #1a1f36;
+        }
+        .card-icon {
+            font-size: 1.9rem;
+            margin-bottom: 14px;
+            display: block;
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+        .card-desc {
+            font-size: 0.82rem;
+            color: #6b7280;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        .card-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 16px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+        .card-read i { font-size: 0.7rem; transition: transform 0.2s; }
+        .topic-card:hover .card-read i { transform: translateX(3px); }
     </style>
 </head>
 <body>
@@ -90,134 +241,110 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">KNOWLEDGE HUB</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Knowledge Hub</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="page-header" aria-labelledby="page-title">
-        <div class="container text-center">
-            <h1 id="page-title" class="display-4 mt-3">Knowledge Hub</h1>
-            <p class="lead">A curated collection of essential resources covering key topics from the CFA curriculum.</p>
+    <section class="hero" aria-labelledby="page-title">
+        <div class="container text-center position-relative">
+            <div class="hero-eyebrow">CFA Level I</div>
+            <h1 id="page-title">Everything you need<br>to <span>pass</span>.</h1>
+            <p>Concise, exam-focused notes on every topic — built for people who'd rather understand than memorise.</p>
         </div>
     </section>
 
     <main id="main-content" class="container py-5" role="main">
         <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <ul class="pdf-list">
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Revision.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Revision</div>
-                                <p class="pdf-description"></p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Ethics.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Ethical and Professional Standards</div>
-                                <p class="pdf-description">The foundational principles of professional conduct and ethical behavior in the investment industry.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Quant.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Quantitative Methods</div>
-                                <p class="pdf-description">Essential statistical concepts, time-series analysis, and probability for financial modeling.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Economics.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Economics</div>
-                                <p class="pdf-description">Microeconomic and macroeconomic principles that drive market behavior and valuation.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/FSA.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Financial Statement Analysis (FSA)</div>
-                                <p class="pdf-description">In-depth analysis of financial statements, ratios, and accounting standards to assess company performance.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Corporate_Issuers.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Corporate Issuers</div>
-                                <p class="pdf-description">Insights into corporate governance, capital structure, and business decisions.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Equity.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Equity Investments</div>
-                                <p class="pdf-description">Methods for valuing equities, analyzing industry trends, and constructing stock portfolios.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Fixed_Income.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Fixed Income</div>
-                                <p class="pdf-description">Comprehensive guide to bonds, yield curves, credit analysis, and fixed income portfolio management.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Derivative.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Derivatives</div>
-                                <p class="pdf-description">Fundamentals of options, futures, forwards, and swaps for hedging and speculation.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Alternative_Investment.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Alternative Investments</div>
-                                <p class="pdf-description">Exploring non-traditional assets like real estate, private equity, hedge funds, and commodities.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../assets/pdfs/cfa-knowledge/Portfolio_Management.html">
-                            <i class="far fa-file-alt"></i>
-                            <div class="pdf-info">
-                                <div class="pdf-title">Portfolio Management</div>
-                                <p class="pdf-description">The art and science of constructing and managing investment portfolios to meet client objectives.</p>
-                            </div>
-                            <span class="pdf-size">READ</span>
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-lg-9">
+
+                <!-- Featured: Revision -->
+                <a href="../assets/pdfs/cfa-knowledge/Revision.html" class="featured-card">
+                    <div class="featured-icon">📚</div>
+                    <div>
+                        <div class="featured-label">Start here</div>
+                        <div class="featured-title">Full Revision Guide</div>
+                        <div class="featured-desc">All 10 topics in one place. Great before an exam.</div>
+                    </div>
+                    <i class="fas fa-arrow-right featured-arrow"></i>
+                </a>
+
+                <!-- Topic grid -->
+                <div class="section-label">Browse by topic</div>
+                <div class="cards-grid">
+
+                    <a href="../assets/pdfs/cfa-knowledge/Ethics.html" class="topic-card" style="--accent:#1a1a2e">
+                        <span class="card-icon">⚖️</span>
+                        <div class="card-title">Ethics & Professional Standards</div>
+                        <div class="card-desc">The rules everyone knows but somehow still breaks. Get these right — they're the easiest free marks.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/Quant.html" class="topic-card" style="--accent:#1a5276">
+                        <span class="card-icon">📐</span>
+                        <div class="card-title">Quantitative Methods</div>
+                        <div class="card-desc">Stats, probability, and regressions. More approachable than it sounds — promise.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/Economics.html" class="topic-card" style="--accent:#1a7a3a">
+                        <span class="card-icon">🌍</span>
+                        <div class="card-title">Economics</div>
+                        <div class="card-desc">Why markets do what they do. Micro, macro, and the central banks pulling the strings.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/FSA.html" class="topic-card" style="--accent:#b7770d">
+                        <span class="card-icon">📊</span>
+                        <div class="card-title">Financial Statement Analysis</div>
+                        <div class="card-desc">Reading a balance sheet like a detective novel. The numbers always tell a story.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/Corporate_Issuers.html" class="topic-card" style="--accent:#7d3c98">
+                        <span class="card-icon">🏢</span>
+                        <div class="card-title">Corporate Issuers</div>
+                        <div class="card-desc">How companies are run, funded, and governed — and why that matters to investors.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/Equity.html" class="topic-card" style="--accent:#c0392b">
+                        <span class="card-icon">📈</span>
+                        <div class="card-title">Equity Investments</div>
+                        <div class="card-desc">Valuing stocks, spotting trends, and building portfolios. The part everyone thinks they already know.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/Fixed_Income.html" class="topic-card" style="--accent:#1f618d">
+                        <span class="card-icon">💳</span>
+                        <div class="card-title">Fixed Income</div>
+                        <div class="card-desc">Bonds, yields, duration, credit risk. Boring name, surprisingly deep rabbit hole.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/Derivative.html" class="topic-card" style="--accent:#117a65">
+                        <span class="card-icon">⚙️</span>
+                        <div class="card-title">Derivatives</div>
+                        <div class="card-desc">Options, futures, swaps — financial weapons of mass confusion, explained simply.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/Alternative_Investment.html" class="topic-card" style="--accent:#784212">
+                        <span class="card-icon">🏛️</span>
+                        <div class="card-title">Alternative Investments</div>
+                        <div class="card-desc">Private equity, hedge funds, real assets. The stuff rich people talk about at dinner.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="../assets/pdfs/cfa-knowledge/Portfolio_Management.html" class="topic-card" style="--accent:#2e4057">
+                        <span class="card-icon">🎯</span>
+                        <div class="card-title">Portfolio Management</div>
+                        <div class="card-desc">Putting it all together. Risk, return, and client objectives — the big picture.</div>
+                        <span class="card-read">Read <i class="fas fa-arrow-right"></i></span>
+                    </a>
+
+                </div>
             </div>
         </div>
     </main>
