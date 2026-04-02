@@ -265,6 +265,34 @@
   #eth    .module-header { background: var(--eth); }
   #eth    .section-title { color: var(--eth); border-color: var(--eth); }
 
+  /* ── STATEMENT STRUCTURE VISUALS ─────────── */
+  .stmt-cascade {
+    background: var(--gray1); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 18px; margin: 12px 0;
+    font-family: 'Inter', monospace; font-size: 12.5px; line-height: 2.1; overflow-x: auto;
+  }
+  .stmt-cascade .sc-section {
+    font-size: 9px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1.3px; color: var(--fsa); display: block; margin-top: 12px; margin-bottom: 1px;
+  }
+  .stmt-cascade .sc-subtotal {
+    font-weight: 700; color: var(--navy);
+    border-top: 1px solid var(--border); padding-top: 2px; display: block;
+  }
+  .stmt-cascade .sc-total {
+    font-weight: 700; color: #fff; background: var(--navy);
+    padding: 2px 8px; border-radius: 4px; display: inline-block; margin-top: 4px;
+  }
+  .bs-eq {
+    background: var(--navy); color: #fff; text-align: center;
+    padding: 10px 16px; border-radius: var(--radius);
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14.5px; margin: 12px 0;
+  }
+  .connect-badge {
+    display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px;
+    font-weight: 700; padding: 2px 7px; border-radius: 4px;
+    background: var(--navy); color: #fff; margin-right: 4px;
+  }
   /* ── MOBILE ───────────────────────────────── */
   @media (max-width: 900px) {
     #sidebar { display: none; }
@@ -1502,6 +1530,26 @@ Implication: No fixed target capital structure; structure follows financing need
 <div class="callout warn"><strong>MD&amp;A is NOT audited.</strong> It's management's perspective — treat with more scepticism than audited footnotes. Footnotes are audited and often reveal the most important information.</div>
 </div>
 </div>
+
+<div class="subsection">
+<div class="sub-title">The Three Statements — Structure &amp; Interconnections <span class="badge">Critical</span></div>
+<table>
+<tr><th>Statement</th><th>What It Answers</th><th>Time Coverage</th><th>Key Equation</th></tr>
+<tr><td><strong>Income Statement</strong></td><td>How much did the company earn?</td><td>Over a period</td><td>Revenue − Expenses = Net Income</td></tr>
+<tr><td><strong>Balance Sheet</strong></td><td>What does the company own and owe?</td><td>Point in time (snapshot)</td><td>Assets = Liabilities + Equity</td></tr>
+<tr><td><strong>Cash Flow Statement</strong></td><td>Where did cash come from and go?</td><td>Over a period (same as IS)</td><td>ΔCash = CFO + CFI + CFF</td></tr>
+</table>
+
+<p><strong>Four Bridges (exam favourite):</strong></p>
+<table>
+<tr><th>Bridge</th><th>What Flows</th></tr>
+<tr><td><span class="connect-badge">IS → BS</span></td><td>Net Income adds to Retained Earnings: <em>Ending RE = Beginning RE + NI − Dividends</em>. D&amp;A reduces carrying value of PP&amp;E and intangibles.</td></tr>
+<tr><td><span class="connect-badge">IS → CFS</span></td><td>Net Income is the starting point for CFO (indirect method). Non-cash items (D&amp;A, unrealised gains) are reversed; accruals are converted to cash.</td></tr>
+<tr><td><span class="connect-badge">CFS → BS</span></td><td>Ending cash on CFS = Cash &amp; equivalents on the Balance Sheet. CapEx (CFI outflow) increases PP&amp;E; debt issued (CFF inflow) increases liabilities.</td></tr>
+<tr><td><span class="connect-badge">BS → CFS</span></td><td>Changes in working capital accounts drive CFO adjustments: ↑AR subtracts from CFO; ↑AP adds to CFO. Period-over-period BS changes are the raw material for the CFS.</td></tr>
+</table>
+<div class="callout tip"><strong>Memory anchor:</strong> Net Income is the hub — it grows equity (IS → BS), and it's the starting point for reconciling accrual profit to actual cash (IS → CFS). Ending cash links the CFS back to the BS.</div>
+</div>
 </div>
 
 <!-- INCOME STATEMENT -->
@@ -1512,10 +1560,24 @@ Implication: No fixed target capital structure; structure follows financing need
 <div>
 <div class="subsection">
 <div class="sub-title">Income Statement Structure</div>
-<div class="formula"><span class="f-label">Income Statement Structure</span>\[ \text{Revenue} - COGS = \text{Gross Profit} \]</div>
-<div class="formula">\[ \text{Gross Profit} - \text{Operating Expenses} = EBIT \]</div>
-<div class="formula">\[ EBIT - \text{Interest} - \text{Taxes} = \text{Net Income} \]</div>
-
+<div class="stmt-cascade">
+<span class="sc-section">Top Line</span>  Revenue (Net Sales)                              $X,XXX
+  − Returns, discounts &amp; allowances                  (XXX)
+<span class="sc-subtotal">= Net Revenue                                    $X,XXX</span>
+<span class="sc-section">Gross Profit</span>  − Cost of Goods Sold (COGS)                      (X,XXX)
+<span class="sc-subtotal">= Gross Profit   → Gross Margin = GP / Revenue   $X,XXX</span>
+<span class="sc-section">Operating Income</span>  − SG&amp;A, R&amp;D, D&amp;A, other operating expenses        (XXX)
+<span class="sc-subtotal">= Operating Income (EBIT)   → Op. Margin = EBIT / Revenue   $XXX</span>
+<span class="sc-section">Pre-Tax Income</span>  + Interest / investment income                     XXX
+  − Interest expense                                  (XXX)
+  +/− Non-operating gains / losses                    ±XX
+<span class="sc-subtotal">= Pre-Tax Income (EBT)                             $XXX</span>
+<span class="sc-section">Bottom Line</span>  − Income Tax Expense                               (XXX)
+  <span class="sc-total">= Net Income                                       $XXX</span>
+  − Preferred Dividends / ÷ Shares = EPS            $X.XX
+</div>
+<div class="callout note"><strong>EBITDA = EBIT + D&amp;A.</strong> Non-GAAP measure used as a cash generation proxy. Does NOT equal CFO — it ignores working capital changes, taxes paid in cash, and capex.</div>
+<div class="callout warn"><strong>Accrual vs. Cash:</strong> The IS uses accrual accounting — revenue earned ≠ cash received, expense incurred ≠ cash paid. The gap between NI and CFO is what the Cash Flow Statement reconciles.</div>
 </div>
 
 <div class="subsection">
@@ -1564,6 +1626,54 @@ Implication: No fixed target capital structure; structure follows financing need
 <!-- BALANCE SHEET -->
 <div class="section" id="fsa-s3">
 <div class="section-title">Analysing Balance Sheets</div>
+
+<div class="subsection">
+<div class="sub-title">Balance Sheet Structure Overview <span class="badge">Critical</span></div>
+<div class="bs-eq">Assets = Liabilities + Shareholders' Equity</div>
+<table>
+<tr>
+  <th style="width:50%">ASSETS — What the company owns or controls</th>
+  <th style="width:50%">LIABILITIES + EQUITY — How assets are funded</th>
+</tr>
+<tr>
+  <td>
+    <strong>Current Assets</strong> <em style="color:var(--subtle);font-size:11px;">(convert to cash &lt; 1 yr)</em><br>
+    Cash &amp; cash equivalents<br>
+    Short-term investments / marketable securities<br>
+    Accounts receivable (net of allowance)<br>
+    Inventory<br>
+    Prepaid expenses &amp; other current assets<br><br>
+    <strong>Non-Current Assets</strong> <em style="color:var(--subtle);font-size:11px;">(benefit &gt; 1 yr)</em><br>
+    PP&amp;E (net of accumulated depreciation)<br>
+    Right-of-use assets (leases)<br>
+    Intangible assets (patents, trademarks)<br>
+    Goodwill<br>
+    Long-term investments / equity-method investments<br>
+    Deferred tax assets (DTA)
+  </td>
+  <td>
+    <strong>Current Liabilities</strong> <em style="color:var(--subtle);font-size:11px;">(due &lt; 1 yr)</em><br>
+    Accounts payable<br>
+    Accrued liabilities (wages, interest, taxes)<br>
+    Short-term debt / current portion of LT debt<br>
+    Unearned (deferred) revenue<br><br>
+    <strong>Non-Current Liabilities</strong> <em style="color:var(--subtle);font-size:11px;">(due &gt; 1 yr)</em><br>
+    Long-term debt / bonds payable<br>
+    Deferred tax liabilities (DTL)<br>
+    Finance lease obligations<br>
+    Pension / post-retirement obligations<br><br>
+    <strong>Shareholders' Equity</strong><br>
+    Common stock + Additional paid-in capital (APIC)<br>
+    Retained earnings<br>
+    Accumulated OCI (AOCI)<br>
+    Treasury stock <em style="color:#dc2626;">(contra — reduces equity)</em>
+  </td>
+</tr>
+</table>
+<div class="callout tip"><strong>Retained Earnings bridge (IS → BS):</strong> Ending RE = Beginning RE + Net Income − Dividends Declared. Every dollar of NI not paid as a dividend accumulates here. This is the primary link between the income statement and the balance sheet.</div>
+<div class="callout note"><strong>Working Capital = Current Assets − Current Liabilities.</strong> Positive = short-term liquidity buffer. Negative can be fine (e.g. supermarkets) or a red flag — context matters.</div>
+</div>
+
 <div class="two-col">
 <div>
 <div class="sub-title">Key Non-Current Assets</div>
@@ -1587,6 +1697,32 @@ Implication: No fixed target capital structure; structure follows financing need
 <!-- CASH FLOW STATEMENT -->
 <div class="section" id="fsa-s4">
 <div class="section-title">Analysing Statements of Cash Flows</div>
+
+<div class="subsection">
+<div class="sub-title">Cash Flow Statement Structure</div>
+<p>Unlike the income statement (accrual basis), the cash flow statement tracks actual cash movements. Its ending cash balance must equal the Cash line on the balance sheet — the hard-wired CFS → BS link.</p>
+<div class="stmt-cascade">
+<span class="sc-section">Operating Activities (CFO) — core business cash generation</span>  Net Income (indirect method starting point)                $X,XXX
+  + Depreciation &amp; amortisation (non-cash add-back)               XXX
+  − Unrealised gains / + unrealised losses                        ±XXX
+  − Increase in accounts receivable   ← earned but not collected (XXX)
+  − Increase in inventory             ← cash tied up in stock    (XXX)
+  + Increase in accounts payable      ← owe but haven't paid yet  XXX
+  + Increase in deferred tax liabilities                           XX
+<span class="sc-subtotal">= Cash Flow from Operations (CFO)                          $X,XXX</span>
+<span class="sc-section">Investing Activities (CFI) — long-term asset transactions</span>  − Capital expenditures / CapEx (purchase of PP&amp;E)           (X,XXX)
+  + Proceeds from sale of PP&amp;E or investments                    XXX
+  − Acquisitions (net of cash acquired)                        (X,XXX)
+<span class="sc-subtotal">= Cash Flow from Investing (CFI)                          $(X,XXX)</span>
+<span class="sc-section">Financing Activities (CFF) — capital structure transactions</span>  + Proceeds from long-term debt / equity issuance              X,XXX
+  − Debt repaid + share repurchases + dividends paid           (X,XXX)
+<span class="sc-subtotal">= Cash Flow from Financing (CFF)                          $(X,XXX)</span>
+<span class="sc-section">Net Change in Cash → links to Balance Sheet</span>  Net Change in Cash = CFO + CFI + CFF                         $±XXX
+  + Beginning Cash (from prior balance sheet)                   X,XXX
+  <span class="sc-total">= Ending Cash = Cash &amp; equivalents on Balance Sheet         $X,XXX</span>
+</div>
+<div class="callout exam"><strong>CFO pattern signals:</strong> (+CFO, −CFI, −CFF) = mature healthy firm. (−CFO, −CFI, +CFF) = growth / startup burning cash. (−CFO, +CFI, +CFF) = distressed — selling assets to fund losses. Consistently NI &gt; CFO = earnings quality warning.</div>
+</div>
 
 <div class="two-col">
 <div>
