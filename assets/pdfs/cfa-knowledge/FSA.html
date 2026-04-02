@@ -114,6 +114,18 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
 .compare-box h5 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
 .compare-box.left h5 { color: var(--blue-dark); }
 .compare-box.right h5 { color: var(--green-dark); }
+/* ── STATEMENT STRUCTURE VISUALS ── */
+.bs-equation { background: var(--navy); color: #fff; text-align: center; padding: 13px 20px; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 15.5px; margin: 16px 0; letter-spacing: 0.3px; }
+.bs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+.bs-side { background: #f8fafc; border: 1.5px solid var(--gray2); border-radius: 10px; padding: 16px 20px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; line-height: 1.75; }
+.bs-head { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #fff; background: var(--navy); padding: 6px 10px; border-radius: 6px; margin-bottom: 12px; }
+.bs-category { font-weight: 700; color: var(--blue-dark); margin: 10px 0 2px; font-size: 12.5px; }
+.bs-item { color: #475569; padding-left: 16px; font-size: 12.5px; line-height: 1.7; }
+.is-cascade { background: #f8fafc; border: 1.5px solid var(--gray2); border-radius: 10px; padding: 18px 22px; margin: 18px 0; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 2; overflow-x: auto; }
+.is-cascade .is-section { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.3px; color: var(--gold); display: block; margin-top: 14px; margin-bottom: 2px; }
+.is-cascade .is-subtotal { font-weight: 700; color: var(--navy); border-top: 1.5px solid var(--gray2); padding-top: 2px; display: block; }
+.is-cascade .is-total { font-weight: 700; color: #fff; background: var(--navy); padding: 3px 8px; border-radius: 4px; display: block; margin-top: 6px; }
+.connect-table thead tr { background: #0e6ba8; }
 /* ── RESPONSIVE ── */
 .mobile-bar {
   display: none;
@@ -150,6 +162,7 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
   .mobile-overlay.open { display: block; }
   #main { margin-left: 0; width: 100%; padding: 24px 16px 80px; }
   .compare-grid { grid-template-columns: 1fr; }
+  .bs-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 26px; }
   .hero .subtitle { font-size: 16px; }
 }
@@ -241,6 +254,56 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
 </tbody>
 </table></div>
 
+<h3>The Three Financial Statements — Structure &amp; Interconnections</h3>
+<p>Every public company produces three core financial statements. They're not independent — they form a closed loop where each feeds into the others.</p>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Statement</th><th>What It Answers</th><th>Time Coverage</th><th>Key Equation</th></tr></thead>
+<tbody>
+  <tr><td><strong>Income Statement</strong></td><td>How much did the company earn?</td><td>Over a period (e.g., fiscal year)</td><td>Revenue − Expenses = Net Income</td></tr>
+  <tr><td><strong>Balance Sheet</strong></td><td>What does the company own and owe at this moment?</td><td>At a point in time (snapshot)</td><td>Assets = Liabilities + Equity</td></tr>
+  <tr><td><strong>Cash Flow Statement</strong></td><td>Where did cash come from and go?</td><td>Over a period (same as IS)</td><td>ΔCash = CFO + CFI + CFF</td></tr>
+</tbody>
+</table></div>
+
+<div class="big-picture">
+<div class="bp-label">Big Picture — The Three-Statement Loop</div>
+<p>The three statements form a closed circuit. <strong>Net Income</strong> from the Income Statement flows into <strong>Retained Earnings</strong> on the Balance Sheet (IS → BS). The <strong>Cash Flow Statement</strong> starts with Net Income and reconciles it to actual cash collected (IS → CFS). The <strong>Ending Cash</strong> on the Cash Flow Statement equals the Cash line on the Balance Sheet (CFS → BS). Changes in Balance Sheet accounts — receivables, inventory, payables — explain CFO adjustments (BS → CFS).</p>
+</div>
+
+<h4>Four Bridges Between the Statements</h4>
+<div class="table-wrap connect-table"><table>
+<thead><tr><th>Bridge</th><th>From</th><th>To</th><th>What Connects</th></tr></thead>
+<tbody>
+  <tr>
+    <td><strong>IS → BS</strong></td>
+    <td>Income Statement</td>
+    <td>Balance Sheet</td>
+    <td>Net Income increases Retained Earnings: <em>Ending RE = Beginning RE + NI − Dividends</em>. D&amp;A expense reduces the carrying value of PP&amp;E and intangibles.</td>
+  </tr>
+  <tr>
+    <td><strong>IS → CFS</strong></td>
+    <td>Income Statement</td>
+    <td>Cash Flow Statement</td>
+    <td>Net Income is the starting point for CFO (indirect method). Non-cash items (D&amp;A, unrealized gains) are reversed; accrual items are converted to cash.</td>
+  </tr>
+  <tr>
+    <td><strong>CFS → BS</strong></td>
+    <td>Cash Flow Statement</td>
+    <td>Balance Sheet</td>
+    <td>Ending cash on CFS = Cash &amp; equivalents on Balance Sheet. CapEx (CFI outflow) increases PP&amp;E. Debt issued (CFF inflow) increases long-term liabilities.</td>
+  </tr>
+  <tr>
+    <td><strong>BS → CFS</strong></td>
+    <td>Balance Sheet</td>
+    <td>Cash Flow Statement</td>
+    <td>Period-over-period changes in working capital accounts drive CFO adjustments: ↑AR subtracts from CFO (earned but not collected); ↑AP adds to CFO (incurred but not paid).</td>
+  </tr>
+</tbody>
+</table></div>
+
+<div class="intuition">A company earns $100 profit but collects only $70 in cash — the rest is in receivables. Income Statement shows $100 Net Income. Balance Sheet shows $30 in AR (an asset increase). Cash Flow Statement reconciles: $100 NI − $30 (increase in AR) = <strong>$70 CFO</strong>. That $70 is also the change in the Cash line on the Balance Sheet.</div>
+
 <div class="exam">
   <div class="exam-header">🎯 Likely Exam Question</div>
   <div class="exam-q">Which step of the FSA framework involves calculating ratios, creating common-size statements, and making adjustments to financial data?</div>
@@ -262,6 +325,35 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
   <h2>Analyzing Income Statements</h2>
   <div class="one-liner">Revenue recognition, expense matching, EPS — the most tested FSA reading.</div>
 </div>
+
+<h3>Income Statement Structure</h3>
+<p>The income statement flows top-down as a waterfall — each layer subtracts costs until you reach net income. Understanding the structure helps you immediately identify where profitability is being eroded.</p>
+
+<div class="is-cascade">
+<span class="is-section">Top Line</span>  Revenue (Net Sales)                                    $X,XXX
+  − Returns, discounts, and allowances                      (XXX)
+<span class="is-subtotal">= Net Revenue                                          $X,XXX</span>
+<span class="is-section">Gross Profit</span>  − Cost of Goods Sold (COGS)                            (X,XXX)
+<span class="is-subtotal">= Gross Profit                                          $X,XXX</span>  <em>→ Gross Profit Margin = Gross Profit / Revenue</em>
+<span class="is-section">Operating Income</span>  − Selling, General &amp; Administrative (SG&amp;A)             (XXX)
+  − Research &amp; Development (R&amp;D)                          (XXX)
+  − Depreciation &amp; Amortization (D&amp;A)                    (XXX)
+  − Other operating expenses / impairments                  (XX)
+<span class="is-subtotal">= Operating Income (EBIT)                               $X,XXX</span>  <em>→ Operating Profit Margin = EBIT / Revenue</em>
+<span class="is-section">Pre-Tax Income</span>  + Interest &amp; investment income                            XXX
+  − Interest expense                                        (XXX)
+  +/− Non-operating gains / losses                          ±XX
+<span class="is-subtotal">= Pre-Tax Income (EBT)                                  $X,XXX</span>
+<span class="is-section">Bottom Line</span>  − Income Tax Expense                                    (XXX)
+<span class="is-total">= Net Income                                            $X,XXX</span>  − Preferred Dividends                                     (XX)
+  = Earnings available to common shareholders              $X,XXX
+  ÷ Weighted avg. shares outstanding                       X,XXX
+  = Earnings Per Share (EPS)                               $X.XX
+</div>
+
+<div class="key-rule">EBITDA = EBIT + D&amp;A. It's not a GAAP measure but is widely used as a proxy for operating cash generation. Don't confuse EBITDA with actual cash flow — it ignores working capital changes, taxes, and capital expenditures.</div>
+
+<div class="intuition">The income statement uses the <strong>accrual basis</strong> — revenue is recorded when earned, expenses when incurred, regardless of when cash moves. This is why net income often differs significantly from CFO. That gap is the whole reason the Cash Flow Statement exists.</div>
 
 <h3>Revenue Recognition — The Five-Step Model <span class="tag tag-critical">Critical</span></h3>
 <p>Under converged IFRS/U.S. GAAP standards, revenue is recognized using a five-step process:</p>
@@ -344,6 +436,53 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
   <div class="one-liner">Assets = Liabilities + Equity — but the devil is in the measurement.</div>
 </div>
 
+<h3>Balance Sheet Structure Overview <span class="tag tag-critical">Critical</span></h3>
+<p>The balance sheet is a snapshot at a single point in time. It's organized by liquidity — most liquid assets and nearest-due liabilities come first. The fundamental identity must always hold:</p>
+
+<div class="bs-equation">Assets = Liabilities + Shareholders' Equity</div>
+
+<div class="bs-grid">
+  <div class="bs-side">
+    <div class="bs-head">ASSETS — What the company owns or controls</div>
+    <div class="bs-category">Current Assets <em style="font-weight:400;color:#64748b;font-size:12px;">(convert to cash within 1 year)</em></div>
+    <div class="bs-item">Cash &amp; cash equivalents</div>
+    <div class="bs-item">Short-term investments / marketable securities</div>
+    <div class="bs-item">Accounts receivable (net of allowance)</div>
+    <div class="bs-item">Inventory</div>
+    <div class="bs-item">Prepaid expenses &amp; other current assets</div>
+    <div class="bs-category">Non-Current Assets <em style="font-weight:400;color:#64748b;font-size:12px;">(benefit beyond 1 year)</em></div>
+    <div class="bs-item">PP&amp;E (net of accumulated depreciation)</div>
+    <div class="bs-item">Right-of-use assets (finance &amp; operating leases)</div>
+    <div class="bs-item">Intangible assets (patents, trademarks, licenses)</div>
+    <div class="bs-item">Goodwill</div>
+    <div class="bs-item">Long-term investments / equity method investments</div>
+    <div class="bs-item">Deferred tax assets (DTA)</div>
+  </div>
+  <div class="bs-side">
+    <div class="bs-head">LIABILITIES + EQUITY — How the assets are funded</div>
+    <div class="bs-category">Current Liabilities <em style="font-weight:400;color:#64748b;font-size:12px;">(due within 1 year)</em></div>
+    <div class="bs-item">Accounts payable</div>
+    <div class="bs-item">Accrued liabilities (wages, interest, taxes)</div>
+    <div class="bs-item">Short-term debt / commercial paper</div>
+    <div class="bs-item">Current portion of long-term debt</div>
+    <div class="bs-item">Unearned (deferred) revenue</div>
+    <div class="bs-category">Non-Current Liabilities <em style="font-weight:400;color:#64748b;font-size:12px;">(due beyond 1 year)</em></div>
+    <div class="bs-item">Long-term debt / bonds payable</div>
+    <div class="bs-item">Deferred tax liabilities (DTL)</div>
+    <div class="bs-item">Lease obligations (finance leases)</div>
+    <div class="bs-item">Pension / post-retirement obligations</div>
+    <div class="bs-category">Shareholders' Equity</div>
+    <div class="bs-item">Common stock + Additional paid-in capital (APIC)</div>
+    <div class="bs-item">Retained earnings</div>
+    <div class="bs-item">Accumulated other comprehensive income (AOCI)</div>
+    <div class="bs-item">Treasury stock <em style="color:#dc2626;">(contra-equity — reduces total equity)</em></div>
+  </div>
+</div>
+
+<div class="intuition">Retained Earnings bridges the balance sheet and income statement: <strong>Ending RE = Beginning RE + Net Income − Dividends Declared</strong>. Every dollar of net income that isn't paid as a dividend accumulates here. This is why a company can grow its balance sheet without issuing new stock — profits compound inside the equity section.</div>
+
+<div class="key-rule">Working capital = Current Assets − Current Liabilities. It measures short-term liquidity cushion. A negative working capital means current liabilities exceed current assets — which is fine for some businesses (supermarkets get paid before paying suppliers) but a red flag for others.</div>
+
 <h3>Intangible Assets</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>Type</th><th>Treatment</th><th>Key Rule</th></tr></thead>
@@ -398,6 +537,39 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
   <tr><td><strong>CFF</strong> (Financing)</td><td>Cash from/to capital providers</td><td>Debt issued/repaid, equity issued/repurchased, dividends paid</td></tr>
 </tbody>
 </table></div>
+
+<h3>Cash Flow Statement Structure</h3>
+<p>Unlike the income statement (accrual basis), the cash flow statement tells you what actually happened to cash during the period. Its ending balance must equal the cash line on the balance sheet.</p>
+
+<div class="is-cascade">
+<span class="is-section">Operating Activities (CFO) — Core business cash generation</span>  Net Income (indirect method starting point)            $X,XXX
+  + Depreciation &amp; amortization (non-cash add-back)           XXX
+  + Amortization of deferred revenue / intangibles             XX
+  − Unrealized gains on investments (non-cash)                (XX)
+  + Unrealized losses on investments (non-cash)                XX
+  − Increase in accounts receivable                          (XXX)  &nbsp;&nbsp;<em>← earned but not collected</em>
+  − Increase in inventory                                    (XXX)  &nbsp;&nbsp;<em>← cash tied up in stock</em>
+  + Increase in accounts payable                              XXX   &nbsp;&nbsp;<em>← owe but haven't paid yet</em>
+  + Increase in deferred tax liabilities                       XX
+<span class="is-subtotal">= Cash Flow from Operations (CFO)                      $X,XXX</span>
+<span class="is-section">Investing Activities (CFI) — Long-term asset transactions</span>  − Capital expenditures (CapEx: purchase of PP&amp;E)        (X,XXX)
+  + Proceeds from sale of PP&amp;E or investments                 XXX
+  − Acquisitions (net of cash acquired)                    (X,XXX)
+  + Proceeds from sale of business segments                    XXX
+  +/− Net purchases/maturities of investments               ±XXX
+<span class="is-subtotal">= Cash Flow from Investing (CFI)                      $(X,XXX)</span>
+<span class="is-section">Financing Activities (CFF) — Capital structure transactions</span>  + Proceeds from long-term debt issuance                   X,XXX
+  − Repayment of long-term debt / bonds                    (X,XXX)
+  + Proceeds from equity issuance (new shares)               XXX
+  − Share repurchases / buybacks                            (XXX)
+  − Dividends paid to shareholders                          (XXX)
+<span class="is-subtotal">= Cash Flow from Financing (CFF)                      $(X,XXX)</span>
+<span class="is-section">Net Change in Cash</span><span class="is-total">  Net Change in Cash = CFO + CFI + CFF                    $±XXX</span>  Beginning Cash &amp; equivalents (from prior balance sheet)   X,XXX
+  + Net Change in Cash                                         ±XXX
+<span class="is-subtotal">= Ending Cash &amp; equivalents (→ Balance Sheet asset)      $X,XXX</span>
+</div>
+
+<div class="intuition">The ending cash balance on the cash flow statement must equal the "Cash &amp; cash equivalents" line on the balance sheet. If they don't match, something is wrong. This is the most direct hard-wired link between the two statements.</div>
 
 <div class="key-rule">Under U.S. GAAP: Interest paid = CFO, Dividends paid = CFF, Interest/dividends received = CFO. Under IFRS: Companies have flexibility — interest/dividends paid can be CFO or CFF; interest/dividends received can be CFO or CFI.</div>
 
