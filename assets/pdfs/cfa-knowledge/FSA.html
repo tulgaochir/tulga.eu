@@ -755,6 +755,23 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
 <h3>Inventory Valuation — Lower of Cost or NRV</h3>
 <p>Under IFRS, inventory is reported at the lower of cost or net realizable value (NRV = expected selling price − completion and selling costs). Write-ups are allowed under IFRS (limited to prior write-downs). Under U.S. GAAP, no write-ups are allowed.</p>
 
+<h4>Core Rules by Standard &amp; Method</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Standard / Method</th><th>Inventory Measurement</th></tr></thead>
+<tbody>
+  <tr><td>IFRS (all methods)</td><td>Lower of cost and NRV</td></tr>
+  <tr><td>U.S. GAAP — FIFO or weighted average</td><td>Lower of cost and NRV</td></tr>
+  <tr><td>U.S. GAAP — LIFO or retail inventory method</td><td>Lower of cost or <em>market</em></td></tr>
+</tbody>
+</table></div>
+
+<h4>What "Market" Means Under U.S. GAAP (LIFO / Retail)</h4>
+<p>Market is defined as the <strong>middle value</strong> of three amounts:</p>
+<div class="formula">\[ \text{Market} = \text{median}(\text{Replacement Cost},\ \text{NRV},\ \text{NRV} - \text{Normal Profit Margin}) \]</div>
+<p>Inventory is then carried at:</p>
+<div class="formula">\[ \text{Inventory Value} = \min(\text{Cost},\ \text{Market}) \]</div>
+<div class="key-rule">The ceiling is NRV (prevents overstating inventory above what can be recovered). The floor is NRV − normal profit margin (prevents understating and creating an artificial future profit). Market cannot exceed the ceiling or fall below the floor — replacement cost is used only if it falls within that range.</div>
+
 <h3>LIFO Liquidation</h3>
 <div class="intuition">A LIFO liquidation occurs when a LIFO firm sells more inventory than it buys — digging into old, cheap layers. This artificially inflates COGS savings and boosts profit margins unsustainably. The LIFO reserve will shrink, which is your red flag in the footnotes.</div>
 
