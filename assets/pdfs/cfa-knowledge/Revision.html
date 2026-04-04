@@ -298,17 +298,24 @@
   .mobile-bar {
     display: none;
     align-items: center;
-    padding: 14px 18px;
+    padding: 0 18px;
+    height: 52px;
     background: var(--navy);
-    position: sticky; top: 0; z-index: 99;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 99;
     gap: 14px;
     border-bottom: 1px solid rgba(255,255,255,.1);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
   }
   .hamburger {
     background: none; border: none;
-    color: rgba(255,255,255,.85); font-size: 24px;
+    color: rgba(255,255,255,.85); font-size: 26px;
     cursor: pointer; line-height: 1; padding: 0;
     flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   .mobile-bar-title {
     color: #fff; font-size: 14px; font-weight: 700;
@@ -316,22 +323,40 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   .mobile-overlay {
-    display: none; position: fixed;
-    inset: 0; background: rgba(0,0,0,.45); z-index: 150;
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 150;
+    -webkit-tap-highlight-color: transparent;
   }
   @media (max-width: 1024px) {
-    .mobile-bar { display: flex; }
+    .mobile-bar { display: -webkit-flex; display: flex; }
     #sidebar {
+      -webkit-transform: translateX(-100%);
       transform: translateX(-100%);
+      -webkit-transition: -webkit-transform .28s ease;
       transition: transform .28s ease;
       z-index: 200;
+      height: 100%;
+      height: -webkit-fill-available;
     }
-    #sidebar.open { transform: translateX(0); }
+    #sidebar.open {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
     .mobile-overlay.open { display: block; }
-    #main { margin-left: 0; width: 100%; padding: 24px 16px 80px; max-width: 100%; }
-    .two-col { grid-template-columns: 1fr; }
+    #main {
+      margin-left: 0 !important;
+      width: 100%;
+      padding: 72px 16px 80px !important;
+      max-width: 100% !important;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
     table { font-size: 13px; }
     .formula { font-size: 14px; padding: 10px 14px; }
+    .section { padding: 18px 0; }
   }
   @media print {
     #sidebar { display: none; }
@@ -362,11 +387,11 @@ MathJax = {
 </head>
 <body>
 
-<div class="mobile-bar">
-  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open menu">&#9776;</button>
-  <span class="mobile-bar-title">CFA Level I — Revision Guide</span>
+<div class="mobile-bar" id="mobile-bar">
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu">&#9776;</button>
+  <span class="mobile-bar-title">CFA Level I — Revision</span>
 </div>
-<div class="mobile-overlay" id="overlay" onclick="toggleSidebar()"></div>
+<div class="mobile-overlay" id="overlay"></div>
 
 <nav id="sidebar">
   <div class="brand">
@@ -3981,16 +4006,31 @@ const obs = new IntersectionObserver(entries => {
 sidebarSections.forEach(s => obs.observe(s));
 </script>
 <script>
-function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('open');
-}
-document.querySelectorAll('#sidebar a').forEach(function(a){
-  a.addEventListener('click',function(){
-    document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('overlay').classList.remove('open');
+(function(){
+  var sidebar  = document.getElementById('sidebar');
+  var overlay  = document.getElementById('overlay');
+  var btn      = document.getElementById('hamburger-btn');
+
+  function openSidebar(){
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden'; /* prevent body scroll while nav open */
+  }
+  function closeSidebar(){
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function toggleSidebar(){ sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); }
+
+  if(btn)     btn.addEventListener('click', toggleSidebar);
+  if(overlay) overlay.addEventListener('click', closeSidebar);
+
+  /* close on any sidebar link tap */
+  document.querySelectorAll('#sidebar a').forEach(function(a){
+    a.addEventListener('click', closeSidebar);
   });
-});
+})();
 </script>
 
 </body>
