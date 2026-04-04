@@ -1960,6 +1960,49 @@ COGS $300k, Inventory ↑ $10k, AP ↑ $5k → Purchases = $310k; Cash paid = $3
 </div>
 </div>
 
+<!-- PENSION ACCOUNTING -->
+<div class="section" id="fsa-s7b">
+<div class="section-title">Pension Accounting (Defined Benefit Plans)</div>
+
+<div class="two-col">
+<div>
+<div class="subsection">
+<div class="sub-title">Net Pension Asset / Liability <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Net Pension Position</span>\[ \text{Net} = \text{Fair Value of Plan Assets} - PBO \]</div>
+<table>
+<tr><th>Result</th><th>Balance Sheet Treatment</th></tr>
+<tr><td>Plan assets &gt; PBO</td><td>Net pension <strong>asset</strong> (non-current asset)</td></tr>
+<tr><td>PBO &gt; Plan assets</td><td>Net pension <strong>liability</strong> (non-current liability)</td></tr>
+</table>
+<div class="callout note"><strong>PBO (Projected Benefit Obligation):</strong> Present value of all future benefits employees have earned to date, assuming future salary increases. The most comprehensive and most commonly used obligation measure.</div>
+</div>
+
+<div class="subsection">
+<div class="sub-title">Three Components of Pension Cost</div>
+<table>
+<tr><th>Component</th><th>Description</th><th>Cash Flow Statement</th></tr>
+<tr><td><strong>Service cost</strong></td><td>Present value of benefits earned by employees this period</td><td>CFO</td></tr>
+<tr><td><strong>Interest cost</strong></td><td>Unwinding of discount on PBO (PBO × discount rate)</td><td>CFO (IFRS: may be CFO or CFF)</td></tr>
+<tr><td><strong>Expected return on plan assets</strong></td><td>Expected earnings on assets held in the fund (reduces pension cost)</td><td>CFO</td></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="subsection">
+<div class="sub-title">IFRS vs US GAAP — Pension</div>
+<table>
+<tr><th></th><th>IFRS</th><th>US GAAP</th></tr>
+<tr><td>Actuarial gains/losses</td><td>Through OCI (never recycled to P&amp;L)</td><td>Through OCI, then amortised to P&amp;L via corridor method</td></tr>
+<tr><td>Past service cost</td><td>Recognised immediately in P&amp;L</td><td>Amortised over service period</td></tr>
+<tr><td>Balance sheet</td><td>Full fair-value recognition of net pension position</td><td>Full fair-value recognition (post-SFAS 158)</td></tr>
+</table>
+<div class="callout warn"><strong>Analyst adjustment:</strong> If a company has an underfunded DB plan, add the unfunded obligation back to debt when assessing leverage. Pension liabilities are "hidden debt" — economically similar to debt but often excluded from headline debt metrics.</div>
+</div>
+</div>
+</div>
+</div>
+
 <!-- FINANCIAL ANALYSIS TECHNIQUES -->
 <div class="section" id="fsa-s8">
 <div class="section-title">Financial Analysis Techniques &amp; Ratios</div>
@@ -2630,6 +2673,37 @@ COGS $300k, Inventory ↑ $10k, AP ↑ $5k → Purchases = $310k; Cash paid = $3
 </div>
 </div>
 </div>
+
+<div class="subsection" style="margin-top:18px;">
+<div class="sub-title">Sovereign Credit Analysis — Willingness vs Ability to Pay <span class="badge">Critical</span></div>
+<p>Unlike corporations, governments cannot be forced into bankruptcy. A sovereign may have the economic capacity to repay yet choose not to (political risk). <strong>Willingness to pay is therefore as important as ability to pay</strong> — especially for emerging market issuers.</p>
+<table>
+<thead>
+<tr><th>Factor</th><th>Key Question</th><th>Why It Matters</th></tr>
+</thead>
+<tbody>
+<tr><td>Institutional quality</td><td>Rule of law? Anti-corruption? Stability?</td><td>Stable institutions → consistent debt culture → lower default risk</td></tr>
+<tr><td>Fiscal flexibility</td><td>Can they adjust taxes and spending?</td><td>Countries able to raise taxes in a crisis can always service debt</td></tr>
+<tr><td>Monetary effectiveness</td><td>Is the central bank independent?</td><td>Independent CB prevents money printing → lower inflation risk</td></tr>
+<tr><td>Economic diversification</td><td>Is GDP concentrated in one export commodity?</td><td>Diversified economy has more stable tax revenue base</td></tr>
+<tr><td>External position</td><td>Reserve currency? Current account surplus?</td><td>Reserve currency status → cheapest possible borrowing cost</td></tr>
+</tbody>
+</table>
+<table style="margin-top:10px;">
+<thead>
+<tr><th>Quantitative Metric</th><th>Direction</th></tr>
+</thead>
+<tbody>
+<tr><td>Debt / GDP</td><td>Higher = worse</td></tr>
+<tr><td>Budget deficit / GDP</td><td>Higher = worse (debt growing faster)</td></tr>
+<tr><td>External debt / GDP</td><td>Higher = worse (FX risk — can't print foreign currency)</td></tr>
+<tr><td>FX reserves / short-term debt</td><td>Higher = better (can meet near-term payments)</td></tr>
+<tr><td>Current account balance</td><td>Surplus = better (earns FX)</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
 </div>
 
 <!-- SECURITISATION -->
@@ -2986,12 +3060,44 @@ Synthetic bond = Stock + Put − Call</div>
 
 <div class="subsection">
 <div class="sub-title">High-Water Mark &amp; Clawback</div>
-<p>High-Water Mark (HWM): highest NAV previously used to calculate performance fee. No performance fee until HWM is exceeded → prevents double-charging.</p>
+<p>High-Water Mark (HWM): highest NAV previously used to calculate performance fee. No performance fee until HWM is exceeded → prevents double-charging. A <strong>clawback provision</strong> allows LPs to recover carry already paid if subsequent losses reverse earlier gains — critical protection in deal-by-deal waterfalls.</p>
 
+</div>
+
+<div class="subsection">
+<div class="sub-title">Waterfall — American vs European <span class="badge">Critical</span></div>
+<table>
+<thead>
+<tr><th>Structure</th><th>Also Called</th><th>How It Works</th><th>Who Benefits?</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Deal-by-deal</strong></td><td>American waterfall</td><td>Performance fee paid on each profitable exit individually — even if other deals lose money</td><td>GP — gets paid early on winners</td></tr>
+<tr><td><strong>Whole-of-fund</strong></td><td>European waterfall</td><td>LPs receive 100% of invested capital + hurdle rate first; GP carry paid only after</td><td>LP — all capital returned before GP earns carry</td></tr>
+</tbody>
+</table>
+<div class="callout note"><strong>Worked example:</strong> Fund invests $100M each in Deal A (+$30M gain) and Deal B (−$20M loss). Net gain = $10M. Carry = 20%.<br>
+• <strong>American:</strong> Carry on A = 20% × $30M = $6M. No carry on B. LP receives $204M (2% net return).<br>
+• <strong>European:</strong> Carry = 20% × $10M = $2M. LP receives $208M (4% net return).<br>
+• <strong>With clawback (American):</strong> LP claws back $4M → same result as European.</div>
 </div>
 </div>
 
 <div>
+<div class="subsection">
+<div class="sub-title">J-Curve Effect <span class="badge">Critical</span></div>
+<table>
+<thead>
+<tr><th>Phase</th><th>What Happens</th><th>Returns</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>1. Capital Commitment</strong></td><td>GP makes capital calls; investments identified. Management fees charged immediately.</td><td>Negative — fees paid, no returns yet</td></tr>
+<tr><td><strong>2. Capital Deployment</strong></td><td>Capital invested; portfolio companies early-stage or being restructured.</td><td>Negative / breakeven</td></tr>
+<tr><td><strong>3. Capital Distribution</strong></td><td>Exits via IPO, trade sale, etc. Capital + profits returned to LPs.</td><td>Strongly positive — the "hockey stick"</td></tr>
+</tbody>
+</table>
+<div class="callout tip"><strong>Intuition:</strong> The J-curve is why alternatives require patience. Positive returns come only in Phase 3. Always compare funds of the same <em>vintage year</em> — a fund in Year 2 and a fund in Year 8 will show wildly different reported returns even if equally well-managed. Use IRR (money-weighted) because the GP controls timing of cash flows.</div>
+</div>
+
 <div class="subsection">
 <div class="sub-title">MOIC &amp; IRR</div>
 <div class="formula"><span class="f-label">Multiple of Invested Capital</span>\[ MOIC = \frac{\text{Realised} + \text{Unrealised Value}}{\text{Total Invested Capital}} \]</div>
