@@ -35,6 +35,9 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html, body {
+    overflow-x: hidden;
+  }
   body {
     font-family: 'Lora', Georgia, serif;
     font-size: 16px;
@@ -349,14 +352,17 @@
     #main {
       margin-left: 0 !important;
       width: 100%;
-      padding: 72px 16px 80px !important;
+      padding: 68px 20px 80px !important;
       max-width: 100% !important;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
     }
     table { font-size: 13px; }
-    .formula { font-size: 14px; padding: 10px 14px; }
-    .section { padding: 18px 0; }
+    .formula { font-size: 14px; padding: 10px 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .callout { font-size: 13px; }
+    .module-header h2 { font-size: 17px; }
+    .section-title { font-size: 12px; }
+    .sub-title { font-size: 14px; }
   }
   @media print {
     #sidebar { display: none; }
@@ -3982,6 +3988,21 @@ Synthetic bond = Stock + Put − Call</div>
 
 </main>
 
+<script>
+/* Wrap bare tables in a scrollable div on mobile so wide tables don't break layout */
+(function(){
+  if (window.innerWidth <= 1024) {
+    document.querySelectorAll('table').forEach(function(t){
+      if (t.parentElement && t.parentElement.style.overflowX !== 'auto') {
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border-radius:10px;';
+        t.parentNode.insertBefore(wrap, t);
+        wrap.appendChild(t);
+      }
+    });
+  }
+})();
+</script>
 <script>
 const sidebarSections = document.querySelectorAll('.section[id]');
 const navLinks = document.querySelectorAll('#sidebar a[href^="#"]');
