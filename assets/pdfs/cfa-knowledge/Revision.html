@@ -1053,6 +1053,16 @@ Only SYSTEMATIC risk is rewarded. Unsystematic risk can be diversified away at n
 </div>
 
 <div class="subsection">
+<div class="sub-title">Taylor Rule <span class="badge">Critical</span></div>
+<div class="formula"><span class="f-label">Taylor Rule</span>\[ \text{Policy Rate} = r^* + \pi^* + 0.5(\pi - \pi^*) + 0.5\left(\frac{Y - Y^*}{Y^*}\right) \]</div>
+<p>Where: r* = neutral real rate; π* = inflation target (typically 2%); π = actual inflation; (Y − Y*)/Y* = output gap.</p>
+<div class="callout note"><strong>Worked example:</strong> Neutral rate = 2%, inflation target = 2%, actual inflation = 4%, output gap = 0.<br>
+Policy Rate = 2% + 2% + 0.5(4% − 2%) + 0.5(0) = 4% + 1% = <strong>5%</strong>.<br>
+Inflation is 2pp above target → rate raised by 1pp above neutral. Policy is restrictive.</div>
+<div class="callout warn"><strong>Monetary policy limitations:</strong> Zero lower bound (ZLB) prevents deep cuts; liquidity trap means cuts stop stimulating; 12–18 month transmission lag makes it easy to over-steer; broken credit channel if banks are undercapitalised.</div>
+</div>
+
+<div class="subsection">
 <div class="sub-title">Quantitative Easing (QE)</div>
 <div class="callout note"><strong>Non-conventional monetary policy</strong> used when policy rate hits the zero lower bound. Central bank purchases longer-term assets (government bonds, MBS) to lower long-term yields and stimulate lending/investment. Increases bank reserves. Tapering = reducing asset purchases.</div>
 </div>
@@ -1683,6 +1693,23 @@ Implication: No fixed target capital structure; structure follows financing need
 <li><strong>Goodwill:</strong> Premium paid in acquisition over fair value of net identifiable assets; not amortised (IFRS and US GAAP); tested for impairment annually</li>
 <li><strong>Financial instruments:</strong> Measured at fair value or amortised cost depending on classification</li>
 </ul>
+
+<div class="sub-title" style="margin-top:10px;">Intangible Assets &amp; Goodwill <span class="badge">Critical</span></div>
+<table>
+<tr><th>Type</th><th>Treatment</th><th>Key Rule</th></tr>
+<tr><td>Internally created intangibles</td><td>Expensed as incurred</td><td>IFRS: research expensed; development <em>may</em> be capitalised. US GAAP: both expensed</td></tr>
+<tr><td>Purchased intangibles (finite life)</td><td>Capitalised, then amortised</td><td>Similar to tangible assets</td></tr>
+<tr><td>Purchased intangibles (indefinite life)</td><td>Not amortised; impairment-tested annually</td><td>Includes goodwill</td></tr>
+</table>
+<div class="formula" style="margin-top:8px;"><span class="f-label">Goodwill</span>\[ \text{Goodwill} = \text{Purchase Price} - \text{Fair Value of Identifiable Net Assets} \]</div>
+<div class="callout tip">Goodwill only arises from acquisitions — you cannot create it internally. It represents the premium paid for brand, customer loyalty, and synergies. Under both IFRS and US GAAP, goodwill is <strong>not amortised</strong> but tested for impairment at least annually.</div>
+
+<table style="margin-top:8px;">
+<tr><th>Financial Asset Classification</th><th>Balance Sheet</th><th>Unrealised Gains/Losses</th></tr>
+<tr><td>Held-to-maturity (debt only)</td><td>Amortised cost</td><td>Not recognised</td></tr>
+<tr><td>Available-for-sale / FVOCI</td><td>Fair value</td><td>OCI (bypasses P&amp;L)</td></tr>
+<tr><td>Trading / FVPL</td><td>Fair value</td><td>Income statement</td></tr>
+</table>
 </div>
 <div>
 <div class="sub-title">Key Non-Current Liabilities</div>
@@ -2130,6 +2157,17 @@ COGS $300k, Inventory ↑ $10k, AP ↑ $5k → Purchases = $310k; Cash paid = $3
 <div class="formula"><span class="f-label">Max Initial Leverage</span>\[ = \frac{1}{\text{Initial Margin }\%} \]</div>
 <p>Margin call triggered when equity falls below maintenance margin.</p>
 
+</div>
+
+<div class="subsection">
+<div class="sub-title">Short Selling <span class="badge">Critical</span></div>
+<p>Borrow shares → sell at current price → hope price falls → buy back (cover) → return shares to lender. Maximum gain = short price (stock goes to zero). Maximum loss = unlimited (price can rise without bound).</p>
+<div class="formula"><span class="f-label">Short Selling Profit</span>\[ \text{Profit} = P_{\text{short}} - P_{\text{cover}} - \text{Dividends Paid} - \text{Borrowing Costs} \]</div>
+<div class="formula"><span class="f-label">Margin Call Price (Short Position)</span>\[ P_{\text{call}} = P_{\text{short}} \times \frac{1 + \text{Initial Margin \%}}{1 + \text{Maintenance Margin \%}} \]</div>
+<div class="callout note"><strong>Worked example:</strong> Short 100 shares at $80, initial margin 50%, maintenance margin 30%.<br>
+Margin call price = $80 × (1 + 0.50) / (1 + 0.30) = $80 × 1.1538 = <strong>$92.31</strong><br>
+The price RISES above the short price to trigger a call — the short is losing money as price climbs.</div>
+<div class="callout warn"><strong>Key trap:</strong> Short sellers must pay dividends declared on borrowed shares to the lender. A $2 dividend reduces short P&amp;L by $2/share.</div>
 </div>
 
 <div class="subsection">
