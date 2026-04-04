@@ -295,9 +295,48 @@
     background: var(--navy); color: #fff; margin-right: 4px;
   }
   /* ── MOBILE ───────────────────────────────── */
-  @media (max-width: 900px) {
+  .mobile-bar {
+    display: none;
+    align-items: center;
+    padding: 14px 18px;
+    background: var(--navy);
+    position: sticky; top: 0; z-index: 99;
+    gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .hamburger {
+    background: none; border: none;
+    color: rgba(255,255,255,.85); font-size: 24px;
+    cursor: pointer; line-height: 1; padding: 0;
+    flex-shrink: 0;
+  }
+  .mobile-bar-title {
+    color: #fff; font-size: 14px; font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mobile-overlay {
+    display: none; position: fixed;
+    inset: 0; background: rgba(0,0,0,.45); z-index: 150;
+  }
+  @media (max-width: 1024px) {
+    .mobile-bar { display: flex; }
+    #sidebar {
+      transform: translateX(-100%);
+      transition: transform .28s ease;
+      z-index: 200;
+    }
+    #sidebar.open { transform: translateX(0); }
+    .mobile-overlay.open { display: block; }
+    #main { margin-left: 0; width: 100%; padding: 24px 16px 80px; max-width: 100%; }
+    .two-col { grid-template-columns: 1fr; }
+    table { font-size: 13px; }
+    .formula { font-size: 14px; padding: 10px 14px; }
+  }
+  @media print {
     #sidebar { display: none; }
-    #main { margin-left: 0; padding: 28px 20px 60px; max-width: 100%; }
+    #main { margin-left: 0; }
+    .mobile-bar { display: none; }
   }
 </style>
 
@@ -322,6 +361,13 @@ MathJax = {
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async id="MathJax-script"></script>
 </head>
 <body>
+
+<div class="mobile-bar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Open menu">&#9776;</button>
+  <span class="mobile-bar-title">CFA Level I — Revision Guide</span>
+</div>
+<div class="mobile-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
 <nav id="sidebar">
   <div class="brand">
     <div class="brand-title">CFA Level I</div>
@@ -3933,6 +3979,18 @@ const obs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.08, rootMargin: '-8% 0px -82% 0px' });
 sidebarSections.forEach(s => obs.observe(s));
+</script>
+<script>
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+document.querySelectorAll('#sidebar a').forEach(function(a){
+  a.addEventListener('click',function(){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  });
+});
 </script>
 
 </body>
