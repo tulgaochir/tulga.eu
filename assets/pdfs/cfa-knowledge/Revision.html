@@ -2248,15 +2248,31 @@ The price RISES above the short price to trigger a call — the short is losing 
 </div>
 
 <div class="subsection">
-<div class="sub-title">Order Types</div>
+<div class="sub-title">Order Types <span class="badge">Critical</span></div>
+<p>All orders are defined relative to <strong>P = current market price</strong>. Core trade-off: <em>Limit orders</em> guarantee price but not execution; <em>Stop orders</em> guarantee activation but not the execution price.</p>
+
 <table>
-<tr><th>Type</th><th>Description</th><th>Price Certainty</th></tr>
-<tr><td>Market order</td><td>Fill immediately at market price</td><td>None</td></tr>
-<tr><td>Limit order</td><td>Buy ≤ limit or sell ≥ limit</td><td>Certain</td></tr>
-<tr><td>All-or-nothing</td><td>Cancel if not fully filled</td><td>N/A</td></tr>
-<tr><td>Hidden</td><td>Visible to brokers, not traders</td><td>N/A</td></tr>
-<tr><td>Iceberg</td><td>Only fraction of size visible</td><td>N/A</td></tr>
+<tr><th>Order Type</th><th>Direction</th><th>Goal</th><th>Price vs. P</th><th>After Trigger</th></tr>
+<tr><td><strong>Limit Buy</strong></td><td>Buy</td><td>Cheaper entry (bargain)</td><td>Below P</td><td>Buys at limit price or lower (better)</td></tr>
+<tr><td><strong>Stop-Buy</strong></td><td>Buy</td><td>Cover short / chase breakout</td><td>Above P</td><td>→ Market order (buys immediately)</td></tr>
+<tr><td><strong>Limit Sell</strong></td><td>Sell</td><td>Take profit at target</td><td>Above P</td><td>Sells at limit price or higher (better)</td></tr>
+<tr><td><strong>Stop-Sell</strong></td><td>Sell</td><td>Cut loss on long (Stop Loss)</td><td>Below P</td><td>→ Market order (sells immediately)</td></tr>
 </table>
+
+<div class="sub-title" style="margin-top:18px">Stop-Limit Orders (Combo) <span class="badge blue">Two Prices</span></div>
+<p>Two prices: <strong>Stop (trigger)</strong> activates the order; <strong>Limit (safety net)</strong> sets the worst acceptable execution price.</p>
+
+<table>
+<tr><th>Order Type</th><th>Trigger</th><th>Limit Condition</th><th>Non-Execution Risk</th></tr>
+<tr><td><strong>Stop-Limit Buy</strong></td><td>Price rises to Stop level</td><td>Only buys if price ≤ Limit (hasn't gapped above)</td><td>Short stays open if market gaps through the limit</td></tr>
+<tr><td><strong>Stop-Limit Sell</strong></td><td>Price falls to Stop level</td><td>Only sells if price ≥ Limit (e.g. still ≥ $85)</td><td>Long position stays open if market gaps below limit</td></tr>
+</table>
+
+<div class="callout warn"><strong>Rule 1 — Stop = activation only:</strong> A stop price wakes the order up — it does NOT guarantee the execution price. A plain Stop-Sell at $40 during a crash may execute at $32 or lower.</div>
+<div class="callout warn"><strong>Rule 2 — Stop-Limit trade-off:</strong> A Stop-Limit gives price control but risks non-execution. If the price gaps through the limit, the order never fills and you remain in the losing position.</div>
+<div class="callout tip"><strong>Rule 3 — Limit = price guarantee:</strong> A Limit order always says "this price or better — otherwise skip the trade entirely." Guarantees the worst price; does NOT guarantee execution.</div>
+<div class="callout exam"><strong>Exam tip — Exporter &amp; Margin scenarios:</strong> Trader needs certainty of exiting at a loss threshold → <strong>Stop-Sell</strong> (execution certainty over price certainty). Trader wants a minimum acceptable price and can afford not to trade → <strong>Limit Sell</strong> (price certainty over execution certainty).<br>
+Classic: Exporter hedging FX wants a minimum rate → Limit Sell. Leveraged investor protecting against margin call → Stop-Sell.</div>
 </div>
 </div>
 
