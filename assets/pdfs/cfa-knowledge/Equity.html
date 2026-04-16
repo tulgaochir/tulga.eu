@@ -387,6 +387,7 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
   </div>
   <div class="nav-section">Markets</div>
   <a href="#r39">R39 — Market Organization</a>
+  <a href="#order-types">↳ Order Types Cheat Sheet</a>
   <a href="#r40">R40 — Market Indexes</a>
   <a href="#r41">R41 — Market Efficiency</a>
   <div class="nav-section">Equity Securities</div>
@@ -535,6 +536,91 @@ hr { border: none; border-top: 2px solid var(--gray2); margin: 52px 0; }
   <li><strong>Operational efficiency</strong> — low transaction costs (commissions, spreads, market impact)</li>
   <li><strong>Informationally efficient</strong> — prices reflect all available information (leads into Reading 41)</li>
 </ul>
+
+</section><hr>
+
+<!-- ════════════════ ORDER TYPES CHEAT SHEET ════════════════ -->
+<section id="order-types">
+<div class="module-header">
+  <div class="lm-label">Reading 39 · Deep Dive</div>
+  <h2>📊 Order Types — The Ultimate Cheat Sheet</h2>
+  <div class="one-liner">P = current market price · Stop, Limit, Stop-Limit decoded: what each order does, when to use it, and three golden rules for the exam.</div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Big Picture</div>
+  <p>Order types are the mechanics of trading. The exam tests your ability to identify which order achieves a trader's goal — and crucially, what happens <em>after</em> an order is triggered. The four basic orders and two combo (Stop-Limit) orders cover virtually every CFA question on this topic. Master the trigger logic and the distinction between price certainty and execution certainty.</p>
+</div>
+
+<h3>The Four Basic Orders <span class="tag tag-critical">Critical</span></h3>
+
+<p>Every order is defined relative to <strong>P = the current market price</strong>.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Order Type</th><th>Direction</th><th>Intention / Goal</th><th>Price Level (vs. P)</th><th>What happens when triggered?</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Limit Buy</strong></td><td>Buy</td><td>Enter at a bargain (cheaper than today)</td><td><em>Below</em> P</td><td>Becomes a buy — but only at the limit price or lower (better).</td></tr>
+    <tr><td><strong>Stop-Buy</strong></td><td>Buy</td><td>Cover a short / follow a breakout</td><td><em>Above</em> P</td><td>Becomes a <strong>market order</strong> → buys immediately at whatever price is available.</td></tr>
+    <tr><td><strong>Limit Sell</strong></td><td>Sell</td><td>Take profit at a target price</td><td><em>Above</em> P</td><td>Becomes a sell — but only at the limit price or higher (better).</td></tr>
+    <tr><td><strong>Stop-Sell</strong></td><td>Sell</td><td>Cut losses on a long position (Stop Loss)</td><td><em>Below</em> P</td><td>Becomes a <strong>market order</strong> → sells immediately at whatever price is available.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="intuition">Think of <strong>Limit orders</strong> as "I want a good deal — or nothing at all." Think of <strong>Stop orders</strong> as "When the price hits my danger zone, get me out NOW — no matter what price I receive." A Limit guarantees price but not execution. A Stop guarantees activation but NOT the final execution price.</div>
+
+<h3>The Combo Orders: Stop-Limit <span class="tag tag-critical">Critical</span></h3>
+
+<p>Stop-Limit orders carry <strong>two prices</strong>: the <strong>Stop</strong> (trigger) and the <strong>Limit</strong> (safety net). The stop wakes the order up; the limit controls the worst acceptable price.</p>
+
+<div class="table-wrap"><table>
+  <thead><tr><th>Order Type</th><th>Direction</th><th>Scenario</th><th>Logic</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Stop-Limit Buy</strong></td>
+      <td>Buy</td>
+      <td>Protecting a short position from further losses</td>
+      <td><strong>Trigger:</strong> Price rises to the Stop level → order activates.<br><strong>Limit:</strong> "I will only buy if the price has not shot above [Limit]." If the price gaps through the limit, the order does <em>not</em> execute — the short remains open.</td>
+    </tr>
+    <tr>
+      <td><strong>Stop-Limit Sell</strong></td>
+      <td>Sell</td>
+      <td>Protecting a long position from further losses</td>
+      <td><strong>Trigger:</strong> Price falls to the Stop level (e.g. $90) → order activates.<br><strong>Limit:</strong> "I will only sell if I still receive at least [Limit] (e.g. $85)." If the price gaps below $85, the order does <em>not</em> execute — you remain stuck in the losing position.</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<h3>Three Golden Rules for the Exam <span class="tag tag-exam">Exam</span></h3>
+
+<div class="key-rule">Rule 1 — Stop = Activation only: A stop price is like an alarm clock. It does NOT execute the trade — it only "wakes up" the order. The actual execution comes afterward, either as a market order (plain stop) or as a limit order (stop-limit).</div>
+
+<div class="key-rule">Rule 2 — Limit = Price guarantee: A limit always says "this price or better — otherwise do nothing at all." A buy limit guarantees you won't overpay. A sell limit guarantees you won't be underpaid. But neither guarantees that you will execute.</div>
+
+<div class="key-rule">Rule 3 — Market vs. Limit after the trigger:<br>
+• A plain <strong>Stop Order</strong> → converts to a <strong>Market Order</strong>. Risk: in a fast crash the execution price can be far below the stop (e.g. stop at $40, execution at $32).<br>
+• A <strong>Stop-Limit Order</strong> → converts to a <strong>Limit Order</strong>. Risk: if the market gaps through your limit, the order never fills and you stay in the losing position.</div>
+
+<div class="analogy">Stock crashes from $50 to $30 in seconds. Plain Stop-Sell at $40 triggers and executes somewhere near $30 — bad price, but you are out. Stop-Limit Sell (stop $40, limit $38) triggers at $40 but finds no buyer at $38 or above — order sits unfilled and you hold the full loss. Each structure transfers a <em>different</em> risk to the trader.</div>
+
+<div class="exam">
+  <div class="exam-header">💡 Exam Tip — Exporter &amp; Margin-Buyer Scenarios</div>
+  <div class="exam-q">When a scenario gives you a trader's goal and asks which order to use, ask yourself two questions:<br><br>
+  1. Is the trader trying to <strong>limit downside risk</strong> and needs certainty of exiting? → <strong>Stop order</strong> (execution guaranteed once triggered, price is not).<br>
+  2. Is the trader trying to <strong>achieve a better price</strong> and can afford not to trade? → <strong>Limit order</strong> (price is guaranteed, execution is not).</div>
+  <div class="exam-a">
+    <strong>Classic scenario — Exporter hedging FX exposure:</strong> The exporter wants to sell foreign currency at a minimum acceptable rate. That is a <strong>Limit Sell</strong> — they refuse to sell below their floor and would rather wait.<br><br>
+    <strong>Classic scenario — Leveraged investor on margin:</strong> The investor must exit if the stock falls to a loss threshold. That is a <strong>Stop-Sell</strong> (Stop Loss) — they need to get out regardless of price when the level is hit; staying in risks a margin call.
+  </div>
+</div>
+
+<div class="big-picture">
+  <div class="bp-label">📌 Quick Decision Tree</div>
+  <p>
+    <strong>Buying?</strong> Want a cheaper entry → <strong>Limit Buy</strong> (price below market). Need to chase a breakout or close a short quickly → <strong>Stop-Buy</strong> (price above market).<br><br>
+    <strong>Selling?</strong> Want to lock in profit at a target → <strong>Limit Sell</strong> (price above market). Need to cut a loss before it worsens → <strong>Stop-Sell</strong> (price below market).<br><br>
+    <strong>Need a trigger AND a price floor/ceiling?</strong> → <strong>Stop-Limit</strong>. Accept the trade-off: you gain price control but risk non-execution if the market moves too fast.
+  </p>
+</div>
 
 </section><hr>
 
